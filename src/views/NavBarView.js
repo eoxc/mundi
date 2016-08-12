@@ -1,9 +1,10 @@
+import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 
 
 export default Marionette.LayoutView.extend({
   template: () => `
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,27 +18,35 @@ export default Marionette.LayoutView.extend({
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
             <li class="divider-vertical"></li>
-            <li><a href="#" class="layers"><i class="fa fa-globe"></i> Layers</a></li>
-            <li><a href="#" class="tools"><i class="fa fa-wrench"></i> Tools</a></li>
+            <li>
+              <a href="#" class="map" data-route="map"><i class="fa fa-globe"></i> Map</a>
+            </li>
+            <li>
+              <a href="#" class="search" data-route="search"><i class="fa fa-wrench"></i> Search</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
   `,
   events: {
-    'click .layers': 'onLayersClick',
-    'click .tools': 'onToolsClick',
+    'click a': 'onRouteClick',
+    // 'click .layers': 'onLayersClick',
+    // 'click .tools': 'onToolsClick',
   },
 
   initialize(options) {
-    this.communicator = options.communicator;
+    this.router = options.router;
+
+    this.router.on('route', () => {
+      const fragment = Backbone.history.getFragment();
+      this.$('[data-route]').parent().removeClass('active');
+      this.$(`[data-route='${fragment}']`).parent().addClass('active');
+    });
   },
 
-  onLayersClick() {
-    this.communicator.trigger('toggle:layers');
-  },
-
-  onToolsClick() {
-    this.communicator.trigger('toggle:tools');
+  onRouteClick(event) {
+    event.preventDefault();
+    this.router.navigate(event.currentTarget.dataset.route, { trigger: true });
   },
 });

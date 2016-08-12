@@ -1,4 +1,10 @@
 {
+    "settings": {
+        "center": [0, 0],
+        "zoom": 3,
+        "timeDomain": ["2006-01-01T00:00:00Z", "2016-12-31T00:00:00Z"],
+        "selectedTimeDomain": ["2006-01-01T00:00:00Z", "2016-12-31T00:00:00Z"]
+    },
     "baseLayers": [{
         "id": "terrain-light",
         "displayName": "Terrain-Light",
