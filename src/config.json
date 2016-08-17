@@ -109,6 +109,11 @@
             "id": "MER_FRS_RGB",
             "protocol": "EO-WCS",
             "url": "http://ows.eox.at/cite/eoxserver/ows"
+        },
+        "download": {
+            "id": "MER_FRS",
+            "protocol": "EO-WCS",
+            "url": "http://ows.eox.at/cite/eoxserver/ows"
         }
     }, {
         "id": "dlr_fire_emission_dispersion_california_20160223",

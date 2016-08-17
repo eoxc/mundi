@@ -1,0 +1,28 @@
+/* by default panels are hidden */
+.panel {
+  position: absolute;
+  max-width: 300px;
+  top: 0;
+  height: 100%;
+  background-color: white;
+  overflow-x: hidden;
+  z-index: 0;
+}
+
+.panel-left {
+  left: -300px;
+  transition: left 0.5s;
+}
+
+.panel-left.in {
+  left: 0px;
+}
+
+.panel-right {
+  right: -300px;
+  transition: right 0.5s;
+}
+
+.panel-right.in {
+  right: 0px;
+}

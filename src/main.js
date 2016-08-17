@@ -11,15 +11,23 @@ import FiltersModel from 'eoxc/src/core/models/FiltersModel';
 
 import LayerOptionsView from 'eoxc/src/core/views/layers/LayerOptionsView';
 
-//import PanelView from 'eoxc/src/core/views/PanelView';
+import TimeSliderView from 'eoxc/src/core/views/TimeSliderView';
 
-import SearchCollection from 'eoxc/src/search/models/SearchCollection';
+// import SearchCollection from 'eoxc/src/search/models/SearchCollection';
 import SearchResultView from 'eoxc/src/search/views/SearchResultView';
 
 import RootLayoutView from './views/RootLayoutView';
-import MapLayoutView from './views/MapLayoutView';
-import NavBarView from './views/NavBarView';
-import ToolsView from './views/ToolsView';
+// import MapLayoutView from './views/MapLayoutView';
+// import NavBarView from './views/NavBarView';
+// import ToolsView from './views/ToolsView';
+
+
+
+
+import PanelView from './views/PanelView';
+
+
+import OpenLayersMapView from 'eoxc/src/contrib/OpenLayers/OpenLayersMapView';
 
 // require styles
 require('bootstrap/dist/css/bootstrap.min.css');
@@ -68,50 +76,50 @@ window.Application = Marionette.Application.extend({
     layout.render();
 
     // setup the router and its routes
-    const router = new Marionette.AppRouter({
-      appRoutes: {
-        map: 'onRouteMap',
-        search: 'onRouteSearch',
-      },
-      controller: {
-        onRouteMap() {
-          // TODO: parse x/y/z and set it to the URL
-
-          layout.showChildView('content', new MapLayoutView({
-            baseLayersCollection,
-            layersCollection,
-            overlayLayersCollection,
-            mapModel,
-            filtersModel,
-            domain: {
-              start: new Date(settings.timeDomain[0]),
-              end: new Date(settings.timeDomain[1]),
-            },
-          }));
-        },
-        onRouteSearch() {
-          const searchCollections = layersCollection
-            .filter(layerModel => layerModel.get('display.visible'))
-            .map(layerModel => {
-              const searchCollection = new SearchCollection([], { layerModel, filtersModel });
-              searchCollection.fetch();
-              return new Backbone.Model({ searchCollection });
-            });
-
-          layout.showChildView('content', new SearchResultView({
-            collection: new Backbone.Collection(searchCollections),
-            mapModel,
-          }));
-        },
-      },
-    });
+    // const router = new Marionette.AppRouter({
+    //   appRoutes: {
+    //     map: 'onRouteMap',
+    //     search: 'onRouteSearch',
+    //   },
+    //   controller: {
+    //     onRouteMap() {
+    //       // TODO: parse x/y/z and set it to the URL
+    //
+    //       layout.showChildView('content', new MapLayoutView({
+    //         baseLayersCollection,
+    //         layersCollection,
+    //         overlayLayersCollection,
+    //         mapModel,
+    //         filtersModel,
+    //         domain: {
+    //           start: new Date(settings.timeDomain[0]),
+    //           end: new Date(settings.timeDomain[1]),
+    //         },
+    //       }));
+    //     },
+    //     onRouteSearch() {
+    //       const searchCollections = layersCollection
+    //         .filter(layerModel => layerModel.get('display.visible'))
+    //         .map(layerModel => {
+    //           const searchCollection = new SearchCollection([], { layerModel, filtersModel });
+    //           searchCollection.fetch();
+    //           return new Backbone.Model({ searchCollection });
+    //         });
+    //
+    //       layout.showChildView('content', new SearchResultView({
+    //         collection: new Backbone.Collection(searchCollections),
+    //         mapModel,
+    //       }));
+    //     },
+    //   },
+    // });
 
     // set up views
 
-    const navBarView = new NavBarView({
-      template: this.navbarTemplate,
-      router,
-    });
+    // const navBarView = new NavBarView({
+    //   template: this.navbarTemplate,
+    //   router,
+    // });
 
     // const layerControlLayoutView = new PanelView({
     //   title: 'Layers',
@@ -161,7 +169,35 @@ window.Application = Marionette.Application.extend({
     // });
 
     // render the views to the regions
-    layout.showChildView('header', navBarView);
+    // layout.showChildView('header', navBarView);
+
+
+    layout.showChildView('content', new OpenLayersMapView({
+      mapModel,
+      filtersModel,
+      baseLayersCollection,
+      overlayLayersCollection,
+      layersCollection,
+    }));
+
+    layout.showChildView('leftPanel', new PanelView({
+      mapModel,
+      filtersModel,
+      baseLayersCollection,
+      overlayLayersCollection,
+      layersCollection,
+      position: 'left',
+    }));
+
+    layout.showChildView('timeSlider', new TimeSliderView({
+      layersCollection,
+      mapModel,
+      filtersModel,
+      domain: {
+        start: new Date(settings.timeDomain[0]),
+        end: new Date(settings.timeDomain[1]),
+      },
+    }));
 
     Backbone.history.start({ pushState: false });
   },
