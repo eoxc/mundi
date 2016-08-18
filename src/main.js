@@ -12,9 +12,12 @@ import FiltersModel from 'eoxc/src/core/models/FiltersModel';
 import LayerOptionsView from 'eoxc/src/core/views/layers/LayerOptionsView';
 
 import TimeSliderView from 'eoxc/src/core/views/TimeSliderView';
+import ModalView from 'eoxc/src/core/views/ModalView';
 
 // import SearchCollection from 'eoxc/src/search/models/SearchCollection';
 import SearchResultView from 'eoxc/src/search/views/SearchResultView';
+import RecordDetailsView from 'eoxc/src/search/views/RecordDetailsView';
+import SearchModel from 'eoxc/src/search/models/SearchModel';
 
 import RootLayoutView from './views/RootLayoutView';
 // import MapLayoutView from './views/MapLayoutView';
@@ -24,7 +27,10 @@ import RootLayoutView from './views/RootLayoutView';
 
 
 
-import PanelView from './views/PanelView';
+import SidePanelView from './views/SidePanelView';
+
+
+import LayerControlLayoutView from 'eoxc/src/core/views/layers/LayerControlLayoutView';
 
 
 import OpenLayersMapView from 'eoxc/src/contrib/OpenLayers/OpenLayersMapView';
@@ -180,14 +186,35 @@ window.Application = Marionette.Application.extend({
       layersCollection,
     }));
 
-    layout.showChildView('leftPanel', new PanelView({
-      mapModel,
-      filtersModel,
-      baseLayersCollection,
-      overlayLayersCollection,
-      layersCollection,
+    layout.showChildView('leftPanel', new SidePanelView({
       position: 'left',
+      view: new LayerControlLayoutView({
+        mapModel,
+        filtersModel,
+        baseLayersCollection,
+        overlayLayersCollection,
+        layersCollection,
+      }),
     }));
+
+    layout.showChildView('rightPanel', new SidePanelView({
+      position: 'right',
+      view: new SearchResultView({
+        mapModel,
+        collection: new Backbone.Collection(
+          layersCollection.map(layerModel => new SearchModel({
+            layerModel, filtersModel,
+          }, { automaticSearch: true }))
+        ),
+        onResultItemClicked(view, record) {
+          layout.showChildView('modals', new ModalView({
+            view: new RecordDetailsView({ model: record }),
+          }));
+        },
+      }),
+    }));
+
+    // layout.showChildView('modals', new ModalView({}));
 
     layout.showChildView('timeSlider', new TimeSliderView({
       layersCollection,

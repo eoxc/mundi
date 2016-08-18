@@ -94,7 +94,7 @@
         "displayColor": "red",
         "display": {
             "id": "MER_FRS_RGB",
-            "visible": true,
+            "visible": false,
             "protocol": "WMS",
             "urls": [
                 "http://ows.eox.at/cite/eoxserver/ows"
@@ -121,7 +121,7 @@
         "displayColor": "green",
         "display": {
             "id": "dlr_fire_emission_dispersion_california_20160223",
-            "visible": true,
+            "visible": false,
             "protocol": "WMS",
             "urls": [
                 "http://ows.eox.at/testbed-12_staging/eoxserver/ows"

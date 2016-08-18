@@ -1,7 +1,7 @@
 /* by default panels are hidden */
-.panel {
+.side-panel {
   position: absolute;
-  max-width: 300px;
+  width: 300px;
   top: 0;
   height: 100%;
   background-color: white;
@@ -9,20 +9,31 @@
   z-index: 0;
 }
 
-.panel-left {
+.side-panel-left {
   left: -300px;
   transition: left 0.5s;
 }
 
-.panel-left.in {
+.side-panel-left.in {
   left: 0px;
 }
 
-.panel-right {
+.side-panel-right {
   right: -300px;
   transition: right 0.5s;
 }
 
-.panel-right.in {
+.side-panel-right.in {
   right: 0px;
+}
+
+.toggle-side-panel {
+  position: absolute;
+}
+.toggle-side-panel-left {
+  left: 0;
+}
+
+.toggle-side-panel-right {
+  right: 0;
 }
