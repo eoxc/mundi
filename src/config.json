@@ -87,6 +87,10 @@
             "id": "MERIS_MGVI",
             "protocol": "EO-WCS",
             "url": "http://ows.eox.at/cite/eoxserver/ows"
+        },
+        "download": {
+            "protocol": "EO-WCS",
+            "url": "http://ows.eox.at/cite/eoxserver/ows"
         }
     }, {
         "id": "MER_FRS_RGB",
@@ -111,7 +115,6 @@
             "url": "http://ows.eox.at/cite/eoxserver/ows"
         },
         "download": {
-            "id": "MER_FRS",
             "protocol": "EO-WCS",
             "url": "http://ows.eox.at/cite/eoxserver/ows"
         }

@@ -1,26 +1,41 @@
 /* by default panels are hidden */
 .side-panel {
   position: absolute;
-  width: 300px;
+  width: 450px;
   top: 0;
   height: 100%;
   background-color: white;
   overflow-x: hidden;
   z-index: 0;
+
+  /*resize: horizontal;*/
+
+  /* for showing/hiding */
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s, opacity 0.5s;
+}
+
+.side-panel.in {
+  opacity: 1;
+  visibility: visible;
+}
+
+.side-panel-content {
+  padding: 30px 5px 30px;
+  height: 100%;
+}
+
+.side-panel-content > div {
+  height: 100%;
 }
 
 .side-panel-left {
-  left: -300px;
-  transition: left 0.5s;
-}
-
-.side-panel-left.in {
   left: 0px;
 }
 
 .side-panel-right {
-  right: -300px;
-  transition: right 0.5s;
+  right: 0px;
 }
 
 .side-panel-right.in {

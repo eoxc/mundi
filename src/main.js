@@ -188,6 +188,7 @@ window.Application = Marionette.Application.extend({
 
     layout.showChildView('leftPanel', new SidePanelView({
       position: 'left',
+      icon: 'fa-bars',
       view: new LayerControlLayoutView({
         mapModel,
         filtersModel,
@@ -199,8 +200,10 @@ window.Application = Marionette.Application.extend({
 
     layout.showChildView('rightPanel', new SidePanelView({
       position: 'right',
+      icon: 'fa-search',
       view: new SearchResultView({
         mapModel,
+        filtersModel,
         collection: new Backbone.Collection(
           layersCollection.map(layerModel => new SearchModel({
             layerModel, filtersModel,

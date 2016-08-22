@@ -9,11 +9,12 @@ export default Marionette.LayoutView.extend({
   templateHelpers() {
     return {
       position: this.position,
+      icon: this.icon,
     };
   },
 
   regions: {
-    sidePanelContent: '#side-panel-content',
+    sidePanelContent: '.side-panel-content',
   },
 
   events: {
@@ -23,6 +24,7 @@ export default Marionette.LayoutView.extend({
   initialize(options) {
     this.position = options.position || 'left';
     this.view = options.view;
+    this.icon = options.icon;
   },
 
   onBeforeShow() {
