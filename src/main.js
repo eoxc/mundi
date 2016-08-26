@@ -188,7 +188,7 @@ window.Application = Marionette.Application.extend({
 
     layout.showChildView('leftPanel', new SidePanelView({
       position: 'left',
-      icon: 'fa-bars',
+      icon: 'fa-cog',
       view: new LayerControlLayoutView({
         mapModel,
         filtersModel,
@@ -200,7 +200,7 @@ window.Application = Marionette.Application.extend({
 
     layout.showChildView('rightPanel', new SidePanelView({
       position: 'right',
-      icon: 'fa-search',
+      icon: 'fa-list',
       view: new SearchResultView({
         mapModel,
         filtersModel,

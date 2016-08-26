@@ -2,8 +2,9 @@
 .side-panel {
   position: absolute;
   width: 450px;
-  top: 0;
+  top: 20px;
   height: 100%;
+  padding-bottom: 20px;
   background-color: white;
   overflow-x: hidden;
   z-index: 0;
@@ -14,6 +15,8 @@
   opacity: 0;
   visibility: hidden;
   transition: visibility 0s, opacity 0.5s;
+
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.39);
 }
 
 .side-panel.in {
@@ -22,7 +25,7 @@
 }
 
 .side-panel-content {
-  padding: 30px 5px 30px;
+  padding: 40px 5px 30px;
   height: 100%;
 }
 
@@ -31,24 +34,34 @@
 }
 
 .side-panel-left {
-  left: 0px;
+  left: 20px;
 }
 
 .side-panel-right {
-  right: 0px;
-}
-
-.side-panel-right.in {
-  right: 0px;
+  right: 20px;
 }
 
 .toggle-side-panel {
   position: absolute;
 }
+
+.toggle-side-panel-out {
+  top: 20px;
+  box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.39);
+}
+
 .toggle-side-panel-left {
   left: 0;
 }
 
 .toggle-side-panel-right {
   right: 0;
+}
+
+.toggle-side-panel-out.toggle-side-panel-left {
+  left: 20px;
+}
+
+.toggle-side-panel-out.toggle-side-panel-right {
+  right: 20px;
 }
