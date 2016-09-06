@@ -25,6 +25,7 @@ import RootLayoutView from './views/RootLayoutView';
 // import ToolsView from './views/ToolsView';
 
 
+import SettingsView from './views/SettingsView';
 
 
 import SidePanelView from './views/SidePanelView';
@@ -189,32 +190,43 @@ window.Application = Marionette.Application.extend({
     layout.showChildView('leftPanel', new SidePanelView({
       position: 'left',
       icon: 'fa-cog',
-      view: new LayerControlLayoutView({
-        mapModel,
-        filtersModel,
-        baseLayersCollection,
-        overlayLayersCollection,
-        layersCollection,
-      }),
+      views: [{
+        name: 'Settings',
+        view: new SettingsView({
+          filtersModel,
+        }),
+      }, {
+        name: 'Layers',
+        view: new LayerControlLayoutView({
+          mapModel,
+          filtersModel,
+          baseLayersCollection,
+          overlayLayersCollection,
+          layersCollection,
+        }),
+      }],
     }));
 
     layout.showChildView('rightPanel', new SidePanelView({
       position: 'right',
       icon: 'fa-list',
-      view: new SearchResultView({
-        mapModel,
-        filtersModel,
-        collection: new Backbone.Collection(
-          layersCollection.map(layerModel => new SearchModel({
-            layerModel, filtersModel,
-          }, { automaticSearch: true }))
-        ),
-        onResultItemClicked(view, record) {
-          layout.showChildView('modals', new ModalView({
-            view: new RecordDetailsView({ model: record }),
-          }));
-        },
-      }),
+      views: [{
+        name: 'Search Results',
+        view: new SearchResultView({
+          mapModel,
+          filtersModel,
+          collection: new Backbone.Collection(
+            layersCollection.map(layerModel => new SearchModel({
+              layerModel, filtersModel,
+            }, { automaticSearch: true }))
+          ),
+          onResultItemClicked(view, record) {
+            layout.showChildView('modals', new ModalView({
+              view: new RecordDetailsView({ model: record }),
+            }));
+          },
+        }),
+      }],
     }));
 
     // layout.showChildView('modals', new ModalView({}));

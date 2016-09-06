@@ -1,0 +1,51 @@
+<form>
+  <h4>Time</h4>
+  <div class="form-group">
+    <label for="">Start</label>
+    <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+      <input type="text" class="form-control">
+      <div class="input-group-addon">
+        <span class="glyphicon glyphicon-th"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="">End</label>
+    <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+      <input type="text" class="form-control">
+      <div class="input-group-addon">
+        <span class="glyphicon glyphicon-th"></span>
+      </div>
+    </div>
+  </div>
+
+  <h4>Area</h4>
+  <div class="form-group">
+    <label for="">Bounding Box</label>
+    <div class="input-group">
+      <span class="input-group-addon">
+        <input type="radio" name="area-type" checked>
+      </span>
+      <input type="number" class="form-control" placeholder="Min-X">
+      <span class="input-group-addon">-</span>
+      <input type="number" class="form-control" placeholder="Min-Y">
+      <span class="input-group-addon">-</span>
+      <input type="number" class="form-control" placeholder="Max-X">
+      <span class="input-group-addon">-</span>
+      <input type="number" class="form-control" placeholder="Max-Y">
+    </div><!-- /input-group -->
+    <button class="btn btn-default btn-block">Draw Bounding Box</button>
+  </div>
+
+   <div class="form-group">
+     <label for="">Polygon</label>
+     <div class="input-group">
+       <span class="input-group-addon">
+         <input type="radio" name="area-type">
+       </span>
+       <input type="file" id="">
+     </div>
+     <p class="help-block">Select a shapefile.</p>
+   </div>
+</form>
