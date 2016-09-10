@@ -51,9 +51,6 @@ window.Application = Marionette.Application.extend({
   },
 
   onStart() {
-    $.getJSON(this.configPath, (config) => {
-      this.onConfigLoaded(config);
-      // test
     i18next.init({
       lng: 'de',
       resources: {
@@ -208,6 +205,7 @@ window.Application = Marionette.Application.extend({
         name: 'Settings',
         view: new SettingsView({
           filtersModel,
+          mapModel,
         }),
       }, {
         name: 'Layers',

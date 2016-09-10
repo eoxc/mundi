@@ -64,9 +64,11 @@
     "backbone.marionette": "^2.4.7",
     "bootstrap": "^3.3.7",
     "bootstrap-datepicker": "^1.6.4",
+    "bootstrap-datetimepicker": "github:Eonasdan/bootstrap-datetimepicker#master",
     "eoxc": "^0.0.1",
     "i18next": "^3.4.1",
     "jquery": "^2.2.3",
-    "jquery-ui": "^1.10.5"
+    "jquery-ui": "^1.10.5",
+    "shpjs": "github:calvinmetcalf/shapefile-js#v3.3.2"
   }
 }
