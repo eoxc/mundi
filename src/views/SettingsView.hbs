@@ -1,7 +1,8 @@
 <form>
-  <h4>Time</h4>
+  <h4>{{t 'Time'}}</h4>
+  <p class="help-block">{{t 'Select the time of interest'}}</p>
   <div class="form-group">
-    <label for="">Start</label>
+    <label for="">{{t 'Start'}}</label>
     <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
       <input type="text" class="form-control">
       <div class="input-group-addon">
@@ -11,7 +12,7 @@
   </div>
 
   <div class="form-group">
-    <label for="">End</label>
+    <label for="">{{t 'End'}}</label>
     <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
       <input type="text" class="form-control">
       <div class="input-group-addon">
@@ -20,9 +21,9 @@
     </div>
   </div>
 
-  <h4>Area</h4>
+  <h4>{{t 'Area'}}</h4>
   <div class="form-group">
-    <label for="">Bounding Box</label>
+    <label for="">{{t 'Bounding Box'}}</label>
     <div class="input-group">
       <span class="input-group-addon">
         <input type="radio" name="area-type" checked>
@@ -35,17 +36,32 @@
       <span class="input-group-addon">-</span>
       <input type="number" class="form-control" placeholder="Max-Y">
     </div><!-- /input-group -->
-    <button class="btn btn-default btn-block">Draw Bounding Box</button>
+    <button class="btn btn-default btn-block">{{t 'Draw Bounding Box'}}</button>
   </div>
 
-   <div class="form-group">
-     <label for="">Polygon</label>
+  <div class="form-group">
+    <label for="">{{t 'Polygon'}}</label>
      <div class="input-group">
-       <span class="input-group-addon">
-         <input type="radio" name="area-type">
-       </span>
-       <input type="file" id="">
-     </div>
-     <p class="help-block">Select a shapefile.</p>
-   </div>
+      <span class="input-group-addon">
+        <input type="radio" name="area-type">
+      </span>
+      <div class="input-group-btn">
+        <label class="btn btn-default btn-file">
+          {{t 'Browse'}} <input type="file" style="display: none;">
+        </label>
+      </div>
+      <input type="text" class="form-control" placeholder="{{t 'No file selected'}}" disabled>
+       <!--
+       <input type="file" id="">-->
+      </div>
+      <p class="help-block">{{t 'Select a shapefile'}}</p>
+      <div class="panel panel-default panel-features" style="display: none">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{t 'Features'}}</h3>
+        </div>
+        <div class="panel-body">
+          <div class="feature-list"></div>
+        </div>
+      </div>
+    </div>
 </form>

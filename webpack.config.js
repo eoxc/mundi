@@ -10,6 +10,7 @@ module.exports = {
     alias: {
       // necessary to avoid multiple packings of backbone due to marionette
       backbone: path.join(__dirname, 'node_modules', 'backbone', 'backbone'),
+      handlebars: 'handlebars/dist/handlebars.min.js',
       // Bind version of jquery
       //jquery: path.join(__dirname, 'node_modules', 'jquery'),
 
@@ -38,7 +39,7 @@ module.exports = {
       { test: /\.coffee$/, loader: 'coffee-loader' },
       { test: /\.css$/, loaders: ['style', 'css'] },
       { test: /\.less$/, loaders: ['style', 'css', 'less'] },
-      { test: /\.hbs$/, loader: 'handlebars-loader' },
+      { test: /\.hbs$/, loader: 'handlebars-loader?helperDirs[]=' + __dirname + '/src/helpers' },
 
       // for anything that might be included in a css
       { test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=100000' },
@@ -51,8 +52,9 @@ module.exports = {
     new webpack.optimize.DedupePlugin(),
     new webpack.ProvidePlugin({
       $: 'jquery',
-      jQuery: 'jquery'
-    })
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+    }),
   ],
   cache: false,
 };

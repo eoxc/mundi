@@ -11,7 +11,7 @@
       <ul class="nav navbar-nav {{#if isLeft}}navbar-right{{else}}{{/if}}">
         {{#each views}}
           <li class="{{#if @first}}active{{/if}}">
-            <a href="#{{../position}}-{{@index}}" aria-controls="messages" role="tab" data-toggle="tab">{{this.name}}</a>
+            <a href="#{{../position}}-{{@index}}" aria-controls="messages" role="tab" data-toggle="tab">{{t this.name}}</a>
           </li>
         {{/each}}
       </ul>
@@ -27,7 +27,7 @@
 
     <div class="side-panel-content out tab-content">
       {{#each views}}
-        <div role="tabpanel" class="tab-pane{{#if @first}} active{{/if}}" id="{{../position}}-{{@index}}">{{this.name}}</div>
+        <div role="tabpanel" class="tab-pane{{#if @first}} active{{/if}}" id="{{../position}}-{{@index}}">{{t this.name}}</div>
       {{/each}}
     </div>
   </div>

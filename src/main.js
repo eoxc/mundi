@@ -2,6 +2,8 @@ import $ from 'jquery';
 
 import 'jquery-ui';
 
+import i18next from 'i18next';
+
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 
@@ -52,6 +54,18 @@ window.Application = Marionette.Application.extend({
     $.getJSON(this.configPath, (config) => {
       this.onConfigLoaded(config);
       // test
+    i18next.init({
+      lng: 'de',
+      resources: {
+        de: {
+          translation: require('./languages/de.json'),
+        },
+      },
+    }, () => {
+      $.getJSON(this.configPath, (config) => {
+        this.onConfigLoaded(config);
+        // test
+      });
     });
   },
 
