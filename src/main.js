@@ -52,7 +52,7 @@ window.Application = Marionette.Application.extend({
 
   onStart() {
     i18next.init({
-      lng: 'de',
+      lng: 'en',
       resources: {
         de: {
           translation: require('./languages/de.json'),
