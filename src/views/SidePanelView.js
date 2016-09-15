@@ -48,5 +48,6 @@ export default Marionette.LayoutView.extend({
 
   onToggleSidePanelClicked() {
     this.$('.side-panel').toggleClass('in');
+    this.$('.toggle-side-panel-out').toggleClass('out');
   },
 });
