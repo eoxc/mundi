@@ -28,9 +28,8 @@ import RootLayoutView from './views/RootLayoutView';
 
 
 import SettingsView from './views/SettingsView';
-
-
 import SidePanelView from './views/SidePanelView';
+import StopSelectionView from './views/StopSelectionView';
 
 
 import LayerControlLayoutView from 'eoxc/src/core/views/layers/LayerControlLayoutView';
@@ -90,7 +89,10 @@ window.Application = Marionette.Application.extend({
     });
 
     // set up layout
-    const layout = new RootLayoutView({ el: $(this.container) });
+    const layout = new RootLayoutView({
+      el: $(this.container),
+      mapModel,
+    });
     layout.render();
 
     // setup the router and its routes
@@ -240,6 +242,8 @@ window.Application = Marionette.Application.extend({
         }),
       }],
     }));
+
+    layout.showChildView('bottomPanel', new StopSelectionView({ mapModel }));
 
     // layout.showChildView('modals', new ModalView({}));
 
