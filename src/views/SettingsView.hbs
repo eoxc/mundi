@@ -28,19 +28,20 @@
     </div>
   </div>
 
-
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">{{t 'Area'}}</h3>
     </div>
     <div class="panel-body">
+      <h4>{{t 'Draw'}}</h4>
       <div class="form-group">
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
           <a href="#" role="button" class="btn btn-default tool tool-point">{{t 'Point'}}</a>
-          <a href="#" role="button" class="btn btn-default tool tool-bbox">{{t 'Rectanlge'}}</a>
+          <a href="#" role="button" class="btn btn-default tool tool-bbox">{{t 'Rectangle'}}</a>
           <a href="#" role="button" class="btn btn-default tool tool-polygon">{{t 'Polygon'}}</a>
         </div>
       </div>
+      <h4>{{t 'Upload'}}</h4>
       <div class="form-group">
         <div class="input-group">
           <div class="input-group-btn">
@@ -50,22 +51,33 @@
           </div>
           <input type="text" class="form-control" placeholder="{{t 'No file selected'}}" disabled>
         </div>
-        <!-- <p class="help-block">{{t 'Select a shapefile'}}</p> -->
-
-        <!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-          <span class="caret"></span>
-        </button> -->
         <div class="feature-list"></div>
+      </div>
 
-        <!-- <div class="panel panel-default panel-features" style="display: none">
-          <div class="panel-heading">
-            <h3 class="panel-title">{{t 'Features'}}</h3>
-          </div>
-          <div class="panel-body">
-            <div class="feature-list"></div>
-          </div>
-        </div> -->
+      <h4 id="current-selection-header">{{t 'Current Selection'}}</h4>
+
+      <div class="form-group show-geometry show-point">
+        <div class="input-group">
+          <input type="number" class="form-control" placeholder="{{t 'Longitude'}}">
+          <span class="input-group-addon">-</span>
+          <input type="number" class="form-control" placeholder="{{t 'Latitude'}}">
+        </div>
+      </div>
+
+      <div class="form-group show-geometry show-bbox">
+        <div class="input-group">
+          <input type="number" class="form-control" placeholder="Min-X">
+          <span class="input-group-addon">-</span>
+          <input type="number" class="form-control" placeholder="Min-Y">
+          <span class="input-group-addon">-</span>
+          <input type="number" class="form-control" placeholder="Max-X">
+          <span class="input-group-addon">-</span>
+          <input type="number" class="form-control" placeholder="Max-Y">
+        </div>
+      </div>
+
+      <div class="form-group show-geometry show-polygon">
+        <input type="text" class="form-control" disabled>
       </div>
 
       <div class="form-group">
@@ -76,42 +88,4 @@
       </div>
     </div>
   </div>
-
-  <!-- <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a role="tab" data-toggle="tab" href="#tab-point">{{t 'Point'}}</a></li>
-    <li role="presentation"><a role="tab" data-toggle="tab" href="#tab-bbox">{{t 'Bounding Box'}}</a></li>
-    <li role="presentation"><a role="tab" data-toggle="tab" href="#tab-polygon">{{t 'Polygon'}}</a></li>
-  </ul>
-
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="tab-point">
-      <div class="form-group">
-        <div class="input-group">
-          <input type="number" class="form-control" placeholder="{{t 'Longitude'}}">
-          <span class="input-group-addon">-</span>
-          <input type="number" class="form-control" placeholder="{{t 'Latitude'}}">
-        </div>
-        <input type="button" class="btn btn-default btn-block tool-point" value="{{t 'Set Point'}}">
-      </div>
-    </div>
-
-    <div role="tabpanel" class="tab-pane" id="tab-bbox">
-      <div class="form-group">
-        <div class="input-group">
-          <input type="number" class="form-control" placeholder="Min-X">
-          <span class="input-group-addon">-</span>
-          <input type="number" class="form-control" placeholder="Min-Y">
-          <span class="input-group-addon">-</span>
-          <input type="number" class="form-control" placeholder="Max-X">
-          <span class="input-group-addon">-</span>
-          <input type="number" class="form-control" placeholder="Max-Y">
-        </div>
-        <input type="button" class="btn btn-default btn-block tool-bbox" value="{{t 'Draw Bounding Box'}}">
-      </div>
-    </div>
-
-    <div role="tabpanel" class="tab-pane" id="tab-polygon">
-
-    </div>
-  </div> -->
 </form>

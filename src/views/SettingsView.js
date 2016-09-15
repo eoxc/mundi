@@ -24,7 +24,9 @@ import 'bootstrap-datepicker';
 
 const FeatureView = Marionette.ItemView.extend({
   tagName: 'li',
-  template: (attrs) => `<a href='#'>${attrs.properties.NAME} <small class="text-right">(${attrs.geometry.type})</small></a>`,
+  template: (attrs) => `
+    <a href='#'>${attrs.properties.NAME} <small class="text-right">(${attrs.geometry.type})</small></a>
+  `,
   triggers: {
     'click a': 'item:clicked',
     mouseover: 'item:hover',
@@ -55,33 +57,32 @@ const FeatureListView = Marionette.CompositeView.extend({
 
   onBeforeShow() {
     // hold onto the drop down menu
-    // var dropdownMenu;
-    //
-    // // and when you show it, move it to the body
-    // $(window).on('show.bs.dropdown', function (e) {
-    //
-    //     // grab the menu
-    //     dropdownMenu = $(e.target).find('.dropdown-menu');
-    //
-    //     // detach it and append it to the body
-    //     $('body').append(dropdownMenu.detach());
-    //
-    //     // grab the new offset position
-    //     var eOffset = $(e.target).offset();
-    //
-    //     // make sure to place it where it would normally go (this could be improved)
-    //     dropdownMenu.css({
-    //       'display': 'block',
-    //       'top': eOffset.top + $(e.target).outerHeight(),
-    //       'left': eOffset.left
-    //     });
-    // });
-    //
-    // // and when you hide it, reattach the drop down, and hide it normally
-    // $(window).on('hide.bs.dropdown', function (e) {
-    //     $(e.target).append(dropdownMenu.detach());
-    //     dropdownMenu.hide();
-    // });
+    let dropdownMenu;
+
+    // and when you show it, move it to the body
+    this.$el.on('show.bs.dropdown', (e) => {
+      // grab the menu
+      dropdownMenu = $(e.target).find('.dropdown-menu');
+
+      // detach it and append it to the body
+      $('body').append(dropdownMenu.detach());
+
+      // grab the new offset position
+      const eOffset = $(e.target).offset();
+
+      // make sure to place it where it would normally go (this could be improved)
+      dropdownMenu.css({
+        display: 'block',
+        top: eOffset.top + $(e.target).outerHeight(),
+        left: eOffset.left,
+      });
+    });
+
+    // and when you hide it, reattach the drop down, and hide it normally
+    this.$el.on('hide.bs.dropdown', (e) => {
+      $(e.target).append(dropdownMenu.detach());
+      dropdownMenu.hide();
+    });
   },
 
   onCollectionReset() {
@@ -239,16 +240,20 @@ export default Marionette.LayoutView.extend({
 
   onFiltersAreaChanged(filtersModel) {
     const area = filtersModel.get('area');
+
+    this.$('.show-geometry').hide();
     if (Array.isArray(area) && area.length === 4) {
-      this.$('#tab-bbox input[type=number]:eq(0)').val(area[0]);
-      this.$('#tab-bbox input[type=number]:eq(1)').val(area[1]);
-      this.$('#tab-bbox input[type=number]:eq(2)').val(area[2]);
-      this.$('#tab-bbox input[type=number]:eq(3)').val(area[3]);
+      this.$('.show-bbox input[type=number]:eq(0)').val(area[0]);
+      this.$('.show-bbox input[type=number]:eq(1)').val(area[1]);
+      this.$('.show-bbox input[type=number]:eq(2)').val(area[2]);
+      this.$('.show-bbox input[type=number]:eq(3)').val(area[3]);
+      this.$('.show-bbox').show();
     } else if (area && area.geometry && area.geometry.type === 'Point') {
-      this.$('#tab-point input[type=number]:eq(0)').val(area.geometry.coordinates[0]);
-      this.$('#tab-point input[type=number]:eq(1)').val(area.geometry.coordinates[1]);
-    } else if (area && area.geometry && area.geometry.type === 'Polygon') {
-      let name = 'Polygon';
+      this.$('.show-point input[type=number]:eq(0)').val(area.geometry.coordinates[0]);
+      this.$('.show-point input[type=number]:eq(1)').val(area.geometry.coordinates[1]);
+      this.$('.show-point').show();
+    } else if (area && area.geometry) {
+      let name = 'Drawn Shape';
       if (area.properties) {
         const keys = ['name', 'NAME']; // TODO: more
         for (let i = 0; i < keys.length; ++i) {
@@ -258,13 +263,16 @@ export default Marionette.LayoutView.extend({
           }
         }
       }
-      this.$('#tab-point input[type=text]').val(name);
+      this.$('.show-polygon input[type=text]').val(name);
+      this.$('.show-polygon').show();
     }
 
     if (area) {
       this.$('.tool-show-feature,.tool-clear').removeClass('disabled');
+      this.$('#current-selection-header').show();
     } else {
       this.$('.tool-show-feature,.tool-clear').addClass('disabled');
+      this.$('#current-selection-header').hide();
     }
   },
 
