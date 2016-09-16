@@ -27,7 +27,7 @@ import RootLayoutView from './views/RootLayoutView';
 // import ToolsView from './views/ToolsView';
 
 
-import SettingsView from './views/SettingsView';
+import FiltersView from './views/FiltersView';
 import SidePanelView from './views/SidePanelView';
 import StopSelectionView from './views/StopSelectionView';
 
@@ -204,8 +204,8 @@ window.Application = Marionette.Application.extend({
       position: 'left',
       icon: 'fa-cog',
       views: [{
-        name: 'Settings',
-        view: new SettingsView({
+        name: 'Filters',
+        view: new FiltersView({
           filtersModel,
           mapModel,
         }),
