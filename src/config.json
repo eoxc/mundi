@@ -1,9 +1,9 @@
 {
     "settings": {
-        "center": [0, 0],
-        "zoom": 3,
-        "timeDomain": ["2006-01-01T00:00:00Z", "2016-12-31T00:00:00Z"],
-        "selectedTimeDomain": ["2006-01-01T00:00:00Z", "2016-12-31T00:00:00Z"]
+        "center": [-50, -15],
+        "zoom": 5,
+        "timeDomain": ["2009-01-01T00:00:00Z", "2009-10-31T00:00:00Z"],
+        "selectedTimeDomain": ["2009-06-25T00:00:00Z", "2009-09-31T00:00:00Z"]
     },
     "baseLayers": [{
         "id": "terrain-light",
@@ -67,38 +67,12 @@
         }
     }],
     "layers": [{
-        "id": "MERIS_MGVI",
-        "displayName": "MERIS_MGVI",
-        "displayColor": "blue",
-        "display": {
-            "id": "MERIS_MGVI",
-            "visible": false,
-            "protocol": "WMS",
-            "urls": [
-                "http://ows.eox.at/cite_staging/eoxserver/ows"
-            ],
-            "matrixSet": "WGS84",
-            "format": "image/png",
-            "projection": "EPSG:4326",
-            "style": "default",
-            "attribution": ""
-        },
-        "search": {
-            "id": "MERIS_MGVI",
-            "protocol": "OpenSearch",
-            "url": "http://ows.eox.at/cite_staging/eoxserver/opensearch/collections/MERIS_MGVI/"
-        },
-        "download": {
-            "protocol": "EO-WCS",
-            "url": "http://ows.eox.at/cite_staging/eoxserver/ows"
-        }
-    }, {
         "id": "MER_FRS_RGB",
-        "displayName": "MER_FRS_RGB",
+        "displayName": "MERIS FRS",
         "displayColor": "red",
         "display": {
             "id": "MER_FRS_RGB",
-            "visible": false,
+            "visible": true,
             "protocol": "WMS",
             "urls": [
                 "http://ows.eox.at/cite_staging/eoxserver/ows"
@@ -117,28 +91,6 @@
         "download": {
             "protocol": "EO-WCS",
             "url": "http://ows.eox.at/cite_staging/eoxserver/ows"
-        }
-    }, {
-        "id": "dlr_fire_emission_dispersion_california_20160223",
-        "displayName": "dlr_fire_emission_dispersion_california_20160223",
-        "displayColor": "green",
-        "display": {
-            "id": "dlr_fire_emission_dispersion_california_20160223",
-            "visible": false,
-            "protocol": "WMS",
-            "urls": [
-                "http://ows.eox.at/testbed-12_staging/eoxserver/ows"
-            ],
-            "matrixSet": "WGS84",
-            "format": "image/png",
-            "projection": "EPSG:4326",
-            "style": "default",
-            "attribution": ""
-        },
-        "search": {
-            "id": "dlr_fire_emission_dispersion_california_20160223",
-            "protocol": "OpenSearch",
-            "url": "http://ows.eox.at/testbed-12_staging/eoxserver/opensearch/collections/dlr_fire_emission_dispersion_california_20160223/"
         }
     }],
     "overlayLayers": [{
