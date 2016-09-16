@@ -1,7 +1,7 @@
 /* by default panels are hidden */
 .side-panel {
   position: absolute;
-  width: 452px;
+  width: 383px;
   top: 20px;
   /*height: 100%;*/
   /*padding-bottom: 20px;*/
@@ -94,11 +94,16 @@
 }
 
 .panel-body {
-  padding: 5px !important;
+  margin: 5px 5px 0 5px !important;
+  padding: 0 !important;
 }
 
 .panel-heading {
   padding: 10px 5px !important;
+}
+
+.form-group {
+  margin-bottom: 5px !important;
 }
 
 .ol-attribution {
