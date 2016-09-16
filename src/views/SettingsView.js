@@ -123,6 +123,8 @@ export default Marionette.LayoutView.extend({
   },
   events: {
     'change .datetime input': 'onDateInputChange',
+    'change .show-point input': 'onPointInputChange',
+    'change .show-bbox input': 'onBBoxInputChange',
     'click .tool-point': 'onToolPointClicked',
     'click .tool-bbox': 'onToolBBoxClicked',
     'click .tool-polygon': 'onToolPolygonClicked',
@@ -174,6 +176,28 @@ export default Marionette.LayoutView.extend({
       this.filtersModel.set('time',
         (startDate < endDate) ? [startDate, endDate] : [endDate, startDate]
       );
+    }
+  },
+
+  onPointInputChange() {
+    const coordinates = this.$('.show-point input[type=number]')
+      .map((index, elem) => $(elem).val())
+      .get()
+      .map(parseFloat);
+
+    if (coordinates.reduce((prev, current) => prev & !isNaN(current), true)) {
+      this.filtersModel.set('area', { geometry: { type: 'Point', coordinates } });
+    }
+  },
+
+  onBBoxInputChange() {
+    const bbox = this.$('.show-bbox input[type=number]')
+      .map((index, elem) => $(elem).val())
+      .get()
+      .map(parseFloat);
+
+    if (bbox.reduce((prev, current) => prev & !isNaN(current), true)) {
+      this.filtersModel.set('area', bbox);
     }
   },
 
