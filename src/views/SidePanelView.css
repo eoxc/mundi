@@ -92,3 +92,37 @@
 .navbar, .panel {
   margin-bottom: 5px !important;
 }
+
+.panel-body {
+  padding: 5px !important;
+}
+
+.panel-heading {
+  padding: 10px 5px !important;
+}
+
+.ol-attribution {
+  bottom: 10px !important;
+  right: 20px !important;
+  padding: 0 !important;
+  border: 1px solid black !important;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39) !important;
+}
+
+.ol-attribution button {
+  margin: 0 !important;
+}
+
+.ol-attribution ul {
+  font-size: .69em !important;
+}
+
+#timeSlider {
+  position: absolute;
+  bottom: 39px;
+  left: 20px;
+  width: -moz-calc(100% - 40px) !important;
+  width: -webkit-calc(100% - 40px) !important;
+  width: -o-calc(100% - 40px) !important;
+  width: calc(100% - 40px) !important;
+}
