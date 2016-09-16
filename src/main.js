@@ -1,3 +1,6 @@
+// require styles
+require('bootstrap/dist/css/bootstrap.min.css');
+
 import $ from 'jquery';
 
 import 'jquery-ui';
@@ -37,8 +40,6 @@ import LayerControlLayoutView from 'eoxc/src/core/views/layers/LayerControlLayou
 
 import OpenLayersMapView from 'eoxc/src/contrib/OpenLayers/OpenLayersMapView';
 
-// require styles
-require('bootstrap/dist/css/bootstrap.min.css');
 require('imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js');
 
 
@@ -234,10 +235,30 @@ window.Application = Marionette.Application.extend({
               layerModel, filtersModel,
             }, { automaticSearch: true }))
           ),
-          onResultItemClicked(view, record) {
+          // onResultItemClicked(view, record) {
+          //   layout.showChildView('modals', new ModalView({
+          //     view: new RecordDetailsView({ model: record }),
+          //   }));
+          // },
+          onResultItemInfo(view, record, layerModel) {
+            const detailsMapModel = new MapModel({ center: [0, 0], zoom: 5 });
+            const time = record.get('properties').time;
             layout.showChildView('modals', new ModalView({
-              view: new RecordDetailsView({ model: record }),
+              title: `${layerModel.get('displayName')} - ${time[0].toISOString()}`,
+              view: new RecordDetailsView({
+                model: record,
+                mapModel: detailsMapModel,
+                mapView: new OpenLayersMapView({
+                  mapModel: detailsMapModel,
+                  filtersModel: new FiltersModel({ time }),
+                  baseLayersCollection,
+                  overlayLayersCollection,
+                  layersCollection,
+                }),
+              }),
             }));
+
+            detailsMapModel.show(record.attributes);
           },
         }),
       }],
