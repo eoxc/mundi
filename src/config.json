@@ -3,7 +3,7 @@
         "center": [-50, -15],
         "zoom": 5,
         "timeDomain": ["2009-01-01T00:00:00Z", "2009-10-31T00:00:00Z"],
-        "selectedTimeDomain": ["2009-06-25T00:00:00Z", "2009-09-31T00:00:00Z"]
+        "selectedTimeDomain": ["2009-06-25T00:00:00Z", "2009-09-30T00:00:00Z"]
     },
     "baseLayers": [{
         "id": "terrain-light",
