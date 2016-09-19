@@ -89,13 +89,13 @@
   border-bottom: 0px !important;
 }
 
-.navbar, .panel {
-  margin-bottom: 5px !important;
+.panel-body {
+  margin: 5px !important;
+  padding: 0 !important;
 }
 
-.panel-body {
-  margin: 5px 5px 0 5px !important;
-  padding: 0 !important;
+.navbar, .panel {
+  margin-bottom: 5px !important;
 }
 
 .panel-heading {
@@ -103,7 +103,11 @@
 }
 
 .form-group {
-  margin-bottom: 5px !important;
+  margin: 0 !important;
+}
+
+.form-group>label {
+  margin: 5px 0 !important;
 }
 
 .ol-attribution {
