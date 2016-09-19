@@ -68,8 +68,8 @@
     }],
     "layers": [{
         "id": "MER_FRS_RGB",
-        "displayName": "MERIS FRS",
-        "displayColor": "red",
+        "displayName": "Envisat MERIS FRS",
+        "displayColor": "#4D4DFF",
         "display": {
             "id": "MER_FRS_RGB",
             "visible": true,
@@ -81,7 +81,7 @@
             "format": "image/png",
             "projection": "EPSG:4326",
             "style": "default",
-            "attribution": ""
+            "attribution": "Copyright (C) European Space Agency - ESA"
         },
         "search": {
             "id": "MER_FRS_RGB",
@@ -89,8 +89,8 @@
             "url": "http://ows.eox.at/cite_staging/eoxserver/opensearch/collections/MER_FRS_RGB/"
         },
         "download": {
-            "protocol": "EO-WCS",
-            "url": "http://ows.eox.at/cite_staging/eoxserver/ows"
+            "protocol": "OpenSearch",
+            "url": "http://ows.eox.at/cite_staging/eoxserver/opensearch/collections/MER_FRS_RGB/"
         }
     }],
     "overlayLayers": [{
