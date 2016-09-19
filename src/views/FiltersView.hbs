@@ -1,16 +1,14 @@
 <form>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">{{t 'Time'}}</h3>
+      <h3 class="panel-title">{{t 'Time Filter'}}</h3>
     </div>
     <div class="panel-body">
       <div class="form-group">
         <label for="">{{t 'Start'}}</label>
         <div class="input-group datetime" data-date-format="yyyy-mm-dd">
           <input type="date" class="form-control">
-          <div class="input-group-addon">
-            <span class="glyphicon glyphicon-th"></span>
-          </div>
+          <span class="input-group-addon">-</span>
           <input type="time" class="form-control">
         </div>
       </div>
@@ -19,9 +17,7 @@
         <label for="">{{t 'End'}}</label>
         <div class="input-group datetime" data-date-format="yyyy-mm-dd">
           <input type="date" class="form-control">
-          <div class="input-group-addon">
-            <span class="glyphicon glyphicon-th"></span>
-          </div>
+          <span class="input-group-addon">-</span>
           <input type="time" class="form-control">
         </div>
       </div>
@@ -30,19 +26,19 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">{{t 'Area'}}</h3>
+      <h3 class="panel-title">{{t 'Spatial Filter'}}</h3>
     </div>
     <div class="panel-body">
-      <h4>{{t 'Draw'}}</h4>
       <div class="form-group">
+        <label for="">{{t 'Draw'}}</label>
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
           <a href="#" role="button" class="btn btn-default tool tool-point">{{t 'Point'}}</a>
           <a href="#" role="button" class="btn btn-default tool tool-bbox">{{t 'Rectangle'}}</a>
           <a href="#" role="button" class="btn btn-default tool tool-polygon">{{t 'Polygon'}}</a>
         </div>
       </div>
-      <h4>{{t 'Upload'}}</h4>
       <div class="form-group">
+        <label for="">{{t 'Upload'}}</label>
         <div class="input-group">
           <div class="input-group-btn">
             <label class="btn btn-default btn-file">

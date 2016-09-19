@@ -8,8 +8,8 @@ import { readFileAsArraybuffer } from '../utils';
 //
 // require('expose?jQuery!jquery');
 
-const template = require('./SettingsView.hbs');
-require('./SettingsView.less');
+const template = require('./FiltersView.hbs');
+require('./FiltersView.less');
 
 // require('eonasdan-bootstrap-datetimepicker');
 // require('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css');

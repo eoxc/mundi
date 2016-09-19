@@ -1,30 +1,29 @@
 <button class="btn btn-default toggle-side-panel toggle-side-panel-{{position}} toggle-side-panel-out">
   <i class="fa {{icon}}" aria-hidden="true"></i>
 </button>
+
 <div class="side-panel side-panel-{{position}}">
-  <nav class="navbar navbar-default">
+
+  <button class="btn btn-default toggle-side-panel toggle-side-panel-{{position}}">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button>
+
+  <nav class="nav">
     <div class="container-fluid">
-      <ul class="nav navbar-nav {{#if isLeft}}navbar-right{{else}}{{/if}}">
+      <ul class="nav nav-tabs {{#if isLeft}}navbar-right{{else}}{{/if}}">
         {{#each views}}
           <li class="{{#if @first}}active{{/if}}">
             <a href="#{{../position}}-{{@index}}" aria-controls="messages" role="tab" data-toggle="tab">{{t this.name}}</a>
           </li>
         {{/each}}
       </ul>
-
-      <ul class="nav navbar-nav {{#if isLeft}}{{else}}navbar-right{{/if}}">
-        <li>
-          <button class="btn btn-default navbar-btn toggle-side-panel toggle-side-panel-{{position}}">
-            <i class="fa fa-times" aria-hidden="true"></i>
-          </button>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="side-panel-content out tab-content">
-      {{#each views}}
-        <div role="tabpanel" class="tab-pane{{#if @first}} active{{/if}}" id="{{../position}}-{{@index}}">{{t this.name}}</div>
-      {{/each}}
     </div>
+  </nav>
+
+  <div class="side-panel-content out tab-content">
+    {{#each views}}
+      <div role="tabpanel" class="tab-pane{{#if @first}} active{{/if}}" id="{{../position}}-{{@index}}">{{t this.name}}</div>
+    {{/each}}
   </div>
+
 </div>
