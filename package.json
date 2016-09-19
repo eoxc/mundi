@@ -1,8 +1,7 @@
 {
-  "name": "eoxc",
+  "name": "CODE-DE",
   "version": "0.0.1",
-  "description": "EOxC client generator",
-  "main": "dist/eoxc.js",
+  "description": "CODE-DE",
   "scripts": {
     "build": "webpack -p",
     "build-dev": "webpack -d",
@@ -20,12 +19,12 @@
     "url": "https://github.com/eoxc/eoxc.git"
   },
   "keywords": [],
-  "author": "Fabian Schindler <fabian.schindler.strauss@gmail.com>",
+  "author": "Fabian Schindler <fabian.schindler@eox.at>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/eoxc/eoxc/issues"
+    "url": "https://github.com/eoxc/CODE-DE/issues"
   },
-  "homepage": "https://github.com/eoxc/eoxc",
+  "homepage": "https://github.com/eoxc/CODE-DE",
   "devDependencies": {
     "babel-core": "^6.5.1",
     "babel-loader": "^6.2.4",
