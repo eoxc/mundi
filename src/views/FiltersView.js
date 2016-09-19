@@ -40,7 +40,7 @@ const FeatureListView = Marionette.CompositeView.extend({
   childView: FeatureView,
 
   template: () => `
-    <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+    <button type="button" class="btn btn-default btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
       Select Feature
       <span class="caret"></span>
     </button>
@@ -291,12 +291,17 @@ export default Marionette.LayoutView.extend({
       this.$('.show-polygon').show();
     }
 
+    // if (area) {
+    //   this.$('.tool-show-feature,.tool-clear').removeClass('disabled');
+    //   this.$('#current-selection-header').show();
+    // } else {
+    //   this.$('.tool-show-feature,.tool-clear').addClass('disabled');
+    //   this.$('#current-selection-header').hide();
+    // }
     if (area) {
-      this.$('.tool-show-feature,.tool-clear').removeClass('disabled');
-      this.$('#current-selection-header').show();
+      this.$('#selection-wrapper').show();
     } else {
-      this.$('.tool-show-feature,.tool-clear').addClass('disabled');
-      this.$('#current-selection-header').hide();
+      this.$('#selection-wrapper').hide();
     }
   },
 
