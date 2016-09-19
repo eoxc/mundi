@@ -6,19 +6,21 @@
     <div class="panel-body">
       <div class="form-group">
         <label for="">{{t 'Start'}}</label>
-        <div class="input-group datetime" data-date-format="yyyy-mm-dd">
-          <input type="date" class="form-control">
-          <span class="input-group-addon">-</span>
-          <input type="time" class="form-control">
+        <div class='input-group datetime start'>
+          <input type='text' class="form-control input-sm" />
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
         </div>
       </div>
 
       <div class="form-group">
         <label for="">{{t 'End'}}</label>
-        <div class="input-group datetime" data-date-format="yyyy-mm-dd">
-          <input type="date" class="form-control">
-          <span class="input-group-addon">-</span>
-          <input type="time" class="form-control">
+        <div class='input-group datetime end'>
+          <input type='text' class="form-control input-sm" />
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
         </div>
       </div>
     </div>
@@ -32,54 +34,57 @@
       <div class="form-group">
         <label for="">{{t 'Draw'}}</label>
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
-          <a href="#" role="button" class="btn btn-default tool tool-point">{{t 'Point'}}</a>
-          <a href="#" role="button" class="btn btn-default tool tool-bbox">{{t 'Rectangle'}}</a>
-          <a href="#" role="button" class="btn btn-default tool tool-polygon">{{t 'Polygon'}}</a>
+          <a href="#" role="button" class="btn btn-default btn-sm tool tool-point">{{t 'Point'}}</a>
+          <a href="#" role="button" class="btn btn-default btn-sm tool tool-bbox">{{t 'Rectangle'}}</a>
+          <a href="#" role="button" class="btn btn-default btn-sm tool tool-polygon">{{t 'Polygon'}}</a>
         </div>
       </div>
       <div class="form-group">
         <label for="">{{t 'Upload'}}</label>
         <div class="input-group">
           <div class="input-group-btn">
-            <label class="btn btn-default btn-file">
+            <label class="btn btn-default btn-file btn-sm">
               {{t 'Browse'}} <input type="file" style="display: none;">
             </label>
           </div>
-          <input type="text" class="form-control" placeholder="{{t 'No file selected'}}" disabled>
+          <input type="text" class="form-control input-sm" placeholder="{{t 'No file selected'}}" disabled>
         </div>
         <div class="feature-list"></div>
       </div>
 
-      <h4 id="current-selection-header">{{t 'Current Selection'}}</h4>
-
-      <div class="form-group show-geometry show-point">
-        <div class="input-group">
-          <input type="number" class="form-control" placeholder="{{t 'Longitude'}}">
-          <span class="input-group-addon">-</span>
-          <input type="number" class="form-control" placeholder="{{t 'Latitude'}}">
+      <div id="selection-wrapper">
+        <div class="form-group show-geometry show-point">
+          <label for="">{{t 'Current Selection'}}</label>
+          <div class="input-group">
+            <input type="number" class="form-control input-sm" placeholder="{{t 'Longitude'}}">
+            <span class="input-group-addon">-</span>
+            <input type="number" class="form-control input-sm" placeholder="{{t 'Latitude'}}">
+          </div>
         </div>
-      </div>
 
-      <div class="form-group show-geometry show-bbox">
-        <div class="input-group">
-          <input type="number" class="form-control" placeholder="Min-X">
-          <span class="input-group-addon">-</span>
-          <input type="number" class="form-control" placeholder="Min-Y">
-          <span class="input-group-addon">-</span>
-          <input type="number" class="form-control" placeholder="Max-X">
-          <span class="input-group-addon">-</span>
-          <input type="number" class="form-control" placeholder="Max-Y">
+        <div class="form-group show-geometry show-bbox">
+          <label for="">{{t 'Current Selection'}}</label>
+          <div class="input-group">
+            <input type="number" class="form-control input-sm" placeholder="Min-X">
+            <span class="input-group-addon">-</span>
+            <input type="number" class="form-control input-sm" placeholder="Min-Y">
+            <span class="input-group-addon">-</span>
+            <input type="number" class="form-control input-sm" placeholder="Max-X">
+            <span class="input-group-addon">-</span>
+            <input type="number" class="form-control input-sm" placeholder="Max-Y">
+          </div>
         </div>
-      </div>
 
-      <div class="form-group show-geometry show-polygon">
-        <input type="text" class="form-control" disabled>
-      </div>
+        <div class="form-group show-geometry show-polygon">
+          <label for="">{{t 'Current Selection'}}</label>
+          <input type="text" class="form-control input-sm" disabled>
+        </div>
 
-      <div class="form-group">
-        <div class="btn-group btn-group-justified" role="group" aria-label="...">
-          <a href="#" role="button" class="btn btn-default disabled tool tool-show-feature">{{t 'Zoom to Selection'}}</a>
-          <a href="#" role="button" class="btn btn-danger disabled tool tool-clear">{{t 'Clear Selection'}}</a>
+        <div class="form-group">
+          <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <a href="#" role="button" class="btn btn-default btn-sm tool tool-show-feature">{{t 'Zoom to Selection'}}</a>
+            <a href="#" role="button" class="btn btn-danger btn-sm tool tool-clear">{{t 'Clear Selection'}}</a>
+          </div>
         </div>
       </div>
     </div>
