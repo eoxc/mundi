@@ -2,6 +2,9 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import $ from 'jquery';
 import shp from 'shpjs';
+import moment from 'moment';
+require('eonasdan-bootstrap-datetimepicker');
+require('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css');
 
 import { readFileAsArraybuffer } from '../utils';
 
@@ -11,16 +14,6 @@ import { readFileAsArraybuffer } from '../utils';
 const template = require('./FiltersView.hbs');
 require('./FiltersView.less');
 
-// require('eonasdan-bootstrap-datetimepicker');
-// require('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css');
-// require('bootstrap-datepicker/dist/css/bootstrap-datepicker.css');
-// require('imports?window=>{jQuery: jquery}!bootstrap-filestyle');
-
-
-import 'bootstrap-datepicker';
-
-//
-// require('bootstrap-filestyle');
 
 const FeatureView = Marionette.ItemView.extend({
   tagName: 'li',
@@ -122,7 +115,7 @@ export default Marionette.LayoutView.extend({
     featureList: '.feature-list',
   },
   events: {
-    'change .datetime input': 'onDateInputChange',
+    'dp.change .datetime': 'onDateInputChange',
     'change .show-point input': 'onPointInputChange',
     'change .show-bbox input': 'onBBoxInputChange',
     'click .tool-point': 'onToolPointClicked',
@@ -131,6 +124,7 @@ export default Marionette.LayoutView.extend({
     'click .tool-clear': 'onToolClearClicked',
     'click .tool-show-feature': 'onToolShowFeatureClicked',
     'change :file': 'onFileChanged',
+
   },
 
   initialize(options) {
@@ -149,30 +143,32 @@ export default Marionette.LayoutView.extend({
       filtersModel: this.filtersModel,
       collection: this.featureListCollection,
     }));
-    // this.$('.date:eq(0)').datepicker({
-    //   inputs: this.$('.date:eq(0) input:eq(0)'),
-    // });
-    // this.$('.date:eq(1)').datepicker({
-    //   inputs: this.$('.date:eq(1) input:eq(0)'),
-    // });
 
-    // this.$('[data-provide="datepicker"]').datetimepicker();
+    this.$('.datetime').datetimepicker({
+      locale: 'en',
+      format: 'YYYY-MM-DD HH:mm:ss',
+      dayViewHeaderFormat: 'YYYY-MM',
+      useCurrent: false,
+      showTodayButton: true,
+      showClose: true,
+      // minDate, maxDate
+      // useCurrent oder defaultDate???
+      // sideBySide ???
+      // , showClear, showClose, ...
+    });
+  },
 
-
+  onShow() {
     this.onFiltersTimeChanged(this.filtersModel);
   },
 
-  // UI event handlers
   onDateInputChange() {
-    const startDate = this.$('.datetime:eq(0) input[type=date]')[0].valueAsDate;
-    const startTime = this.$('.datetime:eq(0) input[type=time]')[0].valueAsDate;
-    const endDate = this.$('.datetime:eq(1) input[type=date]')[0].valueAsDate;
-    const endTime = this.$('.datetime:eq(1) input[type=time]')[0].valueAsDate;
-    if (startDate && startTime && endDate && endTime) {
-      startDate.setUTCHours(startTime.getUTCHours());
-      startDate.setUTCMinutes(startTime.getUTCMinutes());
-      endDate.setUTCHours(endTime.getUTCHours());
-      endDate.setUTCMinutes(endTime.getUTCMinutes());
+    const start = this.$('.datetime.start').data('DateTimePicker').date();
+    const end = this.$('.datetime.end').data('DateTimePicker').date();
+
+    if (!this.updatingTime && start && end) {
+      const startDate = start.toDate();
+      const endDate = end.toDate();
       this.filtersModel.set('time',
         (startDate < endDate) ? [startDate, endDate] : [endDate, startDate]
       );
@@ -245,21 +241,14 @@ export default Marionette.LayoutView.extend({
 
   // Model event handlers
   onFiltersTimeChanged(filtersModel) {
-    // this.$('[data-provide="datepicker"]:eq(0)').data('DateTimePicker').date(value[0]);
-    // this.$('[data-provide="datepicker"]:eq(1)').data('DateTimePicker').date(value[1]);
-    // this.$('.date:eq(0)').datepicker('update', value[0]);
-    // this.$('.date:eq(1)').datepicker('update', value[1]);
+    const time = filtersModel.get('time');
+    this.updatingTime = true;
+    this.$('.datetime.start').data('DateTimePicker').date(moment(time[0]));
+    this.$('.datetime.end').data('DateTimePicker').date(moment(time[1]));
 
-    const time = filtersModel.get('time').map(date => {
-      const newDate = new Date(date);
-      newDate.setUTCMilliseconds(0);
-      return newDate;
-    });
-
-    this.$('.datetime:eq(0) input[type=date]')[0].valueAsDate = time[0];
-    this.$('.datetime:eq(0) input[type=time]')[0].valueAsDate = time[0];
-    this.$('.datetime:eq(1) input[type=date]')[0].valueAsDate = time[1];
-    this.$('.datetime:eq(1) input[type=time]')[0].valueAsDate = time[1];
+    this.$('.datetime.start').data('DateTimePicker').viewDate(moment(time[0]));
+    this.$('.datetime.end').data('DateTimePicker').viewDate(moment(time[1]));
+    this.updatingTime = false;
   },
 
   onFiltersAreaChanged(filtersModel) {
@@ -291,13 +280,6 @@ export default Marionette.LayoutView.extend({
       this.$('.show-polygon').show();
     }
 
-    // if (area) {
-    //   this.$('.tool-show-feature,.tool-clear').removeClass('disabled');
-    //   this.$('#current-selection-header').show();
-    // } else {
-    //   this.$('.tool-show-feature,.tool-clear').addClass('disabled');
-    //   this.$('#current-selection-header').hide();
-    // }
     if (area) {
       this.$('#selection-wrapper').show();
     } else {
