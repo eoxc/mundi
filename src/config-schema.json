@@ -1,0 +1,192 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://github.com/eoxc/CODE-DE/src/config-schema.json",
+
+    "title": "Configuration",
+    "description": "The main configuration object.",
+    "type": "object",
+    "properties": {
+        "settings": {
+            "$ref": "#/definitions/settings"
+        },
+        "baseLayers": {
+            "$ref": "#/definitions/layerSet"
+        },
+        "layers": {
+            "$ref": "#/definitions/layerSet"
+        },
+        "overlayLayers": {
+            "$ref": "#/definitions/layerSet"
+        }
+    },
+    "required": ["settings", "baseLayers", "layers", "overlayLayers"],
+
+    "definitions": {
+        "settings": {
+            "description": "The initial settings object.",
+            "properties": {
+                "center": {
+                    "description": "The inital center of the mapview.",
+                    "type": "array",
+                    "items": [{
+                        "description": "The longitude component of the center point.",
+                        "type": "number",
+                        "minimum": -180,
+                        "maximum": 180
+                    }, {
+                        "description": "The latitude component of the center point.",
+                        "type": "number",
+                        "minimum": -90,
+                        "maximum": 90
+                    }]
+                },
+                "zoom": {
+                    "description": "The inital map zoomlevel.",
+                    "type": "number",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "timeDomain": {
+                    "description": "The overall time domain of the client. No time can be selected outside of this domain.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                },
+                "selectedTimeDomain": {
+                    "description": "The initially selected time of interest.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                }
+            },
+            "required": ["center", "zoom", "timeDomain", "selectedTimeDomain"]
+        },
+        "layerSet": {
+            "type": "array",
+            "items": { "$ref": "#/definitions/layer" }
+        },
+        "layer": {
+            "description": "The definition of a single layer.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "The unique identifier of this layer.",
+                    "type": "string"
+                },
+                "displayName": {
+                    "description": "The layers name to be presented to the user",
+                    "type": "string"
+                },
+                "displayColor": {
+                    "description": "The color to distinguish the layer in the layer-list and the TimeSlider. Must be a valid HTML color definition.",
+                    "type": "string"
+                },
+                "display": {
+                    "description": "Structure to describe how the layer is visually presented.",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "description": "The ID used for the protocol to identify the layer.",
+                            "type": "string"
+                        },
+                        "visible": {
+                            "description": "Whether the layer shall be visible on start.",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "protocol": {
+                            "description": "The protocol used to display the layer.",
+                            "type": "string",
+                            "enum": ["WMS", "WMTS"]
+                        },
+                        "urls": {
+                            "description": "A list of base-URLs to retrieve tiles",
+                            "items": {
+                                "type": "string",
+                                "format": "uri"
+                            }
+                        },
+                        "url": {
+                            "description": "A single base-URL to retrieve tiles",
+                            "type": "string",
+                            "format": "uri"
+                        },
+                        "matrixSet": {
+                            "description": "The matrix set used to retrieve tiles. Required for WMTS.",
+                            "type": "string"
+                        },
+                        "format": {
+                            "description": "The transfer format used to retrieve tiles. For layers and overlayLayers this should be a format that allows transparency (e.g: PNG).",
+                            "type": "string"
+                        },
+                        "projection": {
+                            "description": "The projection identifier in which the tiles will be transferred. E.g: 'EPSG:4326'.",
+                            "type": "string"
+                        },
+                        "style": {
+                            "description": "The style in which the tiles will be retrieved.",
+                            "type": "string"
+                        },
+                        "attribution": {
+                            "description": "A string to be displayed when the layer is displayed. Can contain HTML for specific formatting.",
+                            "type": "string"
+                        }
+                    },
+                    "required": ["id", "protocol", "format", "style"],
+                    "//Note": "Either 'url' or 'urls' is required. For WMTS matrixSet is mandatory as-well."
+                },
+                "search": {
+                    "description": "An object to define how the layer can be searched.",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "description": "The identifier used for search requests. Required for EO-WCS only.",
+                            "type": "string"
+                        },
+                        "protocol": {
+                            "description": "The protocol used to search for records",
+                            "type": "string",
+                            "enum": ["EO-WCS", "OpenSearch"],
+                            "//TODO": "This list will also include 'WFS', once it's implemented"
+                        },
+                        "url": {
+                            "description": "The base-URL to send search requests to.",
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    },
+                    "required": ["protocol", "url"]
+                },
+                "download": {
+                    "description": "An object to define how records of the layer can be downloaded.",
+                    "type": "object",
+                    "properties": {
+                        "protocol": {
+                            "description": "The protocol used to download records.",
+                            "type": "string",
+                            "enum": ["EO-WCS"],
+                            "//TODO": "This list will be extended in the future. Currently, this setting is not used with OpenSearch, as the download information is embedded in the search response."
+                        },
+                        "url": {
+                            "description": "The base-URL to send download requests to.",
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    },
+                    "required": ["protocol", "url"]
+                }
+            },
+            "required": ["id", "displayName", "display"],
+            "//Note": "For searchable layers (not base/overlay layers) the 'displayColor' and 'search' properties are mandatory. When the search protocol is NOT OpenSearch, then the 'download' is also mandatory."
+        }
+    }
+}
