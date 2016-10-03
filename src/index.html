@@ -4,38 +4,155 @@
   <meta charset="UTF-8">
   <title>CODE-DE - Example</title>
 </head>
-<body style="width: 100%; min-height: 100%; margin: 0; padding: 0; overflow: hidden;">
+<body style="width: 100%; height: 100%; position: absolute; margin: 0; padding: 0; overflow: hidden;">
   <script type="text/html" id="navbar-template">
-    <!-- <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand">EOxC - Example Application</a>
-        </div>
 
-        <div class="navbar-collapse collapse navbar-right">
-          <ul class="nav navbar-nav">
-            <li class="divider-vertical"></li>
-            <li><a href="#" class="layers"><i class="fa fa-globe"></i> Layers</a></li>
-            <li><a href="#" class="tools"><i class="fa fa-wrench"></i> Tools</a></li>
-            <li><a href="#" class="user"><i class="fa fa-user"></i> User</a></li>
-          </ul>
-        </div>
-      </div>
-    </div> -->
   </script>
 
-  <div id="app" style="position: absolute; width: 100%; height: 100%; margin: 0; padding:0;"></div>
+  <div id="app" style="width: 100%; height: 100%; position: absolute; margin: 0; padding:0;"></div>
   <script src="../dist/code-de.bundle.js"></script>
   <script>
+var config = {
+    "settings": {
+        "center": [-50, -15],
+        "zoom": 5,
+        "timeDomain": ["2009-01-01T00:00:00Z", "2009-10-31T00:00:00Z"],
+        "selectedTimeDomain": ["2009-06-25T00:00:00Z", "2009-09-30T00:00:00Z"]
+    },
+    "baseLayers": [{
+        "id": "terrain-light",
+        "displayName": "Terrain-Light",
+        "display": {
+            "id": "terrain-light",
+            "visible": true,
+            "protocol": "WMTS",
+            "urls": [
+                "http://a.tiles.maps.eox.at/wmts/",
+                "http://b.tiles.maps.eox.at/wmts/",
+                "http://c.tiles.maps.eox.at/wmts/",
+                "http://d.tiles.maps.eox.at/wmts/",
+                "http://e.tiles.maps.eox.at/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "style": "default",
+            "attribution": "Terrain-Light { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> }"
+        }
+    }, {
+        "id": "terrain",
+        "displayName": "Terrain",
+        "display": {
+            "id": "terrain",
+            "visible": false,
+            "protocol": "WMTS",
+            "urls": [
+                "http://a.tiles.maps.eox.at/wmts/",
+                "http://b.tiles.maps.eox.at/wmts/",
+                "http://c.tiles.maps.eox.at/wmts/",
+                "http://d.tiles.maps.eox.at/wmts/",
+                "http://e.tiles.maps.eox.at/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "style": "default",
+            "attribution": "Terrain { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> }"
+        }
+    }, {
+        "id": "bluemarble",
+        "displayName": "Blue Marble",
+        "display": {
+            "id": "bluemarble",
+            "visible": false,
+            "protocol": "WMTS",
+            "urls": [
+                "http://a.tiles.maps.eox.at/wmts/",
+                "http://b.tiles.maps.eox.at/wmts/",
+                "http://c.tiles.maps.eox.at/wmts/",
+                "http://d.tiles.maps.eox.at/wmts/",
+                "http://e.tiles.maps.eox.at/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "style": "default",
+            "attribution": "Blue Marble { &copy; <a href=\"http://nasa.gov\" target=\"_blank\">NASA</a> }"
+        }
+    }],
+    "layers": [{
+        "id": "MER_FRS_RGB",
+        "displayName": "Envisat MERIS FRS",
+        "displayColor": "#4D4DFF",
+        "display": {
+            "id": "MER_FRS_RGB",
+            "visible": true,
+            "protocol": "WMS",
+            "urls": [
+                "http://ows.eox.at/cite_staging/eoxserver/ows"
+            ],
+            "matrixSet": "WGS84",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "style": "default",
+            "attribution": "Copyright (C) European Space Agency - ESA"
+        },
+        "search": {
+            "id": "MER_FRS_RGB",
+            "protocol": "OpenSearch",
+            "url": "http://ows.eox.at/cite_staging/eoxserver/opensearch/collections/MER_FRS_RGB/"
+        },
+        "download": {
+            "protocol": "OpenSearch",
+            "url": "http://ows.eox.at/cite_staging/eoxserver/opensearch/collections/MER_FRS_RGB/"
+        }
+    }],
+    "overlayLayers": [{
+        "id": "coastline",
+        "displayName": "Coastline",
+        "display": {
+            "id": "coastline",
+            "visible": false,
+            "protocol": "WMTS",
+            "urls": [
+                "http://a.tiles.maps.eox.at/wmts/",
+                "http://b.tiles.maps.eox.at/wmts/",
+                "http://c.tiles.maps.eox.at/wmts/",
+                "http://d.tiles.maps.eox.at/wmts/",
+                "http://e.tiles.maps.eox.at/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "style": "default",
+            "format": "image/png",
+            "attribution": "Overlay { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> and <a href=\"https://github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
+        }
+    },
+    {
+        "id": "overlay",
+        "displayName": "Borders and Labels",
+        "display": {
+            "id": "overlay",
+            "visible": false,
+            "protocol": "WMTS",
+            "urls": [
+                "http://a.tiles.maps.eox.at/wmts/",
+                "http://b.tiles.maps.eox.at/wmts/",
+                "http://c.tiles.maps.eox.at/wmts/",
+                "http://d.tiles.maps.eox.at/wmts/",
+                "http://e.tiles.maps.eox.at/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "style": "default",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "attribution": "Overlay { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> and <a href=\"https://github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
+        }
+    }]
+};
+
 var app = new Application({
-  configPath: '../src/config.json',
-  container: document.getElementById('app'),
-  //navbarTemplate: '#navbar-template'
+  config: config,
+  container: document.getElementById('app')
 });
 app.start();
   </script>

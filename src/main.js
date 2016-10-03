@@ -44,7 +44,8 @@ require('imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js');
 
 
 window.Application = Marionette.Application.extend({
-  initialize({ configPath, container, navbarTemplate }) {
+  initialize({ config, configPath, container, navbarTemplate }) {
+    this.config = config;
     this.configPath = configPath;
     this.container = container;
     this.navbarTemplate = navbarTemplate;
@@ -59,10 +60,13 @@ window.Application = Marionette.Application.extend({
         },
       },
     }, () => {
-      $.getJSON(this.configPath, (config) => {
-        this.onConfigLoaded(config);
-        // test
-      });
+      if (this.config) {
+        this.onConfigLoaded(this.config);
+      } else {
+        $.getJSON(this.configPath, (config) => {
+          this.onConfigLoaded(config);
+        });
+      }
     });
   },
 
