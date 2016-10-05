@@ -4,6 +4,7 @@ require('bootstrap/dist/css/bootstrap.min.css');
 import $ from 'jquery';
 
 import 'jquery-ui';
+import 'promise-polyfill';
 
 import i18next from 'i18next';
 
@@ -19,26 +20,20 @@ import LayerOptionsView from 'eoxc/src/core/views/layers/LayerOptionsView';
 import TimeSliderView from 'eoxc/src/core/views/TimeSliderView';
 import ModalView from 'eoxc/src/core/views/ModalView';
 
-// import SearchCollection from 'eoxc/src/search/models/SearchCollection';
 import SearchResultView from 'eoxc/src/search/views/SearchResultView';
 import RecordDetailsView from 'eoxc/src/search/views/RecordDetailsView';
 import SearchModel from 'eoxc/src/search/models/SearchModel';
 
 import RootLayoutView from './views/RootLayoutView';
-// import MapLayoutView from './views/MapLayoutView';
-// import NavBarView from './views/NavBarView';
-// import ToolsView from './views/ToolsView';
-
 
 import FiltersView from './views/FiltersView';
 import SidePanelView from './views/SidePanelView';
 import StopSelectionView from './views/StopSelectionView';
 
-
 import LayerControlLayoutView from 'eoxc/src/core/views/layers/LayerControlLayoutView';
 
-
 import OpenLayersMapView from 'eoxc/src/contrib/OpenLayers/OpenLayersMapView';
+
 
 require('imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js');
 
