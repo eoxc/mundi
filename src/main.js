@@ -4,7 +4,7 @@ require('bootstrap/dist/css/bootstrap.min.css');
 import $ from 'jquery';
 
 import 'jquery-ui';
-import 'promise-polyfill';
+require('es6-promise').polyfill();
 
 import i18next from 'i18next';
 

@@ -64,10 +64,10 @@
     "bootstrap": "^3.3.7",
     "eonasdan-bootstrap-datetimepicker": "^4.17.42",
     "eoxc": "^0.0.1",
+    "es6-promise": "^4.0.5",
     "i18next": "^3.4.1",
     "jquery": "^2.2.3",
     "jquery-ui": "^1.10.5",
-    "promise-polyfill": "^6.0.2",
     "shpjs": "github:calvinmetcalf/shapefile-js#v3.3.2"
   }
 }
