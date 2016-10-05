@@ -277,6 +277,10 @@ window.Application = Marionette.Application.extend({
       },
     }));
 
+    if (settings.extent) {
+      mapModel.show(settings.extent);
+    }
+
     Backbone.history.start({ pushState: false });
   },
 });

@@ -47,6 +47,31 @@
                         "type": "number"
                     }
                 },
+                "extent": {
+                    "description": "The initally visible extent. This setting is mutually exclusive to 'center' and 'zoom'.",
+                    "type": "array",
+                    "items": [{
+                        "description": "The lower longitude component of the extent.",
+                        "type": "number",
+                        "minimum": -180,
+                        "maximum": 180
+                    }, {
+                        "description": "The lower latitude component of the extent.",
+                        "type": "number",
+                        "minimum": -90,
+                        "maximum": 90
+                    }, {
+                        "description": "The upper longitude component of the extent.",
+                        "type": "number",
+                        "minimum": -180,
+                        "maximum": 180
+                    }, {
+                        "description": "The upper latitude component of the extent.",
+                        "type": "number",
+                        "minimum": -90,
+                        "maximum": 90
+                    }]
+                },
                 "timeDomain": {
                     "description": "The overall time domain of the client. No time can be selected outside of this domain.",
                     "type": "array",
@@ -68,7 +93,11 @@
                     "maxItems": 2
                 }
             },
-            "required": ["center", "zoom", "timeDomain", "selectedTimeDomain"]
+            "oneOf": [
+                { "required": ["center", "zoom", "timeDomain", "selectedTimeDomain"] },
+                { "required": ["extent", "timeDomain", "selectedTimeDomain"] }
+            ]
+
         },
         "layerSet": {
             "type": "array",
