@@ -34,6 +34,7 @@ import LayerControlLayoutView from 'eoxc/src/core/views/layers/LayerControlLayou
 
 import OpenLayersMapView from 'eoxc/src/contrib/OpenLayers/OpenLayersMapView';
 
+import download from 'eoxc/src/download';
 
 require('imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js');
 
@@ -255,6 +256,11 @@ window.Application = Marionette.Application.extend({
                   layersCollection,
                 }),
               }),
+              buttons: [
+                ['Download', () => {
+                  download(layerModel, filtersModel, record, {}, $('#download-elements'));
+                }],
+              ],
             }));
 
             detailsMapModel.show(record.attributes);
