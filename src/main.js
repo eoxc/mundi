@@ -232,7 +232,7 @@ window.Application = Marionette.Application.extend({
           filtersModel,
           collection: new Backbone.Collection(
             layersCollection.map(layerModel => new SearchModel({
-              layerModel, filtersModel,
+              layerModel, filtersModel, mapModel,
             }, { automaticSearch: true }))
           ),
           // onResultItemClicked(view, record) {
