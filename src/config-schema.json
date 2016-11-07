@@ -153,6 +153,14 @@
                             "description": "The matrix set used to retrieve tiles. Required for WMTS.",
                             "type": "string"
                         },
+                        "matrixIdPrefix": {
+                            "description": "A prefix to be prepended to the numerical part of the tile matrix ID.",
+                            "type": "string"
+                        },
+                        "matrixIdPostfix": {
+                            "description": "A postfix to be appended to the numerical part of the tile matrix ID.",
+                            "type": "string"
+                        },
                         "format": {
                             "description": "The transfer format used to retrieve tiles. For layers and overlayLayers this should be a format that allows transparency (e.g: PNG).",
                             "type": "string"
