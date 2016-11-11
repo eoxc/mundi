@@ -5,6 +5,10 @@ import shp from 'shpjs';
 import moment from 'moment';
 require('eonasdan-bootstrap-datetimepicker');
 require('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css');
+import 'bootstrap-slider';
+import 'bootstrap-slider/dist/css/bootstrap-slider.css';
+
+import 'eoxc/src/core/base.css';
 
 import { readFileAsArraybuffer } from '../utils';
 
@@ -109,6 +113,11 @@ export default Marionette.LayoutView.extend({
       startTime: this.filtersModel.get('time')[0].toISOString().slice(0, 10),
       endTime: this.filtersModel.get('time')[1].toISOString().slice(0, 10),
       area: this.filtersModel.get('area'),
+      extraParameters: this.extraParameters.map(param => {
+        const result = param.name.replace(/([A-Z])/g, ' $1');
+        const displayName = result.charAt(0).toUpperCase() + result.slice(1);
+        return Object.assign({ displayName }, param);
+      }),
     };
   },
   regions: {
@@ -124,13 +133,13 @@ export default Marionette.LayoutView.extend({
     'click .tool-clear': 'onToolClearClicked',
     'click .tool-show-feature': 'onToolShowFeatureClicked',
     'change :file': 'onFileChanged',
-
   },
 
   initialize(options) {
     this.mapModel = options.mapModel;
     this.filtersModel = options.filtersModel;
     this.featureListCollection = new Backbone.Collection;
+    this.extraParameters = options.extraParameters;
 
     this.listenTo(this.filtersModel, 'change:time', this.onFiltersTimeChanged);
     this.listenTo(this.filtersModel, 'change:area', this.onFiltersAreaChanged);
@@ -155,6 +164,10 @@ export default Marionette.LayoutView.extend({
       // useCurrent oder defaultDate???
       // sideBySide ???
       // , showClear, showClose, ...
+    });
+
+    this.$('[data-slider-min]').slider({
+      tooltip_position: 'bottom',
     });
   },
 

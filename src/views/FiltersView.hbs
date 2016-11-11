@@ -1,9 +1,11 @@
 <form>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">{{t 'Time Filter'}}</h3>
+      <h3 class="panel-title">
+        <a role="button" class="collapsed" data-toggle="collapse" href="#collapse-time-filter">{{t 'Time Filter'}} <span class="caret"></span></a>
+      </h3>
     </div>
-    <div class="panel-body">
+    <div id="collapse-time-filter" class="panel-body collapse">
       <div class="form-group">
         <label for="">{{t 'Start'}}</label>
         <div class='input-group datetime start'>
@@ -28,9 +30,11 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">{{t 'Spatial Filter'}}</h3>
+      <h3 class="panel-title">
+        <a role="button" class="collapsed" data-toggle="collapse" href="#collapse-spatial-filter">{{t 'Spatial Filter'}} <span class="caret"></span></a>
+      </h3>
     </div>
-    <div class="panel-body">
+    <div id="collapse-spatial-filter" class="panel-body collapse">
       <div class="form-group">
         <label for="">{{t 'Draw'}}</label>
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
@@ -89,4 +93,48 @@
       </div>
     </div>
   </div>
+
+  {{#if extraParameters.length}}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <a role="button" class="collapsed" data-toggle="collapse" href="#collapse-additional-filters">{{t 'Additional Filters'}} <span class="caret"></span></a>
+      </h3>
+    </div>
+    <div id="collapse-additional-filters" class="panel-body collapse">
+      {{#each extraParameters}}
+      <div class="row">
+        <label for="inputEmail3" class="col-sm-5 control-label">{{this.displayName}}</label>
+        <div class="col-sm-6">
+          <input id="ex2" type="text" class="span2" value=""
+            data-provide="slider"
+            data-slider-min="10"
+            data-slider-max="1000"
+            data-slider-step="5"
+            data-slider-value="[250,450]"
+            data-slider-tooltip="hide"
+            />
+        </div>
+        <div class="col-sm-1">
+          <input type="checkbox"/>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
 </form>
+
+<style>
+.slider-horizontal {
+  width: 100% !important;
+}
+.panel .row {
+  margin-right: 0;
+  padding-left: 10px;
+}
+.panel .col-sm-1, .panel .col-sm-2, .panel .col-sm-3, .panel .col-sm-4, .panel .col-sm-5, .panel .col-sm-6 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+</style>
