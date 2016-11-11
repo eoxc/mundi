@@ -62,12 +62,14 @@
   "dependencies": {
     "backbone.marionette": "^2.4.7",
     "bootstrap": "^3.3.7",
+    "bootstrap-slider": "^9.3.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.42",
     "eoxc": "^0.0.1",
     "es6-promise": "^4.0.5",
     "i18next": "^3.4.1",
     "jquery": "^2.2.3",
     "jquery-ui": "^1.10.5",
-    "shpjs": "github:calvinmetcalf/shapefile-js#v3.3.2"
+    "shpjs": "github:calvinmetcalf/shapefile-js#v3.3.2",
+    "tether-shepherd": "^1.8.1"
   }
 }
