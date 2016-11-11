@@ -24,6 +24,8 @@ import SearchResultView from 'eoxc/src/search/views/SearchResultView';
 import RecordDetailsView from 'eoxc/src/search/views/RecordDetailsView';
 import SearchModel from 'eoxc/src/search/models/SearchModel';
 
+import { getParameters } from 'eoxc/src/search';
+
 import RootLayoutView from './views/RootLayoutView';
 
 import FiltersView from './views/FiltersView';
@@ -38,6 +40,9 @@ import download from 'eoxc/src/download';
 
 require('imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js');
 
+import Shepherd from 'tether-shepherd';
+require('tether-shepherd/dist/css/shepherd-theme-arrows.css');
+require('tether-shepherd/dist/css/shepherd-theme-dark.css');
 
 window.Application = Marionette.Application.extend({
   initialize({ config, configPath, container, navbarTemplate }) {
@@ -67,17 +72,32 @@ window.Application = Marionette.Application.extend({
   },
 
   onConfigLoaded(config) {
-    const settings = config.settings;
+    // TODO: check parameters
 
-    // TODO: default settings
-
-    // set up config
     const baseLayersCollection = new LayersCollection(config.baseLayers, {
       exclusiveVisibility: true,
     });
     const layersCollection = new LayersCollection(config.layers);
     const overlayLayersCollection = new LayersCollection(config.overlayLayers);
 
+    Promise.all(layersCollection.map(layerModel => getParameters(layerModel)))
+      .then(extraParameters => {
+        const params = [].concat.apply([], extraParameters)
+          .filter(param => param.type.startsWith('eo:'));
+          // .map(param => {
+          //   if (param.type === )
+          // })
+
+        this.onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, params);
+      });
+  },
+
+  onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, extraParameters) {
+    const settings = config.settings;
+
+    // TODO: default settings
+
+    // set up config
     const mapModel = new MapModel({
       center: settings.center,
       zoom: settings.zoom,
@@ -204,11 +224,13 @@ window.Application = Marionette.Application.extend({
     layout.showChildView('leftPanel', new SidePanelView({
       position: 'left',
       icon: 'fa-cog',
+      defaultOpen: settings.leftPanelOpen,
       views: [{
         name: 'Filters',
         view: new FiltersView({
           filtersModel,
           mapModel,
+          extraParameters,
         }),
       }, {
         name: 'Layers',
@@ -225,6 +247,7 @@ window.Application = Marionette.Application.extend({
     layout.showChildView('rightPanel', new SidePanelView({
       position: 'right',
       icon: 'fa-list',
+      defaultOpen: settings.rightPanelOpen,
       views: [{
         name: 'Search Results',
         view: new SearchResultView({
@@ -286,6 +309,18 @@ window.Application = Marionette.Application.extend({
     if (settings.extent) {
       mapModel.show(settings.extent);
     }
+
+    // const tour = new Shepherd.Tour({
+    //   // classes: 'shepherd-theme-arrows',
+    //   classes: 'shepherd-element shepherd-open shepherd-theme-arrows shepherd-theme-dark',
+    //   showCancelLink: true,
+    // });
+    //
+    // tour.addStep('.toggle-side-panel-left', {
+    //   text: 'This step is attached to the bottom of the <code>.example-css-selector</code> element.',
+    //   attachTo: '.toggle-side-panel-left bottom',
+    // });
+    // tour.start();
 
     Backbone.history.start({ pushState: false });
   },
