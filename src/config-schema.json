@@ -91,6 +91,16 @@
                     },
                     "minItems": 2,
                     "maxItems": 2
+                },
+                "leftPanelOpen": {
+                    "description": "Whether or not the left panel shall be open on start.",
+                    "type": "booloan",
+                    "default": false
+                },
+                "rightPanelOpen": {
+                    "description": "Whether or not the right panel shall be open on start.",
+                    "type": "booloan",
+                    "default": false
                 }
             },
             "oneOf": [
