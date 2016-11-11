@@ -35,6 +35,7 @@ export default Marionette.LayoutView.extend({
     this.position = options.position || 'left';
     this.views = options.views;
     this.icon = options.icon;
+    this.defaultOpen = options.defaultOpen;
   },
 
   onBeforeShow() {
@@ -42,6 +43,10 @@ export default Marionette.LayoutView.extend({
       this.addRegion(`region-${index}`, `#${this.position}-${index}`);
       this.showChildView(`region-${index}`, viewConfig.view);
     });
+
+    if (this.defaultOpen) {
+      this.onToggleSidePanelClicked();
+    }
     // this.views.forEach(view => this.showChildView('sidePanelContent', this.view))
     // this.showChildView('sidePanelContent', this.view);
   },
