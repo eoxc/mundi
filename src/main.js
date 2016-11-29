@@ -44,6 +44,8 @@ import Shepherd from 'tether-shepherd';
 require('tether-shepherd/dist/css/shepherd-theme-arrows.css');
 require('tether-shepherd/dist/css/shepherd-theme-dark.css');
 
+var rangeParameters = new Set([]);
+
 window.Application = Marionette.Application.extend({
   initialize({ config, configPath, container, navbarTemplate }) {
     this.config = config;
@@ -81,12 +83,16 @@ window.Application = Marionette.Application.extend({
     const overlayLayersCollection = new LayersCollection(config.overlayLayers);
 
     Promise.all(layersCollection.map(layerModel => getParameters(layerModel)))
-      .then(extraParameters => {
+      .then((extraParameters) => {
         const params = [].concat.apply([], extraParameters)
-          .filter(param => param.type.startsWith('eo:'));
-          // .map(param => {
-          //   if (param.type === )
-          // })
+          .filter(param => param.type.startsWith('eo:'))
+          .map((param) => {
+            const paramSetting = config.settings.parameters[param.type];
+            if (paramSetting) {
+              return { ...param, ...paramSetting };
+            }
+            return param;
+          });
 
         this.onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, params);
       });
@@ -219,6 +225,8 @@ window.Application = Marionette.Application.extend({
       baseLayersCollection,
       overlayLayersCollection,
       layersCollection,
+      highlightFillColor: settings.highlightFillColor,
+      highlightStrokeColor: settings.highlightStrokeColor,
     }));
 
     layout.showChildView('leftPanel', new SidePanelView({
@@ -304,6 +312,9 @@ window.Application = Marionette.Application.extend({
         start: new Date(settings.timeDomain[0]),
         end: new Date(settings.timeDomain[1]),
       },
+      constrainTimeDomain: settings.constrainTimeDomain,
+      displayInterval: settings.displayInterval,
+      selectableInterval: settings.selectableInterval,
     }));
 
     if (settings.extent) {
