@@ -103,17 +103,29 @@
     </div>
     <div id="collapse-additional-filters" class="panel-body collapse">
       {{#each extraParameters}}
-      <div class="row">
-        <label for="inputEmail3" class="col-sm-5 control-label">{{this.displayName}}</label>
+      <div class="row extra-parameter">
+        <label class="col-sm-5 control-label">{{this.displayName}}</label>
         <div class="col-sm-6">
+          {{#if this.range}}
           <input id="ex2" type="text" class="span2" value=""
+            data-type="{{ this.type }}"
             data-provide="slider"
-            data-slider-min="10"
-            data-slider-max="1000"
-            data-slider-step="5"
-            data-slider-value="[250,450]"
+            data-slider-min="{{ this.min }}"
+            data-slider-max="{{ this.max }}"
+            data-slider-step="1"
+            data-slider-value="[{{ this.min }},{{ this.max }}]"
             data-slider-tooltip="hide"
             />
+          {{else if this.options}}
+          <select data-type="{{ this.type }}" class="form-control input-sm">
+            <option>---</option>
+            {{#each this.options}}
+            <option value="{{ this }}">{{ this }}</option>
+            {{/each}}
+          </select>
+          {{else}}
+          <input type="text" data-type="{{ this.type }}" class="form-control input-sm">
+          {{/if}}
         </div>
         <div class="col-sm-1">
           <input type="checkbox"/>

@@ -113,10 +113,11 @@ export default Marionette.LayoutView.extend({
       startTime: this.filtersModel.get('time')[0].toISOString().slice(0, 10),
       endTime: this.filtersModel.get('time')[1].toISOString().slice(0, 10),
       area: this.filtersModel.get('area'),
-      extraParameters: this.extraParameters.map(param => {
+      extraParameters: this.extraParameters.map((param) => {
         const result = param.name.replace(/([A-Z])/g, ' $1');
         const displayName = result.charAt(0).toUpperCase() + result.slice(1);
-        return Object.assign({ displayName }, param);
+        // return Object.assign({ displayName }, param);
+        return { ...param, displayName };
       }),
     };
   },
@@ -133,6 +134,8 @@ export default Marionette.LayoutView.extend({
     'click .tool-clear': 'onToolClearClicked',
     'click .tool-show-feature': 'onToolShowFeatureClicked',
     'change :file': 'onFileChanged',
+    'change .extra-parameter input': 'onExtraParameterChanged',
+    'change .extra-parameter select': 'onExtraParameterChanged',
   },
 
   initialize(options) {
@@ -305,5 +308,10 @@ export default Marionette.LayoutView.extend({
     if (tool) {
       this.$(`.tool-${tool}`).addClass('active');
     }
+  },
+
+  onExtraParameterChanged(event) {
+    const $target = $(event.target);
+    this.filtersModel.set($target.data('type'), $target.val());
   },
 });
