@@ -44,7 +44,23 @@ import Shepherd from 'tether-shepherd';
 require('tether-shepherd/dist/css/shepherd-theme-arrows.css');
 require('tether-shepherd/dist/css/shepherd-theme-dark.css');
 
-var rangeParameters = new Set([]);
+
+function combineParameter(setting, param) {
+  const options = setting.options || param.options;
+  return {
+    type: param.type,
+    name: param.name,
+    mandatory: setting.mandatory || param.mandatory,
+    options,
+    minExclusive: param.minExclusive,
+    maxExclusive: param.maxExclusive,
+    minInclusive: param.minInclusive,
+    maxInclusive: param.maxInclusive,
+    range: setting.range,
+    min: setting.min,
+    max: setting.max,
+  };
+}
 
 window.Application = Marionette.Application.extend({
   initialize({ config, configPath, container, navbarTemplate }) {
@@ -82,20 +98,64 @@ window.Application = Marionette.Application.extend({
     const layersCollection = new LayersCollection(config.layers);
     const overlayLayersCollection = new LayersCollection(config.overlayLayers);
 
-    Promise.all(layersCollection.map(layerModel => getParameters(layerModel)))
-      .then((extraParameters) => {
-        const params = [].concat.apply([], extraParameters)
-          .filter(param => param.type.startsWith('eo:'))
-          .map((param) => {
-            const paramSetting = config.settings.parameters[param.type];
-            if (paramSetting) {
-              return { ...param, ...paramSetting };
-            }
-            return param;
-          });
+    const parameterPromises = layersCollection
+      .map(layerModel => getParameters(layerModel).then(parameters => [layerModel, parameters]));
 
-        this.onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, params);
-      });
+    if (config.settings.parameters) {
+      Promise.all(parameterPromises)
+        .then((layersPlusParameters) => {
+          const params = config.settings.parameters
+            .map(param => [
+              param, layersPlusParameters.filter(layerPlusParameters => (
+                layerPlusParameters[1].find(p => p.type === param.type)
+              )),
+            ])
+            // filter out the parameters that are nowhere available
+            .filter(paramPlusApplicableLayers => paramPlusApplicableLayers[1].length)
+            // combine the parameter settings info with the info from the search services
+            .map((paramPlusApplicableLayers) => {
+              let param = paramPlusApplicableLayers[0];
+              for (let i = 0; i < paramPlusApplicableLayers[1].length; i += 1) {
+                const [, layerParameters] = paramPlusApplicableLayers[1][i];
+                param = combineParameter(
+                  param, layerParameters.find(p => p.type === param.type)
+                );
+              }
+              if (paramPlusApplicableLayers[1].length < layersCollection.length) {
+                param.onlyAvailableAt = paramPlusApplicableLayers[1].map(layerPlusParameters => (
+                  layerPlusParameters[0].get('displayName')
+                ));
+              }
+              return param;
+            });
+
+          // const params = [].concat.apply([], extraParameters)
+          //   .filter(param => param.type.startsWith('eo:'))
+          //   .map((param) => {
+          //     const paramSetting = config.settings.parameters[param.type];
+          //     if (paramSetting) {
+          //       return {
+          //         type: param.type,
+          //         name: param.name,
+          //         mandatory: param.mandatory,
+          //         options: param.options,
+          //         minExclusive: param.minExclusive,
+          //         maxExclusive: param.maxExclusive,
+          //         minInclusive: param.minInclusive,
+          //         maxInclusive: param.maxInclusive,
+          //         ...paramSetting,
+          //       };
+          //     }
+          //     return param;
+          //   });
+
+          this.onRun(
+            config, baseLayersCollection, layersCollection, overlayLayersCollection, params
+          );
+        });
+    } else {
+      this.onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, []);
+    }
   },
 
   onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, extraParameters) {
@@ -238,6 +298,7 @@ window.Application = Marionette.Application.extend({
         view: new FiltersView({
           filtersModel,
           mapModel,
+          layersCollection,
           extraParameters,
         }),
       }, {
@@ -304,17 +365,25 @@ window.Application = Marionette.Application.extend({
 
     // layout.showChildView('modals', new ModalView({}));
 
+    const domain = {
+      start: new Date(settings.timeDomain[0]),
+      end: new Date(settings.timeDomain[1]),
+    };
+    const display = settings.displayTimeDomain ? {
+      start: new Date(settings.displayTimeDomain[0]),
+      end: new Date(settings.displayTimeDomain[1]),
+    } : domain;
+
     layout.showChildView('timeSlider', new TimeSliderView({
       layersCollection,
       mapModel,
       filtersModel,
-      domain: {
-        start: new Date(settings.timeDomain[0]),
-        end: new Date(settings.timeDomain[1]),
-      },
+      domain,
+      display,
       constrainTimeDomain: settings.constrainTimeDomain,
       displayInterval: settings.displayInterval,
       selectableInterval: settings.selectableInterval,
+      maxTooltips: settings.maxTooltips,
     }));
 
     if (settings.extent) {
