@@ -92,14 +92,46 @@
                     "minItems": 2,
                     "maxItems": 2
                 },
+                "constrainTimeDomain": {
+                    "description": "Whether or not the zoomable area shall be confined to the interval of the 'timeDomain' setting.",
+                    "type": "boolean",
+                    "default": false
+                },
+                "displayInterval": {
+                    "description": "The maximum allowed interval to display on the time slider as an ISO 8601 period.",
+                    "type": "string",
+                    "pattern": "^P(?:([0-9]+)Y|)?(?:([0-9]+)M|)?(?:([0-9]+)D|)?T?(?:([0-9]+)H|)?(?:([0-9]+)M|)?(?:([0-9]+)S|)?$",
+                    "default": null
+                },
+                "selectableInterval": {
+                    "description": "The maximum allowed interval to select as an ISO 8601 period.",
+                    "type": "string",
+                    "pattern": "^P(?:([0-9]+)Y|)?(?:([0-9]+)M|)?(?:([0-9]+)D|)?T?(?:([0-9]+)H|)?(?:([0-9]+)M|)?(?:([0-9]+)S|)?$",
+                    "default": null
+                },
+                "maxTooltips": {
+                    "description": "The maximum number of individual tooltips, before only the beginning of the list is show and a '+ x more' is appended.",
+                    "type": "number",
+                    "default": null
+                },
+                "highlightFillColor": {
+                    "description": "The fill color of highlighted footprints/bounding boxes on the map. Any valid CSS color defintion is supported.",
+                    "type": "string",
+                    "default": "rgba(255, 255, 255, 0.2)"
+                },
+                "highlightStrokeColor": {
+                    "description": "The stroke color of highlighted footprints/bounding boxes on the map. Any valid CSS color defintion is supported.",
+                    "type": "string",
+                    "default": "#cccccc"
+                },
                 "leftPanelOpen": {
                     "description": "Whether or not the left panel shall be open on start.",
-                    "type": "booloan",
+                    "type": "boolean",
                     "default": false
                 },
                 "rightPanelOpen": {
                     "description": "Whether or not the right panel shall be open on start.",
-                    "type": "booloan",
+                    "type": "boolean",
                     "default": false
                 }
             },
@@ -209,6 +241,26 @@
                             "description": "The base-URL to send search requests to.",
                             "type": "string",
                             "format": "uri"
+                        },
+                        "format": {
+                            "description": "The format (mime-type) to use for OpenSearch requests.",
+                            "type": "string",
+                            "default": null
+                        },
+                        "method": {
+                            "description": "The preferred HTTP method to send requests.",
+                            "type": "string",
+                            "enum": ["GET", "POST"],
+                            "default": "GET"
+                        },
+                        "histogramThreshold": {
+                            "description": "The threshold of number of records in the whole visible interval to display the dataset as a histogram instead of individual records. When not specified, the records are always shown.",
+                            "type": "number",
+                            "default": null
+                        },
+                        "parameters": {
+                            "description": "Mapping the parameter type (such as eo:processingCenter) to a settings object.",
+                            "type": "object"
                         }
                     },
                     "required": ["protocol", "url"]
