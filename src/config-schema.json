@@ -144,6 +144,50 @@
                     "description": "Whether or not the right panel shall be open on start.",
                     "type": "boolean",
                     "default": false
+                },
+                "parameters": {
+                    "description": "Mapping the parameter type (such as eo:processingCenter) to a settings object.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "description": "The mandatory parameter type. Use the OpenSeach type, e.g: eo:acquisitionStation.",
+                                "type": "string"
+                            },
+                            "options": {
+                                "description": "Selectable options. Will be rendered as a dropdown.",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "label": {
+                                            "description": "The displayed label of a single option.",
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "description": "The search value to be sent in requests once selected",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": ["label", "value"]
+                                }
+                            },
+                            "range": {
+                                "description": "Whether this search parameter shall be rendered as a dual-slider.",
+                                "type": "boolean",
+                                "default": false
+                            },
+                            "min": {
+                                "description": "The lower boundary for the range. Mandatory for range parameters.",
+                                "type": "number"
+                            },
+                            "max": {
+                                "description": "The upper boundary for the range. Mandatory for range parameters.",
+                                "type": "number"
+                            }
+                        }
+                    }
                 }
             },
             "oneOf": [
@@ -268,10 +312,6 @@
                             "description": "The threshold of number of records in the whole visible interval to display the dataset as a histogram instead of individual records. When not specified, the records are always shown.",
                             "type": "number",
                             "default": null
-                        },
-                        "parameters": {
-                            "description": "Mapping the parameter type (such as eo:processingCenter) to a settings object.",
-                            "type": "object"
                         }
                     },
                     "required": ["protocol", "url"]
