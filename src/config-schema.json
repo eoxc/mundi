@@ -82,6 +82,17 @@
                     "minItems": 2,
                     "maxItems": 2
                 },
+                "displayTimeDomain": {
+                    "description": "The initially displayed time interval.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "default": "timeDomain"
+                },
                 "selectedTimeDomain": {
                     "description": "The initially selected time of interest.",
                     "type": "array",
