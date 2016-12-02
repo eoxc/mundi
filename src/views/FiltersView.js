@@ -21,7 +21,7 @@ require('./FiltersView.less');
 
 const FeatureView = Marionette.ItemView.extend({
   tagName: 'li',
-  template: (attrs) => `
+  template: attrs => `
     <a href='#'>${attrs.properties.NAME} <small class="text-right">(${attrs.geometry.type})</small></a>
   `,
   triggers: {
@@ -134,14 +134,15 @@ export default Marionette.LayoutView.extend({
     'click .tool-clear': 'onToolClearClicked',
     'click .tool-show-feature': 'onToolShowFeatureClicked',
     'change :file': 'onFileChanged',
-    'change .extra-parameter input': 'onExtraParameterChanged',
+    'change .extra-parameter input[type="text"]': 'onExtraParameterChanged',
     'change .extra-parameter select': 'onExtraParameterChanged',
+    'slideStop .extra-parameter input[data-provide="slider"]': 'onExtraParameterChanged',
   },
 
   initialize(options) {
     this.mapModel = options.mapModel;
     this.filtersModel = options.filtersModel;
-    this.featureListCollection = new Backbone.Collection;
+    this.featureListCollection = new Backbone.Collection();
     this.extraParameters = options.extraParameters;
 
     this.listenTo(this.filtersModel, 'change:time', this.onFiltersTimeChanged);
@@ -312,6 +313,22 @@ export default Marionette.LayoutView.extend({
 
   onExtraParameterChanged(event) {
     const $target = $(event.target);
-    this.filtersModel.set($target.data('type'), $target.val());
+
+    if (event.value) {
+      // in case of slider change. Check if the value is min/max
+      const [low, high] = event.value;
+      if ($target.data('slider-min') === low && $target.data('slider-max') === high) {
+        this.filtersModel.unset($target.data('type'));
+      } else {
+        this.filtersModel.set($target.data('type'), { min: low, max: high });
+      }
+    } else {
+      const value = $target.val();
+      if (!value || value === '') {
+        this.filtersModel.unset($target.data('type'));
+      } else {
+        this.filtersModel.set($target.data('type'), value);
+      }
+    }
   },
 });

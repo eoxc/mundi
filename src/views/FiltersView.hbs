@@ -104,32 +104,32 @@
     <div id="collapse-additional-filters" class="panel-body collapse">
       {{#each extraParameters}}
       <div class="row extra-parameter">
-        <label class="col-sm-5 control-label">{{this.displayName}}</label>
+        <label class="col-sm-6 control-label">{{this.displayName}}</label>
         <div class="col-sm-6">
           {{#if this.range}}
-          <input id="ex2" type="text" class="span2" value=""
+          <input id="ex2" class="span2" value=""
             data-type="{{ this.type }}"
             data-provide="slider"
             data-slider-min="{{ this.min }}"
             data-slider-max="{{ this.max }}"
             data-slider-step="1"
             data-slider-value="[{{ this.min }},{{ this.max }}]"
-            data-slider-tooltip="hide"
+            data-slider-tooltip=""
             />
           {{else if this.options}}
           <select data-type="{{ this.type }}" class="form-control input-sm">
-            <option>---</option>
+            <option value="">---</option>
             {{#each this.options}}
-            <option value="{{ this }}">{{ this }}</option>
+            <option value="{{ this.value }}">{{ this.label }}</option>
             {{/each}}
           </select>
           {{else}}
           <input type="text" data-type="{{ this.type }}" class="form-control input-sm">
           {{/if}}
         </div>
-        <div class="col-sm-1">
+        <!-- <div class="col-sm-1">
           <input type="checkbox"/>
-        </div>
+        </div> -->
       </div>
       {{/each}}
     </div>
@@ -148,5 +148,9 @@
 .panel .col-sm-1, .panel .col-sm-2, .panel .col-sm-3, .panel .col-sm-4, .panel .col-sm-5, .panel .col-sm-6 {
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.panel .input-sm {
+  height: 20px;
 }
 </style>
