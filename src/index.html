@@ -12,12 +12,218 @@
   <div id="app" style="width: 100%; height: 100%; position: absolute; margin: 0; padding:0;"></div>
   <script src="../dist/code-de.bundle.js"></script>
   <script>
+// var config = {
+//     "settings": {
+//         "zoom": 5,
+//         "extent": [
+//             -180,
+//             -56,
+//             180,
+//             83
+//         ],
+//         "timeDomain": [
+//             "2016-01-01T00:00:00Z",
+//             "2016-12-05T13:00:00Z"
+//         ],
+//         "constrainTimeDomain": true,
+//         "displayTimeDomain": [
+//             "2016-11-10T13:00:00Z",
+//             "2016-11-17T13:00:00Z"
+//         ],
+//         "selectedTimeDomain": [
+//             "2016-11-14T00:00:00Z",
+//             "2016-11-15T00:00:00Z"
+//         ],
+//         "displayInterval": "P7D",
+//         "selectableInterval": "P1D",
+//         "highlightFillColor": "rgba(255, 0, 0, 0.5)",
+//         "highlightStrokeColor": "rgba(255, 0, 0, 1)",
+//         "maxTooltips": 10,
+//         "rightPanelOpen": true,
+//         "parameters": [{
+//             "type": "eo:productionStatus",
+//         }, {
+//             "type": "eo:acquisitionType",
+//         }, {
+//             "type": "eo:cloudCover",
+//             "range": true,
+//             "min": 0,
+//             "max": 100
+//         }, {
+//             "type": "eo:orbitDirection",
+//         }, {
+//             "type": "eo:orbitNumber",
+//         }, {
+//             "type": "eo:productQualityStatus",
+//         }]
+//     },
+//     "baseLayers": [
+//         {
+//             "id": "eoc:basemap",
+//             "displayName": "EOC Base Map",
+//             "display": {
+//                 "id": "eoc:basemap",
+//                 "visible": true,
+//                 "protocol": "WMTS",
+//                 "urls": [
+//                     "https:\/\/tiles.geoservice.dlr.de\/service\/wmts?"
+//                 ],
+//                 "matrixSet": "EPSG:4326",
+//                 "matrixIdPrefix": "EPSG:4326:",
+//                 "format": "image\/png",
+//                 "projection": "EPSG:4326",
+//                 "style": "default",
+//                 "attribution": "Basemap: Data \u0026copy; \u003Ca href=\u0022http:\/\/openstreetmap.org\u0022\u003EOpenStreetMap contributors\u003C\/a\u003E and others, Rendering \u0026copy; \u003Ca href=\u0022http:\/\/www.dlr.de\/eoc\u0022\u003EDLR\/EOC\u003C\/a\u003E"
+//             }
+//         },
+//         {
+//             "id": "bmng_topo_bathy",
+//             "displayName": "Blue Marble NG",
+//             "display": {
+//                 "id": "bmng_topo_bathy",
+//                 "visible": false,
+//                 "protocol": "WMTS",
+//                 "urls": [
+//                     "https:\/\/tiles.geoservice.dlr.de\/service\/wmts?"
+//                 ],
+//                 "matrixSet": "EPSG:4326",
+//                 "matrixIdPrefix": "EPSG:4326:",
+//                 "format": "image\/png",
+//                 "projection": "EPSG:4326",
+//                 "style": "default",
+//                 "attribution": "Blue Marble NG: \u003Ca href=\u0022http:\/\/earthobservatory.nasa.gov\/Features\/BlueMarble\u0022\u003ENASA Earth Observatory\u003C\/a\u003E"
+//             }
+//         },
+//         {
+//             "id": "eoc:world_relief_bw",
+//             "displayName": "Relief",
+//             "display": {
+//                 "id": "eoc:world_relief_bw",
+//                 "visible": false,
+//                 "protocol": "WMTS",
+//                 "urls": [
+//                     "https:\/\/tiles.geoservice.dlr.de\/service\/wmts?"
+//                 ],
+//                 "matrixSet": "EPSG:4326",
+//                 "matrixIdPrefix": "EPSG:4326:",
+//                 "format": "image\/png",
+//                 "projection": "EPSG:4326",
+//                 "style": "default",
+//                 "attribution": "Relief: \u003Ca href=\u0022http:\/\/www.dlr.de\/eoc\u0022\u003EDLR\/EOC\u003C\/a\u003E"
+//             }
+//         }
+//     ],
+//     "layers": [
+//         {
+//             "id": "S2_MSI_L1C",
+//             "displayName": "WMS Download Sentinel-2 MSI - Level 1C Top-of-Atmosphere Reflectance",
+//             "displayColor": "#7AC6CF",
+//             "display": {
+//                 "id": "S2_MSI_L1C",
+//                 "visible": true,
+//                 "protocol": "WMS",
+//                 "urls": [
+//                     "https:\/\/code-de.org\/geoservice\/Sentinel2\/wms?"
+//                 ],
+//                 "format": "image\/png",
+//                 "projection": "EPSG:4326",
+//                 "style": "default",
+//                 "attribution": "Nutzungsbedingungen: no limitations"
+//             },
+//             "search": {
+//                 "protocol": "OpenSearch",
+//                 "url": "https:\/\/code-de.org\/opensearch\/description.xml\/?parentIdentifier=EOP:CODE-DE:S2_MSI_L1C",
+//                 "id": "EOP:CODE-DE:S2_MSI_L1C",
+//                 "format": "application\/atom+xml",
+//                 "method": "GET",
+//                 "histogramThreshold": 500
+//             },
+//             "download": {
+//                 "protocol": "OpenSearch",
+//                 "url": "https:\/\/code-de.org\/opensearch\/description.xml\/?parentIdentifier=EOP:CODE-DE:S2_MSI_L1C",
+//                 "id": "EOP:CODE-DE:S2_MSI_L1C",
+//                 "format": "application\/atom+xml",
+//                 "method": "GET"
+//             }
+//         }
+//     ],
+//     "overlayLayers": [
+//         {
+//             "id": "eoc:baseoverlay",
+//             "displayName": "EOC Base Overlay",
+//             "display": {
+//                 "id": "eoc:baseoverlay",
+//                 "visible": true,
+//                 "protocol": "WMTS",
+//                 "urls": [
+//                     "https:\/\/tiles.geoservice.dlr.de\/service\/wmts?"
+//                 ],
+//                 "matrixSet": "EPSG:4326",
+//                 "matrixIdPrefix": "EPSG:4326:",
+//                 "format": "image\/png",
+//                 "projection": "EPSG:4326",
+//                 "style": "default",
+//                 "attribution": "Baseoverlay: Data \u0026copy; \u003Ca href=\u0022http:\/\/openstreetmap.org\u0022\u003EOpenStreetMap contributors\u003C\/a\u003E and others, Rendering \u0026copy; \u003Ca href=\u0022http:\/\/www.dlr.de\/eoc\u0022\u003EDLR\/EOC\u003C\/a\u003E"
+//             }
+//         },
+//         {
+//             "id": "eoc:liteoverlay",
+//             "displayName": "EOC Lite Overlay",
+//             "display": {
+//                 "id": "eoc:liteoverlay",
+//                 "visible": false,
+//                 "protocol": "WMTS",
+//                 "urls": [
+//                     "https:\/\/tiles.geoservice.dlr.de\/service\/wmts?"
+//                 ],
+//                 "matrixSet": "EPSG:4326",
+//                 "matrixIdPrefix": "EPSG:4326:",
+//                 "format": "image\/png",
+//                 "projection": "EPSG:4326",
+//                 "style": "default",
+//                 "attribution": "Liteoverlay: Data by \u003Ca href=\u0022http:\/\/naturalearthdata.com\u0022\u003ENatural Earth\u003C\/a\u003E, Rendering \u0026copy; \u003Ca href=\u0022http:\/\/www.dlr.de\/eoc\u0022\u003EDLR\/EOC\u003C\/a\u003E"
+//             }
+//         }
+//     ]
+// };
+
 var config = {
     "settings": {
         "center": [-50, -15],
         "zoom": 5,
-        "timeDomain": ["2009-01-01T00:00:00Z", "2009-10-31T00:00:00Z"],
-        "selectedTimeDomain": ["2009-06-25T00:00:00Z", "2009-09-30T00:00:00Z"]
+        "timeDomain": [
+            "2003-01-01T00:00:00Z",
+            "2009-12-31T23:59:59Z"
+        ],
+        "constrainTimeDomain": true,
+        "displayTimeDomain": [
+            "2009-07-01T00:00:00Z",
+            "2009-07-31T23:59:59Z"
+        ],
+        "selectedTimeDomain": [
+            "2009-07-01T00:00:00Z",
+            "2009-07-15T00:00:00Z"
+        ],
+        "displayInterval": "P1Y",
+        "selectableInterval": "P14D",
+        "maxTooltips": 10,
+        "highlightFillColor": "rgba(255, 0, 0, 0.5)",
+        "highlightStrokeColor": "rgba(255, 0, 0, 1)",
+        "rightPanelOpen": true,
+        "parameters": [{
+            "type": "eo:sensorType",
+        }, {
+            "type": "eo:productionStatus",
+        }, {
+            "type": "eo:acquisitionType",
+        }, {
+            "type": "eo:cloudCover",
+            "range": true,
+            "min": 0,
+            "max": 100
+        }, {
+            "type": "eo:orbitDirection",
+        }]
     },
     "baseLayers": [{
         "id": "terrain-light",
@@ -106,6 +312,25 @@ var config = {
             "protocol": "OpenSearch",
             "url": "http://ows.eox.at/cite_staging/eoxserver/opensearch/collections/MER_FRS_RGB/"
         }
+    },
+    {
+        "id": "FedEO_LANDSAT.ETM.GTC",
+        "displayName": "Landsat ETM GTC from FedEO",
+        "displayColor": "#FF4D4D",
+        "display": {
+            "visible": true,
+            "protocol": "WMS",
+            "urls": [
+            ],
+        },
+        "search": {
+            "id": "FedEO_LANDSAT.ETM.GTC",
+            "protocol": "OpenSearch",
+            "url": "http://ows.eox.at/code-de/FedEO_LANDSAT.ETM.GTC.osdd",
+            "format": "application\/atom+xml",
+            "method": "GET",
+            "histogramThreshold": 200
+        },
     }],
     "overlayLayers": [{
         "id": "coastline",
