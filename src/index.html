@@ -193,19 +193,19 @@ var config = {
         "zoom": 5,
         "timeDomain": [
             "2003-01-01T00:00:00Z",
-            "2009-10-31T23:59:59Z"
+            "2009-12-31T23:59:59Z"
         ],
         "constrainTimeDomain": true,
         "displayTimeDomain": [
-            "2009-09-01T00:00:00Z",
-            "2009-09-30T23:59:59Z"
+            "2009-07-01T00:00:00Z",
+            "2009-07-31T23:59:59Z"
         ],
         "selectedTimeDomain": [
-            "2009-06-25T00:00:00Z",
-            "2009-09-28T00:00:00Z"
+            "2009-07-01T00:00:00Z",
+            "2009-07-15T00:00:00Z"
         ],
-        "displayInterval": "P1M",
-        "selectableInterval": "P1M",
+        "displayInterval": "P1Y",
+        "selectableInterval": "P14D",
         "maxTooltips": 10,
         "highlightFillColor": "rgba(255, 0, 0, 0.5)",
         "highlightStrokeColor": "rgba(255, 0, 0, 1)",
@@ -223,10 +223,6 @@ var config = {
             "max": 100
         }, {
             "type": "eo:orbitDirection",
-        }, {
-            "type": "eo:orbitNumber",
-        }, {
-            "type": "eo:productQualityStatus",
         }]
     },
     "baseLayers": [{
@@ -322,7 +318,7 @@ var config = {
         "displayName": "Landsat ETM GTC from FedEO",
         "displayColor": "#FF4D4D",
         "display": {
-            "visible": false,
+            "visible": true,
             "protocol": "WMS",
             "urls": [
             ],
@@ -331,6 +327,8 @@ var config = {
             "id": "FedEO_LANDSAT.ETM.GTC",
             "protocol": "OpenSearch",
             "url": "http://ows.eox.at/code-de/FedEO_LANDSAT.ETM.GTC.osdd",
+            "format": "application\/atom+xml",
+            "method": "GET",
             "histogramThreshold": 200
         },
     }],
