@@ -312,6 +312,11 @@
                             "description": "The threshold of number of records in the whole visible interval to display the dataset as a histogram instead of individual records. When not specified, the records are always shown.",
                             "type": "number",
                             "default": null
+                        },
+                        "histogramBinCount": {
+                            "description": "The number of histogram bins to display in histogram mode.",
+                            "type": "number",
+                            "default": 20
                         }
                     },
                     "required": ["protocol", "url"]
