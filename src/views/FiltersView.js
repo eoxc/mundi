@@ -3,8 +3,8 @@ import Marionette from 'backbone.marionette';
 import $ from 'jquery';
 import shp from 'shpjs';
 import moment from 'moment';
-require('eonasdan-bootstrap-datetimepicker');
-require('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css');
+import 'eonasdan-bootstrap-datetimepicker';
+import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css';
 import 'bootstrap-slider';
 import 'bootstrap-slider/dist/css/bootstrap-slider.css';
 
@@ -126,6 +126,7 @@ export default Marionette.LayoutView.extend({
   },
   events: {
     'dp.change .datetime': 'onDateInputChange',
+    'click .tool-show-time': 'onShowTimeClicked',
     'change .show-point input': 'onPointInputChange',
     'change .show-bbox input': 'onBBoxInputChange',
     'click .tool-point': 'onToolPointClicked',
@@ -170,8 +171,8 @@ export default Marionette.LayoutView.extend({
       // , showClear, showClose, ...
     });
 
-    this.$('[data-slider-min]').slider({
-      tooltip_position: 'bottom',
+    this.$('[data-provide="slider"]').slider({
+      tooltip_position: 'top',
     });
   },
 
@@ -190,6 +191,10 @@ export default Marionette.LayoutView.extend({
         (startDate < endDate) ? [startDate, endDate] : [endDate, startDate]
       );
     }
+  },
+
+  onShowTimeClicked() {
+    this.filtersModel.show(this.filtersModel.get('time'));
   },
 
   onPointInputChange() {
