@@ -14,6 +14,7 @@ import Marionette from 'backbone.marionette';
 import LayersCollection from 'eoxc/src/core/models/LayersCollection';
 import MapModel from 'eoxc/src/core/models/MapModel';
 import FiltersModel from 'eoxc/src/core/models/FiltersModel';
+import HighlightModel from 'eoxc/src/core/models/HighlightModel';
 
 import LayerOptionsView from 'eoxc/src/core/views/layers/LayerOptionsView';
 
@@ -98,10 +99,9 @@ window.Application = Marionette.Application.extend({
     const layersCollection = new LayersCollection(config.layers);
     const overlayLayersCollection = new LayersCollection(config.overlayLayers);
 
-    const parameterPromises = layersCollection
-      .map(layerModel => getParameters(layerModel).then(parameters => [layerModel, parameters]));
-
     if (config.settings.parameters) {
+      const parameterPromises = layersCollection
+        .map(layerModel => getParameters(layerModel).then(parameters => [layerModel, parameters]));
       Promise.all(parameterPromises)
         .then((layersPlusParameters) => {
           const params = config.settings.parameters
@@ -110,8 +110,10 @@ window.Application = Marionette.Application.extend({
                 layerPlusParameters[1].find(p => p.type === param.type)
               )),
             ])
+
             // filter out the parameters that are nowhere available
             .filter(paramPlusApplicableLayers => paramPlusApplicableLayers[1].length)
+
             // combine the parameter settings info with the info from the search services
             .map((paramPlusApplicableLayers) => {
               let param = paramPlusApplicableLayers[0];
@@ -174,6 +176,7 @@ window.Application = Marionette.Application.extend({
         new Date(settings.selectedTimeDomain[1]),
       ],
     });
+    const highlightModel = new HighlightModel();
 
     // set up layout
     const layout = new RootLayoutView({
@@ -285,6 +288,7 @@ window.Application = Marionette.Application.extend({
       baseLayersCollection,
       overlayLayersCollection,
       layersCollection,
+      highlightModel,
       highlightFillColor: settings.highlightFillColor,
       highlightStrokeColor: settings.highlightStrokeColor,
     }));
@@ -322,6 +326,7 @@ window.Application = Marionette.Application.extend({
         view: new SearchResultView({
           mapModel,
           filtersModel,
+          highlightModel,
           collection: new Backbone.Collection(
             layersCollection.map(layerModel => new SearchModel({
               layerModel, filtersModel, mapModel,
@@ -378,6 +383,7 @@ window.Application = Marionette.Application.extend({
       layersCollection,
       mapModel,
       filtersModel,
+      highlightModel,
       domain,
       display,
       constrainTimeDomain: settings.constrainTimeDomain,
