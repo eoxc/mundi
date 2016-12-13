@@ -339,6 +339,8 @@ window.Application = Marionette.Application.extend({
           // },
           onResultItemInfo(view, record, layerModel) {
             const detailsMapModel = new MapModel({ center: [0, 0], zoom: 5 });
+            const detailsHighlightModel = new HighlightModel();
+
             const time = record.get('properties').time;
             layout.showChildView('modals', new ModalView({
               title: `${layerModel.get('displayName')} - ${time[0].toISOString()}`,
@@ -348,9 +350,12 @@ window.Application = Marionette.Application.extend({
                 mapView: new OpenLayersMapView({
                   mapModel: detailsMapModel,
                   filtersModel: new FiltersModel({ time }),
+                  highlightModel: detailsHighlightModel,
                   baseLayersCollection,
                   overlayLayersCollection,
                   layersCollection,
+                  highlightFillColor: settings.highlightFillColor,
+                  highlightStrokeColor: settings.highlightStrokeColor,
                 }),
               }),
               buttons: [
@@ -361,6 +366,7 @@ window.Application = Marionette.Application.extend({
             }));
 
             detailsMapModel.show(record.attributes);
+            detailsHighlightModel.highlight(record.attributes);
           },
         }),
       }],
