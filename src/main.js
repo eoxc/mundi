@@ -399,7 +399,7 @@ window.Application = Marionette.Application.extend({
     }));
 
     if (settings.extent) {
-      mapModel.show(settings.extent);
+      mapModel.show({ bbox: settings.extent });
     }
 
     // const tour = new Shepherd.Tour({
