@@ -216,6 +216,10 @@
                     "description": "The color to distinguish the layer in the layer-list and the TimeSlider. Must be a valid HTML color definition.",
                     "type": "string"
                 },
+                "link": {
+                    "description": "An HTTP link for further information for the layer. This is rendered in the layer list.",
+                    "type": "string"
+                },
                 "display": {
                     "description": "Structure to describe how the layer is visually presented.",
                     "type": "object",
