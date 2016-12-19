@@ -1,14 +1,14 @@
 /* by default panels are hidden */
 .side-panel {
   position: absolute;
-  width: 383px;
+  width: 397px;
   top: 20px;
-  /*height: 100%;*/
-  /*padding-bottom: 20px;*/
+  max-height: -moz-calc(100% - 148px) !important;
+  max-height: -webkit-calc(100% - 148px) !important;
+  max-height: -o-calc(100% - 148px) !important;
+  max-height: calc(100% - 148px) !important;
   background-color: white;
   z-index: 0;
-
-  /*resize: horizontal;*/
 
   /* for showing/hiding */
   opacity: 0;
@@ -18,6 +18,9 @@
   border: 1px solid black;
   border-radius: 4px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39);
+
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .side-panel.in {
@@ -32,7 +35,6 @@
   background-color: rgba(255, 255, 255, 1);
   border: 1px solid #ddd;
   border-radius: 4px;
-  height: 100%;
 }
 
 .side-panel-content > div {
