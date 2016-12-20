@@ -1,12 +1,19 @@
-/* by default panels are hidden */
-.side-panel {
-  position: absolute;
-  width: 397px;
-  top: 20px;
+.scroll-wrapper {
   max-height: -moz-calc(100% - 148px) !important;
   max-height: -webkit-calc(100% - 148px) !important;
   max-height: -o-calc(100% - 148px) !important;
   max-height: calc(100% - 148px) !important;
+}
+
+.scroll-element.scroll-x {
+  display: none !important;
+}
+
+/* by default panels are hidden */
+.side-panel {
+  position: absolute;
+  width: 382px;
+  top: 20px;
   background-color: white;
   z-index: 0;
 
@@ -18,9 +25,7 @@
   border: 1px solid black;
   border-radius: 4px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39);
-
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .side-panel.in {
