@@ -3,6 +3,7 @@ import Marionette from 'backbone.marionette';
 import $ from 'jquery';
 import shp from 'shpjs';
 import moment from 'moment';
+import 'moment-timezone';
 import 'eonasdan-bootstrap-datetimepicker';
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css';
 import 'bootstrap-slider';
@@ -160,11 +161,12 @@ export default Marionette.LayoutView.extend({
 
     this.$('.datetime').datetimepicker({
       locale: 'en',
-      format: 'YYYY-MM-DD HH:mm:ss',
+      format: 'YYYY-MM-DD HH:mm:ss Z',
       dayViewHeaderFormat: 'YYYY-MM',
       useCurrent: false,
       showTodayButton: true,
       showClose: true,
+      timeZone: 'UTC',
       // minDate, maxDate
       // useCurrent oder defaultDate???
       // sideBySide ???
