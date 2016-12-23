@@ -354,7 +354,7 @@ window.Application = Marionette.Application.extend({
                   baseLayersCollection,
                   overlayLayersCollection,
                   layersCollection,
-                  highlightFillColor: settings.highlightFillColor,
+                  highlightFillColor: 'rgba(0, 0, 0, 0)',
                   highlightStrokeColor: settings.highlightStrokeColor,
                 }),
               }),
