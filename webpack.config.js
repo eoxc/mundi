@@ -35,7 +35,7 @@ module.exports = {
       { test: /node_modules.*eoxc.*js$/, loader: 'babel-loader' },
       { test: /node_modules.*opensearch.*js$/, loader: 'babel-loader' },
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
-      { test: /\.json$/, exclude: /node_modules/, loader: 'json-loader' },
+      { test: /\.json$/, loader: 'json-loader' },
       { test: /\.coffee$/, loader: 'coffee-loader' },
       { test: /\.css$/, loaders: ['style', 'css'] },
       { test: /\.less$/, loaders: ['style', 'css', 'less'] },
