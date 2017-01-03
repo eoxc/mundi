@@ -10,7 +10,7 @@
     "test:watch": "npm run test -- -w",
     "build-browser-tests": "webpack -d --config webpack.tests.config.js",
     "build-browser-tests:watch": "npm run build-browser-tests -- --watch",
-    "dev-server": "webpack-dev-server --content-base src/",
+    "dev-server": "webpack-dev-server -d --content-base src/",
     "docs": "node_modules/.bin/jsdoc README.md src -d ./docs -r -P package.json -t node_modules/minami",
     "lint": "./node_modules/.bin/eslint src"
   },
