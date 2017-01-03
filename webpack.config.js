@@ -25,7 +25,8 @@ module.exports = {
     root: path.join(__dirname, 'node_modules'),
   },
   output: {
-    path: './dist',
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/dist',
     filename: '[name].bundle.js',
     library: 'code-de',
     libraryTarget: 'umd',
