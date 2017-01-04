@@ -1,4 +1,4 @@
-.scroll-wrapper {
+/*.scroll-wrapper {
   max-height: -moz-calc(100% - 148px);
   max-height: -webkit-calc(100% - 148px);
   max-height: -o-calc(100% - 148px);
@@ -10,7 +10,7 @@
   max-height: -webkit-calc(100% - 148px) !important;
   max-height: -o-calc(100% - 148px) !important;
   max-height: calc(100% - 148px) !important;
-}
+}*/
 
 .scroll-element.scroll-x {
   display: none !important;
@@ -33,6 +33,8 @@
   border-radius: 4px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39);
   overflow: hidden;
+
+  max-height: 700px;
 }
 
 .side-panel.in {
