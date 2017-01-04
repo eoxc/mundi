@@ -178,6 +178,16 @@ window.Application = Marionette.Application.extend({
     });
     const highlightModel = new HighlightModel();
 
+    const searchCollection = new Backbone.Collection(
+      layersCollection.map(layerModel => new SearchModel({
+        layerModel,
+        filtersModel,
+        mapModel,
+        defaultPageSize: 50,
+      }, { automaticSearch: true })
+      )
+    );
+
     // set up layout
     const layout = new RootLayoutView({
       el: $(this.container),
@@ -288,6 +298,7 @@ window.Application = Marionette.Application.extend({
       baseLayersCollection,
       overlayLayersCollection,
       layersCollection,
+      searchCollection,
       highlightModel,
       highlightFillColor: settings.highlightFillColor,
       highlightStrokeColor: settings.highlightStrokeColor,
@@ -327,11 +338,7 @@ window.Application = Marionette.Application.extend({
           mapModel,
           filtersModel,
           highlightModel,
-          collection: new Backbone.Collection(
-            layersCollection.map(layerModel => new SearchModel({
-              layerModel, filtersModel, mapModel,
-            }, { automaticSearch: true }))
-          ),
+          collection: searchCollection,
           // onResultItemClicked(view, record) {
           //   layout.showChildView('modals', new ModalView({
           //     view: new RecordDetailsView({ model: record }),
