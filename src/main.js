@@ -1,5 +1,6 @@
 // require styles
 require('bootstrap/dist/css/bootstrap.min.css');
+require('anno.js/dist/anno.css');
 
 import $ from 'jquery';
 
@@ -41,9 +42,9 @@ import download from 'eoxc/src/download';
 
 require('imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js');
 
-import Shepherd from 'tether-shepherd';
-require('tether-shepherd/dist/css/shepherd-theme-arrows.css');
-require('tether-shepherd/dist/css/shepherd-theme-dark.css');
+
+
+import Anno from 'anno.js/dist/anno';
 
 
 function combineParameter(setting, param) {
@@ -409,17 +410,26 @@ window.Application = Marionette.Application.extend({
       mapModel.show({ bbox: settings.extent });
     }
 
-    // const tour = new Shepherd.Tour({
-    //   // classes: 'shepherd-theme-arrows',
-    //   classes: 'shepherd-element shepherd-open shepherd-theme-arrows shepherd-theme-dark',
-    //   showCancelLink: true,
-    // });
-    //
-    // tour.addStep('.toggle-side-panel-left', {
-    //   text: 'This step is attached to the bottom of the <code>.example-css-selector</code> element.',
-    //   attachTo: '.toggle-side-panel-left bottom',
-    // });
-    // tour.start();
+
+    const anno = new Anno.Anno([
+      {
+        target  : '.btn.btn-default.toggle-side-panel.toggle-side-panel-left.toggle-side-panel-out',
+        position: 'right',
+        content : 'This opens a panel where you can configure filters for multiple paramaters'
+      },
+      {
+        target  : '#timeSlider',
+        position: 'top',
+        content : 'Interactive time line selection. You can zoom in with your mouse wheel, and select a time by clicking and dragging.'
+      },
+      {
+        target  : '.side-panel.side-panel-right.scrollbar-inner.in',
+        position: 'left',
+        content : 'The results based on the previously set filter criteria is shown here.'
+      },
+    ]);
+
+    anno.show();
 
     Backbone.history.start({ pushState: false });
   },

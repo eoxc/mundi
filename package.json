@@ -61,6 +61,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "anno.js": "^1.0.3",
     "backbone.marionette": "^2.4.7",
     "bluebird": "^3.4.6",
     "bootstrap": "^3.3.7",
