@@ -31,6 +31,10 @@ module.exports = {
     library: 'code-de',
     libraryTarget: 'umd',
   },
+  devServer: {
+    host: '0.0.0.0',
+    inline: true
+  },
   module: {
     loaders: [
       { test: /node_modules.*eoxc.*js$/, loader: 'babel-loader' },

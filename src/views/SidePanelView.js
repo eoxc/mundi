@@ -54,7 +54,7 @@ export default Marionette.LayoutView.extend({
   },
 
   onShow() {
-    // this.$('.scrollbar-inner').scrollbar();
+    this.$('.scrollbar-inner').scrollbar();
   },
 
   onToggleSidePanelClicked() {
