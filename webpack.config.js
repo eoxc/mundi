@@ -38,6 +38,7 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.coffee$/, loader: 'coffee-loader' },
+      { test: /\.litcoffee$/, loader: 'coffee-loader?literate' },
       { test: /\.css$/, loaders: ['style', 'css'] },
       { test: /\.less$/, loaders: ['style', 'css', 'less'] },
       { test: /\.hbs$/, loader: 'handlebars-loader?helperDirs[]=' + __dirname + '/src/helpers' },

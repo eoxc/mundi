@@ -1,6 +1,5 @@
 // require styles
 require('bootstrap/dist/css/bootstrap.min.css');
-require('anno.js/dist/anno.css');
 
 import $ from 'jquery';
 
@@ -41,10 +40,6 @@ import OpenLayersMapView from 'eoxc/src/contrib/OpenLayers/OpenLayersMapView';
 import download from 'eoxc/src/download';
 
 require('imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js');
-
-
-
-import Anno from 'anno.js/dist/anno';
 
 
 function combineParameter(setting, param) {
@@ -410,26 +405,7 @@ window.Application = Marionette.Application.extend({
       mapModel.show({ bbox: settings.extent });
     }
 
-
-    const anno = new Anno.Anno([
-      {
-        target  : '.btn.btn-default.toggle-side-panel.toggle-side-panel-left.toggle-side-panel-out',
-        position: 'right',
-        content : 'This opens a panel where you can configure filters for multiple paramaters'
-      },
-      {
-        target  : '#timeSlider',
-        position: 'top',
-        content : 'Interactive time line selection. You can zoom in with your mouse wheel, and select a time by clicking and dragging.'
-      },
-      {
-        target  : '.side-panel.side-panel-right.scrollbar-inner.in',
-        position: 'left',
-        content : 'The results based on the previously set filter criteria is shown here.'
-      },
-    ]);
-
-    anno.show();
+    require('./tutorial.js');
 
     Backbone.history.start({ pushState: false });
   },
