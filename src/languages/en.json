@@ -1,0 +1,7 @@
+{
+  "tutorial1": "Welcome! This is a short introduction to the functionalities of this service. You can skip this at any point by clicking the Skip button.",
+  "tutorial2": "This is the map tool which displays available data and their location. It is interactive, i.e. you can pan by clicking and dragging with the mouse and zoom in and out with the mouse wheel (or the + and - buttons at the bottom right).",
+  "tutorial3": "This is the Interactive time line selection (we also refer to it as time slider). It displays the available data as points or bars, or as histogramm bars when there are many datasets. You can select the time you are interested in by clicking and dragging in the top area of the timeslider. This will update the map as well as the result list. You can also zoom in/out with your mouse wheel, as well as move the time domain (i.e. pan) by clicking and dragging at the bottom area.",
+  "tutorial4": "This is the result list. It displays the available data based on the selected time in the time slider and the area currently shown by the map tool. From here you can directly select and download the data you are interested in.",
+  "tutorial5": "In this panel you can specifiy other filters to further narrow down the results."
+}

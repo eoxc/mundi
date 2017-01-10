@@ -2,7 +2,7 @@
   "Filters": "Filter",
   "Settings": "Einstellungen",
   "Layers": "Ebenen",
-  "Search Results": "Suchresultate",
+  "Search Results": "Suchergebnisse",
   "Time Filter": "Zeitlicher Filter",
   "Select the time of interest": "Wähle einen Zeitraum",
   "Start": "Start",
@@ -17,5 +17,14 @@
   "Features": "Elemente",
   "Format": "Format",
   "native format": "Ursprungsformat",
-  "Download": "Herunterladen"
+  "Download": "Herunterladen",
+  "Skip": "Beenden",
+  "End": "Beenden",
+  "Next": "Weiter",
+  "Back": "Zurück",
+  "tutorial1": "Willkommen! Dies ist eine kurze Einführung in die funktionalität des Service. Sie können es jederzeit beenden indem Sie auf Überspringen klicken.",
+  "tutorial2": "Dies ist die Karten ansicht, sie zeigt die verfügbaren Daten und deren Ort an. Sie ist interaktiv, dass heißt die Karte kann verschoben werden per Mausklick und ziehen, und vergrößert/verkleinert werden mit dem Tastenrad. Zusätzliche interaktionsknöpfe stehen unten rechts.",
+  "tutorial3": "Dies ist die interaktive Zeitachse. Es zeigt wann Daten zur verfügung stehen und erlaubt es die erwünschte zeit per ancklicken und ziehen mit der Maus aus zu wählen.",
+  "tutorial4": "Dies ist die Ergebnis Liste die basierend auf der Zeit- und Ortsauswahl die verfügbaren daten anzeigt und es erlaubt diese runter zu laden.",
+  "tutorial5": "Weitere filter können hier gesetzt werden."
 }

@@ -1,20 +1,28 @@
+
 import { Anno, AnnoButton } from 'anno.js/src/anno.litcoffee';
+import i18next from 'i18next';
 
-require('anno.js/dist/anno.css');
-require('./tutorial.css');
+import 'anno.js/dist/anno.css';
+import './tutorial.css';
 
-AnnoButton.DoneButton.text = 'Skip';
+
+AnnoButton.DoneButton.text = i18next.t('Skip');
+
+const finishButton = $.extend(true, {}, AnnoButton.DoneButton);
+finishButton.text = i18next.t('End');
+
+AnnoButton.NextButton.text = i18next.t('Next');
 AnnoButton.DoneButton.className = 'anno-btn-low-importance';
+
+AnnoButton.BackButton.text = i18next.t('Back');
 
 const annoWidget = new Anno([
   {
     target: '.ol-viewport',
     position: 'center-top',
     className: 'complete-page-tag',
-    content: `Welcome! It seems this is your first time here. This is a short
-      introduction to the functionalities of this service. You can skip this at
-      any point by clicking the Skip button.`,
-    buttons: [AnnoButton.DoneButton, AnnoButton.Next],
+    content: i18next.t('tutorial1'),
+    buttons: [AnnoButton.DoneButton, AnnoButton.NextButton],
     onShow: (anno, $target, $annoElem) => {
       $annoElem.find('.anno-arrow').hide();
     },
@@ -23,32 +31,20 @@ const annoWidget = new Anno([
     target: '.ol-viewport',
     position: 'center-top',
     className: 'complete-page-tag',
-    content: `This is the map tool which displays available data and their 
-      location. It is interactive, i.e. you can pan by clicking and dragging 
-      with the mouse and zoom in and out with the mouse wheel (or the + and - 
-      buttons at the bottom right).`,
-    buttons: [AnnoButton.BackButton, AnnoButton.DoneButton, AnnoButton.Next],
+    content: i18next.t('tutorial2'),
+    buttons: [AnnoButton.BackButton, AnnoButton.DoneButton, AnnoButton.NextButton],
   },
   {
     target: '#timeSlider',
     position: 'center-top',
-    content: `This is the Interactive time line selection (we also refer to it 
-      as time slider). It displays the available data as points or bars, or 
-      as histogramm bars when there are many datasets. You can select the 
-      time you are interested in by clicking and dragging in the top area of 
-      the timeslider. This will update the map as well as the result list. You 
-      can also zoom in/out with your mouse wheel, as well as move the time 
-      domain (i.e. pan) by clicking and dragging at the bottom area.`,
-    buttons: [AnnoButton.BackButton, AnnoButton.DoneButton, AnnoButton.Next],
+    content: i18next.t('tutorial3'),
+    buttons: [AnnoButton.BackButton, AnnoButton.DoneButton, AnnoButton.NextButton],
   },
   {
-    target: '.side-panel-right.scrollbar-inner',
+    target: '#rightPanel .side-panel-right',
     position: 'left',
-    content: `This is the result list. It displays the available data based on 
-      the selected time in the time slider and the area currently shown by the 
-      map tool. From here you can directly select and download the data you 
-      are interested in.`,
-    buttons: [AnnoButton.BackButton, AnnoButton.DoneButton, AnnoButton.Next],
+    content: i18next.t('tutorial4'),
+    buttons: [AnnoButton.BackButton, AnnoButton.DoneButton, AnnoButton.NextButton],
     onHide: () => {
       if (!$('.btn.btn-default.toggle-side-panel.toggle-side-panel-left.toggle-side-panel-out').hasClass('out')){
         $('.btn.btn-default.toggle-side-panel.toggle-side-panel-left.toggle-side-panel-out').click();
@@ -56,10 +52,10 @@ const annoWidget = new Anno([
     },
   },
   {
-    target: '.side-panel-left.scrollbar-inner',
+    target: '#leftPanel .side-panel-left',
     position: 'right',
-    content: 'This opens a panel where you can configure filters for multiple paramaters',
-    buttons: [AnnoButton.BackButton, AnnoButton.DoneButton, AnnoButton.Next],
+    content: i18next.t('tutorial5'),
+    buttons: [AnnoButton.BackButton, finishButton],
   },
 ]);
 

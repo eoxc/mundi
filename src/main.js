@@ -74,6 +74,9 @@ window.Application = Marionette.Application.extend({
         de: {
           translation: require('./languages/de.json'),
         },
+        en: {
+          translation: require('./languages/en.json'),
+        },
       },
     }, () => {
       if (this.config) {
