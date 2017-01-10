@@ -41,6 +41,8 @@ import download from 'eoxc/src/download';
 
 require('imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js');
 
+import getTutorialWidget from './tutorial.js';
+
 
 function combineParameter(setting, param) {
   const options = setting.options || param.options;
@@ -408,8 +410,48 @@ window.Application = Marionette.Application.extend({
       mapModel.show({ bbox: settings.extent });
     }
 
-    require('./tutorial.js');
 
+    if (settings.hasOwnProperty('tutorial')) {
+      if (settings.tutorial !== 'disabled') {
+        let tutWidg = getTutorialWidget();
+
+        if (settings.tutorial !== 'disabled') {
+          $('.ol-attribution').append(
+          `<button type="button" title="Tutorial" id="tutorial" style="float:right;">
+            <span>
+              <i style="font-size:0.8em;" class="fa fa-book" aria-hidden="true"></i>
+            </span>
+          </button>`);
+
+          $('#tutorial').click(() => {
+            // Iterate through anno elements to see if any is open and needs to
+            // be closed
+            let cv = tutWidg;
+            while (cv._chainNext) {
+              if(cv._annoElem){
+                cv.hide();
+              }
+              cv = cv._chainNext;
+            }
+            tutWidg.show();
+          });
+        }
+
+        if (settings.tutorial === 'always') {
+          tutWidg.show();
+        }
+
+        if (settings.tutorial === 'first') {
+          if (typeof (Storage) !== 'undefined') {
+            if (localStorage.getItem('firstVisit') === null) {
+              // Open tutorial automatically if it is the first visit
+              tutWidg.show();
+              localStorage.setItem('firstVisit', false);
+            }
+          }
+        }
+      }
+    }
     Backbone.history.start({ pushState: false });
   },
 });

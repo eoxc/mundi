@@ -25,6 +25,11 @@
         "settings": {
             "description": "The initial settings object.",
             "properties": {
+                "tutorial": {
+                    "description": "Allows configuration of tutorial functionality. If not specified the default behavior will be 'disabled' ",
+                    "type": "string",
+                    "enum": [ "always", "once", "button", "disabled" ]
+                },
                 "center": {
                     "description": "The inital center of the mapview.",
                     "type": "array",
