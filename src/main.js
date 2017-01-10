@@ -2,7 +2,6 @@
 require('bootstrap/dist/css/bootstrap.min.css');
 
 import $ from 'jquery';
-
 import 'jquery-ui';
 require('es6-promise').polyfill();
 
@@ -24,6 +23,7 @@ import ModalView from 'eoxc/src/core/views/ModalView';
 import SearchResultView from 'eoxc/src/search/views/SearchResultView';
 import RecordDetailsView from 'eoxc/src/search/views/RecordDetailsView';
 import SearchModel from 'eoxc/src/search/models/SearchModel';
+import RecordsDetailsModalView from './views/RecordsDetailsModalView';
 
 import { getParameters } from 'eoxc/src/search';
 
@@ -291,6 +291,15 @@ window.Application = Marionette.Application.extend({
     // render the views to the regions
     // layout.showChildView('header', navBarView);
 
+    const showRecordDetails = (records, layerModel) => {
+      // TODO: use layerModel
+      layout.showChildView('modals', new RecordsDetailsModalView({
+        baseLayersCollection,
+        overlayLayersCollection,
+        layersCollection,
+        records,
+      }));
+    };
 
     layout.showChildView('content', new OpenLayersMapView({
       mapModel,
@@ -302,6 +311,9 @@ window.Application = Marionette.Application.extend({
       highlightModel,
       highlightFillColor: settings.highlightFillColor,
       highlightStrokeColor: settings.highlightStrokeColor,
+      onFeatureClicked(records, layerModel) {
+        showRecordDetails(records, layerModel);
+      },
     }));
 
     layout.showChildView('leftPanel', new SidePanelView({
@@ -339,41 +351,8 @@ window.Application = Marionette.Application.extend({
           filtersModel,
           highlightModel,
           collection: searchCollection,
-          // onResultItemClicked(view, record) {
-          //   layout.showChildView('modals', new ModalView({
-          //     view: new RecordDetailsView({ model: record }),
-          //   }));
-          // },
           onResultItemInfo(view, record, layerModel) {
-            const detailsMapModel = new MapModel({ center: [0, 0], zoom: 5 });
-            const detailsHighlightModel = new HighlightModel();
-
-            const time = record.get('properties').time;
-            layout.showChildView('modals', new ModalView({
-              title: `${layerModel.get('displayName')} - ${time[0].toISOString()}`,
-              view: new RecordDetailsView({
-                model: record,
-                mapModel: detailsMapModel,
-                mapView: new OpenLayersMapView({
-                  mapModel: detailsMapModel,
-                  filtersModel: new FiltersModel({ time }),
-                  highlightModel: detailsHighlightModel,
-                  baseLayersCollection,
-                  overlayLayersCollection,
-                  layersCollection,
-                  highlightFillColor: 'rgba(0, 0, 0, 0)',
-                  highlightStrokeColor: settings.highlightStrokeColor,
-                }),
-              }),
-              buttons: [
-                ['Download', () => {
-                  download(layerModel, filtersModel, record, {}, $('#download-elements'));
-                }],
-              ],
-            }));
-
-            detailsMapModel.show(record.attributes);
-            detailsHighlightModel.highlight(record.attributes);
+            showRecordDetails([record], layerModel);
           },
         }),
       }],
