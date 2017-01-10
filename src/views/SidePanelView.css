@@ -1,19 +1,9 @@
-/*.scroll-wrapper {
-  max-height: -moz-calc(100% - 148px);
-  max-height: -webkit-calc(100% - 148px);
-  max-height: -o-calc(100% - 148px);
-  max-height: calc(100% - 148px);
-}
-
-.scroll-wrapper > .scroll-content {
-  max-height: -moz-calc(100% - 148px) !important;
-  max-height: -webkit-calc(100% - 148px) !important;
-  max-height: -o-calc(100% - 148px) !important;
-  max-height: calc(100% - 148px) !important;
-}*/
-
 .scroll-element.scroll-x {
   display: none !important;
+}
+
+.scroll-wrapper {
+  padding: 5px 5px 0px 5px !important;
 }
 
 /* by default panels are hidden */
@@ -21,31 +11,39 @@
   position: absolute;
   width: 382px;
   top: 20px;
-  background-color: white;
+
+  height: -moz-calc(100% - 148px);
+  height: -webkit-calc(100% - 148px);
+  height: -o-calc(100% - 148px);
+  height: calc(100% - 148px);
+
   z-index: 0;
+  overflow: hidden;
 
   /* for showing/hiding */
   opacity: 0;
   visibility: hidden;
   transition: visibility 0s, opacity 0.5s;
-
-  border: 1px solid black;
-  border-radius: 4px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39);
-  overflow: hidden;
-
-  max-height: 700px;
 }
 
 .side-panel.in {
+  visibility: visible;
+  max-height: 100%;
   opacity: 1;
   background-color: rgba(255, 255, 255, 0.8);
-  visibility: visible;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39);
 }
 
 .side-panel-content {
-  margin: 0px 5px 5px;
-  padding: 5px 5px 0px 5px;
+  position: relative;
+  height: -moz-calc(100% - 51px);
+  height: -webkit-calc(100% - 51px);
+  height: -o-calc(100% - 51px);
+  height: calc(100% - 51px);
+
+  margin: 0px 5px;
   background-color: rgba(255, 255, 255, 1);
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -102,6 +100,10 @@
 .nav-tabs {
   margin-top: 5px;
   border-bottom: 0px !important;
+}
+
+.nav-tabs>li.active {
+  z-index: 1;
 }
 
 .panel-body {
