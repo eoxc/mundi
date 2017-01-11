@@ -61,6 +61,10 @@ function combineParameter(setting, param) {
   };
 }
 
+function defaultFor(arg, val) {
+  return typeof arg !== 'undefined' ? arg : val;
+}
+
 window.Application = Marionette.Application.extend({
   initialize({ config, configPath, container, navbarTemplate }) {
     this.config = config;
@@ -71,7 +75,8 @@ window.Application = Marionette.Application.extend({
 
   onStart() {
     i18next.init({
-      lng: 'en',
+      lng: defaultFor(this.config.settings.language, 'en'),
+      fallbackLng: 'en',
       resources: {
         de: {
           translation: require('./languages/de.json'),

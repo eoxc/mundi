@@ -30,6 +30,11 @@
                     "type": "string",
                     "enum": [ "always", "once", "button", "disabled" ]
                 },
+                "language": {
+                    "description": "The language used in the UI. Defaults to 'en'.",
+                    "type": "string",
+                    "enum": [ "en", "de" ]
+                },
                 "center": {
                     "description": "The inital center of the mapview.",
                     "type": "array",
