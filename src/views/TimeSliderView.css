@@ -1,0 +1,16 @@
+#timeSlider {
+  position: absolute;
+  bottom: 44px;
+  left: 20px;
+  width: -moz-calc(100% - 40px) !important;
+  width: -webkit-calc(100% - 40px) !important;
+  width: -o-calc(100% - 40px) !important;
+  width: calc(100% - 40px) !important;
+  height: 6em;
+  font: 400 12px Arial;
+  border-radius: 4px;
+}
+
+.timeslider {
+   cursor: ew-resize;
+}
