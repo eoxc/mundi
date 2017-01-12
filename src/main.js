@@ -43,6 +43,9 @@ require('imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js');
 
 import getTutorialWidget from './tutorial.js';
 
+const germanTranslation = require('./languages/de.json');
+const englishTranslation = require('./languages/en.json');
+
 
 function combineParameter(setting, param) {
   const options = setting.options || param.options;
@@ -61,10 +64,6 @@ function combineParameter(setting, param) {
   };
 }
 
-function defaultFor(arg, val) {
-  return typeof arg !== 'undefined' ? arg : val;
-}
-
 window.Application = Marionette.Application.extend({
   initialize({ config, configPath, container, navbarTemplate }) {
     this.config = config;
@@ -74,29 +73,34 @@ window.Application = Marionette.Application.extend({
   },
 
   onStart() {
-    i18next.init({
-      lng: defaultFor(this.config.settings.language, 'en'),
-      fallbackLng: 'en',
-      resources: {
-        de: {
-          translation: require('./languages/de.json'),
-        },
-        en: {
-          translation: require('./languages/en.json'),
-        },
-      },
-    }, () => {
-      if (this.config) {
-        this.onConfigLoaded(this.config);
-      } else {
-        $.getJSON(this.configPath, (config) => {
-          this.onConfigLoaded(config);
-        });
-      }
-    });
+    if (this.config) {
+      this.onConfigLoaded(this.config);
+    } else {
+      $.getJSON(this.configPath, (config) => {
+        this.onConfigLoaded(config);
+      });
+    }
   },
 
   onConfigLoaded(config) {
+    this.config = config;
+    i18next.init({
+      lng: this.config.settings.language || 'en',
+      fallbackLng: 'en',
+      resources: {
+        de: {
+          translation: germanTranslation,
+        },
+        en: {
+          translation: englishTranslation,
+        },
+      },
+    }, () => {
+      this.onI18NextInitialized(config);
+    });
+  },
+
+  onI18NextInitialized(config) {
     // TODO: check parameters
 
     const baseLayersCollection = new LayersCollection(config.baseLayers, {
