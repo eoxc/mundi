@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    'code-de': './src/main.js',
+    'code-de': ['babel-polyfill', './src/main.js'],
   },
   resolve: {
     modulesDirectories: ['web_modules', 'node_modules', 'bower_components'],
