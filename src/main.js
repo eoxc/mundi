@@ -41,9 +41,7 @@ import download from 'eoxc/src/download';
 
 require('imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js');
 
-import Shepherd from 'tether-shepherd';
-require('tether-shepherd/dist/css/shepherd-theme-arrows.css');
-require('tether-shepherd/dist/css/shepherd-theme-dark.css');
+import getTutorialWidget from './tutorial.js';
 
 
 function combineParameter(setting, param) {
@@ -63,6 +61,10 @@ function combineParameter(setting, param) {
   };
 }
 
+function defaultFor(arg, val) {
+  return typeof arg !== 'undefined' ? arg : val;
+}
+
 window.Application = Marionette.Application.extend({
   initialize({ config, configPath, container, navbarTemplate }) {
     this.config = config;
@@ -73,10 +75,14 @@ window.Application = Marionette.Application.extend({
 
   onStart() {
     i18next.init({
-      lng: 'en',
+      lng: defaultFor(this.config.settings.language, 'en'),
+      fallbackLng: 'en',
       resources: {
         de: {
           translation: require('./languages/de.json'),
+        },
+        en: {
+          translation: require('./languages/en.json'),
         },
       },
     }, () => {
@@ -388,18 +394,48 @@ window.Application = Marionette.Application.extend({
       mapModel.show({ bbox: settings.extent });
     }
 
-    // const tour = new Shepherd.Tour({
-    //   // classes: 'shepherd-theme-arrows',
-    //   classes: 'shepherd-element shepherd-open shepherd-theme-arrows shepherd-theme-dark',
-    //   showCancelLink: true,
-    // });
-    //
-    // tour.addStep('.toggle-side-panel-left', {
-    //   text: 'This step is attached to the bottom of the <code>.example-css-selector</code> element.',
-    //   attachTo: '.toggle-side-panel-left bottom',
-    // });
-    // tour.start();
 
+    if (settings.hasOwnProperty('tutorial')) {
+      if (settings.tutorial !== 'disabled') {
+        let tutWidg = getTutorialWidget();
+
+        if (settings.tutorial !== 'disabled') {
+          $('.ol-attribution').append(
+          `<button type="button" title="`+i18next.t('Tutorial')+`" id="tutorial" style="float:right;">
+            <span>
+              <i style="font-size:0.8em;" class="fa fa-book" aria-hidden="true"></i>
+            </span>
+          </button>`);
+
+          $('#tutorial').click(() => {
+            // Iterate through anno elements to see if any is open and needs to
+            // be closed
+            let cv = tutWidg;
+            while (cv._chainNext) {
+              if(cv._annoElem){
+                cv.hide();
+              }
+              cv = cv._chainNext;
+            }
+            tutWidg.show();
+          });
+        }
+
+        if (settings.tutorial === 'always') {
+          tutWidg.show();
+        }
+
+        if (settings.tutorial === 'first') {
+          if (typeof (Storage) !== 'undefined') {
+            if (localStorage.getItem('firstVisit') === null) {
+              // Open tutorial automatically if it is the first visit
+              tutWidg.show();
+              localStorage.setItem('firstVisit', false);
+            }
+          }
+        }
+      }
+    }
     Backbone.history.start({ pushState: false });
   },
 });

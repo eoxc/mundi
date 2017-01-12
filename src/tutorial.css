@@ -1,0 +1,22 @@
+.anno {
+    width: 400px;
+}
+
+.anno-inner {
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39) !important;
+}
+
+.complete-page-tag{
+  top: 35% !important;
+}
+
+.anno-btn-low-importance{
+  border-style: solid !important;
+  border-width: 1px !important;
+}
+
+.btn-disabled {
+  pointer-events: none;
+}
