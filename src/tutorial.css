@@ -1,3 +1,7 @@
+.anno {
+    width: 400px;
+}
+
 .anno-inner {
   border: 1px solid black;
   border-radius: 4px;

@@ -422,7 +422,7 @@ window.Application = Marionette.Application.extend({
 
         if (settings.tutorial !== 'disabled') {
           $('.ol-attribution').append(
-          `<button type="button" title="Tutorial" id="tutorial" style="float:right;">
+          `<button type="button" title="`+i18next.t('Tutorial')+`" id="tutorial" style="float:right;">
             <span>
               <i style="font-size:0.8em;" class="fa fa-book" aria-hidden="true"></i>
             </span>
