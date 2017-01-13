@@ -135,6 +135,11 @@
                     "type": "number",
                     "default": null
                 },
+                "timeSliderControls": {
+                    "description": "Whether or not control buttons should be shown for the TimeSlider.",
+                    "type": "boolean",
+                    "default": false
+                },
                 "highlightFillColor": {
                     "description": "The fill color of highlighted footprints/bounding boxes on the map. Any valid CSS color defintion is supported.",
                     "type": "string",
