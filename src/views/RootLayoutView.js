@@ -10,7 +10,7 @@ export default Marionette.LayoutView.extend({
     <div id="leftPanel" style="margin: 0; left: 0; top: 0;position: absolute; height: 100%"></div>
     <div id="rightPanel" style="margin: 0; right: 0; top: 0; position: absolute; height: 100%"></div>
     <div id="bottomPanel" style="position: absolute; left: 50%; bottom: 20px; display: none;"></div>
-    <div id="topPanel" style="position: absolute; left: 50%; top: 20px; display: none;"></div>
+    <div id="topPanel"></div>
     <div id="modals" style="margin: 0; left: 0; top: 0;position: absolute;"></div>
   `,
   regions: {
