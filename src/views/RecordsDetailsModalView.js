@@ -55,6 +55,7 @@ const RecordsDetailsModalView = ModalView.extend({
         layersCollection: this.layersCollection,
         highlightFillColor: 'rgba(0, 0, 0, 0)',
         highlightStrokeColor: this.highlightStrokeColor,
+        staticHighlight: true,
       });
     // }
     const detailsView = new RecordDetailsView({
