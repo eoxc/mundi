@@ -1,0 +1,11 @@
+#topPanel {
+  display: none;
+  position: absolute;
+  top: 20px;
+  width: 280px;
+  left: -moz-calc(50% - 140px) !important;
+  left: -webkit-calc(50% - 140px) !important;
+  left: -o-calc(50% - 140px) !important;
+  left: calc(50% - 140px) !important;
+  border-radius: 4px;
+}
