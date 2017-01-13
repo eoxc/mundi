@@ -322,6 +322,11 @@
                             "enum": ["GET", "POST"],
                             "default": "GET"
                         },
+                        "lightweightBuckets": {
+                            "description": "Whether or not leightweight buckets shall be used for the timeslider. Lightweight buckets only request the number of records for the given histogram bucket. When the total count is below the given histogramThreshold, then the records will be displayed directly.",
+                            "type": "boolean",
+                            "default": false
+                        },
                         "histogramThreshold": {
                             "description": "The threshold of number of records in the whole visible interval to display the dataset as a histogram instead of individual records. When not specified, the records are always shown.",
                             "type": "number",
@@ -331,6 +336,11 @@
                             "description": "The number of histogram bins to display in histogram mode.",
                             "type": "number",
                             "default": 20
+                        },
+                        "searchLimit": {
+                            "description": "This is the limit for how many records will be displayed in the search results panel. A warning will be displayed if more items are matched.",
+                            "type": "number",
+                            "default": 200
                         }
                     },
                     "required": ["protocol", "url"]
