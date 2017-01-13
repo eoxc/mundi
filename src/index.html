@@ -34,6 +34,7 @@ var config = {
         "displayInterval": "P1Y",
         "selectableInterval": "P14D",
         "maxTooltips": 10,
+        "timeSliderControls": true,
         "highlightFillColor": "rgba(255, 0, 0, 0.5)",
         "highlightStrokeColor": "rgba(255, 0, 0, 1)",
         "rightPanelOpen": true,
@@ -134,7 +135,8 @@ var config = {
             "id": "MER_FRS_RGB",
             "protocol": "OpenSearch",
             "url": "http://ows.eox.at/cite_staging/eoxserver/opensearch/collections/MER_FRS_RGB/",
-            "lightweightBuckets": false
+            "lightweightBuckets": false,
+            "searchLimit": 100
         },
         "download": {
             "protocol": "OpenSearch",
