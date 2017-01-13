@@ -15,9 +15,11 @@
     <div class="modal-body"></div>
     <div class="modal-footer">
       <span class="buttons">
-      {{#each buttons}}
-        <button type="button" class="btn btn-default">{{this}}</button>
-      {{/each}}
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" class="is-selected"> Selected for Download
+          </label>
+        </div>
       </span>
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
