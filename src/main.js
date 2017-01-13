@@ -298,6 +298,7 @@ window.Application = Marionette.Application.extend({
       domain,
       display,
       constrainTimeDomain: settings.constrainTimeDomain,
+      timeSliderControls: settings.timeSliderControls,
       displayInterval: settings.displayInterval,
       selectableInterval: settings.selectableInterval,
       maxTooltips: settings.maxTooltips,

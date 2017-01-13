@@ -14,3 +14,8 @@
 .timeslider {
    cursor: ew-resize;
 }
+
+.control {
+  height: 19px;
+  margin-top: -22px;
+}
