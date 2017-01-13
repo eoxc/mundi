@@ -32,6 +32,7 @@ import RootLayoutView from './views/RootLayoutView';
 import FiltersView from './views/FiltersView';
 import SidePanelView from './views/SidePanelView';
 import StopSelectionView from './views/StopSelectionView';
+import SearchLimitWarningView from './views/SearchLimitWarningView';
 
 import LayerControlLayoutView from 'eoxc/src/core/views/layers/LayerControlLayoutView';
 
@@ -194,6 +195,7 @@ window.Application = Marionette.Application.extend({
         filtersModel,
         mapModel,
         defaultPageSize: 50,
+        maxCount: layerModel.get('search.searchLimit'),
       }, { automaticSearch: true })
       )
     );
@@ -202,107 +204,13 @@ window.Application = Marionette.Application.extend({
     const layout = new RootLayoutView({
       el: $(this.container),
       mapModel,
+      searchCollection,
     });
     layout.render();
 
-    // setup the router and its routes
-    // const router = new Marionette.AppRouter({
-    //   appRoutes: {
-    //     map: 'onRouteMap',
-    //     search: 'onRouteSearch',
-    //   },
-    //   controller: {
-    //     onRouteMap() {
-    //       // TODO: parse x/y/z and set it to the URL
-    //
-    //       layout.showChildView('content', new MapLayoutView({
-    //         baseLayersCollection,
-    //         layersCollection,
-    //         overlayLayersCollection,
-    //         mapModel,
-    //         filtersModel,
-    //         domain: {
-    //           start: new Date(settings.timeDomain[0]),
-    //           end: new Date(settings.timeDomain[1]),
-    //         },
-    //       }));
-    //     },
-    //     onRouteSearch() {
-    //       const searchCollections = layersCollection
-    //         .filter(layerModel => layerModel.get('display.visible'))
-    //         .map(layerModel => {
-    //           const searchCollection = new SearchCollection([], { layerModel, filtersModel });
-    //           searchCollection.fetch();
-    //           return new Backbone.Model({ searchCollection });
-    //         });
-    //
-    //       layout.showChildView('content', new SearchResultView({
-    //         collection: new Backbone.Collection(searchCollections),
-    //         mapModel,
-    //       }));
-    //     },
-    //   },
-    // });
+    // set up panels
 
-    // set up views
-
-    // const navBarView = new NavBarView({
-    //   template: this.navbarTemplate,
-    //   router,
-    // });
-
-    // const layerControlLayoutView = new PanelView({
-    //   title: 'Layers',
-    //   icon: 'fa-globe',
-    //   width: '25em',
-    //   top: '8em',
-    //   left: '3em',
-    //   closed: true,
-    //   view: new LayerControlLayoutView({
-    //     baseLayersCollection,
-    //     layersCollection,
-    //     overlayLayersCollection,
-    //   }),
-    // });
-
-    // communicator.on('toggle:layers', () => {
-    //   layerControlLayoutView.toggleOpen();
-    // });
-
-
-    // TODO remove this
-    // const toolsView = new PanelView({
-    //   title: 'Tools',
-    //   icon: 'fa-wrench',
-    //   width: '10em',
-    //   top: '8em',
-    //   right: '3em',
-    //   closed: true,
-    //   view: new ToolsView({
-    //     mapModel,
-    //     communicator,
-    //   }),
-    // });
-    //
-    // // hook up on the layer collections 'show' event
-    // layersCollection.on('show', (layerModel) => {
-    //   const layerOptionsView = new PanelView({
-    //     title: `${layerModel.get('displayName')} Options`,
-    //     icon: 'fa-sliders',
-    //     left: '45%',
-    //     top: '8em',
-    //     view: new LayerOptionsView({
-    //       model: layerModel,
-    //     }),
-    //   });
-    //   layout.showChildView('layerOptions', layerOptionsView);
-    // });
-
-    // render the views to the regions
-    // layout.showChildView('header', navBarView);
-
-    const showRecordDetails = (records, layerModel) => {
-      // TODO: use layerModel
+    const showRecordDetails = (records) => {
       layout.showChildView('modals', new RecordsDetailsModalView({
         baseLayersCollection,
         overlayLayersCollection,
@@ -321,8 +229,8 @@ window.Application = Marionette.Application.extend({
       highlightModel,
       highlightFillColor: settings.highlightFillColor,
       highlightStrokeColor: settings.highlightStrokeColor,
-      onFeatureClicked(records, layerModel) {
-        showRecordDetails(records, layerModel);
+      onFeatureClicked(records) {
+        showRecordDetails(records);
       },
     }));
 
@@ -361,14 +269,15 @@ window.Application = Marionette.Application.extend({
           filtersModel,
           highlightModel,
           collection: searchCollection,
-          onResultItemInfo(view, record, layerModel) {
-            showRecordDetails([record], layerModel);
+          onResultItemInfo(view, record, searchModel) {
+            showRecordDetails([[record, searchModel]]);
           },
         }),
       }],
     }));
 
     layout.showChildView('bottomPanel', new StopSelectionView({ mapModel }));
+    layout.showChildView('topPanel', new SearchLimitWarningView());
 
     // layout.showChildView('modals', new ModalView({}));
 
