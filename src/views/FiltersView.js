@@ -205,8 +205,11 @@ export default Marionette.LayoutView.extend({
       .get()
       .map(parseFloat);
 
-    if (coordinates.reduce((prev, current) => prev & !isNaN(current), true)) {
-      this.filtersModel.set('area', { geometry: { type: 'Point', coordinates } });
+    if (coordinates.reduce((prev, current) => prev && !isNaN(current), true)) {
+      this.filtersModel.set('area', {
+        geometry: { type: 'Point', coordinates },
+        type: 'Feature',
+      });
     }
   },
 
@@ -216,7 +219,7 @@ export default Marionette.LayoutView.extend({
       .get()
       .map(parseFloat);
 
-    if (bbox.reduce((prev, current) => prev & !isNaN(current), true)) {
+    if (bbox.reduce((prev, current) => prev && !isNaN(current), true)) {
       this.filtersModel.set('area', bbox);
     }
   },
