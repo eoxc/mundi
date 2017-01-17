@@ -180,13 +180,12 @@ window.Application = Marionette.Application.extend({
     const mapModel = new MapModel({
       center: settings.center,
       zoom: settings.zoom,
-    });
-    const filtersModel = new FiltersModel({
       time: [
         new Date(settings.selectedTimeDomain[0]),
         new Date(settings.selectedTimeDomain[1]),
       ],
     });
+    const filtersModel = new FiltersModel({ });
     const highlightModel = new HighlightModel();
 
     const searchCollection = new Backbone.Collection(
@@ -243,6 +242,7 @@ window.Application = Marionette.Application.extend({
         view: new FiltersView({
           filtersModel,
           mapModel,
+          highlightModel,
           layersCollection,
           extraParameters,
         }),

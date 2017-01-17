@@ -46,17 +46,20 @@ const RecordsDetailsModalView = ModalView.extend({
 
   updateRecord(recordModel, searchModel) {
     // if (!this.mapView) {
-      this.mapView = new OpenLayersMapView({
-        mapModel: this.mapModel,
-        filtersModel: this.filtersModel,
-        highlightModel: this.highlightModel,
-        baseLayersCollection: this.baseLayersCollection,
-        overlayLayersCollection: this.overlayLayersCollection,
-        layersCollection: this.layersCollection,
-        highlightFillColor: 'rgba(0, 0, 0, 0)',
-        highlightStrokeColor: this.highlightStrokeColor,
-        staticHighlight: true,
-      });
+    const time = recordModel.get('properties').time;
+    const layerModel = searchModel.get('layerModel');
+    this.mapModel.set('time', time);
+    this.mapView = new OpenLayersMapView({
+      mapModel: this.mapModel,
+      filtersModel: this.filtersModel,
+      highlightModel: this.highlightModel,
+      baseLayersCollection: this.baseLayersCollection,
+      overlayLayersCollection: this.overlayLayersCollection,
+      layersCollection: this.layersCollection,
+      highlightFillColor: 'rgba(0, 0, 0, 0)',
+      highlightStrokeColor: this.highlightStrokeColor,
+      staticHighlight: true,
+    });
     // }
     const detailsView = new RecordDetailsView({
       model: recordModel,
@@ -65,12 +68,9 @@ const RecordsDetailsModalView = ModalView.extend({
     });
     this.showChildView('content', detailsView);
 
-    const time = recordModel.get('properties').time;
-    const layerModel = searchModel.get('layerModel');
-
     this.mapModel.show(recordModel.attributes);
     this.highlightModel.highlight(recordModel.attributes);
-    this.filtersModel.set('time', time);
+
 
     this.$('.modal-title').text(`${layerModel.get('displayName')} - ${time[0].toISOString()}`);
     this.$('.records-prev').toggleClass('disabled', !(this.currentRecordIndex > 0));

@@ -112,8 +112,6 @@ export default Marionette.LayoutView.extend({
   template,
   templateHelpers() {
     return {
-      startTime: this.filtersModel.get('time')[0].toISOString().slice(0, 10),
-      endTime: this.filtersModel.get('time')[1].toISOString().slice(0, 10),
       area: this.filtersModel.get('area'),
       extraParameters: this.extraParameters.map((param) => {
         const result = param.name.replace(/([A-Z])/g, ' $1');
@@ -129,6 +127,7 @@ export default Marionette.LayoutView.extend({
   events: {
     'dp.change .datetime': 'onDateInputChange',
     'click .tool-show-time': 'onShowTimeClicked',
+    'click .tool-clear-time': 'onClearTimeClicked',
     'change .show-point input': 'onPointInputChange',
     'change .show-bbox input': 'onBBoxInputChange',
     'click .tool-point': 'onToolPointClicked',
@@ -152,6 +151,8 @@ export default Marionette.LayoutView.extend({
     this.listenTo(this.filtersModel, 'change:time', this.onFiltersTimeChanged);
     this.listenTo(this.filtersModel, 'change:area', this.onFiltersAreaChanged);
     this.listenTo(this.mapModel, 'change:tool', this.onMapToolChanged);
+    this.listenTo(this.mapModel, 'change:bbox', this.onMapBBOXChanged);
+    this.listenTo(this.mapModel, 'change:time', this.onMapTimeChanged);
   },
 
   onBeforeShow() {
@@ -183,6 +184,7 @@ export default Marionette.LayoutView.extend({
 
   onShow() {
     this.onFiltersTimeChanged(this.filtersModel);
+    this.onMapTimeChanged();
   },
 
   onDateInputChange() {
@@ -200,6 +202,10 @@ export default Marionette.LayoutView.extend({
 
   onShowTimeClicked() {
     this.filtersModel.show(this.filtersModel.get('time'));
+  },
+
+  onClearTimeClicked() {
+    this.filtersModel.unset('time');
   },
 
   onPointInputChange() {
@@ -273,11 +279,21 @@ export default Marionette.LayoutView.extend({
   onFiltersTimeChanged(filtersModel) {
     const time = filtersModel.get('time');
     this.updatingTime = true;
-    this.$('.datetime.start').data('DateTimePicker').date(moment(time[0]));
-    this.$('.datetime.end').data('DateTimePicker').date(moment(time[1]));
-
-    this.$('.datetime.start').data('DateTimePicker').viewDate(moment(time[0]));
-    this.$('.datetime.end').data('DateTimePicker').viewDate(moment(time[1]));
+    if (time) {
+      this.$('.datetime.start').data('DateTimePicker').date(moment(time[0]));
+      this.$('.datetime.end').data('DateTimePicker').date(moment(time[1]));
+      this.$('.datetime.start').data('DateTimePicker').viewDate(moment(time[0]));
+      this.$('.datetime.end').data('DateTimePicker').viewDate(moment(time[1]));
+      this.$('.time-buttons').show();
+      this.$('#map-time-wrapper').hide();
+    } else {
+      this.$('.datetime.start').data('DateTimePicker').date(null);
+      this.$('.datetime.end').data('DateTimePicker').date(null);
+      this.$('.datetime.start').data('DateTimePicker').viewDate(null);
+      this.$('.datetime.end').data('DateTimePicker').viewDate(null);
+      this.$('.time-buttons').hide();
+      this.$('#map-time-wrapper').show();
+    }
     this.updatingTime = false;
   },
 
@@ -312,8 +328,10 @@ export default Marionette.LayoutView.extend({
 
     if (area) {
       this.$('#selection-wrapper').show();
+      this.$('#map-bbox-wrapper').hide();
     } else {
       this.$('#selection-wrapper').hide();
+      this.$('#map-bbox-wrapper').show();
     }
   },
 
@@ -322,6 +340,20 @@ export default Marionette.LayoutView.extend({
     if (tool) {
       this.$(`.tool-${tool}`).addClass('active');
     }
+  },
+
+  onMapBBOXChanged() {
+    const bbox = this.mapModel.get('bbox');
+    this.$('#map-bbox-wrapper input:eq(0)').val(bbox[0].toFixed(2));
+    this.$('#map-bbox-wrapper input:eq(1)').val(bbox[1].toFixed(2));
+    this.$('#map-bbox-wrapper input:eq(2)').val(bbox[2].toFixed(2));
+    this.$('#map-bbox-wrapper input:eq(3)').val(bbox[3].toFixed(2));
+  },
+
+  onMapTimeChanged() {
+    const time = this.mapModel.get('time');
+    this.$('.map-time-start').val(moment(time[0]).format('YYYY-MM-DD HH:mm:ss'));
+    this.$('.map-time-end').val(moment(time[1]).format('YYYY-MM-DD HH:mm:ss'));
   },
 
   onExtraParameterChanged(event) {
