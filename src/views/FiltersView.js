@@ -49,6 +49,7 @@ const FeatureListView = Marionette.CompositeView.extend({
 
   initialize(options) {
     this.mapModel = options.mapModel;
+    this.highlightModel = options.highlightModel;
     this.filtersModel = options.filtersModel;
     this.listenTo(this.collection, 'reset', this.onCollectionReset);
   },
@@ -98,11 +99,11 @@ const FeatureListView = Marionette.CompositeView.extend({
   },
 
   onItemHover(childView) {
-    this.mapModel.highlight(childView.model.attributes);
+    this.highlightModel.highlight(childView.model.attributes);
   },
 
   onItemHoverEnd(childView) {
-    this.mapModel.unHighlight(childView.model.attributes);
+    this.highlightModel.unHighlight(childView.model.attributes);
   },
 });
 
@@ -143,6 +144,7 @@ export default Marionette.LayoutView.extend({
 
   initialize(options) {
     this.mapModel = options.mapModel;
+    this.highlightModel = options.highlightModel;
     this.filtersModel = options.filtersModel;
     this.featureListCollection = new Backbone.Collection();
     this.extraParameters = options.extraParameters;
@@ -155,6 +157,7 @@ export default Marionette.LayoutView.extend({
   onBeforeShow() {
     this.showChildView('featureList', new FeatureListView({
       mapModel: this.mapModel,
+      highlightModel: this.highlightModel,
       filtersModel: this.filtersModel,
       collection: this.featureListCollection,
     }));
