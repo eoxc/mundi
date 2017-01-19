@@ -150,6 +150,21 @@
                     "type": "string",
                     "default": "#cccccc"
                 },
+                "filterFillColor": {
+                    "description": "The fill color of selected regions (both on map and on timeslider). Any valid CSS color defintion is supported.",
+                    "type": "string",
+                    "default": "rgba(0, 0, 0, 0)"
+                },
+                "filterStrokeColor": {
+                    "description": "The stroke color of selected regions (both on map and on timeslider). Any valid CSS color defintion is supported.",
+                    "type": "string",
+                    "default": "rgba(0, 0, 0, 0)"
+                },
+                "filterOutsideColor": {
+                    "description": "The fill color of selected regions (both on map and on timeslider). Any valid CSS color defintion is supported.",
+                    "type": "string",
+                    "default": "#cccccc"
+                },
                 "leftPanelOpen": {
                     "description": "Whether or not the left panel shall be open on start.",
                     "type": "boolean",

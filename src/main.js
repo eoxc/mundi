@@ -281,29 +281,6 @@ window.Application = Marionette.Application.extend({
 
     // layout.showChildView('modals', new ModalView({}));
 
-    const domain = {
-      start: new Date(settings.timeDomain[0]),
-      end: new Date(settings.timeDomain[1]),
-    };
-    const display = settings.displayTimeDomain ? {
-      start: new Date(settings.displayTimeDomain[0]),
-      end: new Date(settings.displayTimeDomain[1]),
-    } : domain;
-
-    layout.showChildView('timeSlider', new TimeSliderView({
-      layersCollection,
-      mapModel,
-      filtersModel,
-      highlightModel,
-      domain,
-      display,
-      constrainTimeDomain: settings.constrainTimeDomain,
-      timeSliderControls: settings.timeSliderControls,
-      displayInterval: settings.displayInterval,
-      selectableInterval: settings.selectableInterval,
-      maxTooltips: settings.maxTooltips,
-    }));
-
     if (settings.extent) {
       mapModel.show({ bbox: settings.extent });
     }
