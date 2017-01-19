@@ -203,6 +203,7 @@ window.Application = Marionette.Application.extend({
       }, { automaticSearch: true })
       )
     );
+    const searchCollection = new Backbone.Collection(searchModels);
 
     // set up layout
     const layout = new RootLayoutView({
@@ -319,14 +320,14 @@ window.Application = Marionette.Application.extend({
     filtersModel.on('change', () => {
       // show warning when time filter is set
       warningsCollection.setWarning(
-        'Using time filter. Displayed records may differ from map.',
+        i18next.t('Using time filter. Displayed records may differ from map.'),
         filtersModel.get('time') || false
       );
 
       const otherFilters = Object.keys(filtersModel.attributes)
         .filter(key => key !== 'time' && key !== 'area');
       warningsCollection.setWarning(
-        'Special filters are set, background map may not reflect this.',
+        i18next.t('Special filters are set, background map may not reflect this.'),
         otherFilters.length
       );
     });
@@ -339,7 +340,7 @@ window.Application = Marionette.Application.extend({
         .reduce((acc, searchModel) => (
           acc || searchModel.get('totalResults') > searchModel.get('hasLoaded')
         ), false);
-      warningsCollection.setWarning('Search hit too many records', show);
+      warningsCollection.setWarning(i18next.t('Search hit too many records'), show);
     });
 
 
