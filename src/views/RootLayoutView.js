@@ -33,25 +33,5 @@ export default Marionette.LayoutView.extend({
         this.$('#bottomPanel').fadeOut('fast');
       }
     });
-    this.searchCollection = options.searchCollection;
-    this.searchCollection.forEach((searchModel) => {
-      this.listenTo(searchModel, 'change:isSearching', this.onIsSearchingChange);
-    });
-  },
-
-  onIsSearchingChange() {
-    const show = this.searchCollection
-      .filter(searchModel => (
-        !searchModel.get('isSearching') && !searchModel.get('hasError')
-      ))
-      .reduce((acc, searchModel) => (
-        acc || searchModel.get('totalResults') > searchModel.get('hasLoaded')
-      ), false);
-
-    if (show) {
-      this.$('#topPanel').fadeIn('fast').css('display', 'flex');
-    } else {
-      this.$('#topPanel').fadeOut('fast');
-    }
   },
 });

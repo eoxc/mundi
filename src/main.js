@@ -32,7 +32,9 @@ import RootLayoutView from './views/RootLayoutView';
 import FiltersView from './views/FiltersView';
 import SidePanelView from './views/SidePanelView';
 import StopSelectionView from './views/StopSelectionView';
-import SearchLimitWarningView from './views/SearchLimitWarningView';
+import WarningsView from './views/WarningsView';
+
+import WarningsCollection from './models/WarningsCollection';
 
 import LayerControlLayoutView from 'eoxc/src/core/views/layers/LayerControlLayoutView';
 
@@ -174,7 +176,10 @@ window.Application = Marionette.Application.extend({
   onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, extraParameters) {
     const settings = config.settings;
 
-    // TODO: default settings
+    // TODO: more default settings
+    settings.filterFillColor = settings.filterFillColor || 'rgba(0, 0, 0, 0)';
+    settings.filterStrokeColor = settings.filterStrokeColor || 'rgba(0, 0, 0, 0)';
+    settings.filterOutsideColor = settings.filterOutsideColor || 'rgba(0, 0, 0, 0.2)';
 
     // set up config
     const mapModel = new MapModel({
@@ -207,6 +212,32 @@ window.Application = Marionette.Application.extend({
     });
     layout.render();
 
+    const domain = {
+      start: new Date(settings.timeDomain[0]),
+      end: new Date(settings.timeDomain[1]),
+    };
+    const display = settings.displayTimeDomain ? {
+      start: new Date(settings.displayTimeDomain[0]),
+      end: new Date(settings.displayTimeDomain[1]),
+    } : domain;
+
+    layout.showChildView('timeSlider', new TimeSliderView({
+      layersCollection,
+      mapModel,
+      filtersModel,
+      highlightModel,
+      filterFillColor: settings.filterFillColor,
+      filterStrokeColor: settings.filterStrokeColor,
+      filterOutsideColor: settings.filterOutsideColor,
+      domain,
+      display,
+      constrainTimeDomain: settings.constrainTimeDomain,
+      timeSliderControls: settings.timeSliderControls,
+      displayInterval: settings.displayInterval,
+      selectableInterval: settings.selectableInterval,
+      maxTooltips: settings.maxTooltips,
+    }));
+
     // set up panels
 
     const showRecordDetails = (records) => {
@@ -228,6 +259,9 @@ window.Application = Marionette.Application.extend({
       highlightModel,
       highlightFillColor: settings.highlightFillColor,
       highlightStrokeColor: settings.highlightStrokeColor,
+      filterFillColor: settings.filterFillColor,
+      filterStrokeColor: settings.filterStrokeColor,
+      filterOutsideColor: settings.filterOutsideColor,
       onFeatureClicked(records) {
         showRecordDetails(records);
       },
@@ -277,9 +311,37 @@ window.Application = Marionette.Application.extend({
     }));
 
     layout.showChildView('bottomPanel', new StopSelectionView({ mapModel }));
-    layout.showChildView('topPanel', new SearchLimitWarningView());
 
-    // layout.showChildView('modals', new ModalView({}));
+    const warningsCollection = new WarningsCollection([]);
+    layout.showChildView('topPanel', new WarningsView({ collection: warningsCollection }));
+
+    // hook up the events that shall generate warnings
+    filtersModel.on('change', () => {
+      // show warning when time filter is set
+      warningsCollection.setWarning(
+        'Using time filter. Displayed records may differ from map.',
+        filtersModel.get('time') || false
+      );
+
+      const otherFilters = Object.keys(filtersModel.attributes)
+        .filter(key => key !== 'time' && key !== 'area');
+      warningsCollection.setWarning(
+        'Special filters are set, background map may not reflect this.',
+        otherFilters.length
+      );
+    });
+
+    searchCollection.on('change', () => {
+      const show = searchCollection
+        .filter(searchModel => (
+          !searchModel.get('isSearching') && !searchModel.get('hasError')
+        ))
+        .reduce((acc, searchModel) => (
+          acc || searchModel.get('totalResults') > searchModel.get('hasLoaded')
+        ), false);
+      warningsCollection.setWarning('Search hit too many records', show);
+    });
+
 
     if (settings.extent) {
       mapModel.show({ bbox: settings.extent });
