@@ -45,7 +45,6 @@ const RecordsDetailsModalView = ModalView.extend({
   },
 
   updateRecord(recordModel, searchModel) {
-    // if (!this.mapView) {
     const time = recordModel.get('properties').time;
     const layerModel = searchModel.get('layerModel');
     this.mapModel.set('time', time);
@@ -60,7 +59,6 @@ const RecordsDetailsModalView = ModalView.extend({
       highlightStrokeColor: this.highlightStrokeColor,
       staticHighlight: true,
     });
-    // }
     const detailsView = new RecordDetailsView({
       model: recordModel,
       mapModel: this.mapModel,
@@ -75,7 +73,8 @@ const RecordsDetailsModalView = ModalView.extend({
     this.$('.modal-title').text(`${layerModel.get('displayName')} - ${time[0].toISOString()}`);
     this.$('.records-prev').toggleClass('disabled', !(this.currentRecordIndex > 0));
     this.$('.records-next').toggleClass('disabled', !(this.currentRecordIndex < this.records.length - 1));
-
+    this.$('.current-record').text(this.currentRecordIndex + 1);
+    this.$('.record-count').text(this.records.length);
 
     const downloadSelection = searchModel.get('downloadSelection');
     const isSelectedForDownload = downloadSelection.findIndex(model => (
