@@ -350,11 +350,11 @@ window.Application = Marionette.Application.extend({
 
     if (settings.hasOwnProperty('tutorial')) {
       if (settings.tutorial !== 'disabled') {
-        let tutWidg = getTutorialWidget();
+        const tutWidg = getTutorialWidget();
 
         if (settings.tutorial !== 'disabled') {
           $('.ol-attribution').append(
-          `<button type="button" title="`+i18next.t('Tutorial')+`" id="tutorial" style="float:right;">
+          `<button type="button" title="${i18next.t('Tutorial')}" id="tutorial" style="float:right;">
             <span>
               <i style="font-size:0.8em;" class="fa fa-book" aria-hidden="true"></i>
             </span>
@@ -365,7 +365,7 @@ window.Application = Marionette.Application.extend({
             // be closed
             let cv = tutWidg;
             while (cv._chainNext) {
-              if(cv._annoElem){
+              if (cv._annoElem) {
                 cv.hide();
               }
               cv = cv._chainNext;
