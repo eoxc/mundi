@@ -1,15 +1,7 @@
-.scroll-element.scroll-x {
-  display: none !important;
-}
-
-.scroll-wrapper {
-  padding: 5px 5px 0px 5px !important;
-}
-
 /* by default panels are hidden */
 .side-panel {
   position: absolute;
-  width: 382px;
+  width: 399px;
   top: 20px;
 
   height: -moz-calc(100% - 148px);
@@ -43,7 +35,11 @@
   height: -o-calc(100% - 51px);
   height: calc(100% - 51px);
 
+  overflow-x: hidden;
+  overflow-y: auto;
+
   margin: 0px 5px;
+  padding: 5px 5px 0px 5px !important;
   background-color: rgba(255, 255, 255, 1);
   border: 1px solid #ddd;
   border-radius: 4px;
