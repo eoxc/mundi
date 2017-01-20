@@ -287,10 +287,11 @@ export default Marionette.LayoutView.extend({
       this.$('.time-buttons').show();
       this.$('#map-time-wrapper').hide();
     } else {
-      this.$('.datetime.start').data('DateTimePicker').date(null);
-      this.$('.datetime.end').data('DateTimePicker').date(null);
-      this.$('.datetime.start').data('DateTimePicker').viewDate(null);
-      this.$('.datetime.end').data('DateTimePicker').viewDate(null);
+      const mapTime = this.mapModel.get('time');
+      this.$('.datetime.start').data('DateTimePicker').date(moment(mapTime[0]));
+      this.$('.datetime.end').data('DateTimePicker').date(moment(mapTime[1]));
+      this.$('.datetime.start').data('DateTimePicker').viewDate(moment(mapTime[0]));
+      this.$('.datetime.end').data('DateTimePicker').viewDate(moment(mapTime[1]));
       this.$('.time-buttons').hide();
       this.$('#map-time-wrapper').show();
     }
