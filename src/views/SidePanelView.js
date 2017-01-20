@@ -1,6 +1,4 @@
 import Marionette from 'backbone.marionette';
-import 'jquery.scrollbar';
-import 'jquery.scrollbar/jquery.scrollbar.css';
 
 require('./SidePanelView.css');
 const template = require('./SidePanelView.hbs');
@@ -51,10 +49,6 @@ export default Marionette.LayoutView.extend({
     }
     // this.views.forEach(view => this.showChildView('sidePanelContent', this.view))
     // this.showChildView('sidePanelContent', this.view);
-  },
-
-  onShow() {
-    this.$('.scrollbar-inner').scrollbar();
   },
 
   onToggleSidePanelClicked() {
