@@ -7,6 +7,7 @@ require('es6-promise').polyfill();
 
 import i18next from 'i18next';
 
+import _ from 'underscore';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 
@@ -176,10 +177,25 @@ window.Application = Marionette.Application.extend({
   onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, extraParameters) {
     const settings = config.settings;
 
-    // TODO: more default settings
-    settings.filterFillColor = settings.filterFillColor || 'rgba(0, 0, 0, 0)';
-    settings.filterStrokeColor = settings.filterStrokeColor || 'rgba(0, 0, 0, 0)';
-    settings.filterOutsideColor = settings.filterOutsideColor || 'rgba(0, 0, 0, 0.2)';
+    _.defaults(settings, {
+      constrainTimeDomain: false,
+      displayInterval: null,
+      selectableInterval: null,
+      maxTooltips: null,
+      timeSliderControls: false,
+      highlightFillColor: 'rgba(255, 255, 255, 0.2)',
+      highlightStrokeColor: '#cccccc',
+      highlightStrokeWidth: 1,
+      filterFillColor: 'rgba(0, 0, 0, 0)',
+      filterStrokeColor: 'rgba(0, 0, 0, 0)',
+      filterOutsideColor: 'rgba(0, 0, 0, 0.2)',
+      footprintFillColor: 'rgba(255, 255, 255, 0.2)',
+      footprintStrokeColor: '#cccccc',
+      selectedFootprintFillColor: 'rgba(255, 0, 0, 0.2)',
+      selectedFootprintStrokeColor: '#ff0000',
+      leftPanelOpen: false,
+      rightPanelOpen: false,
+    });
 
     // set up config
     const mapModel = new MapModel({
@@ -260,9 +276,14 @@ window.Application = Marionette.Application.extend({
       highlightModel,
       highlightFillColor: settings.highlightFillColor,
       highlightStrokeColor: settings.highlightStrokeColor,
+      highlightStrokeWidth: settings.highlightStrokeWidth,
       filterFillColor: settings.filterFillColor,
       filterStrokeColor: settings.filterStrokeColor,
       filterOutsideColor: settings.filterOutsideColor,
+      footprintFillColor: settings.footprintFillColor,
+      footprintStrokeColor: settings.footprintStrokeColor,
+      selectedFootprintFillColor: settings.selectedFootprintFillColor,
+      selectedFootprintStrokeColor: settings.selectedFootprintStrokeColor,
       onFeatureClicked(records) {
         showRecordDetails(records);
       },

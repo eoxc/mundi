@@ -150,6 +150,11 @@
                     "type": "string",
                     "default": "#cccccc"
                 },
+                "highlightStrokeWidth": {
+                    "description": "The stroke width (in pixels) for highlighted footprints/bounding boxes on the map.",
+                    "type": "number",
+                    "default": 1
+                },
                 "filterFillColor": {
                     "description": "The fill color of selected regions (both on map and on timeslider). Any valid CSS color defintion is supported.",
                     "type": "string",
@@ -163,7 +168,27 @@
                 "filterOutsideColor": {
                     "description": "The fill color of selected regions (both on map and on timeslider). Any valid CSS color defintion is supported.",
                     "type": "string",
+                    "default": "rgba(0, 0, 0, 0.2)"
+                },
+                "footprintFillColor": {
+                    "description": "The fill color of footprints of the search result. Any valid CSS color defintion is supported.",
+                    "type": "string",
+                    "default": "rgba(255, 255, 255, 0.2)"
+                },
+                "footprintStrokeColor": {
+                    "description": "The stroke color of footprints of the search result. Any valid CSS color defintion is supported.",
+                    "type": "string",
                     "default": "#cccccc"
+                },
+                "selectedFootprintFillColor": {
+                    "description": "The fill color of footprints of records selected for download. Any valid CSS color defintion is supported.",
+                    "type": "string",
+                    "default": "rgba(255, 0, 0, 0.2)"
+                },
+                "selectedFootprintStrokeColor": {
+                    "description": "The fill color of footprints of records selected for download. Any valid CSS color defintion is supported.",
+                    "type": "string",
+                    "default": "#ff0000"
                 },
                 "leftPanelOpen": {
                     "description": "Whether or not the left panel shall be open on start.",
