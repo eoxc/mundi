@@ -193,15 +193,15 @@ window.Application = Marionette.Application.extend({
     const filtersModel = new FiltersModel({ });
     const highlightModel = new HighlightModel();
 
-    const searchCollection = new Backbone.Collection(
-      layersCollection.map(layerModel => new SearchModel({
+    const searchModels = layersCollection
+      .filter(layerModel => layerModel.get('search.protocol'))
+      .map(layerModel => new SearchModel({
         layerModel,
         filtersModel,
         mapModel,
         defaultPageSize: 50,
         maxCount: layerModel.get('search.searchLimit'),
       }, { automaticSearch: true })
-      )
     );
     const searchCollection = new Backbone.Collection(searchModels);
 
