@@ -178,6 +178,7 @@ window.Application = Marionette.Application.extend({
     const settings = config.settings;
 
     _.defaults(settings, {
+      searchDebounceTime: 250,
       constrainTimeDomain: false,
       displayInterval: null,
       selectableInterval: null,
@@ -217,6 +218,7 @@ window.Application = Marionette.Application.extend({
         mapModel,
         defaultPageSize: 50,
         maxCount: layerModel.get('search.searchLimit'),
+        debounceTime: settings.searchDebounceTime,
       }, { automaticSearch: true })
     );
     const searchCollection = new Backbone.Collection(searchModels);
