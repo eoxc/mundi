@@ -30,6 +30,11 @@
                     "type": "string",
                     "enum": [ "always", "once", "button", "disabled" ]
                 },
+                "searchDebounceTime": {
+                    "description": "Sets the time in milliseconds to wait for additional user input before actually sending a search request.",
+                    "type": "number",
+                    "default": 250
+                },
                 "language": {
                     "description": "The language used in the UI. Defaults to 'en'.",
                     "type": "string",
@@ -161,7 +166,7 @@
                     "default": "rgba(0, 0, 0, 0)"
                 },
                 "filterStrokeColor": {
-                    "description": "The stroke color of selected regions (both on map and on timeslider). Any valid CSS color defintion is supported.",
+                    "description": "The stroke color (or point color) of selected regions (both on map and on timeslider). Any valid CSS color defintion is supported.",
                     "type": "string",
                     "default": "rgba(0, 0, 0, 0)"
                 },
