@@ -16,32 +16,41 @@ var config = {
     "settings": {
         "tutorial": "once",
         "language": "de",
-        "zoom": 5,
+//        "center": [15, 50],
+//        "zoom": 5,
         "extent": [
-            -180,
-            -56,
-            180,
-            83
+            -160,
+            -46,
+            160,
+            68
         ],
         "timeDomain": [
             "2016-01-01T00:00:00Z",
-            "2017-01-01T00:00:00Z"
+            "2017-01-31T23:59:59Z"
         ],
         "constrainTimeDomain": true,
         "displayTimeDomain": [
-            "2016-12-06T00:00:00Z",
-            "2016-12-12T00:00:00Z"
+            "2016-12-01T00:00:00Z",
+            "2017-01-31T23:59:59Z"
         ],
         "selectedTimeDomain": [
-            "2016-12-11T00:00:00Z",
-            "2016-12-11T12:00:00Z"
+            "2017-01-19T00:00:00Z",
+            "2017-01-21T23:59:59Z"
         ],
 //        "displayInterval": "P1M",
-        "selectableInterval": "P1D",
-        "highlightFillColor": "rgba(255, 0, 0, 0.5)",
-        "highlightStrokeColor": "rgba(255, 0, 0, 1)",
-        "maxTooltips": 10,
+        "selectableInterval": "P3D",
+//        "maxTooltips": 10,
         "timeSliderControls": true,
+        "highlightFillColor": "rgba(255, 165, 0, 0)",
+        "highlightStrokeColor": "rgba(255, 165, 0, 1)",
+        "highlightStrokeWidth": 1,
+        "filterFillColor": "rgba(0, 165, 255, 0.2)",
+        "filterStrokeColor": "rgba(0, 165, 255, 1)",
+        "filterOutsideColor": "rgba(0, 0, 0, 0.8)",
+        "footprintFillColor": "rgba(0, 0, 0, 0)",
+        "footprintStrokeColor": "rgba(255, 255, 255, 1)",
+        "selectedFootprintFillColor": "rgba(255, 0, 0, 0.2)",
+        "selectedFootprintStrokeColor": "rgba(255, 0, 0, 1)",
         "rightPanelOpen": true,
         "parameters": [{
             "type": "eo:productionStatus",

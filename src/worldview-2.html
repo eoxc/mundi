@@ -19,54 +19,37 @@ var config = {
         "center": [15, 50],
         "zoom": 5,
         "timeDomain": [
-            "2002-10-01T00:00:00Z",
-            "2012-04-08T23:59:59Z"
+            "2011-02-01T00:00:00Z",
+            "2013-10-31T23:59:59Z"
         ],
         "constrainTimeDomain": true,
         "displayTimeDomain": [
-            "2002-10-01T00:00:00Z",
-            "2003-09-30T23:59:59Z"
+            "2012-11-01T00:00:00Z",
+            "2013-10-31T23:59:59Z"
         ],
         "selectedTimeDomain": [
-            "2002-12-01T00:00:00Z",
-            "2002-12-28T23:59:59Z"
+            "2013-07-01T00:00:00Z",
+            "2013-07-31T23:59:59Z"
         ],
         "displayInterval": "P1Y",
         "selectableInterval": "P1M",
-        "maxTooltips": 1,
+        "maxTooltips": 5,
         "timeSliderControls": true,
-        "highlightFillColor": "rgba(255, 165, 0, 0.5)",
+        "highlightFillColor": "rgba(255, 165, 0, 0)",
         "highlightStrokeColor": "rgba(255, 165, 0, 1)",
         "highlightStrokeWidth": 1,
         "filterFillColor": "rgba(0, 165, 255, 0.2)",
         "filterStrokeColor": "rgba(0, 165, 255, 1)",
         "filterOutsideColor": "rgba(0, 0, 0, 0.8)",
-        "footprintFillColor": "rgba(255, 255, 255, 0.5)",
+        "footprintFillColor": "rgba(0, 0, 0, 0)",
         "footprintStrokeColor": "rgba(255, 255, 255, 1)",
-        "selectedFootprintFillColor": "rgba(255, 0, 0, 0.5)",
+        "selectedFootprintFillColor": "rgba(255, 0, 0, 0.2)",
         "selectedFootprintStrokeColor": "rgba(255, 0, 0, 1)",
         "rightPanelOpen": true,
         "parameters": [{
-            "type": "eo:swathIdentifier",
+            "type": "eo:wrsLongitudeGrid",
         }, {
-            "type": "eo:orbitDirection",
-        }, {
-            "type": "eo:orbitNumber",
-            "range": true,
-            "min": 3310,
-            "max": 52862
-        }, {
-            "type": "eo:track",
-            "range": true,
-            "min": 1,
-            "max": 501
-        }, {
-            "type": "eo:path",
-            "range": true,
-            "min": -9,
-            "max": 7206
-        }, {
-            "type": "eo:polarisationChannels",
+            "type": "eo:wrsLatitudeGrid",
         }]
     },
     "baseLayers": [{
@@ -131,16 +114,16 @@ var config = {
         }
     }],
     "layers": [{
-        "id": "ENVISAT-ASA_IMP_1P",
-        "displayName": "ENVISAT ASA_IMP_1P",
+        "id": "WorldView-2",
+        "displayName": "WorldView-2 European Cities",
         "displayColor": "#ff7f0e",
-        "link": "http://sxcat.eox.at/socat/ASA_IMP_1P",
+        "link": "http://sxcat.eox.at/socat/WorldView-2",
         "display": {
-            "id": "ENVISAT_ASAR_IMP_1P",
+            "id": "WorldView-2",
             "visible": true,
-            "protocol": "WMS",
+            "protocol": "WMTS",
             "urls": [
-                "http://brow01.ngeo.eox.at/c/?"
+                "http://brow02.ngeo.eox.at/c/wmts"
             ],
             "matrixSet": "WGS84",
             "format": "image/png",
@@ -149,15 +132,15 @@ var config = {
             "attribution": "Copyright (C) European Space Agency - ESA"
         },
         "search": {
-            "id": "ENVISAT-ASA_IMP_1P",
+            "id": "WorldView-2",
             "protocol": "OpenSearch",
-            "url": "http://sxcat.eox.at/opensearch/collections/ASA_IMP_1P",
+            "url": "http://sxcat.eox.at/opensearch/collections/WorldView-2",
             "format": "application\/atom+xml",
             "method": "GET",
-            "lightweightBuckets": true,
+            "lightweightBuckets": false,
             "histogramThreshold": 200,
             "histogramBinCount": 30,
-            "searchLimit": 100
+            "searchLimit": 200
         },
     }],
     "overlayLayers": [{
