@@ -16,8 +16,8 @@ var config = {
     "settings": {
         "tutorial": "once",
         "language": "en",
-        "center": [15, 50],
-        "zoom": 5,
+        "center": [15, 30],
+        "zoom": 4,
         "timeDomain": [
             "2003-01-01T00:00:00Z",
             "2003-12-31T23:59:59Z"
@@ -28,15 +28,23 @@ var config = {
             "2003-12-31T23:59:59Z"
         ],
         "selectedTimeDomain": [
-            "2003-12-14T00:00:00Z",
-            "2003-12-15T00:00:00Z"
+            "2003-12-28T00:00:00Z",
+            "2003-12-29T00:00:00Z"
         ],
         "displayInterval": "P1M",
         "selectableInterval": "P1D",
-        "maxTooltips": 10,
+        "maxTooltips": 3,
         "timeSliderControls": true,
-        "highlightFillColor": "rgba(255, 0, 0, 0.5)",
-        "highlightStrokeColor": "rgba(255, 0, 0, 1)",
+        "highlightFillColor": "rgba(255, 165, 0, 0.5)",
+        "highlightStrokeColor": "rgba(255, 165, 0, 1)",
+        "highlightStrokeWidth": 3,
+        "filterFillColor": "rgba(0, 165, 255, 0.2)",
+        "filterStrokeColor": "rgba(0, 165, 255, 1)",
+        "filterOutsideColor": "rgba(0, 0, 0, 0.8)",
+        "footprintFillColor": "rgba(255, 255, 255, 0.5)",
+        "footprintStrokeColor": "rgba(255, 255, 255, 1)",
+        "selectedFootprintFillColor": "rgba(255, 0, 0, 0.5)",
+        "selectedFootprintStrokeColor": "rgba(255, 0, 0, 1)",
         "rightPanelOpen": true,
         "parameters": [{
             "type": "eo:sensorType",
@@ -133,7 +141,7 @@ var config = {
             "lightweightBuckets": true,
             "histogramThreshold": 200,
             "histogramBinCount": 30,
-            "searchLimit": 1000
+            "searchLimit": 200
         },
     }],
     "overlayLayers": [{
