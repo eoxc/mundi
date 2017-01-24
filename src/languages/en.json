@@ -1,4 +1,6 @@
 {
+  "search_error": "An error occurred during the search.",
+  "search_norecords": "No records matched the search.",
   "timefilter_warning": "Search results may differ from products shown on map because of using a separate time filter",
   "advancedfilter_warning": "Search results may differ from products shown on map because of using additional filters",
   "toomanyresults_warning": "Search results may differ from products shown on map because search results are too big",
