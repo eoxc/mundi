@@ -8,6 +8,7 @@ import 'eonasdan-bootstrap-datetimepicker';
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css';
 import 'bootstrap-slider';
 import 'bootstrap-slider/dist/css/bootstrap-slider.css';
+import i18next from 'i18next';
 
 import 'eoxc/src/core/base.css';
 
@@ -39,7 +40,7 @@ const FeatureListView = Marionette.CompositeView.extend({
 
   template: () => `
     <button type="button" class="btn btn-default btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-      Select Feature
+      `+i18next.t('Select Feature')+`
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" style="max-height: 300px; overflow-y: scroll"></ul>
@@ -280,18 +281,18 @@ export default Marionette.LayoutView.extend({
     const time = filtersModel.get('time');
     this.updatingTime = true;
     if (time) {
-      this.$('.datetime.start').data('DateTimePicker').date(moment(time[0]));
-      this.$('.datetime.end').data('DateTimePicker').date(moment(time[1]));
-      this.$('.datetime.start').data('DateTimePicker').viewDate(moment(time[0]));
-      this.$('.datetime.end').data('DateTimePicker').viewDate(moment(time[1]));
+      this.$('.datetime.start').data('DateTimePicker').date(moment.utc(time[0]));
+      this.$('.datetime.end').data('DateTimePicker').date(moment.utc(time[1]));
+      this.$('.datetime.start').data('DateTimePicker').viewDate(moment.utc(time[0]));
+      this.$('.datetime.end').data('DateTimePicker').viewDate(moment.utc(time[1]));
       this.$('.time-buttons').show();
       this.$('#map-time-wrapper').hide();
     } else {
       const mapTime = this.mapModel.get('time');
-      this.$('.datetime.start').data('DateTimePicker').date(moment(mapTime[0]));
-      this.$('.datetime.end').data('DateTimePicker').date(moment(mapTime[1]));
-      this.$('.datetime.start').data('DateTimePicker').viewDate(moment(mapTime[0]));
-      this.$('.datetime.end').data('DateTimePicker').viewDate(moment(mapTime[1]));
+      this.$('.datetime.start').data('DateTimePicker').date(moment.utc(mapTime[0]));
+      this.$('.datetime.end').data('DateTimePicker').date(moment.utc(mapTime[1]));
+      this.$('.datetime.start').data('DateTimePicker').viewDate(moment.utc(mapTime[0]));
+      this.$('.datetime.end').data('DateTimePicker').viewDate(moment.utc(mapTime[1]));
       this.$('.time-buttons').hide();
       this.$('#map-time-wrapper').show();
     }
@@ -353,8 +354,8 @@ export default Marionette.LayoutView.extend({
 
   onMapTimeChanged() {
     const time = this.mapModel.get('time');
-    this.$('.map-time-start').val(moment(time[0]).format('YYYY-MM-DD HH:mm:ss'));
-    this.$('.map-time-end').val(moment(time[1]).format('YYYY-MM-DD HH:mm:ss'));
+    this.$('.map-time-start').val(moment.utc(time[0]).format('YYYY-MM-DD HH:mm:ss'));
+    this.$('.map-time-end').val(moment.utc(time[1]).format('YYYY-MM-DD HH:mm:ss'));
   },
 
   onExtraParameterChanged(event) {
