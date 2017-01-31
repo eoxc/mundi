@@ -35,6 +35,7 @@
   "Back": "Zurück",
   "search_error": "Ein Fehler ist während der Suche aufgetreten.",
   "search_norecords": "Kein Eintrag entspricht der Suche.",
+  "download_norecords": "Keine Einträge wurden für das Herunterladen ausgewählt.",
   "timefilter_warning": "Suchergebnisse weichen möglicherweise von den auf der Karte gezeigten Produkten ab weil ein eigener zeitlicher Filter gesetzt ist",
   "advancedfilter_warning": "Suchergebnisse weichen möglicherweise von den auf der Karte gezeigten Produkten ab weil zusätzliche Filter gesetzt sind",
   "toomanyresults_warning": "Suchergebnisse weichen möglicherweise von den auf der Karte gezeigten Produkten ab weil die Suchergebnisse zu umfangreich sind",
