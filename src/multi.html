@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CODE-DE - Example</title>
+</head>
+<body style="width: 100%; height: 100%; position: absolute; margin: 0; padding: 0; overflow: hidden;">
+  <script type="text/html" id="navbar-template">
+
+  </script>
+
+  <div id="app" style="width: 100%; height: 100%; position: absolute; margin: 0; padding:0;"></div>
+  <script src="code-de.bundle.js"></script>
+  <script>
+var config = {
+    "settings": {
+        "tutorial": "once",
+        "searchDebounceTime": 250,
+        "language": "de",
+        "center": [15, 50],
+        "zoom": 5,
+        "timeDomain": [
+            "1990-01-01T00:00:00Z",
+            "2012-04-08T23:59:59Z"
+        ],
+        "constrainTimeDomain": true,
+        "displayTimeDomain": [
+            "1998-01-01T00:00:00Z",
+            "2005-12-31T23:59:59Z"
+        ],
+        "selectedTimeDomain": [
+            "2003-04-01T00:00:00Z",
+            "2003-06-31T23:59:59Z"
+        ],
+        "displayInterval": "P22Y",
+        "selectableInterval": "P3M",
+        "maxTooltips": 1,
+        "timeSliderControls": true,
+        "highlightFillColor": "rgba(255, 165, 0, 0)",
+        "highlightStrokeColor": "rgba(255, 165, 0, 1)",
+        "highlightStrokeWidth": 1,
+        "filterFillColor": "rgba(0, 165, 255, 0)",
+        "filterStrokeColor": "rgba(0, 165, 255, 1)",
+        "filterOutsideColor": "rgba(0, 0, 0, 0.5)",
+        "footprintFillColor": "rgba(0, 0, 0, 0)",
+        "footprintStrokeColor": "rgba(255, 255, 255, 1)",
+        "selectedFootprintFillColor": "rgba(255, 0, 0, 0.2)",
+        "selectedFootprintStrokeColor": "rgba(255, 0, 0, 1)",
+        "rightPanelOpen": true,
+        "parameters": [{
+            "type": "eo:platformSerialIdentifier",
+        }, {
+            "type": "eo:instrumentShortName",
+        }, {
+            "type": "eo:track",
+            "range": true,
+            "min": 169,
+            "max": 223
+        }, {
+            "type": "eo:frame",
+            "range": true,
+            "min":10,
+            "max": 44
+        }]
+    },
+    "baseLayers": [{
+        "id": "terrain-light",
+        "displayName": "Terrain-Light",
+        "display": {
+            "id": "terrain-light",
+            "visible": true,
+            "protocol": "WMTS",
+            "urls": [
+                "http://a.tiles.maps.eox.at/wmts/",
+                "http://b.tiles.maps.eox.at/wmts/",
+                "http://c.tiles.maps.eox.at/wmts/",
+                "http://d.tiles.maps.eox.at/wmts/",
+                "http://e.tiles.maps.eox.at/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "style": "default",
+            "attribution": "Terrain-Light { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> }"
+        }
+    }, {
+        "id": "terrain",
+        "displayName": "Terrain",
+        "display": {
+            "id": "terrain",
+            "visible": false,
+            "protocol": "WMTS",
+            "urls": [
+                "http://a.tiles.maps.eox.at/wmts/",
+                "http://b.tiles.maps.eox.at/wmts/",
+                "http://c.tiles.maps.eox.at/wmts/",
+                "http://d.tiles.maps.eox.at/wmts/",
+                "http://e.tiles.maps.eox.at/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "style": "default",
+            "attribution": "Terrain { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> }"
+        }
+    }, {
+        "id": "bluemarble",
+        "displayName": "Blue Marble",
+        "display": {
+            "id": "bluemarble",
+            "visible": false,
+            "protocol": "WMTS",
+            "urls": [
+                "http://a.tiles.maps.eox.at/wmts/",
+                "http://b.tiles.maps.eox.at/wmts/",
+                "http://c.tiles.maps.eox.at/wmts/",
+                "http://d.tiles.maps.eox.at/wmts/",
+                "http://e.tiles.maps.eox.at/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "style": "default",
+            "attribution": "Blue Marble { &copy; <a href=\"http://nasa.gov\" target=\"_blank\">NASA</a> }"
+        }
+    }],
+    "layers": [{
+        "id": "Landsat",
+        "displayName": "Landsat European Coverage",
+        "displayColor": "#ff7f0e",
+        "link": "http://sxcat.eox.at/socat/Landsat57Merged",
+        "display": {
+            "id": "Landsat",
+            "visible": true,
+            "protocol": "WMTS",
+            "urls": [
+                "http://brow02.ngeo.eox.at/c/wmts"
+            ],
+            "matrixSet": "WGS84",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "style": "default",
+            "attribution": "Copyright (C) European Space Agency - ESA"
+        },
+        "search": {
+            "id": "Landsat",
+            "protocol": "OpenSearch",
+            "url": "http://sxcat.eox.at/opensearch/collections/Landsat57Merged",
+            "format": "application\/atom+xml",
+            "method": "GET",
+            "lightweightBuckets": false,
+            "histogramThreshold": 200,
+            "histogramBinCount": 30,
+            "searchLimit": 500
+        },
+    },{
+        "id": "ENVISAT-ASA_IMP_1P",
+        "displayName": "ENVISAT ASA_IMP_1P",
+        "displayColor": "#3366cc",
+        "link": "http://sxcat.eox.at/socat/ASA_IMP_1P",
+        "display": {
+            "id": "ENVISAT_ASAR_IMP_1P",
+            "visible": true,
+            "protocol": "WMS",
+            "urls": [
+                "http://brow01.ngeo.eox.at/c/?"
+            ],
+            "matrixSet": "WGS84",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "style": "default",
+            "attribution": "Copyright (C) European Space Agency - ESA"
+        },
+        "search": {
+            "id": "ENVISAT-ASA_IMP_1P",
+            "protocol": "OpenSearch",
+            "url": "http://sxcat.eox.at/opensearch/collections/ASA_IMP_1P",
+            "format": "application\/atom+xml",
+            "method": "GET",
+            "lightweightBuckets": true,
+            "histogramThreshold": 200,
+            "histogramBinCount": 30,
+            "searchLimit": 100
+        },
+    }],
+    "overlayLayers": [{
+        "id": "coastline",
+        "displayName": "Coastline",
+        "display": {
+            "id": "coastline",
+            "visible": false,
+            "protocol": "WMTS",
+            "urls": [
+                "http://a.tiles.maps.eox.at/wmts/",
+                "http://b.tiles.maps.eox.at/wmts/",
+                "http://c.tiles.maps.eox.at/wmts/",
+                "http://d.tiles.maps.eox.at/wmts/",
+                "http://e.tiles.maps.eox.at/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "style": "default",
+            "format": "image/png",
+            "attribution": "Overlay { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> and <a href=\"https://github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
+        }
+    },
+    {
+        "id": "overlay_base",
+        "displayName": "Borders and Labels",
+        "display": {
+            "id": "overlay_base",
+            "visible": false,
+            "protocol": "WMTS",
+            "urls": [
+                "http://a.tiles.maps.eox.at/wmts/",
+                "http://b.tiles.maps.eox.at/wmts/",
+                "http://c.tiles.maps.eox.at/wmts/",
+                "http://d.tiles.maps.eox.at/wmts/",
+                "http://e.tiles.maps.eox.at/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "style": "default",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "attribution": "Overlay { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> and <a href=\"https://github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
+        }
+    }]
+};
+
+var app = new Application({
+  config: config,
+  container: document.getElementById('app')
+});
+app.start();
+  </script>
+</body>
+</html>
