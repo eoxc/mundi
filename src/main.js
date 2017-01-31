@@ -215,8 +215,7 @@ window.Application = Marionette.Application.extend({
         defaultPageSize: 50,
         maxCount: layerModel.get('search.searchLimit'),
         debounceTime: settings.searchDebounceTime,
-      }, { automaticSearch: true })
-    );
+      }));
     const searchCollection = new Backbone.Collection(searchModels);
 
     // set up layout
@@ -323,12 +322,31 @@ window.Application = Marionette.Application.extend({
           filtersModel,
           highlightModel,
           collection: searchCollection,
-          onResultItemInfo(view, record, searchModel) {
+          onResultItemInfo(record, searchModel) {
+            showRecordDetails([[record, searchModel]]);
+          },
+        }),
+      }, {
+        name: 'Download',
+        view: new DownloadView({
+          filtersModel,
+          highlightModel,
+          collection: searchCollection,
+          onResultItemInfo(record, searchModel) {
             showRecordDetails([[record, searchModel]]);
           },
         }),
       }],
     }));
+
+    // hook up record info modal
+    searchCollection.each((searchModel) => {
+      searchModel.on('showInfo', (recordModels) => {
+        showRecordDetails(
+          recordModels.map(recordModel => [recordModel, searchModel])
+        );
+      });
+    });
 
     layout.showChildView('bottomPanel', new StopSelectionView({ mapModel }));
 
