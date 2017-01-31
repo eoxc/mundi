@@ -1,12 +1,11 @@
 // require styles
-require('bootstrap/dist/css/bootstrap.min.css');
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import $ from 'jquery';
 import 'jquery-ui';
-require('es6-promise').polyfill();
+import es6Promise from 'es6-promise';
 
 import i18next from 'i18next';
-
 import _ from 'underscore';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
@@ -16,17 +15,17 @@ import MapModel from 'eoxc/src/core/models/MapModel';
 import FiltersModel from 'eoxc/src/core/models/FiltersModel';
 import HighlightModel from 'eoxc/src/core/models/HighlightModel';
 
-import LayerOptionsView from 'eoxc/src/core/views/layers/LayerOptionsView';
-
 import TimeSliderView from 'eoxc/src/core/views/TimeSliderView';
-import ModalView from 'eoxc/src/core/views/ModalView';
+import LayerControlLayoutView from 'eoxc/src/core/views/layers/LayerControlLayoutView';
 
 import SearchResultView from 'eoxc/src/search/views/SearchResultView';
-import RecordDetailsView from 'eoxc/src/search/views/RecordDetailsView';
 import SearchModel from 'eoxc/src/search/models/SearchModel';
-import RecordsDetailsModalView from './views/RecordsDetailsModalView';
-
 import { getParameters } from 'eoxc/src/search';
+
+import DownloadView from 'eoxc/src/download/views/DownloadView';
+import download from 'eoxc/src/download';
+
+import OpenLayersMapView from 'eoxc/src/contrib/OpenLayers/OpenLayersMapView';
 
 import RootLayoutView from './views/RootLayoutView';
 
@@ -34,18 +33,15 @@ import FiltersView from './views/FiltersView';
 import SidePanelView from './views/SidePanelView';
 import StopSelectionView from './views/StopSelectionView';
 import WarningsView from './views/WarningsView';
+import RecordsDetailsModalView from './views/RecordsDetailsModalView';
 
 import WarningsCollection from './models/WarningsCollection';
 
-import LayerControlLayoutView from 'eoxc/src/core/views/layers/LayerControlLayoutView';
+import 'imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js';
 
-import OpenLayersMapView from 'eoxc/src/contrib/OpenLayers/OpenLayersMapView';
+import getTutorialWidget from './tutorial';
 
-import download from 'eoxc/src/download';
-
-require('imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js');
-
-import getTutorialWidget from './tutorial.js';
+es6Promise.polyfill();
 
 const germanTranslation = require('./languages/de.json');
 const englishTranslation = require('./languages/en.json');
