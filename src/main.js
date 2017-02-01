@@ -322,9 +322,6 @@ window.Application = Marionette.Application.extend({
           filtersModel,
           highlightModel,
           collection: searchCollection,
-          onResultItemInfo(record, searchModel) {
-            showRecordDetails([[record, searchModel]]);
-          },
         }),
       }, {
         name: 'Download',
@@ -332,9 +329,6 @@ window.Application = Marionette.Application.extend({
           filtersModel,
           highlightModel,
           collection: searchCollection,
-          onResultItemInfo(record, searchModel) {
-            showRecordDetails([[record, searchModel]]);
-          },
         }),
       }],
     }));
