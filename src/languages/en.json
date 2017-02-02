@@ -1,6 +1,8 @@
 {
   "search_error": "An error occurred during the search.",
   "search_norecords": "No records matched the search.",
+  "search_n_layers_selected": "One layer selected",
+  "search_n_layers_selected_plural": "{{count}} layers selected",
   "download_norecords": "No records selected for download.",
   "timefilter_warning": "Search results may differ from products shown on map because of using a separate time filter",
   "advancedfilter_warning": "Search results may differ from products shown on map because of using additional filters",
