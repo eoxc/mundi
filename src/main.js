@@ -317,6 +317,7 @@ window.Application = Marionette.Application.extend({
       defaultOpen: settings.rightPanelOpen,
       views: [{
         name: 'Search Results',
+        hasInfo: true,
         view: new SearchResultView({
           mapModel,
           filtersModel,
@@ -325,6 +326,7 @@ window.Application = Marionette.Application.extend({
         }),
       }, {
         name: 'Download',
+        hasInfo: true,
         view: new DownloadView({
           filtersModel,
           highlightModel,

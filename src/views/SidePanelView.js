@@ -31,6 +31,10 @@ export default Marionette.LayoutView.extend({
     'click .toggle-side-panel': 'onToggleSidePanelClicked',
   },
 
+  childEvents: {
+    updateStatus: 'onChildUpdateStatus',
+  },
+
   initialize(options) {
     this.position = options.position || 'left';
     this.views = options.views;
@@ -42,6 +46,11 @@ export default Marionette.LayoutView.extend({
     this.views.forEach((viewConfig, index) => {
       this.addRegion(`region-${index}`, `#${this.position}-${index}`);
       this.showChildView(`region-${index}`, viewConfig.view);
+      if (viewConfig.hasInfo) {
+        this.listenTo(viewConfig.view, 'update:status', (status) => {
+          this.$(`[href="#${this.position}-${index}"] .info`).html(status);
+        });
+      }
     });
 
     if (this.defaultOpen) {
@@ -55,4 +64,8 @@ export default Marionette.LayoutView.extend({
     this.$('.side-panel').toggleClass('in');
     this.$('.toggle-side-panel-out').toggleClass('out');
   },
+
+  onChildUpdateStatus() {
+    console.log(arguments);
+  }
 });

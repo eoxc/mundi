@@ -3,7 +3,6 @@
 </button>
 
 <div class="side-panel side-panel-{{position}}">
-
   <button class="btn btn-default toggle-side-panel toggle-side-panel-{{position}}">
     <i class="fa fa-caret-down" aria-hidden="true"></i>
   </button>
@@ -13,13 +12,12 @@
       <ul class="nav nav-tabs {{#if isLeft}}navbar-right{{else}}{{/if}}">
         {{#each views}}
           <li class="{{#if @first}}active{{/if}}">
-            <a href="#{{../position}}-{{@index}}" aria-controls="messages" role="tab" data-toggle="tab">{{t this.name}}</a>
+            <a href="#{{../position}}-{{@index}}" aria-controls="messages" role="tab" data-toggle="tab">{{t this.name}} {{#if this.hasInfo}}<span class="info"></span>{{/if}}</a>
           </li>
         {{/each}}
       </ul>
     </div>
   </nav>
-
 
   <div class="side-panel-content out">
     <div class="tab-content">
@@ -28,5 +26,4 @@
       {{/each}}
     </div>
   </div>
-
 </div>
