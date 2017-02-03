@@ -379,6 +379,20 @@ window.Application = Marionette.Application.extend({
       mapModel.show({ bbox: settings.extent });
     }
 
+    // create a dynamic style to set up the border/background color of record
+    // items in the search results and download selection view.
+    $(`<style>
+      .record-item:hover, .record-item.highlighted {
+        background-color: ${settings.highlightFillColor};
+        border-color: ${settings.highlightStrokeColor};
+      }
+      .record-item.selected-for-download {
+        background-color: ${settings.selectedFootprintFillColor};
+        border-color: ${settings.selectedFootprintStrokeColor};
+      }
+      </style>
+    `).appendTo('head');
+
 
     if (settings.hasOwnProperty('tutorial')) {
       if (settings.tutorial !== 'disabled') {
