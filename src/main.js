@@ -384,13 +384,13 @@ window.Application = Marionette.Application.extend({
     // create a dynamic style to set up the border/background color of record
     // items in the search results and download selection view.
     $(`<style>
-      .record-item.selected-for-download {
-        background-color: ${settings.selectedFootprintFillColor};
-        border-color: ${settings.selectedFootprintStrokeColor};
-      }
       .record-item:hover, .record-item.highlighted {
         background-color: ${settings.highlightFillColor};
         border-color: ${settings.highlightStrokeColor};
+      }
+      .record-item.selected-for-download {
+        background-color: ${settings.selectedFootprintFillColor};
+        border-color: ${settings.selectedFootprintStrokeColor};
       }
       </style>
     `).appendTo('head');
