@@ -91,22 +91,22 @@
         <div class="form-group show-geometry show-point">
           <label for="">{{t 'Current Selection'}}</label>
           <div class="input-group">
-            <input type="number" class="form-control input-sm" placeholder="{{t 'Longitude'}}">
+            <input type="number" class="form-control input-sm" placeholder="{{t 'Longitude'}}" min="-180" max="180">
             <span class="input-group-addon">-</span>
-            <input type="number" class="form-control input-sm" placeholder="{{t 'Latitude'}}">
+            <input type="number" class="form-control input-sm" placeholder="{{t 'Latitude'}}" min="-90" max="90">
           </div>
         </div>
 
         <div class="form-group show-geometry show-bbox">
           <label for="">{{t 'Current Selection'}}</label>
           <div class="input-group">
-            <input type="number" class="form-control input-sm" placeholder="Min-X">
+            <input type="number" class="form-control input-sm" placeholder="Min-X" min="-180" max="180">
             <span class="input-group-addon">-</span>
-            <input type="number" class="form-control input-sm" placeholder="Min-Y">
+            <input type="number" class="form-control input-sm" placeholder="Min-Y" min="-90" max="90">
             <span class="input-group-addon">-</span>
-            <input type="number" class="form-control input-sm" placeholder="Max-X">
+            <input type="number" class="form-control input-sm" placeholder="Max-X" min="-180" max="180">
             <span class="input-group-addon">-</span>
-            <input type="number" class="form-control input-sm" placeholder="Max-Y">
+            <input type="number" class="form-control input-sm" placeholder="Max-Y" min="-90" max="90">
           </div>
         </div>
 
