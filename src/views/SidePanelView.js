@@ -15,24 +15,8 @@ export default Marionette.LayoutView.extend({
     };
   },
 
-  // regions: {
-  //   sidePanelContent: '.side-panel-content',
-  // },
-
-  // regions() {
-  //   const regions = {};
-  //   this.views.forEach((view, index) => {
-  //     regions[`region-${index}`] = `#${this.position}-${index}`;
-  //   });
-  //   return regions;
-  // },
-
   events: {
     'click .toggle-side-panel': 'onToggleSidePanelClicked',
-  },
-
-  childEvents: {
-    updateStatus: 'onChildUpdateStatus',
   },
 
   initialize(options) {
@@ -56,16 +40,10 @@ export default Marionette.LayoutView.extend({
     if (this.defaultOpen) {
       this.onToggleSidePanelClicked();
     }
-    // this.views.forEach(view => this.showChildView('sidePanelContent', this.view))
-    // this.showChildView('sidePanelContent', this.view);
   },
 
   onToggleSidePanelClicked() {
     this.$('.side-panel').toggleClass('in');
     this.$('.toggle-side-panel-out').toggleClass('out');
   },
-
-  onChildUpdateStatus() {
-    console.log(arguments);
-  }
 });
