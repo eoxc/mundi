@@ -1,7 +1,7 @@
 /* by default panels are hidden */
 .side-panel {
   position: absolute;
-  width: 399px;
+  width: 390px;
   top: 20px;
 
   height: -moz-calc(100% - 148px);
