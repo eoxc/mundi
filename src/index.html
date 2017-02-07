@@ -46,6 +46,14 @@ var config = {
         "selectedFootprintFillColor": "rgba(255, 0, 0, 0.2)",
         "selectedFootprintStrokeColor": "rgba(255, 0, 0, 1)",
         "rightPanelOpen": true,
+        "downloadFormats": [{
+          "name": "TIFF",
+          "mimeType": "image/tiff"
+        }],
+        "downloadProjections": [{
+          "name": "WGS-84",
+          "identifier": "EPSG:4326"
+        }],
         "parameters": [{
             "type": "eo:sensorType",
         }, {
@@ -141,14 +149,17 @@ var config = {
         },
         "search": {
             "id": "MER_FRS_RGB",
+            // "protocol": "EO-WCS",
+            // "url": "http://ows.eox.at/cite_staging/eoxserver/ows",
             "protocol": "OpenSearch",
             "url": "http://ows.eox.at/cite_staging/eoxserver/opensearch/collections/MER_FRS_RGB/",
             "lightweightBuckets": false,
             "searchLimit": 100
         },
         "download": {
-            "protocol": "OpenSearch",
-            "url": "http://ows.eox.at/cite_staging/eoxserver/opensearch/collections/MER_FRS_RGB/"
+            "protocol": "EO-WCS",
+            "method": "GET",
+            "url": "http://ows.eox.at/cite_staging/eoxserver/ows"
         }
     }],
     "overlayLayers": [{
