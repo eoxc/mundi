@@ -58,9 +58,17 @@
                 "zoom": {
                     "description": "The inital map zoomlevel.",
                     "type": "number",
-                    "items": {
-                        "type": "number"
-                    }
+                    "default": 2
+                },
+                "minZoom": {
+                    "description": "The minimum map zoomlevel.",
+                    "type": "number",
+                    "default": 0
+                },
+                "maxZoom": {
+                    "description": "The maximum map zoomlevel.",
+                    "type": "number",
+                    "default": 28
                 },
                 "extent": {
                     "description": "The initally visible extent. This setting is mutually exclusive to 'center' and 'zoom'.",

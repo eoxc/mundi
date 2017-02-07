@@ -174,6 +174,10 @@ window.Application = Marionette.Application.extend({
     const settings = config.settings;
 
     _.defaults(settings, {
+      center: [0, 0],
+      zoom: 2,
+      minZoom: 0,
+      maxZoom: 28,
       searchDebounceTime: 250,
       constrainTimeDomain: false,
       displayInterval: null,
@@ -198,6 +202,8 @@ window.Application = Marionette.Application.extend({
     const mapModel = new MapModel({
       center: settings.center,
       zoom: settings.zoom,
+      minZoom: settings.minZoom,
+      maxZoom: settings.maxZoom,
       time: [
         new Date(settings.selectedTimeDomain[0]),
         new Date(settings.selectedTimeDomain[1]),
