@@ -256,6 +256,42 @@
                             }
                         }
                     }
+                },
+                "downloadFormats": {
+                    "description": "A list of download format descriptions that are being used in the download options view for the user to select for downloads via EO-WCS.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "description": "The name of the download format for display.",
+                                "type": "string"
+                            },
+                            "mimeType": {
+                                "description": "The mime-type of the format that is sent to the server.",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": []
+                },
+                "downloadProjections": {
+                    "description": "A list of download projection descriptions that are being used in the download options view for the user to select for downloads via EO-WCS.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "description": "The name of the download projection for display.",
+                                "type": "string"
+                            },
+                            "identifier": {
+                                "description": "The identifier of the projection (e.g: EPSG-code) that is sent to the server.",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": []
                 }
             },
             "oneOf": [
@@ -410,13 +446,19 @@
                         "protocol": {
                             "description": "The protocol used to download records.",
                             "type": "string",
-                            "enum": ["EO-WCS"],
+                            "enum": ["EO-WCS", "URL"],
                             "//TODO": "This list will be extended in the future. Currently, this setting is not used with OpenSearch, as the download information is embedded in the search response."
                         },
                         "url": {
                             "description": "The base-URL to send download requests to.",
                             "type": "string",
                             "format": "uri"
+                        },
+                        "method": {
+                            "description": "The preferred HTTP method to send requests.",
+                            "type": "string",
+                            "enum": ["GET", "POST"],
+                            "default": "'GET' for URL based protocols, 'POST' for EO-WCS."
                         }
                     },
                     "required": ["protocol", "url"]

@@ -22,7 +22,9 @@ import SearchResultView from 'eoxc/src/search/views/SearchResultView';
 import SearchModel from 'eoxc/src/search/models/SearchModel';
 import { getParameters } from 'eoxc/src/search';
 
-import DownloadView from 'eoxc/src/download/views/DownloadView';
+import DownloadOptionsModel from 'eoxc/src/download/models/DownloadOptionsModel';
+import DownloadSelectionView from 'eoxc/src/download/views/DownloadSelectionView';
+import DownloadOptionsModalView from 'eoxc/src/download/views/DownloadOptionsModalView';
 import download from 'eoxc/src/download';
 
 import OpenLayersMapView from 'eoxc/src/contrib/OpenLayers/OpenLayersMapView';
@@ -196,6 +198,8 @@ window.Application = Marionette.Application.extend({
       selectedFootprintStrokeColor: '#ff0000',
       leftPanelOpen: false,
       rightPanelOpen: false,
+      downloadFormats: [],
+      downloadProjections: [],
     });
 
     // set up config
@@ -260,12 +264,26 @@ window.Application = Marionette.Application.extend({
 
     // set up panels
 
+    const startDownload = (records) => {
+      layout.showChildView('modals', new DownloadOptionsModalView({
+        records,
+        searchCollection,
+        filtersModel,
+        mapModel,
+        model: new DownloadOptionsModel({
+          availableDownloadFormats: settings.downloadFormats,
+          availableProjections: settings.downloadProjections,
+        }),
+      }));
+    };
+
     const showRecordDetails = (records) => {
       layout.showChildView('modals', new RecordsDetailsModalView({
         baseLayersCollection,
         overlayLayersCollection,
         layersCollection,
         records,
+        onStartDownload: startDownload,
       }));
     };
 
@@ -333,10 +351,11 @@ window.Application = Marionette.Application.extend({
       }, {
         name: 'Download',
         hasInfo: true,
-        view: new DownloadView({
+        view: new DownloadSelectionView({
           filtersModel,
           highlightModel,
           collection: searchCollection,
+          onStartDownload: startDownload,
         }),
       }],
     }));
