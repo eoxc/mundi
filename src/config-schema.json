@@ -41,7 +41,7 @@
                     "enum": [ "en", "de" ]
                 },
                 "center": {
-                    "description": "The inital center of the mapview.",
+                    "description": "The initial center of the map view.",
                     "type": "array",
                     "items": [{
                         "description": "The longitude component of the center point.",
@@ -56,22 +56,22 @@
                     }]
                 },
                 "zoom": {
-                    "description": "The inital map zoomlevel.",
+                    "description": "The initial map zoom level.",
                     "type": "number",
                     "default": 2
                 },
                 "minZoom": {
-                    "description": "The minimum map zoomlevel.",
+                    "description": "The minimum map zoom level.",
                     "type": "number",
                     "default": 0
                 },
                 "maxZoom": {
-                    "description": "The maximum map zoomlevel.",
+                    "description": "The maximum map zoom level.",
                     "type": "number",
                     "default": 28
                 },
                 "extent": {
-                    "description": "The initally visible extent. This setting is mutually exclusive to 'center' and 'zoom'.",
+                    "description": "The initially visible extent. This setting is mutually exclusive to 'center' and 'zoom'.",
                     "type": "array",
                     "items": [{
                         "description": "The lower longitude component of the extent.",
