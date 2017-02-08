@@ -250,6 +250,8 @@ window.Application = Marionette.Application.extend({
       mapModel,
       filtersModel,
       highlightModel,
+      highlightFillColor: settings.highlightFillColor,
+      highlightStrokeColor: settings.highlightStrokeColor,
       filterFillColor: settings.filterFillColor,
       filterStrokeColor: settings.filterStrokeColor,
       filterOutsideColor: settings.filterOutsideColor,
