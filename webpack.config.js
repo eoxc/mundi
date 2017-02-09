@@ -48,6 +48,8 @@ module.exports = {
 
       // for anything that might be included in a css
       { test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=4000000' },
+      { test: /\.(png|woff|woff2|eot|ttf|svg)\?wolqql(#iefix)?$/, loader: 'url-loader?limit=4000000' },
+      { test: /\.(png|woff|woff2|eot|ttf|svg)\?wolqql(#eox_font)?$/, loader: 'url-loader?limit=4000000' },
     ],
   },
   plugins: [

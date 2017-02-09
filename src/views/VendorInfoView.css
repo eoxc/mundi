@@ -1,0 +1,28 @@
+#infoPanel {
+  position: absolute;
+  bottom: 10px;
+  width: 280px;
+  left: -moz-calc(50% - 140px) !important;
+  left: -webkit-calc(50% - 140px) !important;
+  left: -o-calc(50% - 140px) !important;
+  left: calc(50% - 140px) !important;
+  /*border-radius: 4px;*/
+}
+
+#infoPanel .btn {
+  padding: 0;
+  color: #fff;
+  font-size: 1.14em;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  height: 1.375em;
+  width: 1.375em;
+  line-height: .4em;
+  background-color: rgba(0,60,136,.5);
+
+  margin: 0 !important;
+  border: 1px solid black !important;
+  border-radius: 4px !important;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39) !important;
+}
