@@ -285,6 +285,8 @@ window.Application = Marionette.Application.extend({
         overlayLayersCollection,
         layersCollection,
         records,
+        highlightFillColor: settings.highlightFillColor,
+        highlightStrokeColor: settings.highlightStrokeColor,
         onStartDownload: startDownload,
       }));
     };

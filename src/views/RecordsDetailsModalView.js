@@ -33,6 +33,7 @@ const RecordsDetailsModalView = ModalView.extend({
     this.baseLayersCollection = options.baseLayersCollection;
     this.overlayLayersCollection = options.overlayLayersCollection;
     this.layersCollection = options.layersCollection;
+    this.highlightFillColor = options.highlightFillColor;
     this.highlightStrokeColor = options.highlightStrokeColor;
 
     this.mapModel = new MapModel({ center: [0, 0], zoom: 5 });
@@ -55,7 +56,7 @@ const RecordsDetailsModalView = ModalView.extend({
       baseLayersCollection: this.baseLayersCollection,
       overlayLayersCollection: this.overlayLayersCollection,
       layersCollection: this.layersCollection,
-      highlightFillColor: 'rgba(0, 0, 0, 0)',
+      highlightFillColor: this.highlightFillColor,
       highlightStrokeColor: this.highlightStrokeColor,
       staticHighlight: true,
     });
