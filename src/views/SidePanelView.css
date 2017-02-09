@@ -110,6 +110,10 @@
   padding: 0 !important;
 }
 
+.selection-body {
+  margin-left: 5px !important;
+}
+
 .navbar, .panel {
   margin-bottom: 5px !important;
 }
@@ -128,4 +132,13 @@
 
 .tab-pane {
   height: 100%;
+}
+
+.record-item {
+  width: 112px;
+  margin-top: 5px;
+  margin-left: -moz-calc(100% - 3 * 112px) / 4);
+  margin-left: -webkit-calc(100% - 3 * 112px) / 4);
+  margin-left: -o-calc(100% - 3 * 112px) / 4);
+  margin-left: calc((100% - 3 * 112px) / 4);
 }
