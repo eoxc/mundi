@@ -18,6 +18,7 @@
   "Point": "Punkt",
   "Rectangle": "Rechteck",
   "Polygon": "Polygon",
+  "Drawn Shape": "Gezeichnetes Polygon",
   "Upload": "Hochladen",
   "Bounding Box": "Begrenzungsrechteck",
   "Draw Bounding Box": "Zeichne ein Begrenzungsrechteck",

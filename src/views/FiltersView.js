@@ -266,7 +266,7 @@ export default Marionette.LayoutView.extend({
 
       readFileAsArraybuffer(event.currentTarget.files[0])
         .then(data => shp(data))
-        .then(features => {
+        .then((features) => {
           this.featureListCollection.reset(features.features);
           this.$('.select-feature').prop('disabled', false);
           this.$('.panel-features').fadeIn('fast');
@@ -314,7 +314,7 @@ export default Marionette.LayoutView.extend({
       this.$('.show-point input[type=number]:eq(1)').val(area.geometry.coordinates[1]);
       this.$('.show-point').show();
     } else if (area && area.geometry) {
-      let name = 'Drawn Shape';
+      let name = i18next.t('Drawn Shape');
       if (area.properties) {
         const keys = ['name', 'NAME']; // TODO: more
         for (let i = 0; i < keys.length; ++i) {
