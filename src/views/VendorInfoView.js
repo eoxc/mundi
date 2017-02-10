@@ -2,12 +2,18 @@ import Marionette from 'backbone.marionette';
 
 import template from './VendorInfoView.hbs';
 import './VendorInfoView.css';
-import '../eox/style.css';
+import eyePath from '../eox/EOX_Logo_eye_only.svg';
 
 const VendorInfoView = Marionette.ItemView.extend({
   template,
-  onRender() {
-    this.$('[data-toggle="popover"]').popover();
+  templateHelpers: {
+    eyePath,
+  },
+  events: {
+    'click .toggle-collapse': 'onToggleCollapseClicked',
+  },
+  onToggleCollapseClicked() {
+    this.$('.collapse,.arrow-collapse,.icon-eox-eye').toggle();
   }
 });
 
