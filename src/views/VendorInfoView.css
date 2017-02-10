@@ -24,11 +24,11 @@
 
 #infoPanel .icon-eox-eye {
   background: no-repeat center url('../eox/EOX_Logo_eye_only_white.svg');
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   display: block;
   background-size: contain;
-  margin: 2.4px;
+  margin: 2px;
 }
 
 #infoPanel #vendor-info {
