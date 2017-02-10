@@ -1,0 +1,53 @@
+#infoPanel {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+}
+
+#infoPanel .btn {
+  padding: 0;
+  color: #fff;
+  font-size: 1.14em;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  height: 1.375em;
+  width: 1.375em;
+  line-height: 1em;
+  background-color: rgba(0,60,136,.5);
+
+  margin: 0 !important;
+  border: 1px solid black !important;
+  border-radius: 4px !important;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39) !important;
+}
+
+#infoPanel .icon-eox-eye {
+  background: no-repeat center url('../eox/EOX_Logo_eye_only_white.svg');
+  width: 15px;
+  height: 15px;
+  display: block;
+  background-size: contain;
+  margin: 2.4px;
+}
+
+#infoPanel #vendor-info {
+  position:absolute;
+  bottom: 0px;
+  left: 23px;
+  background: rgba(255,255,255,.8);
+  display: block;
+  width: 190px;
+  padding: 2px;
+  font-size: 13px;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#infoPanel #vendor-info img {
+  height: 13px;
+}

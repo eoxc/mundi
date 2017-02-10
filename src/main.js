@@ -39,6 +39,8 @@ import RecordsDetailsModalView from './views/RecordsDetailsModalView';
 
 import WarningsCollection from './models/WarningsCollection';
 
+import VendorInfoView from './views/VendorInfoView';
+
 import 'imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js';
 
 import getTutorialWidget from './tutorial';
@@ -427,6 +429,7 @@ window.Application = Marionette.Application.extend({
       </style>
     `).appendTo('head');
 
+    layout.showChildView('infoPanel', new VendorInfoView({}));
 
     if (settings.hasOwnProperty('tutorial')) {
       if (settings.tutorial !== 'disabled') {
