@@ -287,6 +287,9 @@ window.Application = Marionette.Application.extend({
         records,
         highlightFillColor: settings.highlightFillColor,
         highlightStrokeColor: settings.highlightStrokeColor,
+        filterFillColor: settings.filterFillColor,
+        filterStrokeColor: settings.filterStrokeColor,
+        filterOutsideColor: settings.filterOutsideColor,
         onStartDownload: startDownload,
       }));
     };

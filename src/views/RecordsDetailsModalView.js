@@ -36,6 +36,10 @@ const RecordsDetailsModalView = ModalView.extend({
     this.highlightFillColor = options.highlightFillColor;
     this.highlightStrokeColor = options.highlightStrokeColor;
 
+    this.filterFillColor = options.filterFillColor;
+    this.filterStrokeColor = options.filterStrokeColor;
+    this.filterOutsideColor = options.filterOutsideColor;
+
     this.mapModel = new MapModel({ center: [0, 0], zoom: 5 });
     this.highlightModel = new HighlightModel();
     this.filtersModel = new FiltersModel();
@@ -58,6 +62,9 @@ const RecordsDetailsModalView = ModalView.extend({
       layersCollection: this.layersCollection,
       highlightFillColor: this.highlightFillColor,
       highlightStrokeColor: this.highlightStrokeColor,
+      filterFillColor: this.filterFillColor,
+      filterStrokeColor: this.filterStrokeColor,
+      filterOutsideColor: this.filterOutsideColor,
       staticHighlight: true,
     });
     const detailsView = new RecordDetailsView({
@@ -66,6 +73,8 @@ const RecordsDetailsModalView = ModalView.extend({
       mapView: this.mapView,
     });
     this.showChildView('content', detailsView);
+
+    this.filtersModel.set('area', recordModel.attributes.geometry);
 
     this.mapModel.show(recordModel.attributes);
     this.highlightModel.highlight(recordModel.attributes);
