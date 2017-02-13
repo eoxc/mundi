@@ -122,6 +122,7 @@ export default Marionette.LayoutView.extend({
       }),
     };
   },
+  className: 'filters-view',
   regions: {
     featureList: '.feature-list',
   },
