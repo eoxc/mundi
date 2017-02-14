@@ -128,6 +128,7 @@ export default Marionette.LayoutView.extend({
   },
   events: {
     'dp.change .datetime': 'onDateInputChange',
+    'keyup .datetime input': 'onDateTimeKeyUp',
     'click .tool-show-time': 'onShowTimeClicked',
     'click .tool-clear-time': 'onClearTimeClicked',
     'change .show-point input': 'onPointInputChange',
@@ -200,6 +201,21 @@ export default Marionette.LayoutView.extend({
         (startDate < endDate) ? [startDate, endDate] : [endDate, startDate]
       );
     }
+  },
+
+  onDateTimeKeyUp(event) {
+    const key = event.keyCode || event.which;
+    if (key === 13 /* Enter */) {
+      const $this = $(event.target);
+      const value = $this.val();
+      const dtp = $this.closest('.datetime').data('DateTimePicker');
+      this.updatingTime = true;
+      dtp.date(value);
+      dtp.viewDate(value);
+      this.updatingTime = false;
+      return false;
+    }
+    return true;
   },
 
   onShowTimeClicked() {
