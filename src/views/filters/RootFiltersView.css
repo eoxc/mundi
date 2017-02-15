@@ -1,11 +1,9 @@
-// @import "bootstrap/less/variables";
-// @import "bootstrap-datetimepicker/src/less/bootstrap-datetimepicker.less";
-
 .filters-view {
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
 }
+
 
 .btn-file {
   position: relative;
@@ -43,12 +41,3 @@
 .show-geometry,#selection-wrapper {
   display: none;
 }
-
-.slider .tooltip {
-  pointer-events: none;
-}
-
-// .feature-list {
-//   max-height: 200px;
-//   overflow-y: scroll;
-// }

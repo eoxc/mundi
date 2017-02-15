@@ -1,0 +1,16 @@
+.panel .row {
+  margin-right: 0;
+  padding-left: 10px;
+}
+.panel .col-sm-1, .panel .col-sm-2, .panel .col-sm-3, .panel .col-sm-4, .panel .col-sm-5, .panel .col-sm-6 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.panel .input-sm {
+  height: 20px;
+}
+
+.extra-parameter select {
+  width: 100%;
+}

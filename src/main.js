@@ -31,7 +31,7 @@ import OpenLayersMapView from 'eoxc/src/contrib/OpenLayers/OpenLayersMapView';
 
 import RootLayoutView from './views/RootLayoutView';
 
-import FiltersView from './views/FiltersView';
+import RootFiltersView from './views/filters/RootFiltersView';
 import SidePanelView from './views/SidePanelView';
 import StopSelectionView from './views/StopSelectionView';
 import WarningsView from './views/WarningsView';
@@ -44,6 +44,7 @@ import VendorInfoView from './views/VendorInfoView';
 import 'imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js';
 
 import getTutorialWidget from './tutorial';
+
 
 es6Promise.polyfill();
 
@@ -325,7 +326,7 @@ window.Application = Marionette.Application.extend({
       defaultOpen: settings.leftPanelOpen,
       views: [{
         name: 'Filters',
-        view: new FiltersView({
+        view: new RootFiltersView({
           filtersModel,
           mapModel,
           highlightModel,

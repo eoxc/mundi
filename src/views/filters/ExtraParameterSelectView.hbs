@@ -1,0 +1,9 @@
+<label class="col-sm-6 control-label">{{displayName}}</label>
+<div class="col-sm-6">
+  <select data-type="{{ type }}" class="form-control input-sm">
+    <option value="">---</option>
+    {{#each options}}
+    <option value="{{ this.value }}">{{ this.label }}</option>
+    {{/each}}
+  </select>
+</div>

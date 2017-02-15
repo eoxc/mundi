@@ -1,0 +1,7 @@
+.slider-horizontal {
+  width: 100% !important;
+}
+
+.slider .tooltip {
+  pointer-events: none;
+}
