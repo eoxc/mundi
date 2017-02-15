@@ -128,7 +128,6 @@ export default Marionette.LayoutView.extend({
   },
   events: {
     'dp.change .datetime': 'onDateInputChange',
-    'keyup .datetime input': 'onDateTimeKeyUp',
     'click .tool-show-time': 'onShowTimeClicked',
     'click .tool-clear-time': 'onClearTimeClicked',
     'change .show-point input': 'onPointInputChange',
@@ -166,19 +165,27 @@ export default Marionette.LayoutView.extend({
       collection: this.featureListCollection,
     }));
 
-    this.$('.datetime').datetimepicker({
-      locale: 'en',
-      format: 'YYYY-MM-DD HH:mm:ss',
-      dayViewHeaderFormat: 'YYYY-MM',
-      useCurrent: false,
-      showTodayButton: true,
-      showClose: true,
-      timeZone: 'UTC',
-      // minDate, maxDate
-      // useCurrent oder defaultDate???
-      // sideBySide ???
-      // , showClear, showClose, ...
+    ['start', 'end'].forEach((label) => {
+      const $elem = this.$(`.datetime.${label}`);
+      $elem.datetimepicker({
+        locale: 'en',
+        format: 'YYYY-MM-DD HH:mm:ss',
+        dayViewHeaderFormat: 'YYYY-MM',
+        useCurrent: false,
+        showTodayButton: true,
+        showClose: true,
+        timeZone: 'UTC',
+        keyBinds: {
+          enter() {
+            const value = $elem.find('input').val();
+            this.date(value);
+            this.viewDate(value);
+            this.hide();
+          },
+        }
+      });
     });
+
 
     this.$('[data-provide="slider"]').slider({
       tooltip_position: 'top',
@@ -201,21 +208,6 @@ export default Marionette.LayoutView.extend({
         (startDate < endDate) ? [startDate, endDate] : [endDate, startDate]
       );
     }
-  },
-
-  onDateTimeKeyUp(event) {
-    const key = event.keyCode || event.which;
-    if (key === 13 /* Enter */) {
-      const $this = $(event.target);
-      const value = $this.val();
-      const dtp = $this.closest('.datetime').data('DateTimePicker');
-      this.updatingTime = true;
-      dtp.date(value);
-      dtp.viewDate(value);
-      this.updatingTime = false;
-      return false;
-    }
-    return true;
   },
 
   onShowTimeClicked() {
