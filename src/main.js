@@ -45,6 +45,8 @@ import 'imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js';
 
 import getTutorialWidget from './tutorial';
 
+// import './static/code-de.css';
+import './_client.scss';
 
 es6Promise.polyfill();
 
