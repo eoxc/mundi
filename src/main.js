@@ -44,6 +44,7 @@ import VendorInfoView from './views/VendorInfoView';
 import 'imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js';
 
 import getTutorialWidget from './tutorial';
+import { premultiplyColor } from './utils';
 
 // import './static/code-de.css';
 import './_client.scss';
@@ -420,14 +421,15 @@ window.Application = Marionette.Application.extend({
 
     // create a dynamic style to set up the border/background color of record
     // items in the search results and download selection view.
+
     $(`<style>
       .record-item:hover, .record-item.highlighted {
-        background-color: ${settings.highlightFillColor};
-        border-color: ${settings.highlightStrokeColor};
+        background-color: ${premultiplyColor(settings.highlightFillColor)};
+        border-color: ${premultiplyColor(settings.highlightStrokeColor)};
       }
       .record-item.selected-for-download {
-        background-color: ${settings.selectedFootprintFillColor};
-        border-color: ${settings.selectedFootprintStrokeColor};
+        background-color: ${premultiplyColor(settings.selectedFootprintFillColor)};
+        border-color: ${premultiplyColor(settings.selectedFootprintStrokeColor)};
       }
       </style>
     `).appendTo('head');
@@ -449,6 +451,7 @@ window.Application = Marionette.Application.extend({
           $('#tutorial').click(() => {
             // Iterate through anno elements to see if any is open and needs to
             // be closed
+            /* eslint-disable no-underscore-dangle */
             let cv = tutWidg;
             while (cv._chainNext) {
               if (cv._annoElem) {
@@ -456,6 +459,7 @@ window.Application = Marionette.Application.extend({
               }
               cv = cv._chainNext;
             }
+            /* eslint-enable no-underscore-dangle */
             tutWidg.show();
           });
         }
