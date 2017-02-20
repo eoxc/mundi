@@ -62,5 +62,5 @@ module.exports = {
       'window.jQuery': 'jquery',
     }),
   ],
-  cache: false,
+  cache: true,
 };
