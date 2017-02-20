@@ -412,7 +412,7 @@ svg.timeslider {
         color: #fff;
         height: auto;
         padding: 2px 12px;
-        border-radius: 2px !important;
+        // border-radius: 2px !important;
 
         a[href] {
           color: #fff;
@@ -422,8 +422,14 @@ svg.timeslider {
 }
 
 .record-item {
-  border: unset;
-  color: white;
+  border: none;
+  color: black;
+  background-color: $c_hi;
+}
+
+.slider-handle {
+  background-color: $c_hi;
+  background-image: unset;
 }
 
 
@@ -433,11 +439,6 @@ svg.timeslider {
     box-shadow: unset;
   }
 }
-
-
-
-
-
 
 .ol-attribution {
     border: none !important;
@@ -485,6 +486,53 @@ svg.timeslider {
     }
 }
 
+
+.panel-title .caret{
+  -webkit-transform:rotate(0deg);
+          transform:rotate(0deg);
+}
+.panel-title .caret,.panel-title .collapsed .caret{
+  -webkit-transition:.2s ease-in-out;
+          transition:.2s ease-in-out;
+}
+.panel-title .collapsed .caret {
+  -webkit-transform:rotate(-90deg);
+          transform:rotate(-90deg);
+}
+
+.modal {
+  .modal-content {
+    border: none;
+
+    .modal-header {
+      background-color: $c_lo;
+      color: $c_hi;
+      border-bottom: none;
+
+      .close {
+        color: black;
+        background-color: $c_hi;
+        text-shadow: none;
+        opacity: 1;
+        margin-top: -15px;
+        padding: 15px 5px 5px 5px;
+        transition: background-color .25s;
+      }
+      .close:hover {
+        background-color: white;
+      }
+    }
+
+    .modal-footer {
+      background-color: $c_lo;
+      color: $c_hi;
+      border-top: none;
+    }
+  }
+}
+
+// scrollbar styling
+
 ::-webkit-scrollbar {
   background-color: $c_lo;
 }
@@ -493,39 +541,13 @@ svg.timeslider {
   background-color: $c_hi;
 }
 
-// scrollbar styling
 
-@-moz-document url-prefix(http://),url-prefix(https://) {
-scrollbar {
-   -moz-appearance: none !important;
-   background: rgb(0,255,0) !important;
-}
-thumb,scrollbarbutton {
-   -moz-appearance: none !important;
-   background-color: rgb(0,0,255) !important;
-}
-
-thumb:hover,scrollbarbutton:hover {
-   -moz-appearance: none !important;
-   background-color: rgb(255,0,0) !important;
-}
-
-scrollbarbutton {
-   display: none !important;
-}
-
-scrollbar[orient="vertical"] {
-  min-width: 15px !important;
-}
-}
-
-body{
-  scrollbar-base-color: #C0C0C0;
-  scrollbar-base-color: #C0C0C0;
-  scrollbar-3dlight-color: #C0C0C0;
+body {
+  scrollbar-base-color: $c_hi;
+  // scrollbar-3dlight-color: #C0C0C0;
   scrollbar-highlight-color: #C0C0C0;
-  scrollbar-track-color: #EBEBEB;
-  scrollbar-arrow-color: black;
-  scrollbar-shadow-color: #C0C0C0;
+  scrollbar-track-color: $c_lo;
+  scrollbar-arrow-color: $c_hi;
+  scrollbar-shadow-color: $c_lo;
   scrollbar-dark-shadow-color: #C0C0C0;
 }
