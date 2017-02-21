@@ -122,17 +122,17 @@ const AreaFilterView = Marionette.LayoutView.extend({
   onFiltersAreaChanged(filtersModel) {
     const area = filtersModel.get('area');
 
-    this.$('.show-geometry').hide();
+    this.$('.show-geometry').slideUp();
     if (Array.isArray(area) && area.length === 4) {
       this.$('.show-bbox input[type=number]:eq(0)').val(area[0]);
       this.$('.show-bbox input[type=number]:eq(1)').val(area[1]);
       this.$('.show-bbox input[type=number]:eq(2)').val(area[2]);
       this.$('.show-bbox input[type=number]:eq(3)').val(area[3]);
-      this.$('.show-bbox').show();
+      this.$('.show-bbox').slideDown();
     } else if (area && area.geometry && area.geometry.type === 'Point') {
       this.$('.show-point input[type=number]:eq(0)').val(area.geometry.coordinates[0]);
       this.$('.show-point input[type=number]:eq(1)').val(area.geometry.coordinates[1]);
-      this.$('.show-point').show();
+      this.$('.show-point').slideDown();
     } else if (area && area.geometry) {
       let name = i18next.t('Drawn Shape');
       if (area.properties) {
@@ -145,15 +145,15 @@ const AreaFilterView = Marionette.LayoutView.extend({
         }
       }
       this.$('.show-polygon input[type=text]').val(name);
-      this.$('.show-polygon').show();
+      this.$('.show-polygon').slideDown();
     }
 
     if (area) {
       this.$('#selection-wrapper').show();
-      this.$('#map-bbox-wrapper').hide();
+      this.$('#map-bbox-wrapper').slideUp();
     } else {
-      this.$('#selection-wrapper').hide();
-      this.$('#map-bbox-wrapper').show();
+      this.$('#selection-wrapper').slideUp();
+      this.$('#map-bbox-wrapper').slideDown();
     }
   },
 

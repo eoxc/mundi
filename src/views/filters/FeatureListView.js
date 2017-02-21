@@ -26,22 +26,19 @@ const FeatureListView = Marionette.CompositeView.extend({
   },
 
   onBeforeShow() {
-    // hold onto the drop down menu
-    let dropdownMenu;
-
     // and when you show it, move it to the body
     this.$el.on('show.bs.dropdown', (e) => {
       // grab the menu
-      dropdownMenu = $(e.target).find('.dropdown-menu');
+      this.dropdownMenu = $(e.target).find('.dropdown-menu');
 
       // detach it and append it to the body
-      $('body').append(dropdownMenu.detach());
+      $('body').append(this.dropdownMenu.detach());
 
       // grab the new offset position
       const eOffset = $(e.target).offset();
 
       // make sure to place it where it would normally go (this could be improved)
-      dropdownMenu.css({
+      this.dropdownMenu.css({
         display: 'block',
         top: eOffset.top + $(e.target).outerHeight(),
         left: eOffset.left,
@@ -50,8 +47,8 @@ const FeatureListView = Marionette.CompositeView.extend({
 
     // and when you hide it, reattach the drop down, and hide it normally
     this.$el.on('hide.bs.dropdown', (e) => {
-      $(e.target).append(dropdownMenu.detach());
-      dropdownMenu.hide();
+      $(e.target).append(this.dropdownMenu.detach());
+      this.dropdownMenu.hide();
     });
   },
 
@@ -61,6 +58,7 @@ const FeatureListView = Marionette.CompositeView.extend({
 
   onItemClicked(childView) {
     this.filtersModel.set('area', childView.model.attributes);
+    this.dropdownMenu.hide();
   },
 
   onItemHover(childView) {
