@@ -1,13 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ngEO-Light - Example</title>
-</head>
-<body style="width: 100%; height: 100%; position: absolute; margin: 0; padding: 0; overflow: hidden;">
-  <script type="text/html" id="navbar-template">
+  <title>CODE-DE - Example</title>
+  <link rel="stylesheet" href="static/code-de.css"/>
+  <link rel="stylesheet" href="static/fonts.css"/>
+  <style>
+.contextual-links-wrapper {
+  display:none;
+}
+header .navbar, header button{
+  border-radius: 0 !important;
+}
 
-  </script>
+#header .navbar.static .navbar-super {
+    top: 0;
+    height: 0;
+    z-index: 1;
+}
+
+#header .navbar.static {
+    top: 0 !important;
+}
+#header {
+    background: transparent;
+    min-height: auto;
+}
+
+#cas-menu .cas-username {
+    padding: 16px 10px 4px;
+}
+
+
+
+.cas-navigation > #cas-toggle {
+    margin-top: 0px;
+}
+
+#header #block-cas-login-cas-login-blck button {
+  text-decoration: none;
+  color: #7ac6cf;
+  transition: color .25s, background .25s;
+  display: inline-block;
+  line-height: 20px;
+  padding: 14px 10px 4px;
+  margin-right: 0px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center; }
+#header #block-cas-login-cas-login-blck button:hover {
+  background: #fff;
+  color: #373B50; }
+#header #block-cas-login-cas-login-blck button:active {
+  background: #fff;
+  color: #373B50; }
+
+.cas-navigation > #cas-toggle > .cas-username {
+    margin-right: 5px;
+}
+
+.cas-navigation > #cas-toggle > .cas-icon {
+    font-size: 1.2em;
+    width: 20px;
+    height: 20px;
+}
+
+/* cas-menu */
+
+#header .navbar.affix #cas-menu {
+  /*display: none;*/
+}
+
+#cas-menu {
+  position: fixed !important;
+  top: auto !important;
+  left: 0px;
+  right: 0px;
+  border-top: 0px !important;
+  margin-left: -15px;
+  text-align: left;
+  margin-right: -15px;
+  margin-top: 48px;
+}
+
+#cas-menu > a {
+  display: block !important;
+  padding: 10px 22px !important;
+}
+
+#cas-menu .cas-username {
+  display: none;
+}
+.navbar-collapse.collapse {
+  display: none!important;
+}
+
+
+
+.cas-navigation > #cas-toggle > .cas-username {
+  display: inline !important;
+}
+
+
+
+@media (max-width: 768px) {
+  #block-locale-language{
+      display: none !important;
+  }
+  .cas-navigation > #cas-toggle > .cas-username {
+    display: none !important;
+  }
+}
+
+#block-locale-language .language-switcher-locale-url li > a{
+  padding: 16px 0px 4px 0px !important;
+  margin: 0px 3px 0px 3px;
+}
+  </style>
+</head>
+<body class="page-catalogclient i18n-en">
+  <header id="header">
+    <nav class="navbar static">
+      <div class="container">
+        <div class="navbar-super">
+          <div class="container">
+            <div class="region region-navigation">
+              <section id="block-locale-language" class="block block-locale clearfix">
+                <ul class="language-switcher-locale-url">
+                  <li class="en first active"><a href="/en/marketplace/view?filter[0]=satellite%3ASentinel-2" class="language-link active" xml:lang="en">en</a></li>
+                  <li class="de last"><a href="/de/marketplace/view?filter[0]=satellite%3ASentinel-2" class="language-link" xml:lang="de">de</a></li>
+                </ul>
+              </section>
+              <!-- <section id="block-cas-login-cas-login-blck" class="block block-cas-login clearfix">
+                <div class="cas-navigation">
+                  <button id="cas-toggle" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#cas-menu" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="cas-icon glyphicon glyphicon-user"></span>
+                  </button>
+                  <div class="navbar-collapse collapse" id="cas-menu">
+                    <a href="https://tsedos.eoc.dlr.de/pwm/public/NewUser?locale=en">Register</a>
+                    <a href="/en/cas">Login</a>
+                  </div>
+                </div>
+              </section> -->
+            </div>
+          </div>
+        </div>
+        <div class="navbar-header">
+          <div class="navbar-brand-centered">
+            <a href="/en">
+              <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120">
+                <defs>
+                  <linearGradient id="lg" gradientUnits="userSpaceOnUse" x1="0" y1="30" x2="0" y2="0" gradientTransform="matrix(1 0 0 -1 0 112)">
+                    <stop offset="0" style="stop-color:#373B50;stop-opacity:0" ></stop>
+                    <stop offset="1" style="stop-color:#373B50;stop-opacity:0.5" ></stop>
+                  </linearGradient>
+                </defs>
+                <path class="btm" fill="url(#lg)" d="M100.5 83.2l-34.4 30.3h30.5L119 83.2h-18.5zm-37.1 0L16 113.5h30.6l35.3-30.3H63.4zm51.9 30.3h30.6l10.2-30.3h-18.6l-22.2 30.3zm154-30.3h-18.5l24.6 30.3H306l-36.7-30.3zm-94.7 0l-9.6 30.3h30.5l-2.3-30.3h-18.6zm39.1 0l12.1 30.3h30.5l-24.1-30.3h-18.5z" ></path>
+                <path fill="#373B50" d="M46.6 20.6L81.9 6.5H63.4L16 20.6v24h30.6v-24zM16 99.6h30.6v13.9H16V99.6zm50.1 0h30.6v13.9H66.1V99.6zm30.5-79l22.2-14.1h-18.5L66.1 20.6v24h30.5v-24zm68.4 79h30.6v13.9H165V99.6zm30.5-79l-2.8-14.1h-18.5L165 20.6v24h30.5v-24zm-49.6 0l9.8-14.1h-18.4l-22 14.1v24h30.6v-24zm-30.6 79h30.6v13.9h-30.6V99.6zm160.1 0H306v13.8h-30.6V99.6zM306 20.5l-36.7-14h-18.5l24.6 14v24.1H306V20.5zm-80.2 79.1h30.6v13.8h-30.6V99.6zm30.5-79.1l-23.9-14h-19.3l12.7 14v24.1h30.5V20.5zm-7.6 32.9h-30.9V90h30.9c8.6 0 15.7-5.3 15.7-11.8V65.1c0-6.5-7.1-11.7-15.7-11.7zm7.3 24.9c0 3-3.2 5.5-7.3 5.5h-22.5V59.7h22.5c4 0 7.3 2.4 7.3 5.5v13.1zm58-18.6v-6.3h-38.6c-4.4 0-8 2.8-8 6.2V83.8c0 3.4 3.6 6.2 8 6.2H314v-6.3h-38.2v-8.4h19.1V68h-19.1v-8.4l38.2.1zm-306 0V84c0 3.4 3.6 6.2 8 6.2h38.6v-6.3H16.4V59.8h38.2v-6.3H16c-4.4 0-8 2.8-8 6.2zm88.2-6.2H65.7c-4.4 0-8 2.7-8 6v24.6c0 3.3 3.6 6 8 6h30.6c4.4 0 8-2.7 8-6V59.5c-.1-3.3-3.6-6-8.1-6zm-.4 30.3H66.1v-24h29.8l-.1 24zm42.4-30.3h-30.9v36.7h30.9c8.6 0 15.7-5.3 15.7-11.8V65.2c0-6.4-7-11.7-15.7-11.7zm7.3 24.9c0 3-3.2 5.5-7.3 5.5h-22.5V59.8h22.5c4 0 7.3 2.4 7.3 5.5v13.1zm58-18.6v-6.3H165c-4.4 0-8 2.8-8 6.2V84c0 3.4 3.6 6.2 8 6.2h38.6v-6.3h-38.2v-8.4h19.1v-7.4h-19.1v-8.4l38.1.1zm5.4 53.7h3.5V20.4l-7.6-13.9H201l7.9 14.3v92.7z" ></path>
+                <path class="top" fill="#000" opacity="0.1" d="M16 20.6L63.4 6.5h18.5L46.6 20.6H16zm50.1 0l34.2-14.1h18.5L96.6 20.6H66.1zm98.9 0l9.2-14.1h18.5l2.8 14.1H165zm-49.7 0l22-14.1h18.4l-9.8 14.1h-30.6zm160.1-.1l-24.6-14h18.5l36.7 14h-30.6zm-49.6 0l-12.7-14h19.3l23.9 14h-30.5zm-13.4-.1l-7.6-13.9H201l7.9 14.3" ></path>
+             </svg>
+              <h1 class="sr-only">CODE-DE</h1>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
 
   <div id="app" style="width: 100%; height: 100%; position: absolute; margin: 0; padding:0;"></div>
   <script src="code-de.bundle.js"></script>
@@ -192,5 +350,24 @@ var app = new Application({
 });
 app.start();
   </script>
+
+  <style>
+.navbar-collapse.collapse {
+    display: none!important;
+    height: 0px !important;
+    }
+.navbar-collapse.collapse.in {
+    display: block!important;
+    height: auto !important;
+    }
+
+#header .navbar-collapse {
+    background: #373B50;
+    text-align: right;
+}
+#header {
+  min-height: auto;
+}
+  </style>
 </body>
 </html>

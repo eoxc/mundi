@@ -1,0 +1,187 @@
+{
+    "settings": {
+        "center": [-50, -15],
+        "zoom": 5,
+        "timeDomain": [
+            "2003-01-01T00:00:00Z",
+            "2009-12-31T23:59:59Z"
+        ],
+        "constrainTimeDomain": true,
+        "displayTimeDomain": [
+            "2009-07-01T00:00:00Z",
+            "2009-07-31T23:59:59Z"
+        ],
+        "selectedTimeDomain": [
+            "2009-07-01T00:00:00Z",
+            "2009-07-15T00:00:00Z"
+        ],
+        "displayInterval": "P1Y",
+        "selectableInterval": "P14D",
+        "maxTooltips": 10,
+        "highlightFillColor": "rgba(255, 0, 0, 0.5)",
+        "highlightStrokeColor": "rgba(255, 0, 0, 1)",
+        "rightPanelOpen": true,
+        "parameters": [{
+            "type": "eo:sensorType",
+        }, {
+            "type": "eo:productionStatus",
+        }, {
+            "type": "eo:acquisitionType",
+        }, {
+            "type": "eo:cloudCover",
+            "range": true,
+            "min": 0,
+            "max": 100
+        }, {
+            "type": "eo:orbitDirection",
+        }]
+    },
+    "baseLayers": [{
+        "id": "terrain-light",
+        "displayName": "Terrain-Light",
+        "display": {
+            "id": "terrain-light",
+            "visible": true,
+            "protocol": "WMTS",
+            "urls": [
+                "http://a.tiles.maps.eox.at/wmts/",
+                "http://b.tiles.maps.eox.at/wmts/",
+                "http://c.tiles.maps.eox.at/wmts/",
+                "http://d.tiles.maps.eox.at/wmts/",
+                "http://e.tiles.maps.eox.at/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "style": "default",
+            "attribution": "Terrain-Light { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> }"
+        }
+    }, {
+        "id": "terrain",
+        "displayName": "Terrain",
+        "display": {
+            "id": "terrain",
+            "visible": false,
+            "protocol": "WMTS",
+            "urls": [
+                "http://a.tiles.maps.eox.at/wmts/",
+                "http://b.tiles.maps.eox.at/wmts/",
+                "http://c.tiles.maps.eox.at/wmts/",
+                "http://d.tiles.maps.eox.at/wmts/",
+                "http://e.tiles.maps.eox.at/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "style": "default",
+            "attribution": "Terrain { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> }"
+        }
+    }, {
+        "id": "bluemarble",
+        "displayName": "Blue Marble",
+        "display": {
+            "id": "bluemarble",
+            "visible": false,
+            "protocol": "WMTS",
+            "urls": [
+                "http://a.tiles.maps.eox.at/wmts/",
+                "http://b.tiles.maps.eox.at/wmts/",
+                "http://c.tiles.maps.eox.at/wmts/",
+                "http://d.tiles.maps.eox.at/wmts/",
+                "http://e.tiles.maps.eox.at/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "style": "default",
+            "attribution": "Blue Marble { &copy; <a href=\"http://nasa.gov\" target=\"_blank\">NASA</a> }"
+        }
+    }],
+    "layers": [{
+        "id": "MER_FRS_RGB",
+        "displayName": "Envisat MERIS FRS",
+        "displayColor": "#4D4DFF",
+        "display": {
+            "id": "MER_FRS_RGB",
+            "visible": true,
+            "protocol": "WMS",
+            "urls": [
+                "http://ows.eox.at/cite_staging/eoxserver/ows"
+            ],
+            "matrixSet": "WGS84",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "style": "default",
+            "attribution": "Copyright (C) European Space Agency - ESA"
+        },
+        "search": {
+            "id": "MER_FRS_RGB",
+            "protocol": "OpenSearch",
+            "url": "http://ows.eox.at/cite_staging/eoxserver/opensearch/collections/MER_FRS_RGB/"
+        },
+        "download": {
+            "protocol": "OpenSearch",
+            "url": "http://ows.eox.at/cite_staging/eoxserver/opensearch/collections/MER_FRS_RGB/"
+        }
+    },
+    {
+        "id": "FedEO_LANDSAT.ETM.GTC",
+        "displayName": "Landsat ETM GTC from FedEO",
+        "displayColor": "#FF4D4D",
+        "display": {
+            "visible": true,
+            "protocol": "WMS",
+            "urls": [
+            ],
+        },
+        "search": {
+            "id": "FedEO_LANDSAT.ETM.GTC",
+            "protocol": "OpenSearch",
+            "url": "http://ows.eox.at/code-de/FedEO_LANDSAT.ETM.GTC.osdd",
+            "format": "application\/atom+xml",
+            "method": "GET",
+            "histogramThreshold": 200
+        },
+    }],
+    "overlayLayers": [{
+        "id": "coastline",
+        "displayName": "Coastline",
+        "display": {
+            "id": "coastline",
+            "visible": false,
+            "protocol": "WMTS",
+            "urls": [
+                "http://a.tiles.maps.eox.at/wmts/",
+                "http://b.tiles.maps.eox.at/wmts/",
+                "http://c.tiles.maps.eox.at/wmts/",
+                "http://d.tiles.maps.eox.at/wmts/",
+                "http://e.tiles.maps.eox.at/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "style": "default",
+            "format": "image/png",
+            "attribution": "Overlay { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> and <a href=\"https://github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
+        }
+    },
+    {
+        "id": "overlay",
+        "displayName": "Borders and Labels",
+        "display": {
+            "id": "overlay",
+            "visible": false,
+            "protocol": "WMTS",
+            "urls": [
+                "http://a.tiles.maps.eox.at/wmts/",
+                "http://b.tiles.maps.eox.at/wmts/",
+                "http://c.tiles.maps.eox.at/wmts/",
+                "http://d.tiles.maps.eox.at/wmts/",
+                "http://e.tiles.maps.eox.at/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "style": "default",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "attribution": "Overlay { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> and <a href=\"https://github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
+        }
+    }]
+}
