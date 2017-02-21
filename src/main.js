@@ -119,6 +119,7 @@ window.Application = Marionette.Application.extend({
 
     if (config.settings.parameters) {
       const parameterPromises = layersCollection
+        .filter(layerModel => layerModel.get('search.protocol'))
         .map(layerModel => getParameters(layerModel).then(parameters => [layerModel, parameters]));
       Promise.all(parameterPromises)
         .then((layersPlusParameters) => {
