@@ -231,28 +231,32 @@ svg.timeslider,
 
 
 .nav-tabs > li {
-    margin-bottom: 0;
+  margin-bottom: 0;
 
-    > a {
-        line-height: 1.25;
-        background: #eee;
-        font-weight: 700;
+  > a {
+    line-height: 1.25;
+    background: #eee;
+    font-weight: 700;
 
-        &:hover {
-            background: $c_hi;
-        }
-
-        &, &:hover {
-            border: none;
-        }
+    &:hover {
+      background: $c_hi;
     }
 
-
-    &.active a {
-        background: $c_lo !important;
-        color: #fff !important;
-        border: none !important;
+    &, &:hover {
+      border: none;
     }
+  }
+
+  & a {
+    background: white;
+    color: $c_lo;
+  }
+
+  &.active a {
+    background: $c_lo !important;
+    color: #fff !important;
+    border: none !important;
+  }
 }
 
 .panel-default > .panel-heading {
@@ -268,10 +272,12 @@ svg.timeslider,
 
         a:hover {
             color: fade-out($c_hi,.5);
+            text-decoration: none;
         }
 
         a:focus {
             color: $c_hi;
+            text-decoration: none;
         }
     }
 }
@@ -318,30 +324,42 @@ input {
     }
 }
 
-svg.timeslider {
+#timeSlider {
+  .control {
+    background: white;
+    color: $c_lo;
+    border: none;
+    font-weight: 400;
+    &:hover {
+      background: $c_hi;
+    }
+  }
+
+  svg.timeslider {
     border: none !important;
     filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.3));
 
     .brush .extent {
-        fill: $c_lo;
-        stroke: none;
-        cursor: grab !important;
-        cursor: -webkit-grab !important;
+      fill: $c_lo;
+      stroke: none;
+      cursor: grab !important;
+      cursor: -webkit-grab !important;
     }
 
     .mainaxis {
-        line,
-        path {
-            stroke: $c_lo !important;
-            //stroke-width: 2px;
-        }
+      line,
+      path {
+        stroke: $c_lo !important;
+        //stroke-width: 2px;
+      }
 
-        text {
-            fill: $c_lo;
-            font-family: $font-family-sans-serif;
-            text-transform: uppercase;
-        }
+      text {
+        fill: $c_lo;
+        font-family: $font-family-sans-serif;
+        text-transform: uppercase;
+      }
     }
+  }
 }
 
 .layer-control {
@@ -432,18 +450,27 @@ svg.timeslider {
   background-image: unset;
 }
 
-
-.ol-control {
-  button {
-    border-radius: 0;
-    box-shadow: unset;
-  }
+.extra-parameters label {
+  font-weight: 500;
 }
 
-.ol-attribution {
+// .ol-control {
+//   button {
+//     border-radius: 0;
+//     box-shadow: unset;
+//   }
+// }
+
+.ol-control, #infoPanel div {
     border: none !important;
     box-shadow: none !important;
+    border-radius: 4px !important;
+    background: rgba(0,0,0,0);
     filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.3));
+
+    &:hover {
+      background: rgba(0,0,0,0);
+    }
 
     a {
         font-weight: 900;
@@ -453,7 +480,7 @@ svg.timeslider {
         }
     }
 
-    button {
+    button, .btn {
         vertical-align: bottom;
 
         &, &:focus {
@@ -471,19 +498,26 @@ svg.timeslider {
     }
 }
 
-
-.datepicker {
+.bootstrap-datetimepicker-widget {
+  .datepicker {
     .active {
-        background: $c_lo !important;
+      background: $c_lo !important;
 
-        &:hover {
-            background: $c_hi !important;
-        }
+      &:hover {
+        background: $c_hi !important;
+      }
     }
 
     .today:before {
-        border-bottom-color: $c_hi !important;
+      border-bottom-color: $c_hi !important;
     }
+  }
+  a {
+    color: $c_lo;
+  }
+  a span:hover {
+    background-color: $c_hi !important;
+  }
 }
 
 
@@ -520,6 +554,15 @@ svg.timeslider {
       }
       .close:hover {
         background-color: white;
+      }
+    }
+
+    td, th {
+      padding-left: 5px;
+      padding-right: 5px;
+      a {
+        color: $c_lo;
+        font-weight: 700;
       }
     }
 
