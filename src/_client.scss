@@ -332,13 +332,14 @@ input {
 
 #timeSlider {
   .control {
-    background: white;
-    color: $c_lo;
+    background: $c_lo;
+    color: white;
     border: none;
     font-weight: 400;
     &:hover {
       background: $c_hi;
     }
+    margin-top: -19px;
   }
 
   svg.timeslider {
