@@ -49,7 +49,7 @@ const TimeFilterView = Marionette.ItemView.extend({
     });
   },
 
-  onShow() {
+  onAttach() {
     this.onFiltersTimeChanged(this.filtersModel);
     this.onMapTimeChanged();
   },
