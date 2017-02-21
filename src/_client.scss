@@ -504,6 +504,11 @@ input {
     }
 }
 
+.ol-overlay-container .popover.in {
+  width: 69px !important;
+  height: 22px !important;
+}
+
 .bootstrap-datetimepicker-widget {
   .datepicker {
     .active {
@@ -560,6 +565,10 @@ input {
       }
       .close:hover {
         background-color: white;
+      }
+
+      .record-pager {
+        margin-right: 10px;
       }
     }
 
