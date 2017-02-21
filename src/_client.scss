@@ -580,6 +580,32 @@ input {
   }
 }
 
+.anno {
+  color: $c_lo !important;
+  .anno-inner, .anno-btn {
+    border: none !important;
+  }
+
+  .anno-btn {
+    background-color: $c_hi !important;
+    color: $c_lo !important;
+  }
+
+  .anno-btn:hover {
+    background-color: $c_hi !important;
+    color: $c_lo !important;
+  }
+
+  .anno-btn-low-importance {
+    background-color: white !important;
+  }
+
+  .anno-btn-low-importance:hover {
+    background-color: $c_hi !important;
+  }
+}
+
+
 // scrollbar styling
 
 ::-webkit-scrollbar {
