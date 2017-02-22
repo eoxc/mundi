@@ -122,17 +122,23 @@ const AreaFilterView = Marionette.LayoutView.extend({
   onFiltersAreaChanged(filtersModel) {
     const area = filtersModel.get('area');
 
-    this.$('.show-geometry').slideUp();
     if (Array.isArray(area) && area.length === 4) {
-      this.$('.show-bbox input[type=number]:eq(0)').val(area[0]);
-      this.$('.show-bbox input[type=number]:eq(1)').val(area[1]);
-      this.$('.show-bbox input[type=number]:eq(2)').val(area[2]);
-      this.$('.show-bbox input[type=number]:eq(3)').val(area[3]);
-      this.$('.show-bbox').slideDown();
+      const [minx, miny, maxx, maxy] = area;
+      this.$('.show-bbox input[type=number]:eq(0)').val(minx);
+      this.$('.show-bbox input[type=number]:eq(1)')
+        .attr('max', maxy)
+        .val(miny);
+      this.$('.show-bbox input[type=number]:eq(2)').val(maxx);
+      this.$('.show-bbox input[type=number]:eq(3)')
+        .attr('min', miny)
+        .val(maxy);
+      this.$('.show-bbox:hidden').slideDown();
+      this.$('.show-geometry').not('.show-bbox').slideUp();
     } else if (area && area.geometry && area.geometry.type === 'Point') {
       this.$('.show-point input[type=number]:eq(0)').val(area.geometry.coordinates[0]);
       this.$('.show-point input[type=number]:eq(1)').val(area.geometry.coordinates[1]);
-      this.$('.show-point').slideDown();
+      this.$('.show-point:hidden').slideDown();
+      this.$('.show-geometry').not('.show-point').slideUp();
     } else if (area && area.geometry) {
       let name = i18next.t('Drawn Shape');
       if (area.properties) {
@@ -145,7 +151,8 @@ const AreaFilterView = Marionette.LayoutView.extend({
         }
       }
       this.$('.show-polygon input[type=text]').val(name);
-      this.$('.show-polygon').slideDown();
+      this.$('.show-polygon:hidden').slideDown();
+      this.$('.show-geometry').not('.show-polygon').slideUp();
     }
 
     if (area) {
