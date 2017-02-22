@@ -16,19 +16,28 @@
   line-height: 1em;
   background-color: rgba(0,60,136,.5);
 
-  margin: 0 !important;
-  border: 1px solid black !important;
-  border-radius: 4px !important;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39) !important;
+  margin: 0;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39);
 }
 
-#infoPanel .icon-eox-eye {
+#infoPanel .icon-eox-eye-white {
   background: no-repeat center url('../eox/EOX_Logo_eye_only_white.svg');
   width: 16px;
   height: 16px;
   display: block;
   background-size: contain;
   margin: 2px;
+}
+
+#infoPanel .icon-eox-eye {
+  background: no-repeat center url('../eox/EOX_Logo_eye_only.svg');
+  width: 23px;
+  height: 13px;
+  display: block;
+  background-size: contain;
+  display: inline-block;
 }
 
 #infoPanel #vendor-info {

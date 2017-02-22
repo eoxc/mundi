@@ -1,19 +1,11 @@
 import Marionette from 'backbone.marionette';
 
-require('./TimeSliderView.css');
-require('./MapView.css');
+import './TimeSliderView.css';
+import './MapView.css';
+import template from './RootLayoutView.hbs';
 
 export default Marionette.LayoutView.extend({
-  template: () => `
-    <div id="content" style="width: 100%; height:100%; margin: 0;"></div>
-    <div id="timeSlider"></div>
-    <div id="leftPanel" style="margin: 0; left: 0; top: 0;position: absolute; height: 100%"></div>
-    <div id="rightPanel" style="margin: 0; right: 0; top: 0; position: absolute; height: 100%"></div>
-    <div id="bottomPanel" style="position: absolute; left: 50%; bottom: 20px; display: none;"></div>
-    <div id="topPanel"></div>
-    <div id="infoPanel"></div>
-    <div id="modals" style="margin: 0; left: 0; top: 0;position: absolute;"></div>
-  `,
+  template,
   regions: {
     content: '#content',
     leftPanel: '#leftPanel',

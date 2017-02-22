@@ -53,6 +53,8 @@
     "less-loader": "^2.2.3",
     "minami": "^1.1.1",
     "mocha": "^2.3.4",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^6.0.0",
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.13.1",
@@ -73,6 +75,7 @@
     "jquery": "^2.2.3",
     "jquery-ui": "^1.10.5",
     "moment-timezone": "^0.5.10",
+    "parse-color": "^1.0.0",
     "script-path": "^1.0.1",
     "shpjs": "github:calvinmetcalf/shapefile-js#v3.3.2",
     "tether-shepherd": "^1.8.1"

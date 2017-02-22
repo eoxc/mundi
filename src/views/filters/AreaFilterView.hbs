@@ -29,7 +29,9 @@
     <label for="">{{t 'Upload'}}</label>
     <div class="input-group">
       <div class="input-group-btn">
-        <label class="btn btn-default btn-file btn-sm">
+        <label class="btn btn-default btn-file btn-sm"
+          data-toggle="tooltip" data-container="body" data-placement="right"
+          title="{{t 'Select a zipped Shapefile'}}">
           {{t 'Browse'}} <input type="file" style="display: none;">
         </label>
       </div>

@@ -49,7 +49,7 @@ const TimeFilterView = Marionette.ItemView.extend({
     });
   },
 
-  onShow() {
+  onAttach() {
     this.onFiltersTimeChanged(this.filtersModel);
     this.onMapTimeChanged();
   },
@@ -93,16 +93,16 @@ const TimeFilterView = Marionette.ItemView.extend({
       this.$('.datetime.end').data('DateTimePicker').date(moment.utc(time[1]));
       this.$('.datetime.start').data('DateTimePicker').viewDate(moment.utc(time[0]));
       this.$('.datetime.end').data('DateTimePicker').viewDate(moment.utc(time[1]));
-      this.$('.time-buttons').show();
-      this.$('#map-time-wrapper').hide();
+      this.$('.time-buttons').slideDown();
+      this.$('#map-time-wrapper').slideUp();
     } else {
       const mapTime = this.mapModel.get('time');
       this.$('.datetime.start').data('DateTimePicker').date(moment.utc(mapTime[0]));
       this.$('.datetime.end').data('DateTimePicker').date(moment.utc(mapTime[1]));
       this.$('.datetime.start').data('DateTimePicker').viewDate(moment.utc(mapTime[0]));
       this.$('.datetime.end').data('DateTimePicker').viewDate(moment.utc(mapTime[1]));
-      this.$('.time-buttons').hide();
-      this.$('#map-time-wrapper').show();
+      this.$('.time-buttons').slideUp();
+      this.$('#map-time-wrapper').slideDown();
     }
     this.updatingTime = false;
   },
