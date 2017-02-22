@@ -469,7 +469,7 @@ window.Application = Marionette.Application.extend({
           tutWidg.show();
         }
 
-        if (settings.tutorial === 'first') {
+        if (settings.tutorial === 'once') {
           if (typeof (Storage) !== 'undefined') {
             if (localStorage.getItem('firstVisit') === null) {
               // Open tutorial automatically if it is the first visit
