@@ -199,10 +199,6 @@ svg.timeslider,
 }
 
 .datetime {
-    input {
-        font-size: 14px;
-    }
-
     .input-group-addon {
         padding: 0 12px;
         font-size: 20px;
@@ -339,7 +335,11 @@ input {
     &:hover {
       background: $c_hi;
     }
-    margin-top: -19px;
+    margin-top: -21px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
   }
 
   svg.timeslider {
@@ -491,12 +491,12 @@ input {
 }
 
 .ol-attribution ul {
-  font-size: 13px;
+  font-size: 13px !important;
 }
 
 .ol-overlay-container .popover.in {
   width: 69px !important;
-  height: 22px !important;
+  height: 32px !important;
 }
 
 .bootstrap-datetimepicker-widget {
