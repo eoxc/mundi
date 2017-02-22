@@ -46,6 +46,8 @@ const AreaFilterView = Marionette.LayoutView.extend({
       filtersModel: this.filtersModel,
       collection: this.featureListCollection,
     }));
+
+    $(this.el).find('[data-toggle="tooltip"]').tooltip();
   },
 
   // DOM event listeners
