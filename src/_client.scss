@@ -334,6 +334,7 @@ input {
     font-weight: 400;
     &:hover {
       background: $c_hi;
+      color: $c_lo;
     }
     margin-top: -21px;
 
@@ -449,7 +450,8 @@ input {
 .record-item {
   border: none;
   color: black;
-  background-color: $c_hi;
+  // background-color: $c_hi;
+  background-color: white;
 }
 
 .slider-handle {
@@ -461,38 +463,55 @@ input {
   font-weight: 500;
 }
 
-.ol-control, #infoPanel div {
+.ol-control, #infoPanel, #infoPanel div {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0px !important;
+  background-color: transparent;
+  filter: none !important;
+
+  a {
+    font-weight: 900;
+  }
+
+  button, .btn {
     border: none !important;
-    box-shadow: none !important;
-    border-radius: 4px !important;
-    background-color: rgba(0,0,0,0);
-    filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.3));
+    vertical-align: bottom;
 
-    a {
-        font-weight: 900;
+    &, &:focus {
+      background-color: $c_lo;
     }
 
-    button, .btn {
-        vertical-align: bottom;
-
-        &, &:focus {
-            background-color: $c_lo;
-        }
-
-        &:hover {
-            background-color: $c_hi;
-        }
+    &:hover {
+      background-color: $c_hi;
+      color: $c_lo;
     }
+  }
 
-    img, button span {
-        position: relative;
-        top: -1px;
-    }
+  img, button span {
+    position: relative;
+    top: -1px;
+  }
+
+  // &:hover {
+  //   background-color: transparent;
+  // }
+}
+
+#infoPanel .btn:hover .icon-eox-eye-white {
+  background: no-repeat center url('./eox/EOX_Logo_eye_only.svg');
+  width: 16px;
+  height: 16px;
+  display: block;
+  background-size: contain;
+  margin: 2px;
 }
 
 .ol-attribution ul {
   font-size: 13px !important;
 }
+
+
 
 .ol-overlay-container .popover.in {
   width: 69px !important;

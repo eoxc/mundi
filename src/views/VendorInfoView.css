@@ -16,10 +16,10 @@
   line-height: 1em;
   background-color: rgba(0,60,136,.5);
 
-  margin: 0 !important;
-  border: 1px solid black !important;
-  border-radius: 4px !important;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39) !important;
+  margin: 0;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39);
 }
 
 #infoPanel .icon-eox-eye-white {
