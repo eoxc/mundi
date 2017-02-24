@@ -44,6 +44,8 @@ const TimeFilterView = Marionette.ItemView.extend({
             this.viewDate(value);
             this.hide();
           },
+          left: null,
+          right: null
         }
       });
     });
