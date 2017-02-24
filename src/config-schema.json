@@ -38,7 +38,7 @@
                 "language": {
                     "description": "The language used in the UI. Defaults to 'en'.",
                     "type": "string",
-                    "enum": [ "en", "de" ]
+                    "enum": [ "en", "de", "deinformal" ]
                 },
                 "center": {
                     "description": "The initial center of the map view.",
