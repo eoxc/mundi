@@ -207,6 +207,7 @@ svg.timeslider,
         &:hover {
             background: $c_lo;
             color: $c_hi;
+            transition: background-color .25s, color .25s;
         }
     }
 }
@@ -242,6 +243,7 @@ svg.timeslider,
 
     &:hover {
       background: $c_hi;
+      transition: background .25s;
     }
 
     &, &:hover {
@@ -296,6 +298,7 @@ input {
     //.input-group-addon {
     &:hover {
         background: $c_hi;
+        transition: background .25s;
     }
 }
 
@@ -335,6 +338,7 @@ input {
     &:hover {
       background: $c_hi;
       color: $c_lo;
+      transition: background .25s, color .25s;
     }
     margin-top: -21px;
 
@@ -485,6 +489,7 @@ input {
     &:hover {
       background-color: $c_hi;
       color: $c_lo;
+      transition: background-color .25s, color .25s;
     }
   }
 
@@ -525,6 +530,7 @@ input {
 
       &:hover {
         background: $c_hi !important;
+        transition: background .25s;
       }
     }
 
@@ -537,6 +543,7 @@ input {
   }
   a span:hover {
     background-color: $c_hi !important;
+    transition: background-color .25s;
   }
 }
 
@@ -574,6 +581,7 @@ input {
       }
       .close:hover {
         background-color: white;
+        transition: background-color .25s;
       }
 
       .record-pager {
@@ -612,6 +620,7 @@ input {
   .anno-btn:hover {
     background-color: $c_hi !important;
     color: $c_lo !important;
+    transition: background-color .25s, color .25s;
   }
 
   .anno-btn-low-importance {
@@ -620,6 +629,7 @@ input {
 
   .anno-btn-low-importance:hover {
     background-color: $c_hi !important;
+    transition: background-color .25s, color .25s;
   }
 }
 
