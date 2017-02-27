@@ -35,70 +35,16 @@ body {
 }
 
 #app {
-    // position: fixed;
-    top: 55px;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
 }
 
-header {
-    height: 55px;
-    display: block;
-    background-color: $c_lo;
-    filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.3));
-
-    .navbar-brand-centered {
-        position: relative;
-        top: -10px;
-        text-align: center;
-    }
-
-    a {
-        position: relative;
-        z-index: 1;
-
-        &:hover {
-            #logo {
-                path {
-                    fill: $c_hi;
-                }
-
-                .btm {
-                    fill: fade-out($c_hi, .8);
-                }
-            }
-        }
-    }
-
-    #logo {
-        width: 160px;
-        height: 60px;
-
-        path {
-            fill: #fff;
-            transition: fill .25s;
-        }
-
-        .top {
-            fill: #000;
-        }
-
-        .btm {
-            fill: transparent;
-        }
-    }
-
-    h2 {
-        visibility: hidden;
-        opacity: 0;
-    }
-}
-
 .root-container {
   position: absolute;
   width: 100%;
-  height: calc(100% - 55px);
+  height: 100%;
 }
 
 .side-panel {
@@ -116,34 +62,6 @@ header {
       font-size: 10px;
       padding: 2px 6px;
     }
-}
-
-
-
-#leftPanel,
-#rightPanel {
-    // top: -80px !important;
-
-    // .toggle-side-panel {
-    //     background: transparent;
-    //     color: #7ac6cf;
-    //     font-size: 20px;
-    //     padding: 0 5px;
-    //
-    //     &:hover {
-    //         color: #fff;
-    //     }
-    // }
-    //
-    // > div > .toggle-side-panel {
-    //     height: 50px;
-    //     font-size: 26px;
-    //     color: #fff;
-    //
-    //     &:hover {
-    //         color: #7ac6cf;
-    //     }
-    // }
 }
 
 

@@ -70,6 +70,7 @@
 
 .toggle-side-panel-out.out {
   pointer-events: none;
+  visibility: hidden;
 }
 
 .toggle-side-panel-left {
