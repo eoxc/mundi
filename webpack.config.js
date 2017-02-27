@@ -43,9 +43,9 @@ module.exports = {
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.coffee$/, loader: 'coffee-loader' },
       { test: /\.litcoffee$/, loader: 'coffee-loader?literate' },
-      { test: /\.css$/, loaders: ['style', 'css'] },
-      { test: /\.less$/, loaders: ['style', 'css', 'less'] },
-      { test: /\.scss$/, loaders: ['style', 'css', 'sass'] },
+      { test: /\.css$/, loaders: ['style', 'css', 'postcss'] },
+      { test: /\.less$/, loaders: ['style', 'css', 'postcss', 'less'] },
+      { test: /\.scss$/, loaders: ['style', 'css', 'postcss', 'sass'] },
       { test: /\.hbs$/, loader: 'handlebars-loader?helperDirs[]=' + __dirname + '/src/helpers' },
 
       // for anything that might be included in a css
@@ -63,5 +63,10 @@ module.exports = {
       'window.jQuery': 'jquery',
     }),
   ],
+  postcss() {
+    return [
+      require('autoprefixer'),
+    ];
+  },
   cache: true,
 };
