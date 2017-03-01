@@ -369,6 +369,14 @@ input {
     }
 }
 
+.layer-adjust-opacity-popover {
+  background-color: $c_lo;
+  border: none;
+  .arrow:after {
+    border-right-color: $c_lo !important;
+  }
+}
+
 .record-item {
   border: none;
   color: black;
