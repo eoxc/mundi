@@ -84,8 +84,14 @@ const TimeFilterView = Marionette.ItemView.extend({
 
   onMapTimeChanged() {
     const time = this.mapModel.get('time');
+    this.updatingTime = true;
     this.$('.map-time-start').val(moment.utc(time[0]).format('YYYY-MM-DD HH:mm:ss'));
     this.$('.map-time-end').val(moment.utc(time[1]).format('YYYY-MM-DD HH:mm:ss'));
+    this.$('.datetime.start').data('DateTimePicker').date(moment.utc(time[0]));
+    this.$('.datetime.end').data('DateTimePicker').date(moment.utc(time[1]));
+    this.$('.datetime.start').data('DateTimePicker').viewDate(moment.utc(time[0]));
+    this.$('.datetime.end').data('DateTimePicker').viewDate(moment.utc(time[1]));
+    this.updatingTime = false;
   },
 
   onFiltersTimeChanged(filtersModel) {
