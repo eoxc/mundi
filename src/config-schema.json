@@ -292,6 +292,11 @@
                         }
                     },
                     "default": []
+                },
+                "termsAndConditionsUrl": {
+                    "description": "The URL to the terms and conditions document for the user to accept.",
+                    "type": "string",
+                    "default": null
                 }
             },
             "oneOf": [

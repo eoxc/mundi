@@ -393,6 +393,10 @@ input {
   font-weight: 500;
 }
 
+.download-control .checkbox {
+  color: $c_hi;
+}
+
 .ol-control, #infoPanel, #infoPanel div {
   border: none !important;
   box-shadow: none !important;

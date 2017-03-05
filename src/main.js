@@ -374,6 +374,7 @@ window.Application = Marionette.Application.extend({
           highlightModel,
           collection: searchCollection,
           onStartDownload: startDownload,
+          termsAndConditionsUrl: settings.termsAndConditionsUrl,
         }),
       }],
     }));
