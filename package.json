@@ -1,6 +1,6 @@
 {
   "name": "CODE-DE",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "CODE-DE",
   "scripts": {
     "build": "webpack -p",
