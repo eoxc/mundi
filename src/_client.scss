@@ -386,7 +386,7 @@ input {
 
 .slider-handle {
   background-color: $c_hi;
-  background-image: unset;
+  background-image: none;
 }
 
 .extra-parameters label {
@@ -395,6 +395,10 @@ input {
 
 .download-control .checkbox {
   color: $c_hi;
+}
+
+.selection-items i:not([class]) {
+  color: white;
 }
 
 .ol-control, #infoPanel, #infoPanel div {
