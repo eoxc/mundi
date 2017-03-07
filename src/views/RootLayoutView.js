@@ -20,10 +20,10 @@ export default Marionette.LayoutView.extend({
   initialize(options) {
     this.listenTo(options.mapModel, 'change:tool', (model, tool) => {
       if (tool) {
-        this.$('#timeSlider,#leftPanel,#rightPanel,#infoPanel').fadeOut('fast');
+        this.$('#timeSlider,#leftPanel,#rightPanel,#infoPanel,#topPanel').fadeOut('fast');
         this.$('#bottomPanel').fadeIn('fast').css('display', 'flex');
       } else {
-        this.$('#timeSlider,#leftPanel,#rightPanel,#infoPanel').fadeIn('fast');
+        this.$('#timeSlider,#leftPanel,#rightPanel,#infoPanel,#topPanel').fadeIn('fast');
         this.$('#bottomPanel').fadeOut('fast');
       }
     });
