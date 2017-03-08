@@ -401,6 +401,9 @@ input {
 
 .download-control .checkbox {
   color: $c_hi;
+  label {
+    font-size: 13px;
+  }
 }
 
 .selection-items i:not([class]) {
