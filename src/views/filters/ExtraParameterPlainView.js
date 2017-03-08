@@ -18,9 +18,8 @@ const ExtraParameterPlainView = Marionette.ItemView.extend({
   },
 
   onInputChange() {
-    this.$('input').val();
     const type = this.model.get('type');
-    const value = this.$('select').val();
+    const value = this.$('input[type="text"]').val();
     if (!value || value === '') {
       this.trigger('value:unset', type);
     } else {
