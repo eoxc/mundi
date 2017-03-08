@@ -450,11 +450,37 @@ input {
   font-size: 13px !important;
 }
 
-
-
 .ol-overlay-container .popover.in {
   width: 69px !important;
   height: 32px !important;
+}
+
+.ol-mouse-position-eoxc {
+  bottom: 10px;
+  left: 245px;
+  position: absolute;
+  padding: 2px;
+  background-color: rgba(255,255,255,.8);
+  font-size: 13px;
+  font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+
+  height: 22px;
+  width: 115px;
+  text-align: center;
+  white-space: nowrap;
+
+  opacity: 1;
+  transition: opacity .25s linear;
+}
+
+.ol-mouse-position-eoxc:empty {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s .25s, opacity .25s linear;
+}
+
+.record-details-map .ol-mouse-position-eoxc {
+  left: 10px;
 }
 
 .bootstrap-datetimepicker-widget {
