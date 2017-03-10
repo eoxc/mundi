@@ -27,6 +27,7 @@ const TimeFilterView = Marionette.ItemView.extend({
   // Marionette event listeners
 
   onBeforeShow() {
+    this.$('.time-buttons').hide();
     ['start', 'end'].forEach((label) => {
       const $elem = this.$(`.datetime.${label}`);
       $elem.datetimepicker({
