@@ -42,7 +42,7 @@
   "Next": "Weiter",
   "Back": "Zurück",
   "Selected for Download": "Für das Herunterladen ausgewählt",
-  "terms_and_conditions": "Ich habe die <a href='{{value}}'>Nutzungsbedingungen</a> gelesen und akzeptiert",
+  "terms_and_conditions": "Ich habe die <a href='{{value}}' target='_blank'>Nutzungsbedingungen</a> gelesen und akzeptiert",
   "Close": "Schließen",
   "Description of": "Beschreibung von",
   "trying to download thumbnail": "Miniaturbild wird versucht herunterzuladen",

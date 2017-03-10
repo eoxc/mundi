@@ -4,7 +4,7 @@
   "search_n_layers_selected": "One layer selected to show",
   "search_n_layers_selected_plural": "{{count}} layers selected to show",
   "download_norecords": "No products selected for download",
-  "terms_and_conditions": "I have read and agree to the <a href='{{value}}'>terms &amp; conditions</a>",
+  "terms_and_conditions": "I have read and agree to the <a href='{{value}}' target='_blank'>terms &amp; conditions</a>",
   "start_download": "Start download of one product",
   "start_download_plural": "Start download of {{count}} products",
   "confirm_download": "'Download' starts the download of one product",
