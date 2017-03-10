@@ -13,7 +13,7 @@
   "Zoom to Selection": "Zur Auswahl zoomen",
   "Clear Selection": "Auswahl löschen",
   "Spatial Filter": "Räumlicher Filter",
-  "Coordinates are in degrees (longitude, latitude) WGS 84": "Koordinated sind in Grad angegeben (geoggraphische Länge und Breite) WGS84",
+  "Coordinates are in degrees (longitude, latitude) WGS84": "Koordinaten sind in Grad angegeben (geographische Länge und Breite) WGS84",
   "Using bounds of currently visible map": "Filter verwendet den sichtbaren Kartenbereich",
   "Draw": "Zeichnen",
   "Point": "Punkt",
