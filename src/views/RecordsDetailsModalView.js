@@ -5,6 +5,7 @@ import RecordDetailsView from 'eoxc/src/search/views/RecordDetailsView';
 import FiltersModel from 'eoxc/src/core/models/FiltersModel';
 import HighlightModel from 'eoxc/src/core/models/HighlightModel';
 import MapModel from 'eoxc/src/core/models/MapModel';
+import LayersCollection from 'eoxc/src/core/models/LayersCollection';
 
 import template from './RecordsDetailsModalView.hbs';
 
@@ -59,7 +60,7 @@ const RecordsDetailsModalView = ModalView.extend({
       highlightModel: this.highlightModel,
       baseLayersCollection: this.baseLayersCollection,
       overlayLayersCollection: this.overlayLayersCollection,
-      layersCollection: this.layersCollection,
+      layersCollection: new LayersCollection([layerModel]),
       highlightFillColor: this.highlightFillColor,
       highlightStrokeColor: this.highlightStrokeColor,
       filterFillColor: this.filterFillColor,
