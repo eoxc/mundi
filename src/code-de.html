@@ -46,194 +46,356 @@
   <script src="code-de.bundle.js"></script>
   <script>
 var config = {
-    "settings": {
-        "tutorial": "once",
-        "language": "de",
-//        "center": [15, 50],
-//        "zoom": 4,
-        "minZoom": 3,
-        "maxZoom": 14,
-        "extent": [
-            -150,
-            20,
-            180,
-            80
-        ],
-        "timeDomain": [
-            "2016-01-01T00:00:00Z",
-            "2017-01-31T23:59:59Z"
-        ],
-        "constrainTimeDomain": true,
-        "displayTimeDomain": [
-            "2016-12-01T00:00:00Z",
-            "2017-01-31T23:59:59Z"
-        ],
-        "selectedTimeDomain": [
-            "2017-01-19T00:00:00Z",
-            "2017-01-21T23:59:59Z"
-        ],
-//        "displayInterval": "P1M",
-        "selectableInterval": "P3D",
-        "maxTooltips": 3,
-        "timeSliderControls": true,
-        "highlightFillColor": "rgba(255, 165, 0, 0.2)",
-        "highlightStrokeColor": "rgba(255, 165, 0, 1)",
-        "highlightStrokeWidth": 1,
-        "filterFillColor": "rgba(0, 165, 255, 0)",
-        "filterStrokeColor": "rgba(0, 165, 255, 1)",
-        "filterOutsideColor": "rgba(0, 0, 0, 0.5)",
-        "footprintFillColor": "rgba(255, 255, 255, 0.2)",
-        "footprintStrokeColor": "rgba(255, 255, 255, 1)",
-        "selectedFootprintFillColor": "rgba(255, 0, 0, 0.2)",
-        "selectedFootprintStrokeColor": "rgba(255, 0, 0, 1)",
-        "rightPanelOpen": true,
-        "parameters": [{
-            "type": "eo:productionStatus",
-        }, {
-            "type": "eo:acquisitionType",
-        }, {
-            "type": "eo:cloudCover",
-            "range": true,
-            "min": 0,
-            "max": 100
-        }, {
-            "type": "eo:orbitDirection",
-        }, {
-            "type": "eo:orbitNumber",
-        }, {
-            "type": "eo:productQualityStatus",
-        }]
-    },
     "baseLayers": [
         {
-            "id": "eoc:basemap",
-            "displayName": "EOC Base Map",
             "display": {
+                "attribution": "Basemap: Data \u0026copy; \u003Ca href=\u0022http:\/\/openstreetmap.org\u0022\u003EOpenStreetMap contributors\u003C\/a\u003E and others, Rendering \u0026copy; \u003Ca href=\u0022http:\/\/www.dlr.de\/eoc\u0022\u003EDLR\/EOC\u003C\/a\u003E",
+                "format": "image\/png",
                 "id": "eoc:basemap",
-                "visible": true,
-                "protocol": "WMTS",
-                "urls": [
-                    "https:\/\/tiles.geoservice.dlr.de\/service\/wmts?"
-                ],
-                "matrixSet": "EPSG:4326",
                 "matrixIdPrefix": "EPSG:4326:",
-                "format": "image\/png",
+                "matrixSet": "EPSG:4326",
                 "projection": "EPSG:4326",
+                "protocol": "WMTS",
                 "style": "default",
-                "attribution": "Basemap: Data \u0026copy; \u003Ca href=\u0022http:\/\/openstreetmap.org\u0022\u003EOpenStreetMap contributors\u003C\/a\u003E and others, Rendering \u0026copy; \u003Ca href=\u0022http:\/\/www.dlr.de\/eoc\u0022\u003EDLR\/EOC\u003C\/a\u003E"
-            }
+                "urls": [
+                    "https:\/\/a.tiles.geoservice.dlr.de\/service\/wmts?",
+                    "https:\/\/b.tiles.geoservice.dlr.de\/service\/wmts?",
+                    "https:\/\/c.tiles.geoservice.dlr.de\/service\/wmts?",
+                    "https:\/\/d.tiles.geoservice.dlr.de\/service\/wmts?"
+                ],
+                "visible": true
+            },
+            "displayName": "EOC Base Map",
+            "id": "eoc:basemap"
         },
         {
-            "id": "bmng_topo_bathy",
-            "displayName": "Blue Marble NG",
             "display": {
+                "attribution": "Blue Marble NG: \u003Ca href=\u0022http:\/\/earthobservatory.nasa.gov\/Features\/BlueMarble\u0022\u003ENASA Earth Observatory\u003C\/a\u003E",
+                "format": "image\/png",
                 "id": "bmng_topo_bathy",
-                "visible": false,
-                "protocol": "WMTS",
-                "urls": [
-                    "https:\/\/tiles.geoservice.dlr.de\/service\/wmts?"
-                ],
-                "matrixSet": "EPSG:4326",
                 "matrixIdPrefix": "EPSG:4326:",
-                "format": "image\/png",
+                "matrixSet": "EPSG:4326",
                 "projection": "EPSG:4326",
+                "protocol": "WMTS",
                 "style": "default",
-                "attribution": "Blue Marble NG: \u003Ca href=\u0022http:\/\/earthobservatory.nasa.gov\/Features\/BlueMarble\u0022\u003ENASA Earth Observatory\u003C\/a\u003E"
-            }
+                "urls": [
+                    "https:\/\/a.tiles.geoservice.dlr.de\/service\/wmts?",
+                    "https:\/\/b.tiles.geoservice.dlr.de\/service\/wmts?",
+                    "https:\/\/c.tiles.geoservice.dlr.de\/service\/wmts?",
+                    "https:\/\/d.tiles.geoservice.dlr.de\/service\/wmts?"
+                ],
+                "visible": false
+            },
+            "displayName": "Blue Marble NG",
+            "id": "bmng_topo_bathy"
         },
         {
-            "id": "eoc:world_relief_bw",
-            "displayName": "Relief",
             "display": {
-                "id": "eoc:world_relief_bw",
-                "visible": false,
-                "protocol": "WMTS",
-                "urls": [
-                    "https:\/\/tiles.geoservice.dlr.de\/service\/wmts?"
-                ],
-                "matrixSet": "EPSG:4326",
-                "matrixIdPrefix": "EPSG:4326:",
+                "attribution": "Relief: \u003Ca href=\u0022http:\/\/www.dlr.de\/eoc\u0022\u003EDLR\/EOC\u003C\/a\u003E",
                 "format": "image\/png",
+                "id": "eoc:world_relief_bw",
+                "matrixIdPrefix": "EPSG:4326:",
+                "matrixSet": "EPSG:4326",
                 "projection": "EPSG:4326",
+                "protocol": "WMTS",
                 "style": "default",
-                "attribution": "Relief: \u003Ca href=\u0022http:\/\/www.dlr.de\/eoc\u0022\u003EDLR\/EOC\u003C\/a\u003E"
-            }
+                "urls": [
+                    "https:\/\/a.tiles.geoservice.dlr.de\/service\/wmts?",
+                    "https:\/\/b.tiles.geoservice.dlr.de\/service\/wmts?",
+                    "https:\/\/c.tiles.geoservice.dlr.de\/service\/wmts?",
+                    "https:\/\/d.tiles.geoservice.dlr.de\/service\/wmts?"
+                ],
+                "visible": false
+            },
+            "displayName": "Relief",
+            "id": "eoc:world_relief_bw"
         }
     ],
     "layers": [
+        // {
+        //     "id": "S1_SAR_L1_GRD",
+        //     "link": "\/en\/record\/01ca3984-b695-4ffd-ae43-611a3ef314ee",
+        //     "displayName": "Sentinel-1 SAR - Level 1 (Ground Range Detected)",
+        //     "displayColor": "#7AC6CF",
+        //     "display": {
+        //         "id": "S1_SAR_L1_GRD",
+        //         "visible": true,
+        //         "protocol": "WMS",
+        //         "urls": [
+        //             "https:\/\/geoservice.code-de.org\/Sentinel1\/wms?"
+        //         ],
+        //         "format": "image\/png",
+        //         "projection": "EPSG:4326",
+        //         "style": "default",
+        //         "attribution": "Nutzungsbedingungen: https:\/\/scihub.copernicus.eu\/twiki\/pub\/SciHubWebPortal\/TermsConditions\/TC_Sentinel_Data_31072014.pdf"
+        //     },
+        //     "search": {
+        //         "protocol": "OpenSearch",
+        //         "url": "https:\/\/catalog.code-de.org\/opensearch\/description.xml\/?parentIdentifier=EOP:CODE-DE:S1_SAR_L1_GRD",
+        //         "id": "EOP:CODE-DE:S1_SAR_L1_GRD",
+        //         "histogramBinCount": 30,
+        //         "format": "application\/atom+xml",
+        //         "method": "GET",
+        //         "histogramThreshold": 500,
+        //         "lightweightBuckets": true,
+        //         "searchLimit": 200
+        //     },
+        //     "download": {
+        //         "protocol": "OpenSearch",
+        //         "url": "https:\/\/catalog.code-de.org\/opensearch\/description.xml\/?parentIdentifier=EOP:CODE-DE:S1_SAR_L1_GRD",
+        //         "id": "EOP:CODE-DE:S1_SAR_L1_GRD",
+        //         "histogramBinCount": 30,
+        //         "format": "application\/atom+xml",
+        //         "method": "GET",
+        //         "histogramThreshold": 500,
+        //         "lightweightBuckets": true,
+        //         "searchLimit": 200
+        //     }
+        // },
+        // {
+        //     "id": "S1_SAR_L1_SLC",
+        //     "link": "\/en\/record\/39f11eeb-8aa6-45dc-8703-69d4bb8a4b3e",
+        //     "displayName": "Sentinel-1 SAR - Level 1 (Single-Look Complex)",
+        //     "displayColor": "#D9534F",
+        //     "display": {
+        //         "id": "S1_SAR_L1_SLC",
+        //         "visible": false,
+        //         "protocol": "WMS",
+        //         "urls": [
+        //             "https:\/\/geoservice.code-de.org\/Sentinel1\/wms?"
+        //         ],
+        //         "format": "image\/png",
+        //         "projection": "EPSG:4326",
+        //         "style": "default",
+        //         "attribution": "Nutzungsbedingungen: https:\/\/scihub.copernicus.eu\/twiki\/pub\/SciHubWebPortal\/TermsConditions\/TC_Sentinel_Data_31072014.pdf"
+        //     },
+        //     "search": {
+        //         "protocol": "OpenSearch",
+        //         "url": "https:\/\/catalog.code-de.org\/opensearch\/description.xml\/?parentIdentifier=EOP:CODE-DE:S1_SAR_L1_SLC",
+        //         "id": "EOP:CODE-DE:S1_SAR_L1_SLC",
+        //         "histogramBinCount": 30,
+        //         "format": "application\/atom+xml",
+        //         "method": "GET",
+        //         "histogramThreshold": 500,
+        //         "lightweightBuckets": true,
+        //         "searchLimit": 200
+        //     },
+        //     "download": {
+        //         "protocol": "OpenSearch",
+        //         "url": "https:\/\/catalog.code-de.org\/opensearch\/description.xml\/?parentIdentifier=EOP:CODE-DE:S1_SAR_L1_SLC",
+        //         "id": "EOP:CODE-DE:S1_SAR_L1_SLC",
+        //         "histogramBinCount": 30,
+        //         "format": "application\/atom+xml",
+        //         "method": "GET",
+        //         "histogramThreshold": 500,
+        //         "lightweightBuckets": true,
+        //         "searchLimit": 200
+        //     }
+        // },
+        // {
+        //     "id": "S1_SAR_L2_OCN",
+        //     "link": "\/en\/record\/44f2a392-0041-49c0-b943-a96558cbc023",
+        //     "displayName": "Sentinel-1 SAR - Level 2 (Ocean Product)",
+        //     "displayColor": "#5CB85C",
+        //     "display": {
+        //         "id": "S1_SAR_L2_OCN",
+        //         "visible": false,
+        //         "protocol": "WMS",
+        //         "urls": [
+        //             "https:\/\/geoservice.code-de.org\/Sentinel1\/wms?"
+        //         ],
+        //         "format": "image\/png",
+        //         "projection": "EPSG:4326",
+        //         "style": "default",
+        //         "attribution": "Nutzungsbedingungen: https:\/\/scihub.copernicus.eu\/twiki\/pub\/SciHubWebPortal\/TermsConditions\/TC_Sentinel_Data_31072014.pdf"
+        //     },
+        //     "search": {
+        //         "protocol": "OpenSearch",
+        //         "url": "https:\/\/catalog.code-de.org\/opensearch\/description.xml\/?parentIdentifier=EOP:CODE-DE:S1_SAR_L2_OCN",
+        //         "id": "EOP:CODE-DE:S1_SAR_L2_OCN",
+        //         "histogramBinCount": 30,
+        //         "format": "application\/atom+xml",
+        //         "method": "GET",
+        //         "histogramThreshold": 500,
+        //         "lightweightBuckets": true,
+        //         "searchLimit": 200
+        //     },
+        //     "download": {
+        //         "protocol": "OpenSearch",
+        //         "url": "https:\/\/catalog.code-de.org\/opensearch\/description.xml\/?parentIdentifier=EOP:CODE-DE:S1_SAR_L2_OCN",
+        //         "id": "EOP:CODE-DE:S1_SAR_L2_OCN",
+        //         "histogramBinCount": 30,
+        //         "format": "application\/atom+xml",
+        //         "method": "GET",
+        //         "histogramThreshold": 500,
+        //         "lightweightBuckets": true,
+        //         "searchLimit": 200
+        //     }
+        // },
         {
             "id": "S2_MSI_L1C",
-            "displayName": "WMS Download Sentinel-2 MSI - Level 1C Top-of-Atmosphere Reflectance",
-            "displayColor": "#7AC6CF",
+            "link": "\/en\/record\/39b6073d-7ef4-4aa9-a3e4-07f079709b52",
+            "displayName": "Sentinel-2 MSI - Level 1C (Top-of-Atmosphere Reflectance)",
+            "displayColor": "#F0AD4E",
             "display": {
                 "id": "S2_MSI_L1C",
                 "visible": true,
                 "protocol": "WMS",
                 "urls": [
-                    "https:\/\/code-de.org\/geoservice\/Sentinel2\/wms?"
+                    "http://ows.eox.at/code-de_geoservice/Sentinel2/wms?"
                 ],
                 "format": "image\/png",
                 "projection": "EPSG:4326",
                 "style": "default",
-                "attribution": "Nutzungsbedingungen: no limitations"
+                "attribution": "Nutzungsbedingungen: https:\/\/scihub.copernicus.eu\/twiki\/pub\/SciHubWebPortal\/TermsConditions\/TC_Sentinel_Data_31072014.pdf"
             },
             "search": {
                 "protocol": "OpenSearch",
-                "url": "https:\/\/catalog.code-de.org\/opensearch\/description.xml\/?parentIdentifier=EOP:CODE-DE:S2_MSI_L1C",
+                "url": "http://ows.eox.at/code-de/CODE-DE_S2_MSI_L1C.osdd",
                 "id": "EOP:CODE-DE:S2_MSI_L1C",
+                "histogramBinCount": 30,
                 "format": "application\/atom+xml",
                 "method": "GET",
                 "histogramThreshold": 500,
                 "lightweightBuckets": true,
-                "searchLimit": 500
+                "searchLimit": 200
             },
             "download": {
                 "protocol": "OpenSearch",
-                "url": "https:\/\/code-de.org\/opensearch\/description.xml\/?parentIdentifier=EOP:CODE-DE:S2_MSI_L1C",
+                "url": "http://ows.eox.at/code-de_catalog/description.xml/?parentIdentifier=EOP:CODE-DE:S2_MSI_L1C",
                 "id": "EOP:CODE-DE:S2_MSI_L1C",
+                "histogramBinCount": 30,
                 "format": "application\/atom+xml",
-                "method": "GET"
+                "method": "GET",
+                "histogramThreshold": 500,
+                "lightweightBuckets": true,
+                "searchLimit": 200
             }
         }
     ],
     "overlayLayers": [
         {
-            "id": "eoc:baseoverlay",
-            "displayName": "EOC Base Overlay",
             "display": {
-                "id": "eoc:baseoverlay",
-                "visible": true,
-                "protocol": "WMTS",
-                "urls": [
-                    "https:\/\/tiles.geoservice.dlr.de\/service\/wmts?"
-                ],
-                "matrixSet": "EPSG:4326",
-                "matrixIdPrefix": "EPSG:4326:",
+                "attribution": "Baseoverlay: Data \u0026copy; \u003Ca href=\u0022http:\/\/openstreetmap.org\u0022\u003EOpenStreetMap contributors\u003C\/a\u003E and others, Rendering \u0026copy; \u003Ca href=\u0022http:\/\/www.dlr.de\/eoc\u0022\u003EDLR\/EOC\u003C\/a\u003E",
                 "format": "image\/png",
+                "id": "eoc:baseoverlay",
+                "matrixIdPrefix": "EPSG:4326:",
+                "matrixSet": "EPSG:4326",
                 "projection": "EPSG:4326",
+                "protocol": "WMTS",
                 "style": "default",
-                "attribution": "Baseoverlay: Data \u0026copy; \u003Ca href=\u0022http:\/\/openstreetmap.org\u0022\u003EOpenStreetMap contributors\u003C\/a\u003E and others, Rendering \u0026copy; \u003Ca href=\u0022http:\/\/www.dlr.de\/eoc\u0022\u003EDLR\/EOC\u003C\/a\u003E"
-            }
+                "urls": [
+                    "https:\/\/a.tiles.geoservice.dlr.de\/service\/wmts?",
+                    "https:\/\/b.tiles.geoservice.dlr.de\/service\/wmts?",
+                    "https:\/\/c.tiles.geoservice.dlr.de\/service\/wmts?",
+                    "https:\/\/d.tiles.geoservice.dlr.de\/service\/wmts?"
+                ],
+                "visible": true
+            },
+            "displayName": "EOC Base Overlay",
+            "id": "eoc:baseoverlay"
         },
         {
-            "id": "eoc:liteoverlay",
-            "displayName": "EOC Lite Overlay",
             "display": {
-                "id": "eoc:liteoverlay",
-                "visible": false,
-                "protocol": "WMTS",
-                "urls": [
-                    "https:\/\/tiles.geoservice.dlr.de\/service\/wmts?"
-                ],
-                "matrixSet": "EPSG:4326",
-                "matrixIdPrefix": "EPSG:4326:",
+                "attribution": "Liteoverlay: Data by \u003Ca href=\u0022http:\/\/naturalearthdata.com\u0022\u003ENatural Earth\u003C\/a\u003E, Rendering \u0026copy; \u003Ca href=\u0022http:\/\/www.dlr.de\/eoc\u0022\u003EDLR\/EOC\u003C\/a\u003E",
                 "format": "image\/png",
+                "id": "eoc:liteoverlay",
+                "matrixIdPrefix": "EPSG:4326:",
+                "matrixSet": "EPSG:4326",
                 "projection": "EPSG:4326",
+                "protocol": "WMTS",
                 "style": "default",
-                "attribution": "Liteoverlay: Data by \u003Ca href=\u0022http:\/\/naturalearthdata.com\u0022\u003ENatural Earth\u003C\/a\u003E, Rendering \u0026copy; \u003Ca href=\u0022http:\/\/www.dlr.de\/eoc\u0022\u003EDLR\/EOC\u003C\/a\u003E"
-            }
+                "urls": [
+                    "https:\/\/a.tiles.geoservice.dlr.de\/service\/wmts?",
+                    "https:\/\/b.tiles.geoservice.dlr.de\/service\/wmts?",
+                    "https:\/\/c.tiles.geoservice.dlr.de\/service\/wmts?",
+                    "https:\/\/d.tiles.geoservice.dlr.de\/service\/wmts?"
+                ],
+                "visible": false
+            },
+            "displayName": "EOC Lite Overlay",
+            "id": "eoc:liteoverlay"
         }
-    ]
+    ],
+    "settings": {
+        "displayInterval": "P1M",
+        "displayTimeDomain": [
+            "2017-02-23T11:56:33Z",
+            "2017-03-10T11:56:33Z"
+        ],
+        "highlightFillColor": "rgba(246, 182, 0, 0.5)",
+        "highlightStrokeColor": "rgba(246, 182, 0, 1)",
+        "maxTooltips": 1,
+        "parameters": [
+            {
+                "type": "eo:productionStatus"
+            },
+            {
+                "max": 100,
+                "min": 0,
+                "range": true,
+                "type": "eo:cloudCover"
+            },
+            {
+                "type": "eo:orbitDirection"
+            },
+            {
+                "type": "eo:orbitNumber"
+            },
+            {
+                "type": "eo:resolution"
+            },
+            {
+                "type": "eo:platformSerialIdentifier"
+            },
+            {
+                "type": "eo:processingLevel"
+            },
+            {
+                "type": "eo:processingVersion"
+            },
+            {
+                "type": "eo:polarisationMode"
+            },
+            {
+                "type": "eo:polarisationChannels"
+            },
+            {
+                "type": "eo:antennaLookDirection"
+            },
+            {
+                "type": "eo:minimumIncidenceAngle"
+            },
+            {
+                "type": "eo:maximumIncidenceAngle"
+            }
+        ],
+        "rightPanelOpen": false,
+        "leftPanelOpen": true,
+        "selectableInterval": "P1M",
+        "selectedTimeDomain": [
+            "2017-03-09T11:56:33Z",
+            "2017-03-10T11:56:33Z"
+        ],
+        "timeDomain": [
+            "2017-02-18T11:56:33Z",
+            "2017-03-10T11:56:33Z"
+        ],
+        "contrainTimeDomain": true,
+        "zoom": 5,
+        "maxZoom": 15,
+        "tutorial": "once",
+        "searchDebounceTime": 500,
+        "language": "en",
+        "termsAndConditionsUrl": "https:\/\/code-de.org\/de\/terms\/CODE-DE_Terms.pdf",
+        "timeSliderControls": true,
+        "extent": [
+            5.98865807458,
+            47.3024876979,
+            15.0169958839,
+            54.983104153
+        ]
+    }
 };
 
 var app = new Application({
