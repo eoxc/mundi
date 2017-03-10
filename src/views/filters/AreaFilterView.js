@@ -1,12 +1,11 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
-import shp from 'shpjs';
 import i18next from 'i18next';
 
 import template from './AreaFilterView.hbs';
 import FeatureListView from './FeatureListView';
-import { readFileAsArraybuffer } from '../../utils';
+import { parseFeaturesFromFiles } from '../../utils';
 
 const AreaFilterView = Marionette.LayoutView.extend({
   template,
@@ -102,20 +101,29 @@ const AreaFilterView = Marionette.LayoutView.extend({
   },
 
   onFileChanged(event) {
+    const currentTarget = event.currentTarget;
     const $input = $(event.target).parents('.input-group').find(':text');
-    if (event.currentTarget.files && event.currentTarget.files.length) {
-      const name = event.currentTarget.files[0].name;
-      $input.val(name);
+    if (currentTarget.files && currentTarget.files.length) {
+      const files = Array.from(currentTarget.files);
+      const names = files.map(file => file.name).join(', ');
 
-      readFileAsArraybuffer(event.currentTarget.files[0])
-        .then(data => shp(data))
+      $input.val(names);
+
+      parseFeaturesFromFiles(files)
         .then((features) => {
-          this.featureListCollection.reset(features.features);
+          this.featureListCollection.reset(features);
           this.$('.select-feature').prop('disabled', false);
           this.$('.panel-features').fadeIn('fast');
+        })
+        .catch((error) => {
+          $input.val('');
+          currentTarget.value = '';
+          this.featureListCollection.reset([]);
+          throw error;
         });
     } else {
       $input.val('');
+      this.featureListCollection.reset([]);
     }
   },
 
