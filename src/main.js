@@ -401,24 +401,24 @@ window.Application = Marionette.Application.extend({
         filtersModel.get('time') || false
       );
 
-      // const otherFilters = Object.keys(filtersModel.attributes)
-      //   .filter(key => key !== 'time' && key !== 'area');
-      // warningsCollection.setWarning(
-      //   i18next.t('advancedfilter_warning'),
-      //   otherFilters.length
-      // );
+      const otherFilters = Object.keys(filtersModel.attributes)
+        .filter(key => key !== 'time' && key !== 'area');
+      warningsCollection.setWarning(
+        i18next.t('advancedfilter_warning'),
+        otherFilters.length
+      );
     });
 
-    searchCollection.on('change', () => {
-      const show = searchCollection
-        .filter(searchModel => (
-          !searchModel.get('isSearching') && !searchModel.get('hasError')
-        ))
-        .reduce((acc, searchModel) => (
-          acc || searchModel.get('totalResults') > searchModel.get('hasLoaded')
-        ), false);
-      warningsCollection.setWarning(i18next.t('toomanyresults_warning'), show);
-    });
+    // searchCollection.on('change', () => {
+    //   const show = searchCollection
+    //     .filter(searchModel => (
+    //       !searchModel.get('isSearching') && !searchModel.get('hasError')
+    //     ))
+    //     .reduce((acc, searchModel) => (
+    //       acc || searchModel.get('totalResults') > searchModel.get('hasLoaded')
+    //     ), false);
+    //   warningsCollection.setWarning(i18next.t('toomanyresults_warning'), show);
+    // });
 
 
     if (settings.extent) {
