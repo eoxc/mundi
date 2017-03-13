@@ -401,12 +401,12 @@ window.Application = Marionette.Application.extend({
         filtersModel.get('time') || false
       );
 
-      const otherFilters = Object.keys(filtersModel.attributes)
-        .filter(key => key !== 'time' && key !== 'area');
-      warningsCollection.setWarning(
-        i18next.t('advancedfilter_warning'),
-        otherFilters.length
-      );
+      // const otherFilters = Object.keys(filtersModel.attributes)
+      //   .filter(key => key !== 'time' && key !== 'area');
+      // warningsCollection.setWarning(
+      //   i18next.t('advancedfilter_warning'),
+      //   otherFilters.length
+      // );
     });
 
     searchCollection.on('change', () => {
