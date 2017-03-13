@@ -22,6 +22,8 @@ import SearchResultView from 'eoxc/src/search/views/SearchResultView';
 import SearchModel from 'eoxc/src/search/models/SearchModel';
 import { getParameters } from 'eoxc/src/search';
 
+import { version as eoxcVersion } from 'eoxc/package.json';
+
 import DownloadOptionsModel from 'eoxc/src/download/models/DownloadOptionsModel';
 import DownloadSelectionView from 'eoxc/src/download/views/DownloadSelectionView';
 import DownloadOptionsModalView from 'eoxc/src/download/views/DownloadOptionsModalView';
@@ -45,6 +47,8 @@ import 'imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js';
 
 import getTutorialWidget from './tutorial';
 import { premultiplyColor } from './utils';
+
+import { version as cdeVersion } from '../package.json';
 
 // import './static/code-de.css';
 import './_client.scss';
@@ -440,7 +444,7 @@ window.Application = Marionette.Application.extend({
       </style>
     `).appendTo('head');
 
-    layout.showChildView('infoPanel', new VendorInfoView({}));
+    layout.showChildView('infoPanel', new VendorInfoView({ eoxcVersion, cdeVersion }));
 
     if (settings.hasOwnProperty('tutorial')) {
       if (settings.tutorial !== 'disabled') {
