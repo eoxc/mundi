@@ -23,6 +23,12 @@ const ExtraParameterRangeView = Marionette.ItemView.extend({
   onAttach() {
     this.$('[data-provide="slider"]').slider({
       tooltip_position: 'top',
+      formatter(value) {
+        if (Array.isArray(value)) {
+          return `${value[0]} - ${value[1]}`;
+        }
+        return value;
+      },
     });
   },
 
