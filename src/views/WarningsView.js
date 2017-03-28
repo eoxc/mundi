@@ -11,7 +11,7 @@ const WarningView = Marionette.ItemView.extend({
     'click .close': 'onCloseClick',
   },
   onCloseClick() {
-    this.model.collection.remove(this.model);
+    this.model.collection.dismiss(this.model.get('message'));
   },
 });
 
