@@ -1,4 +1,5 @@
 {
+  "layer_failed": "Failed to access layer '{{value}}'",
   "search_error": "An error occurred during the search",
   "search_norecords": "No products matched the search",
   "search_n_layers_selected": "One layer selected to show",
