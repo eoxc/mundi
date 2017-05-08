@@ -50,6 +50,7 @@
   "No thumbnail available": "Kein Miniaturbild verfügbar",
   "Download as Metalink": "Als Metalink herunterladen",
   "Download as URL-List": "Als URL-Liste herunterladen",
+  "layer_failed": "Fehler bei der Anfrage von Ebene '{{value}}'",
   "search_error": "Ein Fehler ist während der Suche aufgetreten",
   "search_norecords": "Kein Produkt entspricht der Suche",
   "search_n_layers_selected": "Eine Ebene zur Anzeige ausgewählt",

@@ -51,7 +51,10 @@ const RecordsDetailsModalView = ModalView.extend({
   },
 
   updateRecord(recordModel, searchModel) {
-    const time = recordModel.get('properties').time;
+    let time = recordModel.get('properties').time;
+    if (time instanceof Date) {
+      time = [time, time];
+    }
     const layerModel = searchModel.get('layerModel');
     this.mapModel.set('time', time);
     this.mapView = new OpenLayersMapView({

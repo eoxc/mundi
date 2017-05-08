@@ -128,14 +128,26 @@ window.Application = Marionette.Application.extend({
     if (config.settings.parameters) {
       const parameterPromises = layersCollection
         .filter(layerModel => layerModel.get('search.protocol'))
-        .map(layerModel => getParameters(layerModel).then(parameters => [layerModel, parameters]));
+        .map(layerModel => (
+          getParameters(layerModel)
+            .then(parameters => [layerModel, parameters, null])
+            .catch(error => [layerModel, null, error])
+        ));
       Promise.all(parameterPromises)
-        .then((layersPlusParameters) => {
+        .then((layersPlusParametersPlusErrors) => {
+          const failedLayers = layersPlusParametersPlusErrors
+            .filter(layerPlusParameters => layerPlusParameters[2])
+            .map(layerPlusParameters => layerPlusParameters[0]);
+
           const params = config.settings.parameters
             .map(param => [
-              param, layersPlusParameters.filter(layerPlusParameters => (
-                layerPlusParameters[1].find(p => p.type === param.type)
-              )),
+              param, layersPlusParametersPlusErrors.filter((layerPlusParameters) => {
+                const layerParams = layerPlusParameters[1];
+                if (layerParams) {
+                  return layerParams.find(p => p.type === param.type);
+                }
+                return null;
+              }),
             ])
 
             // filter out the parameters that are nowhere available
@@ -179,15 +191,16 @@ window.Application = Marionette.Application.extend({
           //   });
 
           this.onRun(
-            config, baseLayersCollection, layersCollection, overlayLayersCollection, params
+            config, baseLayersCollection, layersCollection, overlayLayersCollection,
+            params, failedLayers
           );
         });
     } else {
-      this.onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, []);
+      this.onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, [], []);
     }
   },
 
-  onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, extraParameters) {
+  onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, extraParameters, failedLayers) {
     const settings = config.settings;
 
     _.defaults(settings, {
@@ -413,6 +426,11 @@ window.Application = Marionette.Application.extend({
       );
     });
 
+    // show a warning for every layer that failed to be accessed
+    failedLayers.forEach(layer => warningsCollection.setWarning(
+      i18next.t('layer_failed', { value: layer.get('displayName') })
+    ));
+
     // searchCollection.on('change', () => {
     //   const show = searchCollection
     //     .filter(searchModel => (
@@ -444,7 +462,7 @@ window.Application = Marionette.Application.extend({
       </style>
     `).appendTo('head');
 
-    layout.showChildView('infoPanel', new VendorInfoView({ eoxcVersion, cdeVersion }));
+    layout.showChildView('infoPanel', new VendorInfoView({ eoxcVersion }));
 
     if (settings.hasOwnProperty('tutorial')) {
       if (settings.tutorial !== 'disabled') {
