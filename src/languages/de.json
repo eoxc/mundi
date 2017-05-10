@@ -55,6 +55,7 @@
   "search_norecords": "Kein Produkt entspricht der Suche",
   "search_n_layers_selected": "Eine Ebene zur Anzeige ausgewählt",
   "search_n_layers_selected_plural": "{{count}} Ebenen zur Anzeige ausgewählt",
+  "load_more": "Zusätzlich {{count}} laden",
   "download_norecords": "Keine Produkte für das Herunterladen ausgewählt",
   "Projection": "Projektion",
   "Use bounding box of current spatial filter to crop": "Verwende Begrenzungsrechteck des momentanen räumlichen Filter zum Beschneiden",

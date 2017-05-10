@@ -4,6 +4,7 @@
   "search_norecords": "No products matched the search",
   "search_n_layers_selected": "One layer selected to show",
   "search_n_layers_selected_plural": "{{count}} layers selected to show",
+  "load_more": "Load {{count}} more",
   "download_norecords": "No products selected for download",
   "terms_and_conditions": "I have read and agree to the <a href='{{value}}' target='_blank'>terms &amp; conditions</a>",
   "start_download": "Start download of one product",

@@ -252,6 +252,7 @@ window.Application = Marionette.Application.extend({
         mapModel,
         defaultPageSize: 50,
         maxCount: layerModel.get('search.searchLimit'),
+        loadMore: layerModel.get('search.loadMore'),
         debounceTime: settings.searchDebounceTime,
       }));
     const searchCollection = new Backbone.Collection(searchModels);
