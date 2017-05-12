@@ -26,20 +26,20 @@ var config = {
     "settings": {
         "tutorial": "once",
         "language": "en",
-        "center": [20, 30],
-        "zoom": 3,
+        "center": [-30, 10],
+        "zoom": 2,
         "timeDomain": [
-            "2017-01-01T00:00:00Z",
-            "2017-04-29T23:59:59Z"
+            "2016-01-01T00:00:00Z",
+            "2017-04-30T23:59:59Z"
         ],
         "constrainTimeDomain": true,
         "displayTimeDomain": [
             "2017-01-01T00:00:00Z",
-            "2017-04-29T23:59:59Z"
+            "2017-04-30T23:59:59Z"
         ],
         "selectedTimeDomain": [
-            "2017-04-01T00:00:00Z",
-            "2017-04-29T23:59:59Z"
+            "2017-02-01T00:00:00Z",
+            "2017-04-30T23:59:59Z"
         ],
         // "displayInterval": "P17Y",
         // "selectableInterval": "P1Y",
@@ -142,8 +142,8 @@ var config = {
         }
     }],
     "layers": [{
-        "id": "Sentinel-2",
-        "displayName": "Sentinel-2",
+        "id": "Sentinel-2_EOxServer",
+        "displayName": "Sentinel-2 EOxServer",
         "displayColor": "rgba(255, 153, 0, 1)",
         "display": {
             "id": "S2A_OPER",
@@ -170,7 +170,7 @@ var config = {
             "searchLimit": 200
         }
     },{
-        "id": "Sentinel-2 GeoServer",
+        "id": "Sentinel-2_GeoServer",
         "displayName": "Sentinel-2 GeoServer",
         "displayColor": "rgba(16, 150, 24, 1)",
         "display": {
