@@ -6,9 +6,10 @@ import 'jquery-ui';
 import es6Promise from 'es6-promise';
 
 import i18next from 'i18next';
-import _ from 'underscore';
-import Backbone from 'backbone';
+import _ from 'underscore'; // eslint-disable-line import/no-extraneous-dependencies
+import Backbone from 'backbone'; // eslint-disable-line import/no-extraneous-dependencies
 import Marionette from 'backbone.marionette';
+import 'bootstrap/dist/js/bootstrap.min';
 
 import LayersCollection from 'eoxc/src/core/models/LayersCollection';
 import MapModel from 'eoxc/src/core/models/MapModel';
@@ -27,7 +28,6 @@ import { version as eoxcVersion } from 'eoxc/package.json';
 import DownloadOptionsModel from 'eoxc/src/download/models/DownloadOptionsModel';
 import DownloadSelectionView from 'eoxc/src/download/views/DownloadSelectionView';
 import DownloadOptionsModalView from 'eoxc/src/download/views/DownloadOptionsModalView';
-import download from 'eoxc/src/download';
 
 import OpenLayersMapView from 'eoxc/src/contrib/OpenLayers/OpenLayersMapView';
 
@@ -40,10 +40,6 @@ import WarningsView from './views/WarningsView';
 import RecordsDetailsModalView from './views/RecordsDetailsModalView';
 
 import WarningsCollection from './models/WarningsCollection';
-
-import VendorInfoView from './views/VendorInfoView';
-
-import 'imports?jQuery=jquery!bootstrap/dist/js/bootstrap.min.js';
 
 import getTutorialWidget from './tutorial';
 import { premultiplyColor } from './utils';
@@ -101,13 +97,13 @@ window.Application = Marionette.Application.extend({
       lng: this.config.settings.language || 'en',
       fallbackLng: 'en',
       resources: {
-        'de': {
+        de: {
           translation: germanFormalTranslation,
         },
-        'deinformal': {
+        deinformal: {
           translation: germanInformalTranslation,
         },
-        'en': {
+        en: {
           translation: englishTranslation,
         },
       },
@@ -159,7 +155,7 @@ window.Application = Marionette.Application.extend({
               for (let i = 0; i < paramPlusApplicableLayers[1].length; i += 1) {
                 const [, layerParameters] = paramPlusApplicableLayers[1][i];
                 param = combineParameter(
-                  param, layerParameters.find(p => p.type === param.type)
+                  param, layerParameters.find(p => p.type === param.type) // eslint-disable-line
                 );
               }
               if (paramPlusApplicableLayers[1].length < layersCollection.length) {
@@ -200,7 +196,8 @@ window.Application = Marionette.Application.extend({
     }
   },
 
-  onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, extraParameters, failedLayers) {
+  onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection,
+    extraParameters, failedLayers) {
     const settings = config.settings;
 
     _.defaults(settings, {
@@ -463,9 +460,17 @@ window.Application = Marionette.Application.extend({
       </style>
     `).appendTo('head');
 
-    layout.showChildView('infoPanel', new VendorInfoView({ eoxcVersion }));
+    // layout.showChildView('infoPanel', new VendorInfoView({ eoxcVersion, cdeVersion }));
 
-    if (settings.hasOwnProperty('tutorial')) {
+    // use set timeout here so that vendor info is always at the end of the attribution list
+    setTimeout(() => {
+      const vendorInfoHTML = `<li>Powered&nbsp;by&nbsp;<a href="https://github.com/eoxc" target="_blank">EOxC</a>&nbsp;&copy;&nbsp;<a href="https://eox.at" target="_blank">EOX&nbsp;<i class="icon-eox-eye"/></a>
+      <!-- CODE-DE Client version {{cdeVersion}} https://github.com/eoxc/CODE-DE/releases/tag/v${cdeVersion} -->
+      <!-- eoxc version {{eoxcVersion}} https://github.com/eoxc/eoxc/releases/tag/v${eoxcVersion} --></li>`;
+      $(this.container).find('.ol-attribution ul').append(vendorInfoHTML);
+    });
+
+    if (Object.prototype.hasOwnProperty.call(settings, 'tutorial')) {
       if (settings.tutorial !== 'disabled') {
         const tutWidg = getTutorialWidget();
 
