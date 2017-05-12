@@ -138,18 +138,11 @@ var config = {
                 "method": "GET",
                 "histogramThreshold": 500,
                 "lightweightBuckets": true,
-                "searchLimit": 200
+                "searchLimit": 201,
+                "loadMore":201
             },
             "download": {
-                "protocol": "OpenSearch",
-                "url": "http://ows.eox.at/code-de_catalog/description.xml/?parentIdentifier=EOP:CODE-DE:S1_SAR_L1_GRD",
-                "id": "EOP:CODE-DE:S1_SAR_L1_GRD",
-                "histogramBinCount": 30,
-                "format": "application\/atom+xml",
-                "method": "GET",
-                "histogramThreshold": 500,
-                "lightweightBuckets": true,
-                "searchLimit": 200
+                "protocol": "OpenSearch"
             }
         },
         {
@@ -178,18 +171,11 @@ var config = {
                 "method": "GET",
                 "histogramThreshold": 500,
                 "lightweightBuckets": true,
-                "searchLimit": 200
+                "searchLimit": 201,
+                "loadMore":201
             },
             "download": {
-                "protocol": "OpenSearch",
-                "url": "http://ows.eox.at/code-de_catalog/description.xml/?parentIdentifier=EOP:CODE-DE:S1_SAR_L1_SLC",
-                "id": "EOP:CODE-DE:S1_SAR_L1_SLC",
-                "histogramBinCount": 30,
-                "format": "application\/atom+xml",
-                "method": "GET",
-                "histogramThreshold": 500,
-                "lightweightBuckets": true,
-                "searchLimit": 200
+                "protocol": "OpenSearch"
             }
         },
         {
@@ -218,18 +204,11 @@ var config = {
                 "method": "GET",
                 "histogramThreshold": 500,
                 "lightweightBuckets": true,
-                "searchLimit": 200
+                "searchLimit": 201,
+                "loadMore":201
             },
             "download": {
-                "protocol": "OpenSearch",
-                "url": "http://ows.eox.at/code-de_catalog/description.xml/?parentIdentifier=EOP:CODE-DE:S1_SAR_L2_OCN",
-                "id": "EOP:CODE-DE:S1_SAR_L2_OCN",
-                "histogramBinCount": 30,
-                "format": "application\/atom+xml",
-                "method": "GET",
-                "histogramThreshold": 500,
-                "lightweightBuckets": true,
-                "searchLimit": 200
+                "protocol": "OpenSearch"
             }
         },
         {
@@ -258,18 +237,11 @@ var config = {
                 "method": "GET",
                 "histogramThreshold": 500,
                 "lightweightBuckets": true,
-                "searchLimit": 200
+                "searchLimit": 201,
+                "loadMore":201
             },
             "download": {
-                "protocol": "OpenSearch",
-                "url": "http://ows.eox.at/code-de_catalog/description.xml/?parentIdentifier=EOP:CODE-DE:S2_MSI_L1C",
-                "id": "EOP:CODE-DE:S2_MSI_L1C",
-                "histogramBinCount": 30,
-                "format": "application\/atom+xml",
-                "method": "GET",
-                "histogramThreshold": 500,
-                "lightweightBuckets": true,
-                "searchLimit": 200
+                "protocol": "OpenSearch"
             }
         }
     ],
@@ -318,13 +290,21 @@ var config = {
         }
     ],
     "settings": {
-        "displayInterval": "P1M",
+        //"displayInterval": "P1M",
         "displayTimeDomain": [
-            "2017-02-23T11:56:33Z",
-            "2017-03-10T11:56:33Z"
+            "2017-04-12T11:56:33Z",
+            "2017-05-12T11:56:33Z"
         ],
+        "footprintFillColor": "rgba(0, 0, 0, 0.2)",
+        "footprintStrokeColor": "rgba(0, 0, 0, 1)",
+        "filterFillColor": "rgba(0, 165, 255, 0)",
+        "filterStrokeColor": "rgba(0, 165, 255, 1)",
+        "filterOutsideColor": "rgba(0, 0, 0, 0.5)",
+        "selectedFootprintFillColor": "rgba(255, 0, 0, 0.2)",
+        "selectedFootprintStrokeColor": "rgba(255, 0, 0, 1)",
         "highlightFillColor": "rgba(246, 182, 0, 0.5)",
         "highlightStrokeColor": "rgba(246, 182, 0, 1)",
+        "highlightStrokeWidth": 3,
         "maxTooltips": 1,
         "parameters": [
             {
@@ -374,12 +354,12 @@ var config = {
         "leftPanelOpen": true,
         "selectableInterval": "P1M",
         "selectedTimeDomain": [
-            "2017-03-09T11:56:33Z",
-            "2017-03-10T11:56:33Z"
+            "2017-05-10T11:56:33Z",
+            "2017-05-12T11:56:33Z"
         ],
         "timeDomain": [
             "2017-02-18T11:56:33Z",
-            "2017-03-10T11:56:33Z"
+            "2017-05-12T11:56:33Z"
         ],
         "contrainTimeDomain": true,
         "zoom": 5,
