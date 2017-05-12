@@ -85,6 +85,12 @@ const TimeFilterView = Marionette.ItemView.extend({
 
   onMapTimeChanged() {
     const time = this.mapModel.get('time');
+
+    // if a filter is set explicitly, do not update the text
+    if (this.filtersModel.get('time')) {
+      return;
+    }
+
     this.updatingTime = true;
     this.$('.map-time-start').val(moment.utc(time[0]).format('YYYY-MM-DD HH:mm:ss'));
     this.$('.map-time-end').val(moment.utc(time[1]).format('YYYY-MM-DD HH:mm:ss'));

@@ -627,3 +627,13 @@ body {
   scrollbar-shadow-color: $c_lo;
   scrollbar-dark-shadow-color: #C0C0C0;
 }
+
+// vendor info stuff:
+.icon-eox-eye {
+  background: no-repeat center url('eox/EOX_Logo_eye_only.svg');
+  width: 23px;
+  height: 13px;
+  display: block;
+  background-size: contain;
+  display: inline-block;
+}
