@@ -61,6 +61,7 @@ function combineParameter(setting, param) {
   return {
     type: param.type,
     name: param.name,
+    title: param.title || setting.title,
     mandatory: setting.mandatory || param.mandatory,
     options,
     minExclusive: param.minExclusive,
@@ -199,6 +200,16 @@ window.Application = Marionette.Application.extend({
   onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection,
     extraParameters, failedLayers) {
     const settings = config.settings;
+
+    // allow custom translations from the settings
+    if (settings.translations) {
+      Object.keys(settings.translations)
+        .forEach(
+          lng => i18next.addResourceBundle(
+            lng, 'translation', settings.translations[lng], true, true
+          )
+        );
+    }
 
     _.defaults(settings, {
       center: [0, 0],
