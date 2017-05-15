@@ -138,7 +138,8 @@ var config = {
                 "method": "GET",
                 "histogramThreshold": 500,
                 "lightweightBuckets": true,
-                "searchLimit": 200
+                "searchLimit": 200,
+                "loadMore": 20,
             },
             "download": {
                 "protocol": "OpenSearch",
@@ -334,7 +335,8 @@ var config = {
                 "max": 100,
                 "min": 0,
                 "range": true,
-                "type": "eo:cloudCover"
+                "type": "eo:cloudCover",
+                "title": "Cloud Coverage in percent"
             },
             {
                 "type": "eo:orbitDirection"
@@ -386,7 +388,7 @@ var config = {
         "maxZoom": 15,
         "tutorial": "once",
         "searchDebounceTime": 500,
-        "language": "en",
+        "language": "de",
         "termsAndConditionsUrl": "https:\/\/code-de.org\/de\/terms\/CODE-DE_Terms.pdf",
         "timeSliderControls": true,
         "extent": [
@@ -394,7 +396,31 @@ var config = {
             47.3024876979,
             15.0169958839,
             54.983104153
-        ]
+        ],
+        "translations": {
+            "de": {
+                "Cloud Cover": "Wolkenbedeckung",
+                "Cloud Coverage in percent": "Prozentuelle Wolkenbedeckung",
+                "Production Status": "Produktionsstatus",
+                "Orbit Direction": "Orbitrichtung",
+                "Orbit Number": "Orbitnummer",
+                "Resolution": "Auflösung",
+                "Platform Serial Identifier": "Plattform Identifikation",
+                "Processing Level": "Prozessierungsebene",
+                "Processing Version": "Prozessierungsversion",
+                "Polarisation Mode": "Polarisationsmodus",
+                "Polarisation Channels": "Polarisationskanäle",
+                "Antenna Look Direction": "Antennenausrichtung",
+                "Minimum Incidence Angle": "Minimaler Einfallswinkel",
+                "Maximum Incidence Angle": "Maximaler Einfallswinkel",
+                "LEFT": "Links",
+                "RIGHT": "Rechts",
+                "ASCENDING": "Aufsteigend",
+                "DESCENDING": "Absteigend",
+                "Single": "Einfach",
+                "Double": "Doppelt"
+            }
+        }
     }
 };
 
