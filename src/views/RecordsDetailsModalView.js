@@ -83,8 +83,7 @@ const RecordsDetailsModalView = ModalView.extend({
     this.mapModel.show(recordModel.attributes);
     this.highlightModel.highlight(recordModel.attributes);
 
-
-    this.$('.modal-title').text(`${layerModel.get('displayName')} - ${time[0].toISOString()}`);
+    this.$('.modal-title').text(`${layerModel.get('displayName')} - ${time.toISOString()}`);
     this.$('.records-prev').toggleClass('disabled', !(this.currentRecordIndex > 0));
     this.$('.records-next').toggleClass('disabled', !(this.currentRecordIndex < this.records.length - 1));
     this.$('.current-record').text(this.currentRecordIndex + 1);
