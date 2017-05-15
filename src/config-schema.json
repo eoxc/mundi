@@ -223,6 +223,10 @@
                                 "description": "The mandatory parameter type. Use the OpenSeach type, e.g: eo:acquisitionStation.",
                                 "type": "string"
                             },
+                            "title": {
+                                "description": "A short description of the parameter, used as a tooltip.",
+                                "type": "string"
+                            },
                             "options": {
                                 "description": "Selectable options. Will be rendered as a dropdown.",
                                 "type": "array",
@@ -297,6 +301,10 @@
                     "description": "The URL to the terms and conditions document for the user to accept.",
                     "type": "string",
                     "default": null
+                },
+                "translations": {
+                    "description": "Additional translations not covered in the base translations. Keys can be one of the language specifiers: 'en', 'de', 'deinformal'. The values must be objects, mapping the (english) key to the translated value.",
+                    "type": "object"
                 }
             },
             "oneOf": [
