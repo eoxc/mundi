@@ -1,4 +1,8 @@
-<label class="col-sm-6 control-label">{{displayName}}</label>
+<label class="col-sm-6 control-label"
+  {{#if title}}
+    data-toggle="tooltip" data-placement="top" title="{{t title}}"
+  {{/if}}
+>{{t displayName}}</label>
 <div class="col-sm-6">
   <input type="text" data-type="{{ type }}" class="form-control input-sm">
 </div>

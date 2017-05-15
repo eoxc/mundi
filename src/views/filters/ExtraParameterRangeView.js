@@ -1,21 +1,14 @@
 import $ from 'jquery';
-import Marionette from 'backbone.marionette';
 import 'bootstrap-slider';
 import 'bootstrap-slider/dist/css/bootstrap-slider.css';
 
+import BaseExtraParameterView from './BaseExtraParameterView';
 import template from './ExtraParameterRangeView.hbs';
 import './ExtraParameterRangeView.css';
 
-const ExtraParameterRangeView = Marionette.ItemView.extend({
+const ExtraParameterRangeView = BaseExtraParameterView.extend({
   template,
-  templateHelpers() {
-    const result = this.model.get('name').replace(/([A-Z])/g, ' $1');
-    return {
-      displayName: result.charAt(0).toUpperCase() + result.slice(1),
-    };
-  },
 
-  className: 'row extra-parameter',
   events: {
     'slideStop input[data-provide="slider"]': 'onSliderStop',
   },

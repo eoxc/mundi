@@ -1,9 +1,13 @@
-<label class="col-sm-6 control-label">{{displayName}}</label>
+<label class="col-sm-6 control-label"
+  {{#if title}}
+    data-toggle="tooltip" data-placement="top" title="{{t title}}"
+  {{/if}}
+>{{t displayName}}</label>
 <div class="col-sm-6">
   <select data-type="{{ type }}" class="form-control input-sm">
     <option value="">---</option>
     {{#each options}}
-    <option value="{{ this.value }}">{{ this.label }}</option>
+    <option value="{{ this.value }}">{{ t this.label }}</option>
     {{/each}}
   </select>
 </div>

@@ -1,18 +1,10 @@
-import Marionette from 'backbone.marionette';
-
+import BaseExtraParameterView from './BaseExtraParameterView';
 import template from './ExtraParameterPlainView.hbs';
 
 
-const ExtraParameterPlainView = Marionette.ItemView.extend({
+const ExtraParameterPlainView = BaseExtraParameterView.extend({
   template,
-  templateHelpers() {
-    const result = this.model.get('name').replace(/([A-Z])/g, ' $1');
-    return {
-      displayName: result.charAt(0).toUpperCase() + result.slice(1),
-    };
-  },
 
-  className: 'row extra-parameter',
   events: {
     'change input[type="text"]': 'onInputChange',
   },
