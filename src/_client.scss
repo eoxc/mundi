@@ -293,6 +293,10 @@ input {
         text-transform: uppercase;
       }
     }
+
+    &.loading {
+      opacity: 0.8;
+    }
   }
 }
 
