@@ -48,6 +48,9 @@ const TimeFilterView = Marionette.ItemView.extend({
           left: null,
           right: null,
           delete: null,
+        },
+        icons: {
+          close: 'glyphicon glyphicon-ok'
         }
       });
     });
