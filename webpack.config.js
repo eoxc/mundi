@@ -6,11 +6,15 @@ module.exports = {
     'code-de': ['babel-polyfill', './src/preload.js', './src/main.js'],
   },
   resolve: {
+    // mainFields: ['module', 'main'],
     modulesDirectories: ['web_modules', 'node_modules', 'bower_components'],
+    // packageMains: ['webpack', 'web', 'browserify', ['jam', 'main'], 'main'],
     alias: {
       // necessary to avoid multiple packings of backbone due to marionette
       backbone: path.join(__dirname, 'node_modules', 'backbone', 'backbone'),
       handlebars: 'handlebars/dist/handlebars.min.js',
+      'opensearch-browser': 'opensearch-browser/dist',
+
       // Bind version of jquery
       //jquery: path.join(__dirname, 'node_modules', 'jquery'),
 
