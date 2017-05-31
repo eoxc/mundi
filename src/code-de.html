@@ -119,7 +119,7 @@ var config = {
             "displayColor": "#7AC6CF",
             "display": {
                 "id": "S1_SAR_L1_GRD",
-                "visible": true,
+                "visible": false,
                 "protocol": "WMS",
                 "urls": [
                     "http://ows.eox.at/code-de_geoservice/Sentinel1/wms?"
@@ -218,7 +218,7 @@ var config = {
             "displayColor": "#F0AD4E",
             "display": {
                 "id": "S2_MSI_L1C",
-                "visible": false,
+                "visible": true,
                 "protocol": "WMS",
                 "urls": [
                     "http://ows.eox.at/code-de_geoservice/Sentinel2/wms?"
@@ -237,8 +237,8 @@ var config = {
                 "method": "GET",
                 "histogramThreshold": 500,
                 "lightweightBuckets": true,
-                "searchLimit": 150,
-                "loadMore":150
+                "searchLimit": 600,
+                "loadMore":600
             },
             "download": {
                 "protocol": "OpenSearch"
@@ -355,7 +355,7 @@ var config = {
         "leftPanelOpen": true,
         "selectableInterval": "P1M",
         "selectedTimeDomain": [
-            "2017-05-10T11:56:33Z",
+            "2017-04-20T11:56:33Z",
             "2017-05-12T11:56:33Z"
         ],
         "timeDomain": [
