@@ -298,9 +298,14 @@
                     "default": []
                 },
                 "termsAndConditionsUrl": {
-                    "description": "The URL to the terms and conditions document for the user to accept.",
-                    "type": "string",
-                    "default": null
+                    "oneOf": [{
+                        "description": "The URL to the terms and conditions document for the user to accept.",
+                        "type": "string",
+                        "default": null
+                    }, {
+                        "description": "An object, mapping the language specifier (as specified in settings.language) to a URL.",
+                        "type": "object"
+                    }],
                 },
                 "translations": {
                     "description": "Additional translations not covered in the base translations. Keys can be one of the language specifiers: 'en', 'de', 'deinformal'. The values must be objects, mapping the (english) key to the translated value.",

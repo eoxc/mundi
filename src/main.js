@@ -379,6 +379,11 @@ window.Application = Marionette.Application.extend({
       }],
     }));
 
+    let termsAndConditionsUrl = settings.termsAndConditionsUrl;
+    if (typeof termsAndConditionsUrl === 'object') {
+      termsAndConditionsUrl = termsAndConditionsUrl[settings.language];
+    }
+
     layout.showChildView('rightPanel', new SidePanelView({
       position: 'right',
       icon: 'fa-list',
@@ -400,7 +405,7 @@ window.Application = Marionette.Application.extend({
           highlightModel,
           collection: searchCollection,
           onStartDownload: startDownload,
-          termsAndConditionsUrl: settings.termsAndConditionsUrl,
+          termsAndConditionsUrl,
         }),
       }],
     }));
