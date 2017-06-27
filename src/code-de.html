@@ -324,7 +324,17 @@ var config = {
                 "type": "eo:orbitNumber"
             },
             {
-                "type": "eo:resolution"
+                "type": "eo:resolution",
+                "options": [{
+                    "label": "10m",
+                    "value": "10",
+                }, {
+                    "label": "20m",
+                    "value": "20",
+                }, {
+                    "label": "60m",
+                    "value": "60",
+                }]
             },
             {
                 "type": "eo:platformSerialIdentifier"
@@ -355,11 +365,11 @@ var config = {
         "leftPanelOpen": true,
         "selectableInterval": "P1M",
         "selectedTimeDomain": [
-            "2017-04-20T11:56:33Z",
+            "2017-05-09T11:56:33Z",
             "2017-05-12T11:56:33Z"
         ],
         "timeDomain": [
-            "2017-02-18T11:56:33Z",
+            "2017-05-09T11:56:33Z",
             "2017-05-12T11:56:33Z"
         ],
         "contrainTimeDomain": true,
@@ -370,12 +380,13 @@ var config = {
         "language": "de",
         "termsAndConditionsUrl": "https:\/\/code-de.org\/de\/terms\/CODE-DE_Terms.pdf",
         "timeSliderControls": true,
-        "extent": [
-            5.98865807458,
-            47.3024876979,
-            15.0169958839,
-            54.983104153
-        ],
+        // "extent": [
+        //     5.98865807458,
+        //     47.3024876979,
+        //     15.0169958839,
+        //     54.983104153
+        // ],
+        center: [180, 50],
         "translations": {
             "de": {
                 "Cloud Cover": "Wolkenbedeckung",
