@@ -377,16 +377,18 @@ var config = {
         "maxZoom": 15,
         "tutorial": "once",
         "searchDebounceTime": 500,
-        "language": "de",
-        "termsAndConditionsUrl": "https:\/\/code-de.org\/de\/terms\/CODE-DE_Terms.pdf",
+        "language": "en",
+        "termsAndConditionsUrl": {
+          "en": "https:\/\/code-de.org\/de\/terms\/CODE-DE_Terms.pdf",
+          "de": "https:\/\/code-de.org\/de\/terms\/CODE-DE_Nutzungsbedingungen.pdf",
+        },
         "timeSliderControls": true,
-        // "extent": [
-        //     5.98865807458,
-        //     47.3024876979,
-        //     15.0169958839,
-        //     54.983104153
-        // ],
-        center: [180, 50],
+        "extent": [
+            5.98865807458,
+            47.3024876979,
+            15.0169958839,
+            54.983104153
+        ],
         "translations": {
             "de": {
                 "Cloud Cover": "Wolkenbedeckung",
