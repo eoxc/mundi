@@ -36,7 +36,8 @@ module.exports = {
   },
   devServer: {
     host: '0.0.0.0',
-    inline: true
+    inline: true,
+    disableHostCheck: true,
   },
   module: {
     loaders: [
