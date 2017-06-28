@@ -8,7 +8,7 @@ with a particular client configuration.
 # Test procedure for each OS/Browser combination:
 
 * Open URL http://<URL-of-dev-environment>:8080/<configuration>.html e.g. http://localhost:8080/code-de.html or http://sao:8080/
-    Check proper loading of EOxC e.g. panels visibility, timeslider selection, map, search results, etc.
+  Check proper loading of EOxC e.g. panels visibility, timeslider selection, map, search results, etc.
 * Zoom, pan on map (make sure to zoom over dateline)
     Check update of search results in list and on map
 * Zoom, pan on timeslider
@@ -37,16 +37,22 @@ with a particular client configuration.
 ## One-time testing preparation
 
 * Checkout repositories
+    ```bash
     git checkout git@github.com:eoxc/eoxc.git
     git checkout git@github.com:eoxc/CODE-DE.git
+    ```
 * Link repositories
+    ```bash
     cd <path-to-CODE-DE-repository>
     npm link eoxc
+    ```
 * Install dependencies
+    ```bash
     cd <path-to-eoxc-repository>
     npm install
     cd <path-to-CODE-DE-repository>
     npm install
+    ```
 
 ## General testing preparation
 
