@@ -17,6 +17,7 @@ export default Marionette.LayoutView.extend({
 
   events: {
     'click .toggle-side-panel': 'onToggleSidePanelClicked',
+    'shown.bs.tab [data-toggle="tab"]': 'onTabShown',
   },
 
   initialize(options) {
@@ -45,5 +46,10 @@ export default Marionette.LayoutView.extend({
   onToggleSidePanelClicked() {
     this.$('.side-panel').toggleClass('in');
     this.$('.toggle-side-panel-out').toggleClass('out');
+  },
+
+  onTabShown(e) {
+    const view = this.views[parseInt(e.target.href.split('#')[1].split('-')[1])].view;
+    view.triggerMethod('shown');
   },
 });
