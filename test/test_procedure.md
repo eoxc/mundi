@@ -5,6 +5,9 @@ and fill in the table. For each row add the version of the browser used for
 testing and add an `X` for each successful execution of below test procedure
 with a particular client configuration.
 
+At least one test shall be performed using the build as it is going to be
+uploaded to GitHub. Other tests could be done using the npm dev-server.
+
 # Test procedure for each OS/Browser combination:
 
 * Open URL http://<URL-of-dev-environment>:8080/<configuration>.html e.g. http://localhost:8080/code-de.html or http://sao:8080/
