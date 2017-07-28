@@ -197,15 +197,15 @@ var config = {
             },
             "search": {
                 "protocol": "OpenSearch",
-                "url": "http://opensearch.sentinel-hub.com/resto/api/collections/Sentinel2/describe.xml",
+                "url": "http://ows.eox.at/sentinel-hub/sentinel-hub.osdd",
                 "id": "S2",
                 "histogramBinCount": 30,
                 "format": "application\/atom+xml",
                 "method": "GET",
-                "histogramThreshold": 500,
+                "histogramThreshold": 600,
                 "lightweightBuckets": true,
-                "searchLimit": 300,
-                "loadMore":150
+                "searchLimit": 600,
+                "loadMore":300
             },
             "download": {
                 "protocol": "OpenSearch"
