@@ -27,6 +27,7 @@ Mac   | Chrome       |         |            |              |            |       
 Mac   | Firefox      |         |            |              |            |            |
 Linux | Chrome       |         |            |              |            |            |
 Linux | Chrome Beta  |         |            |              |            |            |
+Linux | Chrome Dev   |         |            |              |            |            |
 Linux | Chromium     |         |            |              |            |            |
 Linux | Firefox      |         |            |              |            |            |
 Win10 | Edge         |         |            |              |            |            |

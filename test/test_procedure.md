@@ -11,8 +11,8 @@ uploaded to GitHub. Other tests could be done using the npm dev-server.
 # Test procedure for each OS/Browser combination:
 
 * Open URL http://<URL-of-dev-environment>:8080/<configuration>.html e.g. http://localhost:8080/code-de.html or http://sao:8080/
-  - [ ] Check proper loading of EOxC e.g. panels visibility, timeslider selection, map, search results, etc.
-* Zoom, pan on map (make sure to zoom over dateline)
+  - [ ] Check proper loading of EOxC e.g. tutorial, panels visibility, timeslider selection, map, search results, etc.
+* Zoom, pan on map (make sure to zoom over dateline and to area with zero results)
   - [ ] Check update of search results in list and on map
 * Zoom, pan on timeslider
   - [ ] Check filling of timeslider histogram buckets or dots
