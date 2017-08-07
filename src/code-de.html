@@ -243,6 +243,39 @@ var config = {
             "download": {
                 "protocol": "OpenSearch"
             }
+        },
+        {
+            "id": "S2_MSI_L1C_TE",
+            "link": "\/en\/record\/39b6073d-7ef4-4aa9-a3e4-07f079709b52",
+            "displayName": "Sentinel-2 MSI - Test Environment",
+            "displayColor": "rgba(153, 0, 153, 1)",
+            "display": {
+                "id": "S2_MSI_L1C",
+                "visible": false,
+                "protocol": "WMS",
+                "urls": [
+                    "http://ows.eox.at/code-de_geoservice/Sentinel2/wms?"
+                ],
+                "format": "image\/png",
+                "projection": "EPSG:4326",
+                "style": "default",
+                "attribution": "Nutzungsbedingungen: https:\/\/scihub.copernicus.eu\/twiki\/pub\/SciHubWebPortal\/TermsConditions\/TC_Sentinel_Data_31072014.pdf"
+            },
+            "search": {
+                "protocol": "OpenSearch",
+                "url": "https://dehub.dlr.de/opensearch/description.xml/?parentIdentifier=EOP:CODE-DE:S2_MSI_L1C",
+                "id": "EOP:CODE-DE:S2_MSI_L1C",
+                "histogramBinCount": 30,
+                "format": "application\/atom+xml",
+                "method": "GET",
+                "histogramThreshold": 500,
+                "lightweightBuckets": true,
+                "searchLimit": 600,
+                "loadMore":600
+            },
+            "download": {
+                "protocol": "OpenSearch"
+            }
         }
     ],
     "overlayLayers": [
