@@ -4,9 +4,10 @@ Mac   | Safari       | 10.1    | X          | X            | X          | X     
 Mac   | Chrome       | 59      | X          | X            | X          | X          | X
 Mac   | Firefox      | 54      | X          | X            | X          | X          | X
 Linux | Chrome       | 60      | X          | X            | X          | X          | X
-Linux | Chrome Dev   | 61      | X          | X            |            |            |
-Linux | Chromium     | 59      |            |              |            |            |
-Linux | Firefox      | 54      |            |              |            |            |
+Linux | Chrome Beta  | 61      | X          | X            |            |            |
+Linux | Chrome Dev   | 62      | X          | X            |            |            |
+Linux | Chromium     | 59      |            | X            |            |            |
+Linux | Firefox      | 54      |            | X            |            |            |
 Win10 | Edge         | 38      |           |             |           |           |
 Win10 | Edge         | 40      | X          | X            |            |            |
 Win10 | Edge Preview | 41      |           |             |            |            |
