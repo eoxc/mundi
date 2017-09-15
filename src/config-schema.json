@@ -399,6 +399,14 @@
                         "attribution": {
                             "description": "A string to be displayed when the layer is displayed. Can contain HTML for specific formatting.",
                             "type": "string"
+                        },
+                        "cqlParameterName": {
+                            "description": "The name of the CQL parameter name for WMS requests. When set, the CQL filtering is enabled for this view layer.",
+                            "type": "string"
+                        },
+                        "cqlMapping": {
+                            "description": "The mapping of the search filter name to the attribute names used for CQL.",
+                            "type": "string"
                         }
                     },
                     "required": ["id", "protocol", "format", "style"],
