@@ -9,13 +9,23 @@ import ExtraParameterPlainView from './ExtraParameterPlainView';
 
 const ExtraParametersListView = Marionette.CompositeView.extend({
   template,
+  templateHelpers() {
+    return {
+      name: this.searchModel.get('layerModel').get('displayName'),
+      id: this.searchModel.get('layerModel').get('id'),
+    };
+  },
   className: 'panel panel-default',
 
   initialize(options) {
-    this.filtersModel = options.filtersModel;
+    this.searchModel = options.searchModel;
+    this.filtersModel = options.searchModel.get('filtersModel');
   },
 
-  childViewContainer: '#collapse-additional-filters',
+  childViewContainer() {
+    return `#collapse-additional-filters-${this.searchModel.get('layerModel').get('id')}`;
+  },
+
   getChildView(parameter) {
     if (parameter.get('range')) {
       return ExtraParameterRangeView;

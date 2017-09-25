@@ -114,91 +114,130 @@ window.Application = Marionette.Application.extend({
   },
 
   onI18NextInitialized(config) {
-    // TODO: check parameters
-
     const baseLayersCollection = new LayersCollection(config.baseLayers, {
       exclusiveVisibility: true,
     });
     const layersCollection = new LayersCollection(config.layers);
     const overlayLayersCollection = new LayersCollection(config.overlayLayers);
 
-    if (config.settings.parameters) {
-      const parameterPromises = layersCollection
-        .filter(layerModel => layerModel.get('search.protocol'))
-        .map(layerModel => (
-          getParameters(layerModel)
-            .then(parameters => [layerModel, parameters, null])
-            .catch(error => [layerModel, null, error])
-        ));
-      Promise.all(parameterPromises)
+    const promises = layersCollection.map((layerModel) => {
+      const parameterSettings = layerModel.get('search.parameters') || config.settings.parameters;
+      if (parameterSettings) {
+        return getParameters(layerModel)
+          .then(parameters => [layerModel, parameters, null])
+          .catch(error => [layerModel, null, error]);
+      }
+      return null;
+    }).filter(promise => !!promise);
+
+    if (promises.length) {
+      Promise.all(promises)
         .then((layersPlusParametersPlusErrors) => {
           const failedLayers = layersPlusParametersPlusErrors
             .filter(layerPlusParameters => layerPlusParameters[2])
             .map(layerPlusParameters => layerPlusParameters[0]);
 
-          const params = config.settings.parameters
-            .map(param => [
-              param, layersPlusParametersPlusErrors.filter((layerPlusParameters) => {
-                const layerParams = layerPlusParameters[1];
-                if (layerParams) {
-                  return layerParams.find(p => p.type === param.type);
+          layersPlusParametersPlusErrors
+            .filter(layerPlusParameters => !layerPlusParameters[2])
+            .forEach(([layerModel, retrievedParameters]) => {
+              const parameterSettings = layerModel.get('search.parameters') || config.settings.parameters;
+              const combinedParameters = parameterSettings.map((param) => {
+                const retrievedParameter = retrievedParameters.find(p => p.type === param.type);
+                if (!retrievedParameter) {
+                  console.warn(`${layerModel.get('displayName')} does not have a parameter ${param.type}`);
+                  return null;
                 }
-                return null;
-              }),
-            ])
+                return combineParameter(param, retrievedParameter);
+              }).filter(param => !!param);
 
-            // filter out the parameters that are nowhere available
-            .filter(paramPlusApplicableLayers => paramPlusApplicableLayers[1].length)
-
-            // combine the parameter settings info with the info from the search services
-            .map((paramPlusApplicableLayers) => {
-              let param = paramPlusApplicableLayers[0];
-              for (let i = 0; i < paramPlusApplicableLayers[1].length; i += 1) {
-                const [, layerParameters] = paramPlusApplicableLayers[1][i];
-                param = combineParameter(
-                  param, layerParameters.find(p => p.type === param.type) // eslint-disable-line
-                );
-              }
-              if (paramPlusApplicableLayers[1].length < layersCollection.length) {
-                param.onlyAvailableAt = paramPlusApplicableLayers[1].map(layerPlusParameters => (
-                  layerPlusParameters[0].get('displayName')
-                ));
-              }
-              return param;
+              layerModel.set('search.parameters', combinedParameters);
             });
-
-          // const params = [].concat.apply([], extraParameters)
-          //   .filter(param => param.type.startsWith('eo:'))
-          //   .map((param) => {
-          //     const paramSetting = config.settings.parameters[param.type];
-          //     if (paramSetting) {
-          //       return {
-          //         type: param.type,
-          //         name: param.name,
-          //         mandatory: param.mandatory,
-          //         options: param.options,
-          //         minExclusive: param.minExclusive,
-          //         maxExclusive: param.maxExclusive,
-          //         minInclusive: param.minInclusive,
-          //         maxInclusive: param.maxInclusive,
-          //         ...paramSetting,
-          //       };
-          //     }
-          //     return param;
-          //   });
-
           this.onRun(
-            config, baseLayersCollection, layersCollection, overlayLayersCollection,
-            params, failedLayers
+            config, baseLayersCollection, layersCollection, overlayLayersCollection, failedLayers
           );
         });
     } else {
-      this.onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, [], []);
+      this.onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, []);
     }
+
+    //
+    //
+    // if (config.settings.parameters) {
+    //   const parameterPromises = layersCollection
+    //     .filter(layerModel => layerModel.get('search.protocol'))
+    //     .map(layerModel => (
+    //       getParameters(layerModel)
+    //         .then(parameters => [layerModel, parameters, null])
+    //         .catch(error => [layerModel, null, error])
+    //     ));
+    //   Promise.all(parameterPromises)
+    //     .then((layersPlusParametersPlusErrors) => {
+    //       const failedLayers = layersPlusParametersPlusErrors
+    //         .filter(layerPlusParameters => layerPlusParameters[2])
+    //         .map(layerPlusParameters => layerPlusParameters[0]);
+    //
+    //       const params = config.settings.parameters
+    //         .map(param => [
+    //           param, layersPlusParametersPlusErrors.filter((layerPlusParameters) => {
+    //             const layerParams = layerPlusParameters[1];
+    //             if (layerParams) {
+    //               return layerParams.find(p => p.type === param.type);
+    //             }
+    //             return null;
+    //           }),
+    //         ])
+    //
+    //         // filter out the parameters that are nowhere available
+    //         .filter(paramPlusApplicableLayers => paramPlusApplicableLayers[1].length)
+    //
+    //         // combine the parameter settings info with the info from the search services
+    //         .map((paramPlusApplicableLayers) => {
+    //           let param = paramPlusApplicableLayers[0];
+    //           for (let i = 0; i < paramPlusApplicableLayers[1].length; i += 1) {
+    //             const [, layerParameters] = paramPlusApplicableLayers[1][i];
+    //             param = combineParameter(
+    //               param, layerParameters.find(p => p.type === param.type) // eslint-disable-line
+    //             );
+    //           }
+    //           if (paramPlusApplicableLayers[1].length < layersCollection.length) {
+    //             param.onlyAvailableAt = paramPlusApplicableLayers[1].map(layerPlusParameters => (
+    //               layerPlusParameters[0].get('displayName')
+    //             ));
+    //           }
+    //           return param;
+    //         });
+    //
+    //       // const params = [].concat.apply([], extraParameters)
+    //       //   .filter(param => param.type.startsWith('eo:'))
+    //       //   .map((param) => {
+    //       //     const paramSetting = config.settings.parameters[param.type];
+    //       //     if (paramSetting) {
+    //       //       return {
+    //       //         type: param.type,
+    //       //         name: param.name,
+    //       //         mandatory: param.mandatory,
+    //       //         options: param.options,
+    //       //         minExclusive: param.minExclusive,
+    //       //         maxExclusive: param.maxExclusive,
+    //       //         minInclusive: param.minInclusive,
+    //       //         maxInclusive: param.maxInclusive,
+    //       //         ...paramSetting,
+    //       //       };
+    //       //     }
+    //       //     return param;
+    //       //   });
+    //
+    //       this.onRun(
+    //         config, baseLayersCollection, layersCollection, overlayLayersCollection,
+    //         params, failedLayers
+    //       );
+    //     });
+    // } else {
+    //   this.onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, [], []);
+    // }
   },
 
-  onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection,
-    extraParameters, failedLayers) {
+  onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, failedLayers) {
     const settings = config.settings;
 
     // allow custom translations from the settings
@@ -256,11 +295,12 @@ window.Application = Marionette.Application.extend({
       .filter(layerModel => layerModel.get('search.protocol'))
       .map(layerModel => new SearchModel({
         layerModel,
-        filtersModel,
+        filtersModel: new FiltersModel({ }),
         mapModel,
         defaultPageSize: 50,
         maxCount: layerModel.get('search.searchLimit'),
         loadMore: layerModel.get('search.loadMore'),
+        extraParameters: layerModel.get('search.extraParameters'),
         debounceTime: settings.searchDebounceTime,
       }));
     const searchCollection = new Backbone.Collection(searchModels);
@@ -364,8 +404,7 @@ window.Application = Marionette.Application.extend({
           filtersModel,
           mapModel,
           highlightModel,
-          layersCollection,
-          extraParameters,
+          searchCollection,
         }),
       }, {
         name: 'Layers',
