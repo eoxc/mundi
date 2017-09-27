@@ -440,6 +440,7 @@ window.Application = Marionette.Application.extend({
         name: 'Download',
         hasInfo: true,
         view: new DownloadSelectionView({
+          mapModel,
           filtersModel,
           highlightModel,
           collection: searchCollection,
