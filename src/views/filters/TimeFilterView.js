@@ -18,10 +18,8 @@ const TimeFilterView = Marionette.ItemView.extend({
 
   initialize(options) {
     this.mapModel = options.mapModel;
-    this.filtersModel = options.filtersModel;
-
     this.listenTo(this.mapModel, 'change:time', this.onMapTimeChanged);
-    this.listenTo(this.filtersModel, 'change:time', this.onFiltersTimeChanged);
+    this.listenTo(this.mapModel, 'change:extendedTime', this.onMapExtendedTimeChanged);
   },
 
   // Marionette event listeners
@@ -57,7 +55,7 @@ const TimeFilterView = Marionette.ItemView.extend({
   },
 
   onAttach() {
-    this.onFiltersTimeChanged(this.filtersModel);
+    this.onMapExtendedTimeChanged(this.mapModel);
     this.onMapTimeChanged();
   },
 
@@ -70,18 +68,18 @@ const TimeFilterView = Marionette.ItemView.extend({
     if (!this.updatingTime && start && end) {
       const startDate = start.toDate();
       const endDate = end.toDate();
-      this.filtersModel.set('time',
+      this.mapModel.set('extendedTime',
         (startDate < endDate) ? [startDate, endDate] : [endDate, startDate]
       );
     }
   },
 
   onShowTimeClicked() {
-    this.filtersModel.show(this.filtersModel.get('time'));
+    this.mapModel.show(this.mapModel.get('extendedTime'));
   },
 
   onClearTimeClicked() {
-    this.filtersModel.unset('time');
+    this.mapModel.unset('extendedTime');
   },
 
   // model event listeners
@@ -93,7 +91,7 @@ const TimeFilterView = Marionette.ItemView.extend({
     this.$('.map-time-end').val(moment.utc(time[1]).format('YYYY-MM-DD HH:mm:ss'));
 
     // if a filter is set explicitly, do not update the text
-    if (this.filtersModel.get('time')) {
+    if (this.mapModel.get('extendedTime')) {
       return;
     }
 
@@ -105,8 +103,8 @@ const TimeFilterView = Marionette.ItemView.extend({
     this.updatingTime = false;
   },
 
-  onFiltersTimeChanged(filtersModel) {
-    const time = filtersModel.get('time');
+  onMapExtendedTimeChanged(mapModel) {
+    const time = mapModel.get('extendedTime');
     this.updatingTime = true;
     if (time) {
       this.$('.datetime.start').data('DateTimePicker').date(moment.utc(time[0]));

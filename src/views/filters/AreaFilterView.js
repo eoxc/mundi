@@ -28,10 +28,9 @@ const AreaFilterView = Marionette.LayoutView.extend({
   initialize(options) {
     this.mapModel = options.mapModel;
     this.highlightModel = options.highlightModel;
-    this.filtersModel = options.filtersModel;
     this.featureListCollection = new Backbone.Collection();
 
-    this.listenTo(this.filtersModel, 'change:area', this.onFiltersAreaChanged);
+    this.listenTo(this.mapModel, 'change:area', this.onMapAreaChanged);
     this.listenTo(this.mapModel, 'change:tool', this.onMapToolChanged);
     this.listenTo(this.mapModel, 'change:bbox', this.onMapBBOXChanged);
   },
@@ -42,7 +41,6 @@ const AreaFilterView = Marionette.LayoutView.extend({
     this.showChildView('featureList', new FeatureListView({
       mapModel: this.mapModel,
       highlightModel: this.highlightModel,
-      filtersModel: this.filtersModel,
       collection: this.featureListCollection,
     }));
 
@@ -58,7 +56,7 @@ const AreaFilterView = Marionette.LayoutView.extend({
       .map(parseFloat);
 
     if (coordinates.reduce((prev, current) => prev && !isNaN(current), true)) {
-      this.filtersModel.set('area', {
+      this.mapModel.set('area', {
         geometry: { type: 'Point', coordinates },
         type: 'Feature',
       });
@@ -72,7 +70,7 @@ const AreaFilterView = Marionette.LayoutView.extend({
       .map(parseFloat);
 
     if (bbox.reduce((prev, current) => prev && !isNaN(current), true)) {
-      this.filtersModel.set('area', bbox);
+      this.mapModel.set('area', bbox);
     }
   },
 
@@ -91,12 +89,12 @@ const AreaFilterView = Marionette.LayoutView.extend({
   onToolClearClicked(event) {
     event.preventDefault();
     this.mapModel.set('tool', null);
-    this.filtersModel.set('area', null);
+    this.mapModel.set('area', null);
   },
 
   onToolShowFeatureClicked(event) {
     event.preventDefault();
-    const area = this.filtersModel.get('area');
+    const area = this.mapModel.get('area');
     this.mapModel.show(area);
   },
 
@@ -129,8 +127,8 @@ const AreaFilterView = Marionette.LayoutView.extend({
 
   // model event listeners
 
-  onFiltersAreaChanged(filtersModel) {
-    const area = filtersModel.get('area');
+  onMapAreaChanged(mapModel) {
+    const area = mapModel.get('area');
 
     if (Array.isArray(area) && area.length === 4) {
       const [minx, miny, maxx, maxy] = area;

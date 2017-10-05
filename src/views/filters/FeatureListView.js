@@ -21,7 +21,6 @@ const FeatureListView = Marionette.CompositeView.extend({
   initialize(options) {
     this.mapModel = options.mapModel;
     this.highlightModel = options.highlightModel;
-    this.filtersModel = options.filtersModel;
     this.listenTo(this.collection, 'reset', this.onCollectionReset);
   },
 
@@ -57,7 +56,7 @@ const FeatureListView = Marionette.CompositeView.extend({
   },
 
   onItemClicked(childView) {
-    this.filtersModel.set('area', childView.model.attributes);
+    this.mapModel.set('area', childView.model.attributes);
     this.dropdownMenu.hide();
   },
 
