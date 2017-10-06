@@ -10,9 +10,11 @@ import ExtraParameterPlainView from './ExtraParameterPlainView';
 const ExtraParametersListView = Marionette.CompositeView.extend({
   template,
   templateHelpers() {
+    const layerModel = this.searchModel.get('layerModel');
     return {
-      name: this.searchModel.get('layerModel').get('displayName'),
-      id: this.searchModel.get('layerModel').get('id'),
+      name: layerModel.get('displayName'),
+      id: layerModel.get('id'),
+      visible: layerModel.get('display.visible'),
     };
   },
   className: 'panel panel-default',
@@ -20,6 +22,7 @@ const ExtraParametersListView = Marionette.CompositeView.extend({
   initialize(options) {
     this.searchModel = options.searchModel;
     this.filtersModel = options.searchModel.get('filtersModel');
+    this.listenTo(this.searchModel, 'change display.visible', this.render);
   },
 
   childViewContainer() {
