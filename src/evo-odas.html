@@ -3,8 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>EVO-ODAS EOxC Demo</title>
-  <link rel="stylesheet" href="static/code-de.css"/>
-  <link rel="stylesheet" href="static/fonts.css"/>
   <style>
     #header .navbar.static {
         top: 0 !important;
@@ -26,20 +24,20 @@ var config = {
     "settings": {
         "tutorial": "once",
         "language": "en",
-        "center": [-30, 10],
-        "zoom": 2,
+        "center": [14, 48],
+        "zoom": 5,
         "timeDomain": [
             "2016-01-01T00:00:00Z",
-            "2017-04-30T23:59:59Z"
+            "2017-12-31T23:59:59Z"
         ],
         "constrainTimeDomain": true,
         "displayTimeDomain": [
-            "2017-01-01T00:00:00Z",
-            "2017-04-30T23:59:59Z"
+            "2016-01-01T00:00:00Z",
+            "2017-12-31T23:59:59Z"
         ],
         "selectedTimeDomain": [
-            "2017-02-01T00:00:00Z",
-            "2017-04-30T23:59:59Z"
+            "2017-05-01T00:00:00Z",
+            "2017-06-30T23:59:59Z"
         ],
         // "displayInterval": "P17Y",
         // "selectableInterval": "P1Y",
@@ -88,11 +86,11 @@ var config = {
             "visible": true,
             "protocol": "WMTS",
             "urls": [
-                "http://a.tiles.maps.eox.at/wmts/",
-                "http://b.tiles.maps.eox.at/wmts/",
-                "http://c.tiles.maps.eox.at/wmts/",
-                "http://d.tiles.maps.eox.at/wmts/",
-                "http://e.tiles.maps.eox.at/wmts/"
+                "//a.tiles.maps.eox.at/wmts/",
+                "//b.tiles.maps.eox.at/wmts/",
+                "//c.tiles.maps.eox.at/wmts/",
+                "//d.tiles.maps.eox.at/wmts/",
+                "//e.tiles.maps.eox.at/wmts/"
             ],
             "matrixSet": "WGS84",
             "format": "image/png",
@@ -108,17 +106,37 @@ var config = {
             "visible": false,
             "protocol": "WMTS",
             "urls": [
-                "http://a.tiles.maps.eox.at/wmts/",
-                "http://b.tiles.maps.eox.at/wmts/",
-                "http://c.tiles.maps.eox.at/wmts/",
-                "http://d.tiles.maps.eox.at/wmts/",
-                "http://e.tiles.maps.eox.at/wmts/"
+                "//a.tiles.maps.eox.at/wmts/",
+                "//b.tiles.maps.eox.at/wmts/",
+                "//c.tiles.maps.eox.at/wmts/",
+                "//d.tiles.maps.eox.at/wmts/",
+                "//e.tiles.maps.eox.at/wmts/"
             ],
             "matrixSet": "WGS84",
             "format": "image/png",
             "projection": "EPSG:4326",
             "style": "default",
             "attribution": "Terrain { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> }"
+        }
+    },  {
+        "id": "s2cloudless",
+        "displayName": "Sentinel-2 cloudless",
+        "display": {
+            "id": "s2cloudless",
+            "visible": false,
+            "protocol": "WMTS",
+            "urls": [
+                "//a.s2maps-tiles.eu/wmts/",
+                "//b.s2maps-tiles.eu/wmts/",
+                "//c.s2maps-tiles.eu/wmts/",
+                "//d.s2maps-tiles.eu/wmts/",
+                "//e.s2maps-tiles.eu/wmts/"
+            ],
+            "matrixSet": "WGS84",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "style": "default",
+            "attribution": "<a xmlns:dct=\"http://purl.org/dc/terms/\" href=\"https://s2maps.eu\" property=\"dct:title\">Sentinel-2 cloudless - https://s2maps.eu</a> by <a xmlns:cc=\"http://creativecommons.org/ns#\" href=\"https://eox.at\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">EOX IT Services GmbH</a> (Contains modified Copernicus Sentinel data 2016 &amp; 2017)"
         }
     }, {
         "id": "bluemarble",
@@ -128,11 +146,11 @@ var config = {
             "visible": false,
             "protocol": "WMTS",
             "urls": [
-                "http://a.tiles.maps.eox.at/wmts/",
-                "http://b.tiles.maps.eox.at/wmts/",
-                "http://c.tiles.maps.eox.at/wmts/",
-                "http://d.tiles.maps.eox.at/wmts/",
-                "http://e.tiles.maps.eox.at/wmts/"
+                "//a.tiles.maps.eox.at/wmts/",
+                "//b.tiles.maps.eox.at/wmts/",
+                "//c.tiles.maps.eox.at/wmts/",
+                "//d.tiles.maps.eox.at/wmts/",
+                "//e.tiles.maps.eox.at/wmts/"
             ],
             "matrixSet": "WGS84",
             "format": "image/png",
@@ -142,26 +160,27 @@ var config = {
         }
     }],
     "layers": [{
-        "id": "Sentinel-2_EOxServer",
-        "displayName": "Sentinel-2 EOxServer",
+        "id": "Sentinel-1-EOxServer-ows.eox.at",
+        "displayName": "Sentinel-1 EOxServer ows.eox.at",
         "displayColor": "rgba(255, 153, 0, 1)",
         "display": {
-            "id": "S2A_OPER",
-            "visible": true,
+            "id": "sentinel1",
+            "visible": false,
             "protocol": "WMS",
             "urls": [
-                "http://localhost:8000/ows"
+                "//ows.eox.at/evo-odas/eoxserver/ows"
             ],
             "matrixSet": "WGS84",
             "format": "image/png",
             "projection": "EPSG:4326",
             "style": "default",
-            "attribution": "Copyright (C) European Space Agency - ESA"
+            "attribution": "Copyright (C) European Space Agency - ESA",
+            "cqlParameterName": "cql"
         },
         "search": {
-            "id": "S2A_OPER",
+            "id": "sentinel1",
             "protocol": "OpenSearch",
-            "url": "http://localhost:8000/opensearch/collections/S2A_OPER",
+            "url": "//ows.eox.at/evo-odas/eoxserver/opensearch/collections/sentinel1/",
             "format": "application\/atom+xml",
             "method": "GET",
             "lightweightBuckets": true,
@@ -169,27 +188,28 @@ var config = {
             "histogramBinCount": 30,
             "searchLimit": 200
         }
-    },{
-        "id": "Sentinel-2_GeoServer",
-        "displayName": "Sentinel-2 GeoServer",
+    }, {
+        "id": "Sentinel-2-EOxServer-ows.eox.at",
+        "displayName": "Sentinel-2 EOxServer ows.eox.at",
         "displayColor": "rgba(16, 150, 24, 1)",
         "display": {
-            "id": "sentinel2:TCI",
+            "id": "sentinel2",
             "visible": true,
             "protocol": "WMS",
             "urls": [
-                "http://cloudsdi.geo-solutions.it:80/geoserver/ows?SERVICE=WMS"
+                "//ows.eox.at/evo-odas/eoxserver/ows"
             ],
             "matrixSet": "WGS84",
             "format": "image/png",
             "projection": "EPSG:4326",
             "style": "default",
-            "attribution": "Copyright (C) European Space Agency - ESA"
+            "attribution": "Copyright (C) European Space Agency - ESA",
+            "cqlParameterName": "cql"
         },
         "search": {
             "id": "SENTINEL2",
             "protocol": "OpenSearch",
-            "url": "http://cloudsdi.geo-solutions.it/geoserver/oseo/description?parentid=SENTINEL2",
+            "url": "//ows.eox.at/evo-odas/eoxserver/opensearch/collections/sentinel2/",
             "format": "application\/atom+xml",
             "method": "GET",
             "lightweightBuckets": true,
@@ -197,17 +217,153 @@ var config = {
             "histogramBinCount": 30,
             "searchLimit": 200
         }
-
-        // "displayColor": "rgba(51, 102, 204, 1)",
-        // "displayColor": "rgba(220, 57, 18, 1)",
-        // "displayColor": "rgba(153, 0, 153, 1)",
-        // "displayColor": "rgba(0, 153, 198, 1)",
-        // "displayColor": "rgba(221, 68, 119, 1)",
-// 102, 170, 0
-// 184, 46, 46
-// 49, 99, 149
-
-    }],
+    }, {
+        "id": "Landsat-8-EOxServer-ows.eox.at",
+        "displayName": "Landsat 8 EOxServer ows.eox.at",
+        "displayColor": "rgba(51, 102, 204, 1)",
+        "display": {
+            "id": "landsat8",
+            "visible": false,
+            "protocol": "WMS",
+            "urls": [
+                "//ows.eox.at/evo-odas/eoxserver/ows"
+            ],
+            "matrixSet": "WGS84",
+            "format": "image/png",
+            "projection": "EPSG:4326",
+            "style": "default",
+            "attribution": "Copyright (C) European Space Agency - ESA",
+            "cqlParameterName": "cql"
+        },
+        "search": {
+            "id": "landsat8",
+            "protocol": "OpenSearch",
+            "url": "//ows.eox.at/evo-odas/eoxserver/opensearch/collections/landsat8/",
+            "format": "application\/atom+xml",
+            "method": "GET",
+            "lightweightBuckets": true,
+            "histogramThreshold": 200,
+            "histogramBinCount": 30,
+            "searchLimit": 200
+        }
+    },
+    // {
+    //     "id": "Sentinel-1_GeoServer CloudSDI",
+    //     "displayName": "Sentinel-1 GeoServer CloudSDI",
+    //     "displayColor": "rgba(220, 57, 18, 1)",
+    //     "display": {
+    //         "id": "test:SENTINEL1_MOSAIC",
+    //         "visible": true,
+    //         "protocol": "WMS",
+    //         "urls": [
+    //             "http://cloudsdi.geo-solutions.it/geoserver/ows?SERVICE=WMS"
+    //         ],
+    //         "matrixSet": "WGS84",
+    //         "format": "image/png",
+    //         "projection": "EPSG:4326",
+    //         "style": "default",
+    //         "attribution": "Copyright (C) European Space Agency - ESA"
+    //     },
+    //     "search": {
+    //         "id": "SENTINEL1",
+    //         "protocol": "OpenSearch",
+    //         "url": "http://cloudsdi.geo-solutions.it/geoserver/oseo/description?parentid=SENTINEL1",
+    //         "format": "application\/atom+xml",
+    //         "method": "GET",
+    //         "lightweightBuckets": true,
+    //         "histogramThreshold": 200,
+    //         "histogramBinCount": 30,
+    //         "searchLimit": 200
+    //     }
+    // },
+    // {
+    //     "id": "Sentinel-2_GeoServer CloudSDI",
+    //     "displayName": "Sentinel-2 GeoServer CloudSDI",
+    //     "displayColor": "rgba(153, 0, 153, 1)",
+    //     "display": {
+    //         "id": "geosolutions:SENTINEL2_MOSAIC",
+    //         "visible": true,
+    //         "protocol": "WMS",
+    //         "urls": [
+    //             "http://cloudsdi.geo-solutions.it/geoserver/ows?SERVICE=WMS"
+    //         ],
+    //         "matrixSet": "WGS84",
+    //         "format": "image/png",
+    //         "projection": "EPSG:4326",
+    //         "style": "default",
+    //         "attribution": "Copyright (C) European Space Agency - ESA"
+    //     },
+    //     "search": {
+    //         "id": "SENTINEL2",
+    //         "protocol": "OpenSearch",
+    //         "url": "http://cloudsdi.geo-solutions.it/geoserver/oseo/description?parentid=SENTINEL2",
+    //         "format": "application\/atom+xml",
+    //         "method": "GET",
+    //         "lightweightBuckets": true,
+    //         "histogramThreshold": 200,
+    //         "histogramBinCount": 30,
+    //         "searchLimit": 200
+    //     }
+    // },
+    // {
+    //     "id": "Sentinel-1_GeoServer ODA",
+    //     "displayName": "Sentinel-1 GeoServer ODA",
+    //     "displayColor": "rgba(0, 153, 198, 1)",
+    //     "display": {
+    //         "id": "evoodas:SENTINEL1",
+    //         "visible": true,
+    //         "protocol": "WMS",
+    //         "urls": [
+    //             "http://oda.dlr.de/geoserver/ows?SERVICE=WMS"
+    //         ],
+    //         "matrixSet": "WGS84",
+    //         "format": "image/png",
+    //         "projection": "EPSG:4326",
+    //         "style": "default",
+    //         "attribution": "Copyright (C) European Space Agency - ESA"
+    //     },
+    //     "search": {
+    //         "id": "SENTINEL1",
+    //         "protocol": "OpenSearch",
+    //         "url": "http://oda.dlr.de/geoserver/oseo/description?parentid=SENTINEL1",
+    //         "format": "application\/atom+xml",
+    //         "method": "GET",
+    //         "lightweightBuckets": true,
+    //         "histogramThreshold": 200,
+    //         "histogramBinCount": 30,
+    //         "searchLimit": 200
+    //     }
+    // },
+    // {
+    //     "id": "Sentinel-2_GeoServer ODA",
+    //     "displayName": "Sentinel-2 GeoServer ODA",
+    //     "displayColor": "rgba(221, 68, 119, 1)",
+    //     "display": {
+    //         "id": "evoodas:SENTINEL2_V2",
+    //         "visible": true,
+    //         "protocol": "WMS",
+    //         "urls": [
+    //             "http://oda.dlr.de/geoserver/ows?SERVICE=WMS"
+    //         ],
+    //         "matrixSet": "WGS84",
+    //         "format": "image/png",
+    //         "projection": "EPSG:4326",
+    //         "style": "default",
+    //         "attribution": "Copyright (C) European Space Agency - ESA"
+    //     },
+    //     "search": {
+    //         "id": "SENTINEL2",
+    //         "protocol": "OpenSearch",
+    //         "url": "http://oda.dlr.de/geoserver/oseo/description?parentid=SENTINEL2",
+    //         "format": "application\/atom+xml",
+    //         "method": "GET",
+    //         "lightweightBuckets": true,
+    //         "histogramThreshold": 200,
+    //         "histogramBinCount": 30,
+    //         "searchLimit": 200
+    //     }
+    // },
+    ],
     "overlayLayers": [{
         "id": "coastline",
         "displayName": "Coastline",
@@ -216,11 +372,11 @@ var config = {
             "visible": false,
             "protocol": "WMTS",
             "urls": [
-                "http://a.tiles.maps.eox.at/wmts/",
-                "http://b.tiles.maps.eox.at/wmts/",
-                "http://c.tiles.maps.eox.at/wmts/",
-                "http://d.tiles.maps.eox.at/wmts/",
-                "http://e.tiles.maps.eox.at/wmts/"
+                "//a.tiles.maps.eox.at/wmts/",
+                "//b.tiles.maps.eox.at/wmts/",
+                "//c.tiles.maps.eox.at/wmts/",
+                "//d.tiles.maps.eox.at/wmts/",
+                "//e.tiles.maps.eox.at/wmts/"
             ],
             "matrixSet": "WGS84",
             "style": "default",
@@ -236,11 +392,11 @@ var config = {
             "visible": false,
             "protocol": "WMTS",
             "urls": [
-                "http://a.tiles.maps.eox.at/wmts/",
-                "http://b.tiles.maps.eox.at/wmts/",
-                "http://c.tiles.maps.eox.at/wmts/",
-                "http://d.tiles.maps.eox.at/wmts/",
-                "http://e.tiles.maps.eox.at/wmts/"
+                "//a.tiles.maps.eox.at/wmts/",
+                "//b.tiles.maps.eox.at/wmts/",
+                "//c.tiles.maps.eox.at/wmts/",
+                "//d.tiles.maps.eox.at/wmts/",
+                "//e.tiles.maps.eox.at/wmts/"
             ],
             "matrixSet": "WGS84",
             "style": "default",

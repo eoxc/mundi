@@ -139,7 +139,36 @@ var config = {
                 "histogramThreshold": 500,
                 "lightweightBuckets": true,
                 "searchLimit": 150,
-                "loadMore":150
+                "loadMore":150,
+                "parameters": [
+                    {
+                        "type": "eo:productionStatus"
+                    },
+                    {
+                        "type": "eo:orbitDirection"
+                    },
+                    {
+                        "type": "eo:orbitNumber"
+                    },
+                    {
+                        "type": "eo:processingLevel"
+                    },
+                    {
+                        "type": "eo:polarisationMode"
+                    },
+                    {
+                        "type": "eo:polarisationChannels"
+                    },
+                    {
+                        "type": "eo:antennaLookDirection"
+                    },
+                    {
+                        "type": "eo:minimumIncidenceAngle"
+                    },
+                    {
+                        "type": "eo:maximumIncidenceAngle"
+                    }
+                ]
             },
             "download": {
                 "protocol": "OpenSearch"
@@ -172,7 +201,36 @@ var config = {
                 "histogramThreshold": 500,
                 "lightweightBuckets": true,
                 "searchLimit": 150,
-                "loadMore":150
+                "loadMore":150,
+                "parameters": [
+                    {
+                        "type": "eo:productionStatus"
+                    },
+                    {
+                        "type": "eo:orbitDirection"
+                    },
+                    {
+                        "type": "eo:orbitNumber"
+                    },
+                    {
+                        "type": "eo:processingLevel"
+                    },
+                    {
+                        "type": "eo:polarisationMode"
+                    },
+                    {
+                        "type": "eo:polarisationChannels"
+                    },
+                    {
+                        "type": "eo:antennaLookDirection"
+                    },
+                    {
+                        "type": "eo:minimumIncidenceAngle"
+                    },
+                    {
+                        "type": "eo:maximumIncidenceAngle"
+                    }
+                ]
             },
             "download": {
                 "protocol": "OpenSearch"
@@ -205,7 +263,36 @@ var config = {
                 "histogramThreshold": 500,
                 "lightweightBuckets": true,
                 "searchLimit": 150,
-                "loadMore":150
+                "loadMore":150,
+                "parameters": [
+                    {
+                        "type": "eo:productionStatus"
+                    },
+                    {
+                        "type": "eo:orbitDirection"
+                    },
+                    {
+                        "type": "eo:orbitNumber"
+                    },
+                    {
+                        "type": "eo:processingLevel"
+                    },
+                    {
+                        "type": "eo:polarisationMode"
+                    },
+                    {
+                        "type": "eo:polarisationChannels"
+                    },
+                    {
+                        "type": "eo:antennaLookDirection"
+                    },
+                    {
+                        "type": "eo:minimumIncidenceAngle"
+                    },
+                    {
+                        "type": "eo:maximumIncidenceAngle"
+                    }
+                ]
             },
             "download": {
                 "protocol": "OpenSearch"
@@ -238,7 +325,38 @@ var config = {
                 "histogramThreshold": 500,
                 "lightweightBuckets": true,
                 "searchLimit": 600,
-                "loadMore":600
+                "loadMore":600,
+                "parameters": [
+                    {
+                        "type": "eo:productionStatus"
+                    },
+                    {
+                        "max": 100,
+                        "min": 0,
+                        "range": true,
+                        "type": "eo:cloudCover",
+                        "title": "Cloud Coverage in percent"
+                    },
+                    {
+                        "type": "eo:orbitDirection"
+                    },
+                    {
+                        "type": "eo:orbitNumber"
+                    },
+                    {
+                        "type": "eo:resolution",
+                        "options": [{
+                            "label": "10m",
+                            "value": "10",
+                        }, {
+                            "label": "20m",
+                            "value": "20",
+                        }, {
+                            "label": "60m",
+                            "value": "60",
+                        }]
+                    }
+                ]
             },
             "download": {
                 "protocol": "OpenSearch"
@@ -250,15 +368,22 @@ var config = {
             "displayName": "Sentinel-2 MSI - Test Environment",
             "displayColor": "rgba(153, 0, 153, 1)",
             "display": {
-                "id": "S2_MSI_L1C",
+                "id": "S2_MSI_L1C_GRANULES",
+//layers=S2_MSI_L1C_10m,S2_MSI_L1C_GRANULES
+//&styles=Sentinel2_TCI_105,Sentinel2_fp_scale%20
+//&cql_filter=INCLUDE;cloudcover%20BETWEEN%200%20AND%20100&DIM_cloudcover=0/100
                 "visible": false,
                 "protocol": "WMS",
                 "urls": [
-                    "http://ows.eox.at/code-de_geoservice/Sentinel2/wms?"
+                    "https://e.tiles.code-de.org/Sentinel2/wms?"
                 ],
                 "format": "image\/png",
                 "projection": "EPSG:4326",
                 "style": "default",
+                "cqlParameterName": "cql_filter",
+                "cqlMapping": {
+                    "eo:cloudCover" : "cloudcover"
+                },
                 "attribution": "Nutzungsbedingungen: https:\/\/scihub.copernicus.eu\/twiki\/pub\/SciHubWebPortal\/TermsConditions\/TC_Sentinel_Data_31072014.pdf"
             },
             "search": {
@@ -271,7 +396,38 @@ var config = {
                 "histogramThreshold": 500,
                 "lightweightBuckets": true,
                 "searchLimit": 600,
-                "loadMore":600
+                "loadMore":600,
+                "parameters": [
+                    {
+                        "type": "eo:productionStatus"
+                    },
+                    {
+                        "max": 100,
+                        "min": 0,
+                        "range": true,
+                        "type": "eo:cloudCover",
+                        "title": "Cloud Coverage in percent"
+                    },
+                    {
+                        "type": "eo:orbitDirection"
+                    },
+                    {
+                        "type": "eo:orbitNumber"
+                    },
+                    {
+                        "type": "eo:resolution",
+                        "options": [{
+                            "label": "10m",
+                            "value": "10",
+                        }, {
+                            "label": "20m",
+                            "value": "20",
+                        }, {
+                            "label": "60m",
+                            "value": "60",
+                        }]
+                    }
+                ]
             },
             "download": {
                 "protocol": "OpenSearch"
@@ -325,8 +481,8 @@ var config = {
     "settings": {
         //"displayInterval": "P1M",
         "displayTimeDomain": [
-            "2017-04-12T11:56:33Z",
-            "2017-05-12T11:56:33Z"
+            "2017-01-01T00:00:00Z",
+            "2017-12-31T23:59:59Z"
         ],
         "footprintFillColor": "rgba(0, 0, 0, 0.2)",
         "footprintStrokeColor": "rgba(0, 0, 0, 1)",
@@ -339,71 +495,16 @@ var config = {
         "highlightStrokeColor": "rgba(246, 182, 0, 1)",
         "highlightStrokeWidth": 3,
         "maxTooltips": 1,
-        "parameters": [
-            {
-                "type": "eo:productionStatus"
-            },
-            {
-                "max": 100,
-                "min": 0,
-                "range": true,
-                "type": "eo:cloudCover",
-                "title": "Cloud Coverage in percent"
-            },
-            {
-                "type": "eo:orbitDirection"
-            },
-            {
-                "type": "eo:orbitNumber"
-            },
-            {
-                "type": "eo:resolution",
-                "options": [{
-                    "label": "10m",
-                    "value": "10",
-                }, {
-                    "label": "20m",
-                    "value": "20",
-                }, {
-                    "label": "60m",
-                    "value": "60",
-                }]
-            },
-            {
-                "type": "eo:platformSerialIdentifier"
-            },
-            {
-                "type": "eo:processingLevel"
-            },
-            {
-                "type": "eo:processingVersion"
-            },
-            {
-                "type": "eo:polarisationMode"
-            },
-            {
-                "type": "eo:polarisationChannels"
-            },
-            {
-                "type": "eo:antennaLookDirection"
-            },
-            {
-                "type": "eo:minimumIncidenceAngle"
-            },
-            {
-                "type": "eo:maximumIncidenceAngle"
-            }
-        ],
         "rightPanelOpen": true,
         "leftPanelOpen": true,
         "selectableInterval": "P1M",
         "selectedTimeDomain": [
-            "2017-05-09T11:56:33Z",
-            "2017-05-12T11:56:33Z"
+            "2017-08-01T00:00:00Z",
+            "2017-08-05T23:59:59Z"
         ],
         "timeDomain": [
-            "2017-05-09T11:56:33Z",
-            "2017-05-12T11:56:33Z"
+            "2017-01-01T00:00:00Z",
+            "2017-12-31T23:59:59Z"
         ],
         "contrainTimeDomain": true,
         "zoom": 5,
@@ -427,7 +528,7 @@ var config = {
                 "Cloud Cover": "Wolkenbedeckung",
                 "Cloud Coverage in percent": "Prozentuelle Wolkenbedeckung",
                 "Production Status": "Produktionsstatus",
-                "Data acquisition has been rejected for whatever reason": "Datenerfassung wurde aus welchen Grund auch immer abgelehnt",
+                "Data acquisition has been rejected for whatever reason": "Datenerfassung wurde aus welchem Grund auch immer abgelehnt",
                 "Potential data acquisition": "Potentielle Datenerfassung",
                 "Data acquisition planned": "Datenerfassung geplant",
                 "Data acquisition failed": "Datenerfassung fehlgeschlagen",
@@ -439,7 +540,6 @@ var config = {
                 "Resolution": "Auflösung",
                 "Platform Serial Identifier": "Plattform Identifikation",
                 "Processing Level": "Prozessierungsebene",
-                "Processing Version": "Prozessierungsversion",
                 "Polarisation Mode": "Polarisationsmodus",
                 "Polarisation Channels": "Polarisationskanäle",
                 "UNDEFINED": "UNDEFINIERT",
