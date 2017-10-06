@@ -406,7 +406,7 @@
                         },
                         "cqlMapping": {
                             "description": "The mapping of the search filter name to the attribute names used for CQL.",
-                            "type": "string"
+                            "type": "object"
                         }
                     },
                     "required": ["id", "protocol", "format", "style"],
@@ -493,6 +493,30 @@
                         }
                     },
                     "required": ["protocol", "url"]
+                },
+                "fullResolution": {
+                    "description": "Configuration settings for the full resolution download",
+                    "type": "object",
+                    "properties": {
+                        "protocol": {
+                            "description": "The protocol used for full resolution download.",
+                            "type": "string",
+                            "enum": ["EO-WCS"],
+                        },
+                        "url": {
+                            "description": "The base-URL to send full resolution download requests to.",
+                            "type": "string",
+                            "format": "uri"
+                        },
+                        "cqlParameterName": {
+                            "description": "The name of the CQL parameter name for WCS requests. When set, the CQL filtering is enabled for this layer.",
+                            "type": "string"
+                        },
+                        "cqlMapping": {
+                            "description": "The mapping of the search filter name to the attribute names used for CQL.",
+                            "type": "object"
+                        }
+                    }
                 }
             },
             "required": ["id", "displayName", "display"],
