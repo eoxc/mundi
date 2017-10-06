@@ -431,6 +431,16 @@ var config = {
             },
             "download": {
                 "protocol": "OpenSearch"
+            },
+            "fullResolution": {
+                "protocol": "WCS",
+                "id": "Sentinel2__S2_MSI_L1C_10m",
+                "url": "http://d.tiles.code-de.org/Sentinel2/wcs?",
+                "cqlParameterName": "cql_filter",
+                "cqlMapping": {
+                    "eo:cloudCover" : "cloudcover"
+                },
+                "maxSize": 500,
             }
         }
     ],
