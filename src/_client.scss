@@ -46,7 +46,7 @@ body {
 }
 
 .side-panel {
-    filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.3));
+    // filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.3));
 
     .side-panel-left {
         left: 25px;
@@ -137,7 +137,8 @@ svg.timeslider,
 
 .side-panel.in,
 .side-panel.out {
-    background: fade-out($c_hi,.5);
+    // background: fade-out($c_hi,1.0);
+    background: $c_hi;
 }
 
 .side-panel-content {
@@ -271,7 +272,8 @@ input {
 
   svg.timeslider {
     border: none !important;
-    filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.3));
+    opacity: 1.0;
+    // filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.3));
 
     .brush .extent {
       fill: $c_lo;
@@ -295,7 +297,7 @@ input {
     }
 
     &.loading {
-      opacity: 0.8;
+      opacity: 1.0;
     }
   }
 }
