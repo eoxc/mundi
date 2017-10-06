@@ -1,6 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
 
+const packageJson = require('./package.json');
+const eoxcPackageJson = require('eoxc/package.json');
+
 module.exports = {
   entry: {
     'code-de': ['babel-polyfill', './src/preload.js', './src/main.js'],
@@ -67,6 +70,9 @@ module.exports = {
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
     }),
+    new webpack.BannerPlugin(
+      `CODE-DE version: ${packageJson.version}\neoxc version: ${eoxcPackageJson.version}`
+    ),
   ],
   postcss() {
     return [
