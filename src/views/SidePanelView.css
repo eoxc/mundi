@@ -59,8 +59,6 @@
 .toggle-side-panel-out {
   opacity: 1;
   top: 20px;
-  border: 1px solid black;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39);
 }
 
 .toggle-side-panel-out.out {
@@ -101,6 +99,10 @@
   min-width: 20px;
   padding-left: 5px;
   display: inline-block;
+}
+
+.tab-content {
+  padding-bottom: 5px;
 }
 
 .panel-body {
