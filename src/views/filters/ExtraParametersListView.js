@@ -22,7 +22,7 @@ const ExtraParametersListView = Marionette.CompositeView.extend({
   initialize(options) {
     this.searchModel = options.searchModel;
     this.filtersModel = options.searchModel.get('filtersModel');
-    this.listenTo(this.searchModel, 'change display.visible', this.render);
+    this.listenTo(this.searchModel, 'change display.visible', this.onChangeVisible);
   },
 
   childViewContainer() {
@@ -36,6 +36,14 @@ const ExtraParametersListView = Marionette.CompositeView.extend({
       return ExtraParameterSelectView;
     }
     return ExtraParameterPlainView;
+  },
+
+  onRender() {
+    this.onChangeVisible();
+  },
+
+  onChangeVisible() {
+    this.$el.css('display', this.searchModel.get('layerModel').get('display.visible') ? '' : 'none');
   },
 
   childEvents: {
