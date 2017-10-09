@@ -14,7 +14,6 @@ const ExtraParametersListView = Marionette.CompositeView.extend({
     return {
       name: layerModel.get('displayName'),
       id: layerModel.get('id'),
-      visible: layerModel.get('display.visible'),
     };
   },
   className: 'panel panel-default',

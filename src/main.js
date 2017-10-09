@@ -95,6 +95,7 @@ window.Application = Marionette.Application.extend({
   onConfigLoaded(config) {
     this.config = config;
     i18next.init({
+      nsSeparator: '#',
       lng: this.config.settings.language || 'en',
       fallbackLng: 'en',
       resources: {

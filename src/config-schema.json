@@ -466,6 +466,54 @@
                             "description": "This is the count of elements to be fetched when 'Load more' is clicked.",
                             "type": "number",
                             "default": 50
+                        },
+                        "parameters": {
+                            "description": "Mapping the parameter type (such as eo:processingCenter) to a settings object.",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "type": {
+                                        "description": "The mandatory parameter type. Use the OpenSeach type, e.g: eo:acquisitionStation.",
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "description": "A short description of the parameter, used as a tooltip.",
+                                        "type": "string"
+                                    },
+                                    "options": {
+                                        "description": "Selectable options. Will be rendered as a dropdown.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "label": {
+                                                    "description": "The displayed label of a single option.",
+                                                    "type": "string"
+                                                },
+                                                "value": {
+                                                    "description": "The search value to be sent in requests once selected",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": ["label", "value"]
+                                        }
+                                    },
+                                    "range": {
+                                        "description": "Whether this search parameter shall be rendered as a dual-slider.",
+                                        "type": "boolean",
+                                        "default": false
+                                    },
+                                    "min": {
+                                        "description": "The lower boundary for the range. Mandatory for range parameters.",
+                                        "type": "number"
+                                    },
+                                    "max": {
+                                        "description": "The upper boundary for the range. Mandatory for range parameters.",
+                                        "type": "number"
+                                    }
+                                }
+                            }
                         }
                     },
                     "required": ["protocol", "url"]
@@ -515,6 +563,15 @@
                         "cqlMapping": {
                             "description": "The mapping of the search filter name to the attribute names used for CQL.",
                             "type": "object"
+                        },
+                        "axisNames": {
+                            "description": "The axis names to include the subset in WCS requests.",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "minItems": 2,
+                            "maxItems": 2
                         }
                     }
                 }
