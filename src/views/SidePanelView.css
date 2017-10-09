@@ -1,7 +1,7 @@
 /* by default panels are hidden */
 .side-panel {
   position: absolute;
-  width: 390px;
+  width: 380px;
   top: 20px;
 
   height: -moz-calc(100% - 148px);
@@ -22,11 +22,6 @@
   visibility: visible;
   max-height: 100%;
   opacity: 1;
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid black;
-  border-radius: 4px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39);
-
   transition: visibility 0.5s, opacity 0.5s;
 }
 
@@ -122,7 +117,7 @@
 }
 
 .panel-heading {
-  padding: 10px 5px !important;
+  padding: 5px !important;
 }
 
 .form-group {
@@ -138,10 +133,10 @@
 }
 
 .record-item {
-  width: 112px;
+  width: 110px;
   margin-top: 5px;
-  margin-left: -moz-calc(100% - 3 * 112px) / 4);
-  margin-left: -webkit-calc(100% - 3 * 112px) / 4);
-  margin-left: -o-calc(100% - 3 * 112px) / 4);
-  margin-left: calc((100% - 3 * 112px) / 4);
+  margin-left: -moz-calc(100% - 3 * 110px) / 4);
+  margin-left: -webkit-calc(100% - 3 * 110px) / 4);
+  margin-left: -o-calc(100% - 3 * 110px) / 4);
+  margin-left: calc((100% - 3 * 110px) / 4);
 }
