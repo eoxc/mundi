@@ -368,7 +368,11 @@ var config = {
             "displayName": "Sentinel-2 MSI - Test Environment",
             "displayColor": "rgba(153, 0, 153, 1)",
             "display": {
-                "id": "S2_MSI_L1C_GRANULES",
+                // "id": "S2_MSI_L1C_GRANULES",
+                "ids": [
+                    "S2_MSI_L1C_GRANULES",
+                    "S2_MSI_L1C_10m",
+                ],
 //layers=S2_MSI_L1C_10m,S2_MSI_L1C_GRANULES
 //&styles=Sentinel2_TCI_105,Sentinel2_fp_scale%20
 //&cql_filter=INCLUDE;cloudcover%20BETWEEN%200%20AND%20100&DIM_cloudcover=0/100
@@ -382,7 +386,8 @@ var config = {
                 "style": "default",
                 "cqlParameterName": "cql_filter",
                 "cqlMapping": {
-                    "eo:cloudCover" : "cloudcover"
+                    "eo:cloudCover" : "cloudcover",
+                    "eo:resolution": "resolution",
                 },
                 "attribution": "Nutzungsbedingungen: https:\/\/scihub.copernicus.eu\/twiki\/pub\/SciHubWebPortal\/TermsConditions\/TC_Sentinel_Data_31072014.pdf"
             },
