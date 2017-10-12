@@ -79,5 +79,6 @@ module.exports = {
       require('autoprefixer'),
     ];
   },
+  devtool: 'source-map',
   cache: true,
 };
