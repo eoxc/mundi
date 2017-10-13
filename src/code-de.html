@@ -386,8 +386,7 @@ var config = {
                 "style": "default",
                 "cqlParameterName": "cql_filter",
                 "cqlMapping": {
-                    "eo:cloudCover" : "cloudcover",
-                    "eo:resolution": "resolution",
+                    "eo:cloudCover" : "cloudcover"
                 },
                 "attribution": "Nutzungsbedingungen: https:\/\/scihub.copernicus.eu\/twiki\/pub\/SciHubWebPortal\/TermsConditions\/TC_Sentinel_Data_31072014.pdf"
             },
@@ -443,7 +442,8 @@ var config = {
                 "url": "https://d.tiles.code-de.org/Sentinel2/wcs?",
                 "cqlParameterName": "cql_filter",
                 "cqlMapping": {
-                    "eo:cloudCover" : "cloudcover"
+                    "eo:cloudCover" : "cloudcover",
+                    "time": "time"
                 },
                 "maxSize": 500,
                 "axisNames": ['Long', 'Lat']
