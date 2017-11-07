@@ -13,7 +13,7 @@ const ExtraParametersListView = Marionette.CompositeView.extend({
     const layerModel = this.searchModel.get('layerModel');
     return {
       name: layerModel.get('displayName'),
-      id: layerModel.get('id'),
+      id: layerModel.cid,
     };
   },
   className: 'panel panel-default',
@@ -25,7 +25,7 @@ const ExtraParametersListView = Marionette.CompositeView.extend({
   },
 
   childViewContainer() {
-    return `#collapse-additional-filters-${this.searchModel.get('layerModel').get('id')}`;
+    return `#collapse-additional-filters-${this.searchModel.get('layerModel').cid}`;
   },
 
   getChildView(parameter) {
