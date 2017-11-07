@@ -15,7 +15,7 @@ const RootFiltersView = Marionette.LayoutView.extend({
       .filter(searchModel => searchModel.get('layerModel').get('search.parameters'));
     return {
       searchModelsWithParameters,
-      layerIdsWithParameters: searchModelsWithParameters.map(searchModel => searchModel.get('layerModel').get('id')),
+      layerIdsWithParameters: searchModelsWithParameters.map(searchModel => searchModel.get('layerModel').cid),
     };
   },
   tagName: 'form',
@@ -44,7 +44,7 @@ const RootFiltersView = Marionette.LayoutView.extend({
 
     this.templateHelpers().searchModelsWithParameters.forEach((searchModel) => {
       const layerModel = searchModel.get('layerModel');
-      const layerId = layerModel.get('id');
+      const layerId = layerModel.cid;
       this.addRegion(`extraParameters${layerId}`, `#extra-parameters-${layerId}`);
       this.showChildView(`extraParameters${layerId}`, new ExtraParametersListView(Object.assign({}, options, {
         searchModel,
