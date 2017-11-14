@@ -26,6 +26,7 @@
       <a href="#" role="button" class="btn btn-default btn-sm tool tool-polygon">{{t 'Polygon'}}</a>
     </div>
   </div>
+  {{#if uploadEnabled}}
   <div class="form-group">
     <label for="">{{t 'Upload'}}</label>
     <div class="input-group">
@@ -40,6 +41,7 @@
     </div>
     <div class="feature-list"></div>
   </div>
+  {{/if}}
 
   <div id="selection-wrapper">
     <div class="form-group show-geometry show-point">

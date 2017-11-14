@@ -276,6 +276,7 @@ window.Application = Marionette.Application.extend({
       rightPanelOpen: false,
       downloadFormats: [],
       downloadProjections: [],
+      uploadEnabled: true,
     });
 
     // set up config
@@ -406,6 +407,7 @@ window.Application = Marionette.Application.extend({
           mapModel,
           highlightModel,
           searchCollection,
+          uploadEnabled: settings.uploadEnabled,
         }),
       }, {
         name: 'Layers',
