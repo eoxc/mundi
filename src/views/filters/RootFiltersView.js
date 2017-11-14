@@ -23,6 +23,7 @@ const RootFiltersView = Marionette.LayoutView.extend({
     this.highlightModel = options.highlightModel;
     this.filtersModel = options.filtersModel;
     this.extraParameters = options.extraParameters;
+    this.uploadEnabled = options.uploadEnabled;
   },
 
   onBeforeShow() {
@@ -30,6 +31,7 @@ const RootFiltersView = Marionette.LayoutView.extend({
       mapModel: this.mapModel,
       highlightModel: this.highlightModel,
       filtersModel: this.filtersModel,
+      uploadEnabled: this.uploadEnabled,
     };
     this.showChildView('timeFilter', new TimeFilterView(options));
     this.showChildView('areaFilter', new AreaFilterView(options));

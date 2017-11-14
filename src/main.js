@@ -95,6 +95,7 @@ window.Application = Marionette.Application.extend({
   onConfigLoaded(config) {
     this.config = config;
     i18next.init({
+      nsSeparator: '#',
       lng: this.config.settings.language || 'en',
       fallbackLng: 'en',
       resources: {
@@ -236,6 +237,7 @@ window.Application = Marionette.Application.extend({
       rightPanelOpen: false,
       downloadFormats: [],
       downloadProjections: [],
+      uploadEnabled: true,
     });
 
     // set up config
@@ -366,6 +368,8 @@ window.Application = Marionette.Application.extend({
           highlightModel,
           layersCollection,
           extraParameters,
+          searchCollection,
+          uploadEnabled: settings.uploadEnabled,
         }),
       }, {
         name: 'Layers',

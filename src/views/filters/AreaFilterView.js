@@ -9,6 +9,11 @@ import { parseFeaturesFromFiles } from '../../utils';
 
 const AreaFilterView = Marionette.LayoutView.extend({
   template,
+  templateHelpers() {
+    return {
+      uploadEnabled: this.uploadEnabled,
+    };
+  },
   className: 'panel panel-default',
   events: {
     'change .show-point input': 'onPointInputChange',
@@ -21,14 +26,11 @@ const AreaFilterView = Marionette.LayoutView.extend({
     'change :file': 'onFileChanged',
   },
 
-  regions: {
-    featureList: '.feature-list',
-  },
-
   initialize(options) {
     this.mapModel = options.mapModel;
     this.highlightModel = options.highlightModel;
     this.filtersModel = options.filtersModel;
+    this.uploadEnabled = options.uploadEnabled;
     this.featureListCollection = new Backbone.Collection();
 
     this.listenTo(this.filtersModel, 'change:area', this.onFiltersAreaChanged);
@@ -39,14 +41,17 @@ const AreaFilterView = Marionette.LayoutView.extend({
   // Marionette event listeners
 
   onBeforeShow() {
-    this.showChildView('featureList', new FeatureListView({
-      mapModel: this.mapModel,
-      highlightModel: this.highlightModel,
-      filtersModel: this.filtersModel,
-      collection: this.featureListCollection,
-    }));
+    if (this.uploadEnabled) {
+      this.addRegion('featureList', '.feature-list');
+      this.showChildView('featureList', new FeatureListView({
+        mapModel: this.mapModel,
+        highlightModel: this.highlightModel,
+        filtersModel: this.filtersModel,
+        collection: this.featureListCollection,
+      }));
 
-    $(this.el).find('[data-toggle="tooltip"]').tooltip();
+      $(this.el).find('[data-toggle="tooltip"]').tooltip();
+    }
   },
 
   // DOM event listeners
