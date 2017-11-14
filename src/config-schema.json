@@ -308,8 +308,12 @@
                     }],
                 },
                 "translations": {
-                    "description": "Additional translations not covered in the base translations. Keys can be one of the language specifiers: 'en', 'de', 'deinformal'. The values must be objects, mapping the (english) key to the translated value.",
+                    "description": "Additional translations not covered in the base translations. Keys can be one of the language specifiers: 'en', 'de', 'deinformal'. The values must be objects, mapping the (english) key to the translated value. Must not contain the '#' character.",
                     "type": "object"
+                },
+                "uploadEnabled": {
+                    "description": "Whether or not the 'Upload' functionality shall be available. (Loading of shapefiles for geometries). Default is true",
+                    "type": "boolean"
                 }
             },
             "oneOf": [
@@ -384,6 +388,18 @@
                             "description": "A postfix to be appended to the numerical part of the tile matrix ID.",
                             "type": "string"
                         },
+                        "tileSize": {
+                            "description": "The width and height (in pixels) for each WMS tile to be requested. Defaults to 256.",
+                            "type": ["array", "integer"],
+                            "items": [{
+                                "type": "integer",
+                                "minimum": 0
+                            }, {
+                                "type": "integer",
+                                "minimum": 0
+                            }],
+                            "minimum": 0
+                        },
                         "format": {
                             "description": "The transfer format used to retrieve tiles. For layers and overlayLayers this should be a format that allows transparency (e.g: PNG).",
                             "type": "string"
@@ -406,7 +422,11 @@
                         },
                         "cqlMapping": {
                             "description": "The mapping of the search filter name to the attribute names used for CQL.",
-                            "type": "string"
+                            "type": "object"
+                        },
+                        "extraParameters": {
+                            "description": "Addtional key-value pairs to add to WMS requests.",
+                            "type": "object"
                         }
                     },
                     "required": ["id", "protocol", "format", "style"],
