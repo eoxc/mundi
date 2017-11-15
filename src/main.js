@@ -18,6 +18,7 @@ import HighlightModel from 'eoxc/src/core/models/HighlightModel';
 
 import TimeSliderView from 'eoxc/src/core/views/TimeSliderView';
 import LayerControlLayoutView from 'eoxc/src/core/views/layers/LayerControlLayoutView';
+import LayerOptionsModalView from 'eoxc/src/core/views/layers/LayerOptionsModalView';
 
 import SearchResultView from 'eoxc/src/search/views/SearchResultView';
 import SearchModel from 'eoxc/src/search/models/SearchModel';
@@ -372,6 +373,11 @@ window.Application = Marionette.Application.extend({
         onStartDownload: startDownload,
       }));
     };
+
+    layersCollection.on('show-options', (layerModel) => {
+      layout.showChildView('modals', new LayerOptionsModalView({ model: layerModel }));
+    });
+
 
     layout.showChildView('content', new OpenLayersMapView({
       mapModel,

@@ -427,6 +427,40 @@
                         "extraParameters": {
                             "description": "Addtional key-value pairs to add to WMS requests.",
                             "type": "object"
+                        },
+                        "options": {
+                            "description": "Names layer parameters the user is allowed to adjust.",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "description": "The displayed name of the config option.",
+                                        "type": "string"
+                                    },
+                                    "target": {
+                                        "description": "The dotted path of the parameter. e.g: 'display.style'",
+                                        "type": "string"
+                                    },
+                                    "values": {
+                                        "description": "A list of possible options.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "label": {
+                                                    "description": "The displayed name of the option value.",
+                                                    "type": "string"
+                                                },
+                                                "value": {
+                                                    "description": "The actual value.",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     },
                     "required": ["id", "protocol", "format", "style"],
