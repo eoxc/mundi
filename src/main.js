@@ -29,6 +29,8 @@ import { version as eoxcVersion } from 'eoxc/package.json';
 import DownloadOptionsModel from 'eoxc/src/download/models/DownloadOptionsModel';
 import DownloadSelectionView from 'eoxc/src/download/views/DownloadSelectionView';
 import DownloadOptionsModalView from 'eoxc/src/download/views/DownloadOptionsModalView';
+import FullResolutionDownloadOptionsModalView from 'eoxc/src/download/views/FullResolutionDownloadOptionsModalView';
+
 
 import OpenLayersMapView from 'eoxc/src/contrib/OpenLayers/OpenLayersMapView';
 
@@ -378,6 +380,22 @@ window.Application = Marionette.Application.extend({
       layout.showChildView('modals', new LayerOptionsModalView({ model: layerModel }));
     });
 
+    layersCollection.on('download-full-resolution', (layerModel) => {
+      // layout.showChildView('modals', new LayerOptionsModalView({ model: layerModel }));
+      layout.showChildView('modals', new FullResolutionDownloadOptionsModalView({
+        layerModel,
+        filtersModel,
+        mapModel,
+        model: new DownloadOptionsModel({
+          availableDownloadFormats: settings.downloadFormats,
+          availableProjections: settings.downloadProjections,
+          sizeX: 100,
+          sizeY: 100,
+          resolutionX: 0.01,
+          resolutionY: 0.01,
+        }),
+      }));
+    });
 
     layout.showChildView('content', new OpenLayersMapView({
       mapModel,
