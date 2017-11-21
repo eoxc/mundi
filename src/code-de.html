@@ -446,7 +446,54 @@ var config = {
                     "time": "time"
                 },
                 "maxSize": 500,
-                "axisNames": ['Long', 'Lat']
+                "axisNames": ['Long', 'Lat'],
+                "fields": [{
+                  "name": "B1",
+                  "identifier": "B1"
+                }, {
+                  "name": "B2",
+                  "identifier": "B2"
+                }, {
+                  "name": "B3",
+                  "identifier": "B3"
+                }, {
+                  "name": "B4",
+                  "identifier": "B4"
+                }, {
+                  "name": "B5",
+                  "identifier": "B5"
+                }, {
+                  "name": "B6",
+                  "identifier": "B6"
+                }, {
+                  "name": "B7",
+                  "identifier": "B7"
+                }, {
+                  "name": "B8",
+                  "identifier": "B8"
+                }, {
+                  "name": "B8a",
+                  "identifier": "B8a"
+                }, {
+                  "name": "B9",
+                  "identifier": "B9"
+                }, {
+                  "name": "B10",
+                  "identifier": "B10"
+                }, {
+                  "name": "B11",
+                  "identifier": "B11"
+                }, {
+                  "name": "B12",
+                  "identifier": "B12"
+                }],
+                "interpolations": [{
+                  "name": "Nearest-Neighbor",
+                  "identifier": "nearest"
+                }, {
+                  "name": "Average",
+                  "identifier": "average"
+                }]
             }
         }
     ],
@@ -574,7 +621,27 @@ var config = {
                 "Cloud Cover": "Cloud coverage (%)",
                 "Error: NoApplicableCode": "Search timed out. Please refine the filter criteria.",
             }
-        }
+        },
+        "downloadFormats": [{
+          "name": "TIFF",
+          "mimeType": "image/tiff"
+        }, {
+          "name": "JP2",
+          "mimeType": "image/jp2"
+        }, {
+          "name": "NetCDF",
+          "mimeType": "application/x-netcdf"
+        }],
+        "downloadProjections": [{
+          "name": "WGS-84",
+          "identifier": "EPSG:4326"
+        }, {
+          "name": "Google Mercator",
+          "identifier": "EPSG:3857"
+        }, {
+          "name": "LAEA",
+          "identifier": "EPSG:3035"
+        }]
     }
 };
 
