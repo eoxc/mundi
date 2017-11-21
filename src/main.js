@@ -163,82 +163,6 @@ window.Application = Marionette.Application.extend({
     } else {
       this.onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, []);
     }
-
-    //
-    //
-    // if (config.settings.parameters) {
-    //   const parameterPromises = layersCollection
-    //     .filter(layerModel => layerModel.get('search.protocol'))
-    //     .map(layerModel => (
-    //       getParameters(layerModel)
-    //         .then(parameters => [layerModel, parameters, null])
-    //         .catch(error => [layerModel, null, error])
-    //     ));
-    //   Promise.all(parameterPromises)
-    //     .then((layersPlusParametersPlusErrors) => {
-    //       const failedLayers = layersPlusParametersPlusErrors
-    //         .filter(layerPlusParameters => layerPlusParameters[2])
-    //         .map(layerPlusParameters => layerPlusParameters[0]);
-    //
-    //       const params = config.settings.parameters
-    //         .map(param => [
-    //           param, layersPlusParametersPlusErrors.filter((layerPlusParameters) => {
-    //             const layerParams = layerPlusParameters[1];
-    //             if (layerParams) {
-    //               return layerParams.find(p => p.type === param.type);
-    //             }
-    //             return null;
-    //           }),
-    //         ])
-    //
-    //         // filter out the parameters that are nowhere available
-    //         .filter(paramPlusApplicableLayers => paramPlusApplicableLayers[1].length)
-    //
-    //         // combine the parameter settings info with the info from the search services
-    //         .map((paramPlusApplicableLayers) => {
-    //           let param = paramPlusApplicableLayers[0];
-    //           for (let i = 0; i < paramPlusApplicableLayers[1].length; i += 1) {
-    //             const [, layerParameters] = paramPlusApplicableLayers[1][i];
-    //             param = combineParameter(
-    //               param, layerParameters.find(p => p.type === param.type) // eslint-disable-line
-    //             );
-    //           }
-    //           if (paramPlusApplicableLayers[1].length < layersCollection.length) {
-    //             param.onlyAvailableAt = paramPlusApplicableLayers[1].map(layerPlusParameters => (
-    //               layerPlusParameters[0].get('displayName')
-    //             ));
-    //           }
-    //           return param;
-    //         });
-    //
-    //       // const params = [].concat.apply([], extraParameters)
-    //       //   .filter(param => param.type.startsWith('eo:'))
-    //       //   .map((param) => {
-    //       //     const paramSetting = config.settings.parameters[param.type];
-    //       //     if (paramSetting) {
-    //       //       return {
-    //       //         type: param.type,
-    //       //         name: param.name,
-    //       //         mandatory: param.mandatory,
-    //       //         options: param.options,
-    //       //         minExclusive: param.minExclusive,
-    //       //         maxExclusive: param.maxExclusive,
-    //       //         minInclusive: param.minInclusive,
-    //       //         maxInclusive: param.maxInclusive,
-    //       //         ...paramSetting,
-    //       //       };
-    //       //     }
-    //       //     return param;
-    //       //   });
-    //
-    //       this.onRun(
-    //         config, baseLayersCollection, layersCollection, overlayLayersCollection,
-    //         params, failedLayers
-    //       );
-    //     });
-    // } else {
-    //   this.onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, [], []);
-    // }
   },
 
   onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, failedLayers) {
@@ -382,10 +306,11 @@ window.Application = Marionette.Application.extend({
 
     layersCollection.on('download-full-resolution', (layerModel) => {
       // layout.showChildView('modals', new LayerOptionsModalView({ model: layerModel }));
+      const searchModel = searchCollection.find(model => model.get('layerModel') === layerModel);
       layout.showChildView('modals', new FullResolutionDownloadOptionsModalView({
         layerModel,
-        filtersModel,
         mapModel,
+        filtersModel: searchModel.get('filtersModel'),
         model: new DownloadOptionsModel({
           availableDownloadFormats: settings.downloadFormats,
           availableProjections: settings.downloadProjections,
