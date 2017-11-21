@@ -570,6 +570,10 @@
                             }
                         }
                     },
+                    "maxUrlLength": {
+                        "description": "The maximum URL length of search requests to be sent. Longer URLs will not be sent, but an error will be raised directly. Default is 4000.",
+                        "type": "number"
+                    },
                     "required": ["protocol", "url"]
                 },
                 "download": {
@@ -626,6 +630,40 @@
                             },
                             "minItems": 2,
                             "maxItems": 2
+                        },
+                        "fields": {
+                            "description": "Available fields to select for download.",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "description": "The displayed name of the field",
+                                        "type": "string"
+                                    },
+                                    "identifier": {
+                                        "description": "The identifier of the field to be sent in the download request",
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "interpolations": {
+                            "description": "Available interpolation methods to choose for download.",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "description": "The displayed name of the interpolation",
+                                        "type": "string"
+                                    },
+                                    "identifier": {
+                                        "description": "The identifier of the interpolation to be sent in the download request",
+                                        "type": "string"
+                                    }
+                                }
+                            }
                         }
                     }
                 }
