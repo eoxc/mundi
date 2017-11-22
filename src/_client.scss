@@ -250,6 +250,12 @@ input {
     input {
         border: none;
     }
+
+    .checkbox,.radio {
+        label {
+            text-align: left;
+        }
+    }
 }
 
 #timeSlider {

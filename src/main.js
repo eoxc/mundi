@@ -305,7 +305,6 @@ window.Application = Marionette.Application.extend({
     });
 
     layersCollection.on('download-full-resolution', (layerModel) => {
-      // layout.showChildView('modals', new LayerOptionsModalView({ model: layerModel }));
       const searchModel = searchCollection.find(model => model.get('layerModel') === layerModel);
       layout.showChildView('modals', new FullResolutionDownloadOptionsModalView({
         layerModel,
@@ -314,10 +313,6 @@ window.Application = Marionette.Application.extend({
         model: new DownloadOptionsModel({
           availableDownloadFormats: settings.downloadFormats,
           availableProjections: settings.downloadProjections,
-          sizeX: 100,
-          sizeY: 100,
-          resolutionX: 0.01,
-          resolutionY: 0.01,
         }),
       }));
     });
