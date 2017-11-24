@@ -122,13 +122,14 @@
   padding: 5px !important;
 }
 
-.form-group {
+.side-panel .form-group {
   margin: 0 !important;
 }
 
-.form-group>label {
+.side-panel .form-group>label {
   margin: 5px 0 !important;
 }
+
 
 .tab-pane {
   height: 100%;
