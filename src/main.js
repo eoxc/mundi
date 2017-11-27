@@ -31,6 +31,7 @@ import DownloadSelectionView from 'eoxc/src/download/views/DownloadSelectionView
 import DownloadOptionsModalView from 'eoxc/src/download/views/DownloadOptionsModalView';
 import FullResolutionDownloadOptionsModalView from 'eoxc/src/download/views/FullResolutionDownloadOptionsModalView';
 
+import { sendProcessingRequest } from 'eoxc/src/processing';
 
 import OpenLayersMapView from 'eoxc/src/contrib/OpenLayers/OpenLayersMapView';
 
@@ -315,6 +316,10 @@ window.Application = Marionette.Application.extend({
           availableProjections: settings.downloadProjections,
         }),
       }));
+    });
+
+    searchCollection.on('start-processing', (searchModel) => {
+      sendProcessingRequest(searchModel, mapModel);
     });
 
     layout.showChildView('content', new OpenLayersMapView({
