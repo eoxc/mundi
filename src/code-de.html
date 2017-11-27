@@ -46,7 +46,191 @@
   <script src="code-de.bundle.js"></script>
   <script>
 var config = {
+    "settings": {
+        "tutorial": "once",
+        "uploadEnabled": false,
+        "searchDebounceTime": 500,
+        "language": "en",
+        "termsAndConditionsUrl": {
+          "en": "https:\/\/code-de.org\/de\/terms\/CODE-DE_Terms.pdf",
+          "de": "https:\/\/code-de.org\/de\/terms\/CODE-DE_Nutzungsbedingungen.pdf",
+        },
+        "timeDomain": [
+            "2016-01-01T00:00:00Z",
+            "2017-11-28T00:00:00Z"
+        ],
+        "constrainTimeDomain": true,
+        "displayTimeDomain": [
+            "2017-10-30T00:00:00Z",
+            "2017-11-28T00:00:00Z"
+        ],
+        "displayInterval": "P28D",
+        "selectedTimeDomain": [
+            "2017-11-18T00:00:00Z",
+            "2017-11-28T00:00:00Z"
+        ],
+        "selectableInterval": "P28D",
+        "timeSliderControls": true,
+        "maxTooltips": 1,
+        "rightPanelOpen": true,
+        "leftPanelOpen": true,
+        "zoom": 5,
+        "maxZoom": 13,
+        "extent": [
+            5.98865807458,
+            47.3024876979,
+            15.0169958839,
+            54.983104153
+        ],
+        "footprintFillColor": "rgba(0, 0, 0, 0.2)",
+        "footprintStrokeColor": "rgba(0, 0, 0, 1)",
+        "filterFillColor": "rgba(0, 165, 255, 0)",
+        "filterStrokeColor": "rgba(0, 165, 255, 1)",
+        "filterOutsideColor": "rgba(0, 0, 0, 0.5)",
+        "selectedFootprintFillColor": "rgba(255, 0, 0, 0.2)",
+        "selectedFootprintStrokeColor": "rgba(255, 0, 0, 1)",
+        "highlightFillColor": "rgba(246, 182, 0, 0.5)",
+        "highlightStrokeColor": "rgba(246, 182, 0, 1)",
+        "highlightStrokeWidth": 3,
+        "translations": {
+            "de": {
+                "Cloud Cover": "Wolkenbedeckung",
+                "Cloud Coverage in percent": "Prozentuelle Wolkenbedeckung",
+                "Production Status": "Produktionsstatus",
+                "Data acquisition has been rejected for whatever reason": "Datenerfassung wurde aus welchem Grund auch immer abgelehnt",
+                "Potential data acquisition": "Potentielle Datenerfassung",
+                "Data acquisition planned": "Datenerfassung geplant",
+                "Data acquisition failed": "Datenerfassung fehlgeschlagen",
+                "Data acquisition cancelled": "Datenerfassung abgebrochen",
+                "Data acquired": "Daten erfasst",
+                "Data acquisition archived": "Datenerfassung archiviert",
+                "Orbit Direction": "Orbitrichtung",
+                "Orbit Number": "Orbitnummer",
+                "Resolution": "Auflösung",
+                "Platform Serial Identifier": "Plattform Identifikation",
+                "Processing Level": "Prozessierungsebene",
+                "Polarisation Mode": "Polarisationsmodus",
+                "Polarisation Channels": "Polarisationskanäle",
+                "UNDEFINED": "UNDEFINIERT",
+                "Antenna Look Direction": "Antennenausrichtung",
+                "Minimum Incidence Angle": "Minimaler Einfallswinkel",
+                "Maximum Incidence Angle": "Maximaler Einfallswinkel",
+                "LEFT": "Links",
+                "RIGHT": "Rechts",
+                "ASCENDING": "Aufsteigend",
+                "DESCENDING": "Absteigend",
+                "Single": "Einfach",
+                "Double": "Doppelt",
+                "Error: NoApplicableCode": "Zeitüberschreitung bei der Suche. Bitte Suchkriterien verfeinern.",
+            },
+            "en": {
+                "Cloud Cover": "Cloud coverage (%)",
+                "Error: NoApplicableCode": "Search timed out. Please refine the filter criteria.",
+            }
+        },
+        "downloadFormats": [{
+          "name": "TIFF",
+          "mimeType": "image/tiff"
+        }, {
+          "name": "JP2",
+          "mimeType": "image/jp2"
+        }, {
+          "name": "NetCDF",
+          "mimeType": "application/x-netcdf"
+        }],
+        "downloadProjections": [{
+          "name": "WGS-84",
+          "identifier": "EPSG:4326"
+        }, {
+          "name": "Google Mercator",
+          "identifier": "EPSG:3857"
+        }, {
+          "name": "LAEA",
+          "identifier": "EPSG:3035"
+        }]
+    },
     "baseLayers": [
+        {
+            "id": "terrain-light",
+            "displayName": "EOX Terrain-Light",
+            "display": {
+                "id": "terrain-light",
+                "visible": true,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "style": "default",
+                "attribution": "Terrain-Light { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> }"
+            }
+        }, {
+            "id": "terrain",
+            "displayName": "EOX Terrain",
+            "display": {
+                "id": "terrain",
+                "visible": false,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "style": "default",
+                "attribution": "Terrain { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> }"
+            }
+        },  {
+            "id": "s2cloudless",
+            "displayName": "EOX Sentinel-2 cloudless",
+            "display": {
+                "id": "s2cloudless",
+                "visible": false,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.s2maps-tiles.eu/wmts/",
+                    "//b.s2maps-tiles.eu/wmts/",
+                    "//c.s2maps-tiles.eu/wmts/",
+                    "//d.s2maps-tiles.eu/wmts/",
+                    "//e.s2maps-tiles.eu/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "style": "default",
+                "attribution": "<a xmlns:dct=\"http://purl.org/dc/terms/\" href=\"https://s2maps.eu\" property=\"dct:title\">Sentinel-2 cloudless - https://s2maps.eu</a> by <a xmlns:cc=\"http://creativecommons.org/ns#\" href=\"https://eox.at\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">EOX IT Services GmbH</a> (Contains modified Copernicus Sentinel data 2016 &amp; 2017)"
+            }
+        }, {
+            "id": "bluemarble",
+            "displayName": "Blue Marble",
+            "display": {
+                "id": "bluemarble",
+                "visible": false,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "style": "default",
+                "attribution": "Blue Marble { &copy; <a href=\"http://nasa.gov\" target=\"_blank\">NASA</a> }"
+            }
+        },
         {
             "display": {
                 "attribution": "Basemap: Data \u0026copy; \u003Ca href=\u0022http:\/\/openstreetmap.org\u0022\u003EOpenStreetMap contributors\u003C\/a\u003E and others, Rendering \u0026copy; \u003Ca href=\u0022http:\/\/www.dlr.de\/eoc\u0022\u003EDLR\/EOC\u003C\/a\u003E",
@@ -63,31 +247,10 @@ var config = {
                     "https:\/\/c.tiles.geoservice.dlr.de\/service\/wmts?",
                     "https:\/\/d.tiles.geoservice.dlr.de\/service\/wmts?"
                 ],
-                "visible": true
+                "visible": false
             },
             "displayName": "EOC Base Map",
             "id": "eoc:basemap"
-        },
-        {
-            "display": {
-                "attribution": "Blue Marble NG: \u003Ca href=\u0022http:\/\/earthobservatory.nasa.gov\/Features\/BlueMarble\u0022\u003ENASA Earth Observatory\u003C\/a\u003E",
-                "format": "image\/png",
-                "id": "bmng_topo_bathy",
-                "matrixIdPrefix": "EPSG:4326:",
-                "matrixSet": "EPSG:4326",
-                "projection": "EPSG:4326",
-                "protocol": "WMTS",
-                "style": "default",
-                "urls": [
-                    "https:\/\/a.tiles.geoservice.dlr.de\/service\/wmts?",
-                    "https:\/\/b.tiles.geoservice.dlr.de\/service\/wmts?",
-                    "https:\/\/c.tiles.geoservice.dlr.de\/service\/wmts?",
-                    "https:\/\/d.tiles.geoservice.dlr.de\/service\/wmts?"
-                ],
-                "visible": false
-            },
-            "displayName": "Blue Marble NG",
-            "id": "bmng_topo_bathy"
         },
         {
             "display": {
@@ -107,14 +270,14 @@ var config = {
                 ],
                 "visible": false
             },
-            "displayName": "Relief",
+            "displayName": "EOC Relief",
             "id": "eoc:world_relief_bw"
         }
     ],
     "layers": [
         {
             "id": "S1_SAR_L1_GRD",
-            "link": "\/en\/record\/01ca3984-b695-4ffd-ae43-611a3ef314ee",
+            "link": "https://code-de.org\/en\/record\/01ca3984-b695-4ffd-ae43-611a3ef314ee",
             "displayName": "Sentinel-1 SAR - Level 1 (Ground Range Detected)",
             "displayColor": "#7AC6CF",
             "display": {
@@ -133,13 +296,13 @@ var config = {
                 "protocol": "OpenSearch",
                 "url": "http://ows.eox.at/code-de/CODE-DE_S1_SAR_L1_GRD.osdd",
                 "id": "EOP:CODE-DE:S1_SAR_L1_GRD",
-                "histogramBinCount": 30,
+                "histogramBinCount": 28,
                 "format": "application\/atom+xml",
                 "method": "GET",
-                "histogramThreshold": 500,
+                "histogramThreshold": 600,
                 "lightweightBuckets": true,
-                "searchLimit": 150,
-                "loadMore":150,
+                "searchLimit": 300,
+                "loadMore":300,
                 "parameters": [
                     {
                         "type": "eo:productionStatus"
@@ -176,7 +339,7 @@ var config = {
         },
         {
             "id": "S1_SAR_L1_SLC",
-            "link": "\/en\/record\/39f11eeb-8aa6-45dc-8703-69d4bb8a4b3e",
+            "link": "https://code-de.org\/en\/record\/39f11eeb-8aa6-45dc-8703-69d4bb8a4b3e",
             "displayName": "Sentinel-1 SAR - Level 1 (Single-Look Complex)",
             "displayColor": "#D9534F",
             "display": {
@@ -195,13 +358,13 @@ var config = {
                 "protocol": "OpenSearch",
                 "url": "http://ows.eox.at/code-de/CODE-DE_S1_SAR_L1_SLC.osdd",
                 "id": "EOP:CODE-DE:S1_SAR_L1_SLC",
-                "histogramBinCount": 30,
+                "histogramBinCount": 28,
                 "format": "application\/atom+xml",
                 "method": "GET",
-                "histogramThreshold": 500,
+                "histogramThreshold": 600,
                 "lightweightBuckets": true,
-                "searchLimit": 150,
-                "loadMore":150,
+                "searchLimit": 300,
+                "loadMore":300,
                 "parameters": [
                     {
                         "type": "eo:productionStatus"
@@ -238,7 +401,7 @@ var config = {
         },
         {
             "id": "S1_SAR_L2_OCN",
-            "link": "\/en\/record\/44f2a392-0041-49c0-b943-a96558cbc023",
+            "link": "https://code-de.org\/en\/record\/44f2a392-0041-49c0-b943-a96558cbc023",
             "displayName": "Sentinel-1 SAR - Level 2 (Ocean Product)",
             "displayColor": "#5CB85C",
             "display": {
@@ -257,13 +420,13 @@ var config = {
                 "protocol": "OpenSearch",
                 "url": "http://ows.eox.at/code-de/CODE-DE_S1_SAR_L2_OCN.osdd",
                 "id": "EOP:CODE-DE:S1_SAR_L2_OCN",
-                "histogramBinCount": 30,
+                "histogramBinCount": 28,
                 "format": "application\/atom+xml",
                 "method": "GET",
-                "histogramThreshold": 500,
+                "histogramThreshold": 600,
                 "lightweightBuckets": true,
-                "searchLimit": 150,
-                "loadMore":150,
+                "searchLimit": 300,
+                "loadMore":300,
                 "parameters": [
                     {
                         "type": "eo:productionStatus"
@@ -300,7 +463,7 @@ var config = {
         },
         {
             "id": "S2_MSI_L1C",
-            "link": "\/en\/record\/39b6073d-7ef4-4aa9-a3e4-07f079709b52",
+            "link": "https://code-de.org\/en\/record\/39b6073d-7ef4-4aa9-a3e4-07f079709b52",
             "displayName": "Sentinel-2 MSI - Level 1C (Top-of-Atmosphere Reflectance)",
             "displayColor": "#F0AD4E",
             "display": {
@@ -319,10 +482,10 @@ var config = {
                 "protocol": "OpenSearch",
                 "url": "http://ows.eox.at/code-de/CODE-DE_S2_MSI_L1C.osdd",
                 "id": "EOP:CODE-DE:S2_MSI_L1C",
-                "histogramBinCount": 30,
+                "histogramBinCount": 28,
                 "format": "application\/atom+xml",
                 "method": "GET",
-                "histogramThreshold": 500,
+                "histogramThreshold": 600,
                 "lightweightBuckets": true,
                 "searchLimit": 600,
                 "loadMore":600,
@@ -364,7 +527,7 @@ var config = {
         },
         {
             "id": "S2_MSI_L1C_TE",
-            "link": "\/en\/record\/39b6073d-7ef4-4aa9-a3e4-07f079709b52",
+            "link": "https://code-de.org\/en\/record\/39b6073d-7ef4-4aa9-a3e4-07f079709b52",
             "displayName": "Sentinel-2 MSI - Test Environment",
             "displayColor": "rgba(153, 0, 153, 1)",
             "display": {
@@ -392,15 +555,15 @@ var config = {
             },
             "search": {
                 "protocol": "OpenSearch",
-                "url": "https://dehub.dlr.de/opensearch/description.xml/?parentIdentifier=EOP:CODE-DE:S2_MSI_L1C",
+                "url": "https://catalog.code-de-ref.eoc.dlr.de/opensearch/description.xml/?parentIdentifier=EOP:CODE-DE:S2_MSI_L1C",
                 "id": "EOP:CODE-DE:S2_MSI_L1C",
-                "histogramBinCount": 30,
+                "histogramBinCount": 28,
                 "format": "application\/atom+xml",
                 "method": "GET",
-                "histogramThreshold": 500,
+                "histogramThreshold": 600,
                 "lightweightBuckets": true,
-                "searchLimit": 100, //TODO: remove limitation once inconsistencies in opensearch service are resolved 600,
-                "loadMore":100, //TODO: remove limitation once inconsistencies in opensearch service are resolved 600,
+                "searchLimit": 600,
+                "loadMore":600,
                 "parameters": [
                     {
                         "type": "eo:productionStatus"
@@ -438,8 +601,8 @@ var config = {
             },
             "fullResolution": {
                 "protocol": "WCS",
-                "id": "Sentinel2__S2_MSI_L1C_10m",
-                "url": "https://d.tiles.code-de.org/Sentinel2/wcs?",
+                "id": "Sentinel2__S2_MSI_L1C_FULL",
+                "url": "https://geoservice.code-de.org/Sentinel2/wcs?",
                 "cqlParameterName": "cql_filter",
                 "cqlMapping": {
                     "eo:cloudCover" : "cloudcover",
@@ -499,6 +662,47 @@ var config = {
     ],
     "overlayLayers": [
         {
+            "id": "coastline",
+            "displayName": "EOX Coastline",
+            "display": {
+                "id": "coastline",
+                "visible": false,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "style": "default",
+                "format": "image/png",
+                "attribution": "Overlay { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> and <a href=\"https://github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
+            }
+        },
+        {
+            "id": "overlay_base",
+            "displayName": "EOX Borders and Labels",
+            "display": {
+                "id": "overlay_base",
+                "visible": false,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "style": "default",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "attribution": "Overlay { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> and <a href=\"https://github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
+            }
+        },
+        {
             "display": {
                 "attribution": "Baseoverlay: Data \u0026copy; \u003Ca href=\u0022http:\/\/openstreetmap.org\u0022\u003EOpenStreetMap contributors\u003C\/a\u003E and others, Rendering \u0026copy; \u003Ca href=\u0022http:\/\/www.dlr.de\/eoc\u0022\u003EDLR\/EOC\u003C\/a\u003E",
                 "format": "image\/png",
@@ -514,7 +718,7 @@ var config = {
                     "https:\/\/c.tiles.geoservice.dlr.de\/service\/wmts?",
                     "https:\/\/d.tiles.geoservice.dlr.de\/service\/wmts?"
                 ],
-                "visible": true
+                "visible": false
             },
             "displayName": "EOC Base Overlay",
             "id": "eoc:baseoverlay"
@@ -539,111 +743,25 @@ var config = {
             },
             "displayName": "EOC Lite Overlay",
             "id": "eoc:liteoverlay"
-        }
-    ],
-    "settings": {
-        //"displayInterval": "P1M",
-        "displayTimeDomain": [
-            "2017-01-01T00:00:00Z",
-            "2017-12-31T23:59:59Z"
-        ],
-        "footprintFillColor": "rgba(0, 0, 0, 0.2)",
-        "footprintStrokeColor": "rgba(0, 0, 0, 1)",
-        "filterFillColor": "rgba(0, 165, 255, 0)",
-        "filterStrokeColor": "rgba(0, 165, 255, 1)",
-        "filterOutsideColor": "rgba(0, 0, 0, 0.5)",
-        "selectedFootprintFillColor": "rgba(255, 0, 0, 0.2)",
-        "selectedFootprintStrokeColor": "rgba(255, 0, 0, 1)",
-        "highlightFillColor": "rgba(246, 182, 0, 0.5)",
-        "highlightStrokeColor": "rgba(246, 182, 0, 1)",
-        "highlightStrokeWidth": 3,
-        "maxTooltips": 1,
-        "rightPanelOpen": true,
-        "leftPanelOpen": true,
-        "selectableInterval": "P1M",
-        "selectedTimeDomain": [
-            "2017-08-01T00:00:00Z",
-            "2017-08-05T23:59:59Z"
-        ],
-        "timeDomain": [
-            "2017-01-01T00:00:00Z",
-            "2017-12-31T23:59:59Z"
-        ],
-        "contrainTimeDomain": true,
-        "zoom": 5,
-        "maxZoom": 15,
-        "uploadEnabled": false,
-        "tutorial": "once",
-        "searchDebounceTime": 500,
-        "language": "en",
-        "termsAndConditionsUrl": {
-          "en": "https:\/\/code-de.org\/de\/terms\/CODE-DE_Terms.pdf",
-          "de": "https:\/\/code-de.org\/de\/terms\/CODE-DE_Nutzungsbedingungen.pdf",
         },
-        "timeSliderControls": true,
-        "extent": [
-            5.98865807458,
-            47.3024876979,
-            15.0169958839,
-            54.983104153
-        ],
-        "translations": {
-            "de": {
-                "Cloud Cover": "Wolkenbedeckung",
-                "Cloud Coverage in percent": "Prozentuelle Wolkenbedeckung",
-                "Production Status": "Produktionsstatus",
-                "Data acquisition has been rejected for whatever reason": "Datenerfassung wurde aus welchem Grund auch immer abgelehnt",
-                "Potential data acquisition": "Potentielle Datenerfassung",
-                "Data acquisition planned": "Datenerfassung geplant",
-                "Data acquisition failed": "Datenerfassung fehlgeschlagen",
-                "Data acquisition cancelled": "Datenerfassung abgebrochen",
-                "Data acquired": "Daten erfasst",
-                "Data acquisition archived": "Datenerfassung archiviert",
-                "Orbit Direction": "Orbitrichtung",
-                "Orbit Number": "Orbitnummer",
-                "Resolution": "Auflösung",
-                "Platform Serial Identifier": "Plattform Identifikation",
-                "Processing Level": "Prozessierungsebene",
-                "Polarisation Mode": "Polarisationsmodus",
-                "Polarisation Channels": "Polarisationskanäle",
-                "UNDEFINED": "UNDEFINIERT",
-                "Antenna Look Direction": "Antennenausrichtung",
-                "Minimum Incidence Angle": "Minimaler Einfallswinkel",
-                "Maximum Incidence Angle": "Maximaler Einfallswinkel",
-                "LEFT": "Links",
-                "RIGHT": "Rechts",
-                "ASCENDING": "Aufsteigend",
-                "DESCENDING": "Absteigend",
-                "Single": "Einfach",
-                "Double": "Doppelt",
-                "Error: NoApplicableCode": "Zeitüberschreitung bei der Suche. Bitte Suchkriterien verfeinern.",
+        {
+            "display": {
+                "format": "image\/png",
+                "projection": "EPSG:4326",
+                "style": "default",
+                "id": "GUF28_DLR_v1_Mosaic",
+                "visible": false,
+                "protocol": "WMS",
+                "urls": [
+                    "https:\/\/geoservice.dlr.de\/eoc\/land\/wms?"
+                ],
+                "attribution": "Nutzungsbedingungen: A non-exclusive, spatially and temporally unlimited, non-transferable, non-sublicensable right to use GUF is granted free of charge for\n- scientific purposes on the high resolution version of GUF\u00ae (0.4 arcseconds),\n- non-commercial purposes on the low resolution version of the GUF\u00ae (2.8 arcseconds).\nThis license does not grant any commercial use of GUF\u00ae or products generated or derived by GUF\u00ae."
             },
-            "en": {
-                "Cloud Cover": "Cloud coverage (%)",
-                "Error: NoApplicableCode": "Search timed out. Please refine the filter criteria.",
-            }
-        },
-        "downloadFormats": [{
-          "name": "TIFF",
-          "mimeType": "image/tiff"
-        }, {
-          "name": "JP2",
-          "mimeType": "image/jp2"
-        }, {
-          "name": "NetCDF",
-          "mimeType": "application/x-netcdf"
-        }],
-        "downloadProjections": [{
-          "name": "WGS-84",
-          "identifier": "EPSG:4326"
-        }, {
-          "name": "Google Mercator",
-          "identifier": "EPSG:3857"
-        }, {
-          "name": "LAEA",
-          "identifier": "EPSG:3035"
-        }]
-    }
+            "id": "GUF28_DLR_v1_Mosaic_Overlay",
+            "link": "\/de\/record\/5fd5bf46-ba85-4672-a4d0-76f322c69201",
+            "displayName": "GUF28_DLR_v1_Mosaic (for non-commercial use only)"
+        }
+    ]
 };
 
 var app = new Application({
