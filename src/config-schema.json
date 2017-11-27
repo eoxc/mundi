@@ -514,12 +514,12 @@
                         "searchLimit": {
                             "description": "This is the limit for how many records will be displayed in the search results panel. A warning will be displayed if more items are matched.",
                             "type": "number",
-                            "default": 200
+                            "default": 150
                         },
                         "loadMore": {
                             "description": "This is the count of elements to be fetched when 'Load more' is clicked.",
                             "type": "number",
-                            "default": 50
+                            "default": 150
                         },
                         "parameters": {
                             "description": "Mapping the parameter type (such as eo:processingCenter) to a settings object.",
