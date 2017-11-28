@@ -109,6 +109,7 @@ var config = {
                 "Resolution": "Auflösung",
                 "Platform Serial Identifier": "Plattform Identifikation",
                 "Processing Level": "Prozessierungsebene",
+                "Processing Version": "Prozessierungsversion",
                 "Polarisation Mode": "Polarisationsmodus",
                 "Polarisation Channels": "Polarisationskanäle",
                 "UNDEFINED": "UNDEFINIERT",
@@ -464,7 +465,7 @@ var config = {
         {
             "id": "S2_MSI_L1C",
             "link": "https://code-de.org\/en\/record\/39b6073d-7ef4-4aa9-a3e4-07f079709b52",
-            "displayName": "Sentinel-2 MSI - Level 1C (Top-of-Atmosphere Reflectance)",
+            "displayName": "Sentinel-2 - Operational Environment",
             "displayColor": "#F0AD4E",
             "display": {
                 "id": "S2_MSI_L1C",
@@ -488,7 +489,7 @@ var config = {
                 "histogramThreshold": 600,
                 "lightweightBuckets": true,
                 "searchLimit": 600,
-                "loadMore":600,
+                "loadMore": 600,
                 "parameters": [
                     {
                         "type": "eo:productionStatus"
@@ -526,23 +527,23 @@ var config = {
             }
         },
         {
-            "id": "S2_MSI_L1C_TE",
+            "id": "S2_MSI_L1C_RE",
             "link": "https://code-de.org\/en\/record\/39b6073d-7ef4-4aa9-a3e4-07f079709b52",
-            "displayName": "Sentinel-2 MSI - Test Environment",
+            "displayName": "Sentinel-2 - Reference Environment",
             "displayColor": "rgba(153, 0, 153, 1)",
             "display": {
-                // "id": "S2_MSI_L1C_GRANULES",
-                "ids": [
-                    "S2_MSI_L1C_GRANULES",
-                    "S2_MSI_L1C_10m",
-                ],
+                "id": "S2_MSI_L1C",
+                // "ids": [
+                //     "S2_MSI_L1C_GRANULES",
+                //     "S2_MSI_L1C_10m",
+                // ],
 //layers=S2_MSI_L1C_10m,S2_MSI_L1C_GRANULES
 //&styles=Sentinel2_TCI_105,Sentinel2_fp_scale%20
 //&cql_filter=INCLUDE;cloudcover%20BETWEEN%200%20AND%20100&DIM_cloudcover=0/100
                 "visible": false,
                 "protocol": "WMS",
                 "urls": [
-                    "https://e.tiles.code-de.org/Sentinel2/wms?"
+                    "https://geoservice.code-de-ref.eoc.dlr.de/Sentinel2/wms?"
                 ],
                 "format": "image\/png",
                 "projection": "EPSG:4326",
@@ -563,7 +564,7 @@ var config = {
                 "histogramThreshold": 600,
                 "lightweightBuckets": true,
                 "searchLimit": 600,
-                "loadMore":600,
+                "loadMore": 600,
                 "parameters": [
                     {
                         "type": "eo:productionStatus"
@@ -602,7 +603,7 @@ var config = {
             "fullResolution": {
                 "protocol": "WCS",
                 "id": "Sentinel2__S2_MSI_L1C_FULL",
-                "url": "https://geoservice.code-de.org/Sentinel2/wcs?",
+                "url": "https://geoservice.code-de-ref.eoc.dlr.de/Sentinel2/wcs?",
                 "cqlParameterName": "cql_filter",
                 "cqlMapping": {
                     "eo:cloudCover" : "cloudcover",
