@@ -238,6 +238,7 @@ window.Application = Marionette.Application.extend({
       downloadFormats: [],
       downloadProjections: [],
       uploadEnabled: true,
+      downloadEnabled: true,
     });
 
     // set up config
@@ -410,6 +411,7 @@ window.Application = Marionette.Application.extend({
           collection: searchCollection,
           onStartDownload: startDownload,
           termsAndConditionsUrl,
+          downloadEnabled: settings.downloadEnabled,
         }),
       }],
     }));
