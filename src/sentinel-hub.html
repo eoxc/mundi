@@ -188,12 +188,17 @@ var config = {
             "displayName": "Sentinel-2",
             "displayColor": "rgba(51, 102, 204, 1)",
             "display": {
-                "id": "",
+                "id": "TRUE_COLOR",
                 "visible": true,
                 "protocol": "WMS",
                 "urls": [
-                    ""
-                ]
+                    "http://services.sentinel-hub.com/v1/wms/f3ab47b0-ac4c-4a67-a5db-24e2122a80d9?"
+                ],
+                "format": "image\/png",
+                "projection": "EPSG:4326",
+                "style": "",
+                "version": "1.1.1",
+                "discardZulu": true,
             },
             "search": {
                 "protocol": "OpenSearch",
@@ -205,7 +210,121 @@ var config = {
                 "histogramThreshold": 600,
                 "lightweightBuckets": true,
                 "searchLimit": 600,
-                "loadMore":300
+                "loadMore": 300,
+                "descriptionTemplate":
+                  "<table class='table table-condensed'>" +
+                    "<tr>" +
+                      "<td>S3 Path</td>" +
+                      "<td><a target='_blank' href='http://sentinel-s2-l1c.s3-website.eu-central-1.amazonaws.com#{{properties.s3Path}}/'>{{properties.s3Path}}</a></td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Product Type</td>" +
+                      "<td>{{properties.eop.productType}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Processing Level</td>" +
+                      "<td>{{properties.eop.processingLevel}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Platform Short Name</td>" +
+                      "<td>{{properties.eop.platformShortName}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Platform Serial Identifier</td>" +
+                      "<td>{{properties.eop.platformSerialIdentifier}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Instrument Short Name</td>" +
+                      "<td>{{properties.eop.instrumentShortName}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Sensor Type</td>" +
+                      "<td>{{properties.eop.sensorType}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Resolution</td>" +
+                      "<td>{{properties.eop.resolution}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Orbit Number</td>" +
+                      "<td>{{properties.eop.orbitNumber}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Cloud Cover</td>" +
+                      "<td>{{properties.eop.cloudCoverPercentage}}&#37;</td>" +
+                    "</tr>" +
+                  "</table>"
+                ,
+                "thumbnailUrlTemplate": "http://sentinel-s2-l1c.s3.amazonaws.com/{{properties.s3Path}}/preview.jpg",
+            },
+            "download": {
+                "protocol": "OpenSearch"
+            }
+        }, {
+            "id": "Landsat-8",
+            "displayName": "Landsat 8",
+            "displayColor": "rgba(16, 150, 24, 1)",
+            "display": {
+                "id": "LANDSAT8",
+                "visible": true,
+                "protocol": "WMS",
+                "urls": [
+                    "https://services-uswest2.sentinel-hub.com/v1/wms/6d9d1734-5ac9-4ab1-b7dc-e5423ec85043"
+                ],
+                "format": "image\/png",
+                "projection": "EPSG:4326",
+                "style": "",
+                "version": "1.1.1",
+                "discardZulu": true,
+            },
+            "search": {
+                "protocol": "OpenSearch",
+                "url": "http://opensearch.sentinel-hub.com/resto/api/collections/Landsat8/describe.xml",
+                "id": "L8",
+                "histogramBinCount": 30,
+                "format": "application\/atom+xml",
+                "method": "GET",
+                "histogramThreshold": 600,
+                "lightweightBuckets": true,
+                "searchLimit": 600,
+                "loadMore": 300,
+                "descriptionTemplate":
+                  "<table class='table table-condensed'>" +
+                    "<tr>" +
+                      "<td>S3 Path</td>" +
+                      "<td><a target='_blank' href='http://landsat-pds.s3.amazonaws.com/#{{properties.s3Path}}/index.html'>{{properties.s3Path}}</a></td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Processing Level</td>" +
+                      "<td>{{properties.eop.processingLevel}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Platform Short Name</td>" +
+                      "<td>{{properties.eop.platformShortName}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Platform Serial Identifier</td>" +
+                      "<td>{{properties.eop.platformSerialIdentifier}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Instrument Short Name</td>" +
+                      "<td>{{properties.eop.instrumentShortName}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Sensor Type</td>" +
+                      "<td>{{properties.eop.sensorType}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Resolution</td>" +
+                      "<td>{{properties.eop.resolution}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Cloud Cover</td>" +
+                      "<td>{{properties.eop.cloudCoverPercentage}}&#37;</td>" +
+                    "</tr>" +
+                  "</table>"
+                ,
+                "thumbnailUrlTemplate": "http://landsat-pds.s3.amazonaws.com/{{properties.s3Path}}/{{properties.title}}_thumb_small.jpg",
             },
             "download": {
                 "protocol": "OpenSearch"
