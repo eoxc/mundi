@@ -412,9 +412,17 @@
                             "description": "The style in which the tiles will be retrieved.",
                             "type": "string"
                         },
+                        "version": {
+                            "description": "Override service version parameter. Default is '1.1.0'.",
+                            "type": "string"
+                        },
                         "attribution": {
                             "description": "A string to be displayed when the layer is displayed. Can contain HTML for specific formatting.",
                             "type": "string"
+                        },
+                        "discardZulu": {
+                            "description": "When this is set to 'true', the trailing 'Z' (for UTC Zulu) will be discarded for the WM(T)S time parameter. Default is 'false'.",
+                            "type": "boolean"
                         },
                         "cqlParameterName": {
                             "description": "The name of the CQL parameter name for WMS requests. When set, the CQL filtering is enabled for this view layer.",
@@ -573,6 +581,14 @@
                     "maxUrlLength": {
                         "description": "The maximum URL length of search requests to be sent. Longer URLs will not be sent, but an error will be raised directly. Default is 4000.",
                         "type": "number"
+                    },
+                    "thumbnailUrlTemplate": {
+                        "description": "The template string to construct a thumbnail URL. Use '{{' and '}}' to select values. e.g: 'http://landsat-pds.s3.amazonaws.com/{{properties.s3Path}}/{{properties.title}}_thumb_small.jpg'.",
+                        "type": "string"
+                    },
+                    "descriptionTemplate": {
+                        "description": "The template string to construct a record description. Use '{{' and '}}' to select values.",
+                        "type": "string"
                     },
                     "required": ["protocol", "url"]
                 },
