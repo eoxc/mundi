@@ -75,6 +75,7 @@ const RecordsDetailsModalView = ModalView.extend({
       model: recordModel,
       mapModel: this.mapModel,
       mapView: this.mapView,
+      descriptionTemplate: layerModel.get('search.descriptionTemplate'),
     });
     this.showChildView('content', detailsView);
 
