@@ -307,6 +307,10 @@
                         "type": "object"
                     }],
                 },
+                "downloadEnabled": {
+                    "description": "Whether or not the 'Download' button shall be enabled. Default is true.",
+                    "type": "boolean"
+                },
                 "translations": {
                     "description": "Additional translations not covered in the base translations. Keys can be one of the language specifiers: 'en', 'de', 'deinformal'. The values must be objects, mapping the (english) key to the translated value. Must not contain the '#' character.",
                     "type": "object"

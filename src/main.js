@@ -205,6 +205,7 @@ window.Application = Marionette.Application.extend({
       downloadFormats: [],
       downloadProjections: [],
       uploadEnabled: true,
+      downloadEnabled: true,
     });
 
     // set up config
@@ -398,6 +399,7 @@ window.Application = Marionette.Application.extend({
           collection: searchCollection,
           onStartDownload: startDownload,
           termsAndConditionsUrl,
+          downloadEnabled: settings.downloadEnabled,
         }),
       }],
     }));
@@ -417,20 +419,20 @@ window.Application = Marionette.Application.extend({
     layout.showChildView('topPanel', new WarningsView({ collection: warningsCollection }));
 
     // hook up the events that shall generate warnings
-    filtersModel.on('change', () => {
-      // show warning when time filter is set
-      warningsCollection.setWarning(
-        i18next.t('timefilter_warning'),
-        filtersModel.get('time') || false
-      );
+    // filtersModel.on('change', () => {
+    //   // show warning when time filter is set
+    //   warningsCollection.setWarning(
+    //     i18next.t('timefilter_warning'),
+    //     filtersModel.get('time') || false
+    //   );
 
-      const otherFilters = Object.keys(filtersModel.attributes)
-        .filter(key => key !== 'time' && key !== 'area');
-      warningsCollection.setWarning(
-        i18next.t('advancedfilter_warning'),
-        otherFilters.length
-      );
-    });
+    //   const otherFilters = Object.keys(filtersModel.attributes)
+    //     .filter(key => key !== 'time' && key !== 'area');
+    //   warningsCollection.setWarning(
+    //     i18next.t('advancedfilter_warning'),
+    //     otherFilters.length
+    //   );
+    // });
 
     // show a warning for every layer that failed to be accessed
     failedLayers.forEach(layer => warningsCollection.setWarning(
