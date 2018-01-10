@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>EOxC Demo Sentinel-Hub</title>
-  <link rel="stylesheet" href="static/code-de.css"/>
-  <link rel="stylesheet" href="static/fonts.css"/>
+  <link rel="stylesheet" href="eoxc.css"/>
   <style>
     #header .navbar.static {
         top: 0 !important;
@@ -37,29 +36,30 @@
 var config = {
     "settings": {
         "rightPanelOpen": true,
-        "leftPanelOpen": true,
+        "leftPanelOpen": false,
         "language": "en",
         "tutorial": "once",
         "center": [15, 50],
         "zoom": 4,
-        "minZoom": 4,
-        "maxZoom": 15,
+        "minZoom": 2,
+        "maxZoom": 13,
         "searchDebounceTime": 250,
         "timeSliderControls": true,
         "timeDomain": [
             "2015-01-01T00:00:00Z",
-            "2017-07-31T23:59:59Z"
+            "2018-01-31T23:59:59Z"
         ],
         "contrainTimeDomain": true,
-        "selectedTimeDomain": [
-            "2017-07-20T00:00:00Z",
-            "2017-07-26T23:59:59Z"
-        ],
-        "selectableInterval": "P1M",
         "displayTimeDomain": [
-            "2017-07-01T00:00:00Z",
-            "2017-07-31T23:59:59Z"
+            "2017-12-14T00:00:00Z",
+            "2018-01-11T00:00:00Z"
         ],
+        "displayInterval": "P61D",
+        "selectedTimeDomain": [
+            "2018-01-08T00:00:00Z",
+            "2018-01-09T00:00:00Z"
+        ],
+        "selectableInterval": "P28D",
         "footprintFillColor": "rgba(255, 255, 255, 0.2)",
         "footprintStrokeColor": "rgba(255, 255, 255, 1)",
         "filterFillColor": "rgba(0, 165, 255, 0)",
@@ -79,19 +79,6 @@ var config = {
                 "min": 0,
                 "range": true
             },
-            {
-                "type": "eo:resolution",
-                "options": [{
-                    "label": "10m",
-                    "value": "10",
-                }, {
-                    "label": "20m",
-                    "value": "20",
-                }, {
-                    "label": "60m",
-                    "value": "60",
-                }]
-            }
         ],
         "translations": {
             "en": {
@@ -108,11 +95,11 @@ var config = {
                 "visible": true,
                 "protocol": "WMTS",
                 "urls": [
-                    "http://a.tiles.maps.eox.at/wmts/",
-                    "http://b.tiles.maps.eox.at/wmts/",
-                    "http://c.tiles.maps.eox.at/wmts/",
-                    "http://d.tiles.maps.eox.at/wmts/",
-                    "http://e.tiles.maps.eox.at/wmts/"
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
                 ],
                 "matrixSet": "WGS84",
                 "format": "image/png",
@@ -128,11 +115,11 @@ var config = {
                 "visible": false,
                 "protocol": "WMTS",
                 "urls": [
-                    "http://a.tiles.maps.eox.at/wmts/",
-                    "http://b.tiles.maps.eox.at/wmts/",
-                    "http://c.tiles.maps.eox.at/wmts/",
-                    "http://d.tiles.maps.eox.at/wmts/",
-                    "http://e.tiles.maps.eox.at/wmts/"
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
                 ],
                 "matrixSet": "WGS84",
                 "format": "image/png",
@@ -148,11 +135,11 @@ var config = {
                 "visible": false,
                 "protocol": "WMTS",
                 "urls": [
-                    "http://a.tiles.maps.eox.at/wmts/",
-                    "http://b.tiles.maps.eox.at/wmts/",
-                    "http://c.tiles.maps.eox.at/wmts/",
-                    "http://d.tiles.maps.eox.at/wmts/",
-                    "http://e.tiles.maps.eox.at/wmts/"
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
                 ],
                 "matrixSet": "WGS84",
                 "format": "image/png",
@@ -168,11 +155,11 @@ var config = {
                 "visible": false,
                 "protocol": "WMTS",
                 "urls": [
-                    "http://a.tiles.maps.eox.at/wmts/",
-                    "http://b.tiles.maps.eox.at/wmts/",
-                    "http://c.tiles.maps.eox.at/wmts/",
-                    "http://d.tiles.maps.eox.at/wmts/",
-                    "http://e.tiles.maps.eox.at/wmts/"
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
                 ],
                 "matrixSet": "WGS84",
                 "format": "image/png",
@@ -192,7 +179,7 @@ var config = {
                 "visible": true,
                 "protocol": "WMS",
                 "urls": [
-                    "http://services.sentinel-hub.com/v1/wms/f3ab47b0-ac4c-4a67-a5db-24e2122a80d9?"
+                    "https://services.sentinel-hub.com/ogc/wms/f3ab47b0-ac4c-4a67-a5db-24e2122a80d9?"
                 ],
                 "format": "image\/png",
                 "projection": "EPSG:4326",
@@ -200,10 +187,11 @@ var config = {
                 "version": "1.1.1",
                 "discardZulu": true,
                 "tileSize": 512,
+                "attribution": "<a href=\"https://scihub.copernicus.eu/twiki/pub/SciHubWebPortal/TermsConditions/TC_Sentinel_Data_31072014.pdf\" target=\"_blank\">TC_Sentinel_Data_31072014.pdf</a>",
             },
             "search": {
                 "protocol": "OpenSearch",
-                "url": "http://ows.eox.at/sentinel-hub/sentinel-hub.osdd",
+                "url": "http://opensearch.sentinel-hub.com/resto/api/collections/Sentinel2/describe.xml",
                 "id": "S2",
                 "histogramBinCount": 30,
                 "format": "application\/atom+xml",
@@ -267,7 +255,7 @@ var config = {
             "displayColor": "rgba(16, 150, 24, 1)",
             "display": {
                 "id": "LANDSAT8",
-                "visible": true,
+                "visible": false,
                 "protocol": "WMS",
                 "urls": [
                     "https://services-uswest2.sentinel-hub.com/v1/wms/6d9d1734-5ac9-4ab1-b7dc-e5423ec85043"
@@ -278,6 +266,7 @@ var config = {
                 "version": "1.1.1",
                 "discardZulu": true,
                 "tileSize": 512,
+                "attribution": "<a href=\"https://landsat.usgs.gov/landsat-8\" target=\"_blank\">Landsat 8</a>",
             },
             "search": {
                 "protocol": "OpenSearch",
@@ -294,7 +283,7 @@ var config = {
                   "<table class='table table-condensed'>" +
                     "<tr>" +
                       "<td>S3 Path</td>" +
-                      "<td><a target='_blank' href='http://landsat-pds.s3.amazonaws.com/#{{properties.s3Path}}/index.html'>{{properties.s3Path}}</a></td>" +
+                      "<td><a target='_blank' href='http://landsat-pds.s3.amazonaws.com/{{properties.s3Path}}/index.html'>{{properties.s3Path}}</a></td>" +
                     "</tr>" +
                     "<tr>" +
                       "<td>Processing Level</td>" +
@@ -342,11 +331,11 @@ var config = {
                 "visible": false,
                 "protocol": "WMTS",
                 "urls": [
-                    "http://a.tiles.maps.eox.at/wmts/",
-                    "http://b.tiles.maps.eox.at/wmts/",
-                    "http://c.tiles.maps.eox.at/wmts/",
-                    "http://d.tiles.maps.eox.at/wmts/",
-                    "http://e.tiles.maps.eox.at/wmts/"
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
                 ],
                 "matrixSet": "WGS84",
                 "style": "default",
@@ -362,11 +351,11 @@ var config = {
                 "visible": false,
                 "protocol": "WMTS",
                 "urls": [
-                    "http://a.tiles.maps.eox.at/wmts/",
-                    "http://b.tiles.maps.eox.at/wmts/",
-                    "http://c.tiles.maps.eox.at/wmts/",
-                    "http://d.tiles.maps.eox.at/wmts/",
-                    "http://e.tiles.maps.eox.at/wmts/"
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
                 ],
                 "matrixSet": "WGS84",
                 "style": "default",
