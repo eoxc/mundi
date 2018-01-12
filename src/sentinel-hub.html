@@ -3,8 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <title>Browse open satellite data</title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:400,400italic,700,300">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style>
+    /* Overrides for styles defined in bundle */
+    .navbar{
+      background: #373b50 !important;
+      padding-bottom: 0 !important;
+      margin: 0 !important;
+      border: 0 !important;
+      height: 50px !important;
+      display: block !important;
+    }
+    .navbar-brand {
+      padding: 15px !important;
+    }
+    .navbar-brand>img {
+      height: 20px !important;
+      width: auto !important;
+    }
+    .navbar-default .navbar-text {
+      margin: 5px 20px !important;
+      font-weight: 300 !important;
+      font-size: 25px !important;
+      padding: 6px 0 0 !important;
+      font-family: "Lato", sans-serif !important;
+    }
+    .navbar-default .navbar-nav>li>a, .navbar-default .navbar-text {
+      color: #fff !important;
+    }
+  </style>
 </head>
-<body>
+<body onload="window_loaded()">
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -13,12 +43,12 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="https://eox.at/" target="_blank"><img src="EOX_Logo.svg"/></a>
-        <h2 class="navbar-text center" style="color: white">Browse open satellite data</h2>
+        <a class="navbar-brand" href="https://eox.at/" target="_blank"><img src="EOX_Logo_white.svg"/></a>
+        <h2 class="navbar-text">Browse open satellite data with EOxC</h2>
       </div>
       <div class="collapse navbar-collapse" id="links">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" data-toggle="modal" data-target="#about-modal">About</a></li>
+          <li><a href="#" data-toggle="modal" data-target="#about-modal" id="aboutBtn">About</a></li>
         </ul>
       </div>
     </div>
@@ -30,19 +60,21 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">EOxC</h4>
+          <h4 class="modal-title" id="myModalLabel">About EOxC</h4>
         </div>
         <div class="modal-body">
-          <p><a href="https://github.com/eoxc" target="_blank">EOxC</a> let's you intuitively browse satellite data. View, search/filter, and download Sentinel-2 and Landsat 8 products directly in your browser.</p>
-          <p>Follow the <a title="Tutorial" id="tutorial">tutorial <i style="font-size:0.8em;" class="fa fa-book" aria-hidden="true"></i></a> for a brief guided tour of the offered functionality</p>
+          <p><a href="https://github.com/eoxc" target="_blank">EOxC</a> lets you intuitively browse satellite data. View, search/filter, and download Sentinel-2 and Landsat 8 products directly in your browser.</p>
+          <p><a href="" onclick="tutBtn()" data-dismiss="modal"><i style="font-size:0.8em;" class="fa fa-book" aria-hidden="true"></i> Show tutorial</a></p>
+          <hr />
           <p>EOxC connects to the <a href="http://opensearch.sentinel-hub.com/resto/api/collections/Sentinel2/describe.xml" target="_blank">OpenSearch</a> and <a href="http://sentinel-hub.com/develop/documentation/api/ogc_api/wms-parameters" target="_blank">WMS</a> services provided by <a href="http://sentinel-hub.com" target="_blank">Sentinel Hub</a></p>
           <p>Downloads are provided via the <a href="https://aws.amazon.com/public-datasets/sentinel-2/" target="_blank">sentinel-s2-l1c bucket</a> and the <a href="https://aws.amazon.com/public-datasets/landsat/" target="_blank">landsat-pds bucket</a> on Amazon Simple Storage Service (S3)</p>
           <p>Support has been generously provided by the <a href="http://www.esa.int/ESA" target="_blank">European Space Agency (ESA).</a></p>
-          <p>Contributions are welcome on <a href="https://github.com/eoxc" target="_blank">GitHub</a></p>
-          <p>Proudly presented by:<br/><a href="https://eox.at" target="_blank"><img src="EOX_Logo.svg" style="width: 120px"/></a></p>
+          <p>Contributions are welcome on <a href="https://github.com/eoxc" target="_blank">GitHub</a>!</p>
+          <hr />
+          <p>Proudly presented by:<br/><a href="https://eox.at" target="_blank"><img src="EOX_Logo.svg" style="width: 120px; margin-top: 10px;"/></a></p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
         </div>
       </div>
     </div>
@@ -64,7 +96,7 @@
         "rightPanelOpen": true,
         "leftPanelOpen": false,
         "language": "en",
-        "tutorial": "once",
+        "tutorial": "button",
         "center": [15, 50],
         "zoom": 4,
         "minZoom": 2,
@@ -199,7 +231,7 @@
         {
             "id": "Sentinel-2",
             "displayName": "Sentinel-2",
-            "displayColor": "rgba(51, 102, 204, 1)",
+            "displayColor": "rgb(69, 90, 100)",
             "link": "https://aws.amazon.com/public-datasets/sentinel-2/",
             "display": {
                 "id": "TRUE_COLOR",
@@ -279,7 +311,7 @@
         }, {
             "id": "Landsat-8",
             "displayName": "Landsat 8",
-            "displayColor": "rgba(16, 150, 24, 1)",
+            "displayColor": "rgb(122, 198, 207)",
             "link": "https://aws.amazon.com/public-datasets/landsat/",
             "display": {
                 "id": "LANDSAT8",
@@ -401,28 +433,30 @@
   });
   app.start();
   </script>
-  <style>
-    .navbar{
-      background: #7ac6cf;
-      padding-bottom: 0;
-      margin: 0;
-      border: 0;
-    }
-    .navbar-brand {
-      padding: 5px;
-    }
-    .navbar-brand>img {
-      height: 100%;
-      width: auto;
-    }
-    .navbar-text {
-      margin: 5px 30px;
-    }
-    .center {
-      transform: translateX(-50%);
-      left: 50%;
-      position: absolute;
-    }
-  </style>
+  <script>
+  function window_loaded(){
+    // if (localStorage.getItem('firstVisit') === null) {
+      // Open tutorial automatically if it is the first visit
+      document.getElementById('aboutBtn').click();
+      // localStorage.setItem('firstVisit', false);
+    // }
+  }
+  var simulateClick = function (elem) {
+      // Create our event (with options)
+      var evt = new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          view: window
+      });
+      // If cancelled, don't dispatch our event
+      var canceled = !elem.dispatchEvent(evt);
+  };
+  var aLink = document.querySelector('a');
+  simulateClick(aLink);
+
+  function tutBtn(){
+    document.getElementById('tutorial').click();
+  }
+  </script>
 </body>
 </html>
