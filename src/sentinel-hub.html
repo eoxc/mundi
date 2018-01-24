@@ -34,6 +34,12 @@
     .navbar-default .navbar-nav>li>a, .navbar-default .navbar-text {
       color: #fff !important;
     }
+    .navbar-default .navbar-nav>li>a:focus {
+      outline-width: 0;
+    }
+    .navbar-default .navbar-nav>li>a:hover, .navbar-default a:hover.navbar-brand {
+      background-color: #7ac6cf !important;
+    }
   </style>
 </head>
 <body onload="window_loaded()">
@@ -51,6 +57,7 @@
       <div class="collapse navbar-collapse" id="links">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#" data-toggle="modal" data-target="#about-modal" id="aboutBtn">About</a></li>
+          <li><a href="#" data-toggle="modal" data-target="#known-limitations-modal" id="aboutBtn">Known limitations</a></li>
         </ul>
       </div>
     </div>
@@ -65,10 +72,10 @@
           <h4 class="modal-title" id="myModalLabel">About EOxC</h4>
         </div>
         <div class="modal-body">
-          <p><a href="https://github.com/eoxc" target="_blank">EOxC</a> lets you intuitively browse satellite data. View, search/filter, and download Sentinel-2 and Landsat 8 products directly in your browser.</p>
+          <p><a href="https://github.com/eoxc" target="_blank">EOxC</a> is the software that lets you intuitively browse satellite data. View, search/filter, and download Sentinel-2 and Landsat 8 products directly in your browser.</p>
           <p><a href="" onclick="tutBtn()" data-dismiss="modal"><i style="font-size:0.8em;" class="fa fa-book" aria-hidden="true"></i> Show tutorial</a></p>
           <hr />
-          <p>EOxC connects to the <a href="http://opensearch.sentinel-hub.com/resto/api/collections/Sentinel2/describe.xml" target="_blank">OpenSearch</a> and <a href="http://sentinel-hub.com/develop/documentation/api/ogc_api/wms-parameters" target="_blank">WMS</a> services provided by <a href="http://sentinel-hub.com" target="_blank">Sentinel Hub.</a></p>
+          <p>EOxC connects to the <a href="http://opensearch.sentinel-hub.com/resto/api/collections/Sentinel2/describe.xml" target="_blank">OpenSearch</a> and <a href="http://sentinel-hub.com/develop/documentation/api/ogc_api/wms-parameters" target="_blank">WMS</a> services provided by <a href="http://sentinel-hub.com" target="_blank">Sentinel Hub</a>.</p>
           <p>Downloads are provided via the <a href="https://aws.amazon.com/public-datasets/sentinel-2/" target="_blank">sentinel-s2-l1c bucket</a> and the <a href="https://aws.amazon.com/public-datasets/landsat/" target="_blank">landsat-pds bucket</a> on Amazon Simple Storage Service (S3).</p>
           <p>Support has been generously provided by the <a href="http://www.esa.int/ESA" target="_blank">European Space Agency (ESA).</a></p>
           <p>Contributions are welcome on <a href="https://github.com/eoxc" target="_blank">GitHub</a>!</p>
@@ -82,6 +89,30 @@
     </div>
   </div>
 
+  <!-- Known limitations modal -->
+  <div class="modal fade" id="known-limitations-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel2">Known limitations</h4>
+        </div>
+        <div class="modal-body">
+          <p>This website connects to the <a href="http://opensearch.sentinel-hub.com/resto/api/collections/Sentinel2/describe.xml" target="_blank">OpenSearch</a> and <a href="http://sentinel-hub.com/develop/documentation/api/ogc_api/wms-parameters" target="_blank">WMS</a> services provided by <a href="http://sentinel-hub.com" target="_blank">Sentinel Hub</a> and outside the control of EOX. Please take into account below limitations of those services when browsing for data.</p>
+          <hr />
+          <p>Wrong number of total results in OpenSearch responses leading to erratic changes on the user interface like showing a different amount of total records after clicking on the "Load more" button, showing "No more records" while still products are missing, or showing a way too low overall number on the timeslider bucket and particularly lower than the number of search results.</p>
+          <p>Occasional mismatch of acquisition times reported by OpenSearch and WMS leading to products not shown on the map in product details page.</p>
+          <p>Some Landsat 8 footprints are wrongly encoded in OpenSearch responses showing them in a circle around null island just off the African west cost.</p>
+          <p>There is a lag of about two days before new products are available via WMS for all zoom levels leading to search results without representation on the map.</p>
+          <hr />
+          <p>Proudly presented by:<br/><a href="https://eox.at" target="_blank"><img src="EOX_Logo.svg" style="width: 120px; margin-top: 10px;"/></a></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div id="app" style="width: 100%; top: 50px; bottom: 0; position: absolute; margin: 0; padding:0;"></div>
   <script src="code-de.bundle.js"></script>
