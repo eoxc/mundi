@@ -491,6 +491,10 @@
                 "format": "image\/png",
                 "projection": "EPSG:4326",
                 "style": "",
+                "cqlParameterName": "cql_filter",
+                "cqlMapping": {
+                    "eo:cloudCover": "cloudcover"
+                },
                 "attribution": "Nutzungsbedingungen: https:\/\/scihub.copernicus.eu\/twiki\/pub\/SciHubWebPortal\/TermsConditions\/TC_Sentinel_Data_31072014.pdf"
             },
             "search": {
@@ -538,7 +542,44 @@
             },
             "download": {
                 "protocol": "OpenSearch"
-            }
+            },
+            "fullResolution": {
+                "protocol": "WCS",
+                "id": "Sentinel2__S2_MSI_L1C_FULL",
+                "url": "https://geoservice.code-de.org/Sentinel2/wcs?",
+                "cqlParameterName": "cql_filter",
+                "cqlMapping": {
+                    "eo:cloudCover": "cloudcover",
+                },
+                "maxSize": 500,
+                "axisNames": [
+                    'http://www.opengis.net/def/axis/OGC/0/Long',
+                    'http://www.opengis.net/def/axis/OGC/0/Lat'
+                ],
+                "fields": [{
+                  "name": "B02",
+                  "identifier": "B02"
+                }, {
+                  "name": "B03",
+                  "identifier": "B03"
+                }, {
+                  "name": "B04",
+                  "identifier": "B04"
+                }, {
+                  "name": "B08",
+                  "identifier": "B08"
+                }],
+                "interpolations": [{
+                  "name": "Nearest-Neighbor",
+                  "identifier": "http://www.opengis.net/def/interpolation/OGC/1/nearest-neighbor"
+                }, {
+                  "name": "Linear",
+                  "identifier": "http://www.opengis.net/def/interpolation/OGC/1/linear"
+                }, {
+                  "name": "Cubic",
+                  "identifier": "http://www.opengis.net/def/interpolation/OGC/1/cubic"
+                }]
+            },
         },
         {
             "id": "S2_MSI_L1C_RE",
@@ -564,7 +605,7 @@
                 "style": "",
                 "cqlParameterName": "cql_filter",
                 "cqlMapping": {
-                    "eo:cloudCover" : "cloudcover"
+                    "eo:cloudCover": "cloudcover"
                 },
                 "attribution": "Nutzungsbedingungen: https:\/\/scihub.copernicus.eu\/twiki\/pub\/SciHubWebPortal\/TermsConditions\/TC_Sentinel_Data_31072014.pdf"
             },
@@ -620,7 +661,7 @@
                 "url": "https://geoservice.code-de-ref.eoc.dlr.de/Sentinel2/wcs?",
                 "cqlParameterName": "cql_filter",
                 "cqlMapping": {
-                    "eo:cloudCover" : "cloudcover",
+                    "eo:cloudCover": "cloudcover",
                 },
                 "maxSize": 500,
                 "axisNames": [
