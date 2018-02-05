@@ -141,21 +141,27 @@
           "name": "TIFF",
           "mimeType": "image/tiff"
         }, {
-          "name": "JP2",
-          "mimeType": "image/jp2"
+          "name": "JPG",
+          "mimeType": "image/jpeg"
+        }, {
+          "name": "PNG",
+          "mimeType": "image/png"
         }, {
           "name": "NetCDF",
           "mimeType": "application/x-netcdf"
+        }, {
+          "name": "PDF",
+          "mimeType": "application/pdf"
         }],
         "downloadProjections": [{
           "name": "WGS-84",
-          "identifier": "EPSG:4326"
+          "identifier": "http://www.opengis.net/def/crs/EPSG/0/4326"
         }, {
           "name": "Google Mercator",
-          "identifier": "EPSG:3857"
+          "identifier": "http://www.opengis.net/def/crs/EPSG/0/3857"
         }, {
-          "name": "LAEA",
-          "identifier": "EPSG:3035"
+          "name": "ETRS89",
+          "identifier": "http://www.opengis.net/def/crs/EPSG/0/4258"
         }]
     },
     "baseLayers": [
@@ -615,56 +621,34 @@
                 "cqlParameterName": "cql_filter",
                 "cqlMapping": {
                     "eo:cloudCover" : "cloudcover",
-                    "time": "time"
                 },
                 "maxSize": 500,
-                "axisNames": ['Long', 'Lat'],
+                "axisNames": [
+                    'http://www.opengis.net/def/axis/OGC/0/Long',
+                    'http://www.opengis.net/def/axis/OGC/0/Lat'
+                ],
                 "fields": [{
-                  "name": "B1",
-                  "identifier": "B1"
+                  "name": "B02",
+                  "identifier": "B02"
                 }, {
-                  "name": "B2",
-                  "identifier": "B2"
+                  "name": "B03",
+                  "identifier": "B03"
                 }, {
-                  "name": "B3",
-                  "identifier": "B3"
+                  "name": "B04",
+                  "identifier": "B04"
                 }, {
-                  "name": "B4",
-                  "identifier": "B4"
-                }, {
-                  "name": "B5",
-                  "identifier": "B5"
-                }, {
-                  "name": "B6",
-                  "identifier": "B6"
-                }, {
-                  "name": "B7",
-                  "identifier": "B7"
-                }, {
-                  "name": "B8",
-                  "identifier": "B8"
-                }, {
-                  "name": "B8a",
-                  "identifier": "B8a"
-                }, {
-                  "name": "B9",
-                  "identifier": "B9"
-                }, {
-                  "name": "B10",
-                  "identifier": "B10"
-                }, {
-                  "name": "B11",
-                  "identifier": "B11"
-                }, {
-                  "name": "B12",
-                  "identifier": "B12"
+                  "name": "B08",
+                  "identifier": "B08"
                 }],
                 "interpolations": [{
                   "name": "Nearest-Neighbor",
-                  "identifier": "nearest"
+                  "identifier": "http://www.opengis.net/def/interpolation/OGC/1/nearest-neighbor"
                 }, {
-                  "name": "Average",
-                  "identifier": "average"
+                  "name": "Linear",
+                  "identifier": "http://www.opengis.net/def/interpolation/OGC/1/linear"
+                }, {
+                  "name": "Cubic",
+                  "identifier": "http://www.opengis.net/def/interpolation/OGC/1/cubic"
                 }]
             },
             "processingUrl": "https://processing.code-de-ref.eoc.dlr.de/injectInputSelection"
