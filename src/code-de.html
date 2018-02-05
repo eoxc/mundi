@@ -45,7 +45,14 @@
   <div id="app" style="width: 100%; top: 55px; bottom: 0; position: absolute; margin: 0; padding:0;"></div>
   <script src="code-de.bundle.js"></script>
   <script>
-var config = {
+  var today = new Date();
+  today.setUTCHours(24, 0, 0, 0);
+  var twoYearsAgo = new Date(new Date(today).setUTCFullYear(today.getUTCFullYear() - 2));
+  var displayTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 28));
+  var selectedTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 10));
+  var selectedTimeDomainEnd = new Date(new Date(today).setUTCDate(today.getUTCDate()));
+
+  var config = {
     "settings": {
         "tutorial": "once",
         "uploadEnabled": false,
@@ -58,17 +65,17 @@ var config = {
         // },
         "timeDomain": [
             "2016-01-01T00:00:00Z",
-            "2017-11-28T00:00:00Z"
+            today.toISOString()
         ],
         "constrainTimeDomain": true,
         "displayTimeDomain": [
-            "2017-10-30T00:00:00Z",
-            "2017-11-28T00:00:00Z"
+            displayTimeDomainStart.toISOString(),
+            today.toISOString()
         ],
         "displayInterval": "P365D",
         "selectedTimeDomain": [
-            "2017-11-18T00:00:00Z",
-            "2017-11-28T00:00:00Z"
+            selectedTimeDomainStart.toISOString(),
+            selectedTimeDomainEnd.toISOString()
         ],
         "selectableInterval": "P14D",
         "timeSliderControls": true,
