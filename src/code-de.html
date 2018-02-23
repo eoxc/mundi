@@ -693,6 +693,88 @@
                 }]
             },
             "processingUrl": "https://processing.code-de-ref.eoc.dlr.de/injectInputSelection"
+        },
+        {
+            "id": "S2_MSI_L1C_2",
+            "link": "https://code-de.org\/en\/record\/39b6073d-7ef4-4aa9-a3e4-07f079709b52",
+            "displayName": "Sentinel-2 - OpenSearch only",
+            "displayColor": "#F0AD4E",
+            "display": {
+                "id": "S2_MSI_L1C",
+                "visible": false,
+                "protocol": "WMS",
+            },
+            "search": {
+                "protocol": "OpenSearch",
+                "url": "http://ows.eox.at/code-de/CODE-DE_S2_MSI_L1C.osdd",
+                "id": "EOP:CODE-DE:S2_MSI_L1C",
+                "histogramBinCount": 28,
+                "format": "application\/atom+xml",
+                "method": "GET",
+                "histogramThreshold": 600,
+                "lightweightBuckets": true,
+                "searchLimit": 600,
+                "loadMore": 600,
+                "parameters": [
+                    {
+                        "type": "eo:productionStatus"
+                    },
+                    {
+                        "max": 100,
+                        "min": 0,
+                        "range": true,
+                        "type": "eo:cloudCover",
+                        "title": "Cloud Coverage in percent"
+                    },
+                    {
+                        "type": "eo:orbitDirection"
+                    },
+                    {
+                        "type": "eo:orbitNumber"
+                    },
+                    {
+                        "type": "eo:resolution",
+                        "options": [{
+                            "label": "10m",
+                            "value": "10",
+                        }, {
+                            "label": "20m",
+                            "value": "20",
+                        }, {
+                            "label": "60m",
+                            "value": "60",
+                        }]
+                    }
+                ]
+            },
+            "download": {
+                "protocol": "OpenSearch"
+            },
+        },
+        {
+            "id": "S2_MSI_L1C_3",
+            "link": "https://code-de.org\/en\/record\/39b6073d-7ef4-4aa9-a3e4-07f079709b52",
+            "displayName": "Sentinel-2 - WMS only",
+            "displayColor": "#F0AD4E",
+            "display": {
+                "id": "S2_MSI_L1C",
+                "visible": false,
+                "protocol": "WMS",
+                "urls": [
+                    "http://ows.eox.at/code-de_geoservice/Sentinel2/wms?"
+                ],
+                "format": "image\/png",
+                "projection": "EPSG:4326",
+                "style": "",
+                "cqlParameterName": "cql_filter",
+                "cqlMapping": {
+                    "eo:cloudCover": "cloudcover"
+                },
+                "attribution": "Nutzungsbedingungen: https:\/\/scihub.copernicus.eu\/twiki\/pub\/SciHubWebPortal\/TermsConditions\/TC_Sentinel_Data_31072014.pdf"
+            },
+            "download": {
+                "protocol": "OpenSearch"
+            },
         }
     ],
     "overlayLayers": [
