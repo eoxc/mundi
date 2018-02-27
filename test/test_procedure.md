@@ -11,7 +11,7 @@ uploaded to GitHub. Other tests could be done using the npm dev-server.
 # Test procedure for each OS/Browser combination:
 
 * Open URL http://<URL-of-dev-environment>:8080/<configuration>.html e.g. http://localhost:8080/code-de.html or http://sao:8080/
-  - [ ] Check proper loading of EOxC e.g. tutorial, panels visibility, timeslider selection, map, search results, etc.
+  - [ ] Check proper loading of EOxC e.g. tutorial, language, panels visibility, timeslider selection, map, search results, etc.
 * Zoom, pan on map (make sure to zoom over dateline and to area with zero results)
   - [ ] Check update of search results in list and on map
 * Zoom, pan on timeslider
@@ -33,7 +33,13 @@ uploaded to GitHub. Other tests could be done using the npm dev-server.
 * Set spatial filter via left panel
   - [ ] Check update of search results
 * Set additional filter via left panel
-  - [ ] Check update of search results
+  - [ ] Check update of search results and images on map
+* Download full resolution raster
+  - [ ] Check downloaded raster file
+* Copy and load OpenSearch URL
+  - [ ] Check that search results are the same
+* Start processing
+  - [ ] Check sending of proper processing requests
 
 # Testing preparation
 
