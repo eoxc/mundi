@@ -629,6 +629,10 @@
                             "type": "string",
                             "enum": ["EO-WCS"],
                         },
+                        "id": {
+                            "description": "The ID used for the protocol to identify the coverage.",
+                            "type": "string"
+                        },
                         "url": {
                             "description": "The base-URL to send full resolution download requests to.",
                             "type": "string",
@@ -641,6 +645,16 @@
                         "cqlMapping": {
                             "description": "The mapping of the search filter name to the attribute names used for CQL.",
                             "type": "object"
+                        },
+                        "maxSizeWarning": {
+                            "description": "A warning is shown when the download is expected to be bigger than the configured number in MB. The estimate is calculated as 'sizeX * sizeY * #bands * 8 / 1024 / 1024'.",
+                            "type": "number",
+                            "default": 20
+                        },
+                        "maxSizeResolution": {
+                            "description": "Resolution used to calculate the estimate for 'maxSizeWarning'.",
+                            "type": "number",
+                            "default": 0.0000858306884765625
                         },
                         "axisNames": {
                             "description": "The axis names to include the subset in WCS requests.",
