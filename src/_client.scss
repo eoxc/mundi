@@ -256,6 +256,24 @@ input {
             text-align: left;
         }
     }
+
+}
+
+.form-horizontal {
+
+    .form-group label {
+        text-align: left;
+        width: 100%;
+    }
+
+    .checkbox,.checkbox-inline,.radio,.radio-inline {
+        padding-top: 0;
+    }
+
+}
+
+.size-warning {
+    margin: 15px 0 0 0;
 }
 
 #timeSlider {
