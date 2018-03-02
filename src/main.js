@@ -5,7 +5,6 @@ import $ from 'jquery';
 import 'jquery-ui';
 import es6Promise from 'es6-promise';
 
-import i18next from 'i18next';
 import _ from 'underscore'; // eslint-disable-line import/no-extraneous-dependencies
 import Backbone from 'backbone'; // eslint-disable-line import/no-extraneous-dependencies
 import Marionette from 'backbone.marionette';
@@ -47,6 +46,8 @@ import WarningsCollection from './models/WarningsCollection';
 
 import getTutorialWidget from './tutorial';
 import { premultiplyColor } from './utils';
+
+import i18next from './i18next';
 
 import { version as cdeVersion } from '../package.json';
 
