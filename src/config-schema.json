@@ -700,6 +700,23 @@
                             }
                         }
                     }
+                },
+                "processing": {
+                    "description": "Configuration settings for the processing button",
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "description": "The URL to send processing POST requests to.",
+                            "type": "string",
+                            "format": "uri"
+                        },
+                        "method": {
+                            "description": "The method used to send processing requests. 'fetch' sends a POST request with a JSON payload in the current tab, 'form' simulates sending a form in a new tab with JSON as the value of the 'request' field.",
+                            "type": "string",
+                            "enum": ["fetch", "form"],
+                        },
+
+
                 }
             },
             "required": ["id", "displayName", "display"],
