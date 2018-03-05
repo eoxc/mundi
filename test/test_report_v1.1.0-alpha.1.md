@@ -1,8 +1,8 @@
 OS    | Browser      | Version | index.html | code-de.html | multi.html | fedeo.html | landsat.html
 ----- | ------------ | ------- | ---------- | ------------ | ---------- | ---------- | ------------
-Mac   | Safari       |         |            |              |            |            |
-Mac   | Chrome       |         |            |              |            |            |
-Mac   | Firefox      |         |            |              |            |            |
+Mac   | Safari       | 11      | X          | X            | X          |            | X
+Mac   | Chrome       | 64      | X          | X            | X          | X          | X
+Mac   | Firefox      | 58      | X          | X            | X          |            |
 Linux | Chrome       |         |            |              |            |            |
 Linux | Chrome Beta  |         |            |              |            |            |
 Linux | Chrome Dev   |         |            |              |            |            |
