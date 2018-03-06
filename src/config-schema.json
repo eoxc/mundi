@@ -428,6 +428,10 @@
                             "description": "When this is set to 'true', the trailing 'Z' (for UTC Zulu) will be discarded for the WM(T)S time parameter. Default is 'false'.",
                             "type": "boolean"
                         },
+                        "useMilliseconds": {
+                            "description": "Determines whether the granularity of the time parameter includes milliseconds. Defaults to 'true'.",
+                            "type": "boolean"
+                        },
                         "cqlParameterName": {
                             "description": "The name of the CQL parameter name for WMS requests. When set, the CQL filtering is enabled for this view layer.",
                             "type": "string"
