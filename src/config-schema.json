@@ -598,6 +598,14 @@
                         "description": "The template string to construct a record description. Use '{{' and '}}' to select values.",
                         "type": "string"
                     },
+                    "extraFields": {
+                        "description": "Extra fields to be parsed. Object keys are the JSON path where the output of the simple XPath shall be stored. Values are simple XPath expressions, always relative to a single Atom entry/RSS item.",
+                        "type": "object"
+                    },
+                    "extraFieldsNamespaces": {
+                        "description": "Namespace code to URL mapping for namespaces used in 'extraFields'.",
+                        "type": "object"
+                    },
                     "required": ["protocol", "url"]
                 },
                 "download": {
