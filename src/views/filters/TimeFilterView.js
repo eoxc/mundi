@@ -75,7 +75,7 @@ const TimeFilterView = Marionette.ItemView.extend({
   },
 
   onShowTimeClicked() {
-    this.mapModel.show(this.mapModel.get('extendedTime'));
+    this.mapModel.showTime(this.mapModel.get('extendedTime'));
   },
 
   onClearTimeClicked() {
