@@ -495,7 +495,19 @@
                 "cqlMapping": {
                     "eo:cloudCover": "cloudcover"
                 },
-                "attribution": "Nutzungsbedingungen: https:\/\/scihub.copernicus.eu\/twiki\/pub\/SciHubWebPortal\/TermsConditions\/TC_Sentinel_Data_31072014.pdf"
+                "attribution": "Nutzungsbedingungen: https:\/\/scihub.copernicus.eu\/twiki\/pub\/SciHubWebPortal\/TermsConditions\/TC_Sentinel_Data_31072014.pdf",
+                // "options": [{
+                //     "name": "Style",
+                //     "target": "display.style",
+                //     "values": [{
+                //         "label": "RGB",
+                //         "value": ""
+                //     },
+                //     {
+                //         "label": "False Color",
+                //         "value": "false"
+                //     }]
+                // }],
             },
             "search": {
                 "protocol": "OpenSearch",
@@ -610,7 +622,7 @@
             },
         },
         {
-            "id": "S2_MSI_L1C_RE",
+            "id": "Sentinel-2-RE",
             "link": "https://code-de-ref.eoc.dlr.de/en/marketplace/search?filter[0]=type:dataset#body_1c322e7dc2ed34cca3ca20ef49889e80",
             "displayName": "Sentinel-2 - RE",
             "displayColor": "rgba(153, 0, 153, 1)",
@@ -750,7 +762,7 @@
             },
             "processing": {
                 "url": "https://processing.code-de-ref.eoc.dlr.de/injectInputSelection",
-                "method": "fetch",
+                "method": "form",
             }
         },
         {
@@ -805,6 +817,25 @@
                         }]
                     }
                 ]
+            },
+            "download": {
+                "protocol": "OpenSearch"
+            },
+        },
+        {
+            "id": "METOP-A_GOME-2_OL_DAILY_HCHO",
+            "displayName": "METOP-A_GOME-2_OL_DAILY_HCHO",
+            "displayColor": "#000",
+            "display": {
+                "id": "METOP-A_GOME-2_OL_DAILY_HCHO",
+                "visible": false,
+                "protocol": "WMS",
+                "urls": [
+                    "https://geoservice.dlr.de/eoc/atmosphere/wms?"
+                ],
+                "format": "image\/png",
+                "projection": "EPSG:4326",
+                "style": "",
             },
             "download": {
                 "protocol": "OpenSearch"
