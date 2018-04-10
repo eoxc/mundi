@@ -41,7 +41,7 @@ const RecordsDetailsModalView = ModalView.extend({
     this.filterStrokeColor = options.filterStrokeColor;
     this.filterOutsideColor = options.filterOutsideColor;
 
-    this.mapModel = new MapModel({ center: [0, 0], zoom: 5 });
+    this.mapModel = new MapModel({ center: [0, 0], zoom: 5, noclick: true });
     this.highlightModel = new HighlightModel();
     this.filtersModel = new FiltersModel();
   },
