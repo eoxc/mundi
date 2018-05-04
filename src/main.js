@@ -278,7 +278,11 @@ window.Application = Marionette.Application.extend({
     const startDownload = (records) => {
       layout.showChildView('modals', new DownloadOptionsModalView({
         records,
-        searchCollection,
+        searchCollection: new Backbone.Collection(
+          searchCollection.filter(
+            searchModel => searchModel.get('layerModel').get('download.protocol') !== 'S3'
+          ),
+        ),
         filtersModel,
         mapModel,
         model: new DownloadOptionsModel({
