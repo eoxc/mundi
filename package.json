@@ -1,7 +1,7 @@
 {
-  "name": "CODE-DE",
+  "name": "mundi",
   "version": "1.1.0-alpha.1",
-  "description": "CODE-DE",
+  "description": "mundi",
   "scripts": {
     "build": "webpack -p",
     "build-dev": "webpack -d",
@@ -16,15 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/eoxc/CODE-DE.git"
+    "url": "https://github.com/eoxc/mundi.git"
   },
   "keywords": [],
   "author": "Fabian Schindler <fabian.schindler@eox.at>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/eoxc/CODE-DE/issues"
+    "url": "https://github.com/eoxc/mundi/issues"
   },
-  "homepage": "https://github.com/eoxc/CODE-DE",
+  "homepage": "https://github.com/eoxc/mundi",
   "devDependencies": {
     "babel-core": "^6.5.1",
     "babel-loader": "^6.2.4",
