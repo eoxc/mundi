@@ -480,7 +480,7 @@ window.Application = Marionette.Application.extend({
     // use set timeout here so that vendor info is always at the end of the attribution list
     setTimeout(() => {
       const vendorInfoHTML = `<li>Powered&nbsp;by&nbsp;<a href="https://github.com/eoxc" target="_blank">EOxC</a>&nbsp;&copy;&nbsp;<a href="https://eox.at" target="_blank">EOX&nbsp;<i class="icon-eox-eye"/></a>
-      <!-- CODE-DE Client version ${cdeVersion} https://github.com/eoxc/CODE-DE/releases/tag/v${cdeVersion} -->
+      <!-- mundi Client version ${cdeVersion} https://github.com/eoxc/mundi/releases/tag/v${cdeVersion} -->
       <!-- eoxc version ${eoxcVersion} https://github.com/eoxc/eoxc/releases/tag/v${eoxcVersion} --></li>`;
       $(this.container).find('.ol-attribution ul').append(vendorInfoHTML);
     });
