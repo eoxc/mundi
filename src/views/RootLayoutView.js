@@ -15,6 +15,7 @@ export default Marionette.LayoutView.extend({
     infoPanel: '#infoPanel',
     timeSlider: '#timeSlider',
     modals: '#modals',
+    topModals: '#top-modals',
   },
 
   initialize(options) {

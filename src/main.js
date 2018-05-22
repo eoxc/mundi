@@ -307,8 +307,8 @@ window.Application = Marionette.Application.extend({
       }));
     };
 
-    layersCollection.on('show-options', (layerModel) => {
-      layout.showChildView('modals', new LayerOptionsModalView({ model: layerModel }));
+    layersCollection.on('show-options', (layerModel, useDetailsDisplay) => {
+      layout.showChildView('topModals', new LayerOptionsModalView({ model: layerModel, useDetailsDisplay }));
     });
 
     layersCollection.on('download-full-resolution', (layerModel) => {
