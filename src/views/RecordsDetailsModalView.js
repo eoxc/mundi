@@ -23,6 +23,7 @@ const RecordsDetailsModalView = ModalView.extend({
   events: {
     'click .records-next': 'onRecordsNextClicked',
     'click .records-prev': 'onRecordsPrevClicked',
+    'click .layer-options': 'onLayerOptionsClicked',
     'shown.bs.modal': 'onModalShown',
     'change .is-selected': 'onDownloadSelectionChange',
   },
@@ -56,6 +57,7 @@ const RecordsDetailsModalView = ModalView.extend({
       time = [time, time];
     }
     const layerModel = searchModel.get('layerModel');
+    const displayParams = layerModel.get('detailsDisplay') || layerModel.get('display');
     this.mapModel.set('time', time);
     this.mapView = new OpenLayersMapView({
       mapModel: this.mapModel,
@@ -70,6 +72,7 @@ const RecordsDetailsModalView = ModalView.extend({
       filterStrokeColor: this.filterStrokeColor,
       filterOutsideColor: this.filterOutsideColor,
       staticHighlight: true,
+      useDetailsDisplay: true,
     });
     const detailsView = new RecordDetailsView({
       model: recordModel,
@@ -90,6 +93,8 @@ const RecordsDetailsModalView = ModalView.extend({
     this.$('.current-record').text(this.currentRecordIndex + 1);
     this.$('.record-count').text(this.records.length);
 
+    this.$('.layer-options').toggle(!!displayParams.options);
+
     const downloadSelection = searchModel.get('downloadSelection');
     const isSelectedForDownload = downloadSelection.findIndex(model => (
       model.get('id') === recordModel.get('id')
@@ -109,6 +114,12 @@ const RecordsDetailsModalView = ModalView.extend({
       this.currentRecordIndex += 1;
       this.updateRecord(...this.records[this.currentRecordIndex]);
     }
+  },
+
+  onLayerOptionsClicked() {
+    const searchModel = this.records[this.currentRecordIndex][1];
+    const layerModel = searchModel.get('layerModel');
+    layerModel.trigger('show-options', layerModel, true);
   },
 
   onDownloadSelectionChange() {
