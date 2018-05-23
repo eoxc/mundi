@@ -74,6 +74,7 @@
   "Of total size": "Von gesamter Größe",
   "Bands": "Bänder",
   "download_size_warning": "Die geschätzte Größe zum Herunterladen ohne Komprimierung ist {{estimated_size}}MB. Das überschreitet möglicherweise Ressourcen des Dienstes.",
+  "download_bands_warning": "Das aktuelle Format unterstützt maximal {{maxBands}} Bänder, aber {{requestedBands}} sind ausgewählt.",
   "Log in to enable the download": "Einloggen um das Herunterladen zu erlauben",
   "timefilter_warning": "Suchergebnisse weichen möglicherweise von den auf der Karte gezeigten Produkten ab weil ein eigener zeitlicher Filter gesetzt ist",
   "advancedfilter_warning": "Suchergebnisse weichen möglicherweise von den auf der Karte gezeigten Produkten ab weil zusätzliche Filter gesetzt sind",

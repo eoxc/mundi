@@ -137,21 +137,25 @@
                 "Error: NoApplicableCode": "Search timed out. Please refine the filter criteria.",
             }
         },
+
         "downloadFormats": [{
           "name": "TIFF",
           "mimeType": "image/tiff"
         }, {
           "name": "JPG",
-          "mimeType": "image/jpeg"
+          "mimeType": "image/jpeg",
+          "maxBands": 3,
         }, {
           "name": "PNG",
-          "mimeType": "image/png"
+          "mimeType": "image/png",
+          "maxBands": 4,
         }, {
           "name": "NetCDF",
           "mimeType": "application/x-netcdf"
         }, {
           "name": "PDF",
-          "mimeType": "application/pdf"
+          "mimeType": "application/pdf",
+          "maxBands": 3,
         }],
         "downloadProjections": [{
           "name": "WGS-84",
