@@ -4,5 +4,5 @@
   {{/if}}
 >{{t displayName}}</label>
 <div class="col-sm-6">
-  <input type="text" data-type="{{ type }}" class="form-control input-sm">
+  <input type="text" data-type="{{ type }}" {{#if default}}value="{{default}}"{{/if}} class="form-control input-sm">
 </div>

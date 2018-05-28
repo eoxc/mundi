@@ -12,7 +12,11 @@ const RootFiltersView = Marionette.LayoutView.extend({
   template,
   templateHelpers() {
     const searchModelsWithParameters = this.searchCollection
-      .filter(searchModel => searchModel.get('layerModel').get('search.parameters'));
+      .filter(
+        searchModel => (
+          searchModel.get('layerModel').get('search.parameters') || []
+        ).filter(param => !param.fixed).length
+      );
     return {
       searchModelsWithParameters,
       layerIdsWithParameters: searchModelsWithParameters.map(searchModel => searchModel.get('layerModel').cid),
@@ -44,16 +48,17 @@ const RootFiltersView = Marionette.LayoutView.extend({
     this.showChildView('timeFilter', new TimeFilterView(options));
     this.showChildView('areaFilter', new AreaFilterView(options));
 
-    this.templateHelpers().searchModelsWithParameters.forEach((searchModel) => {
-      const layerModel = searchModel.get('layerModel');
-      const layerId = layerModel.cid;
-      this.addRegion(`extraParameters${layerId}`, `#extra-parameters-${layerId}`);
-      this.showChildView(`extraParameters${layerId}`, new ExtraParametersListView(Object.assign({}, options, {
-        searchModel,
-        collection: new Backbone.Collection(layerModel.get('search.parameters')),
-        // filtersModel: layerModel.get('filter')
-      })));
-    });
+    this.templateHelpers().searchModelsWithParameters
+      .forEach((searchModel) => {
+        const layerModel = searchModel.get('layerModel');
+        const layerId = layerModel.cid;
+        this.addRegion(`extraParameters${layerId}`, `#extra-parameters-${layerId}`);
+        this.showChildView(`extraParameters${layerId}`, new ExtraParametersListView(Object.assign({}, options, {
+          searchModel,
+          collection: new Backbone.Collection(layerModel.get('search.parameters')),
+          // filtersModel: layerModel.get('filter')
+        })));
+      });
   },
 });
 

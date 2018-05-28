@@ -9,6 +9,20 @@ import './ExtraParameterRangeView.css';
 const ExtraParameterRangeView = BaseExtraParameterView.extend({
   template,
 
+  templateHelpers() {
+    const defaultValue = this.model.get('default');
+    const low = defaultValue ? defaultValue[0] : this.model.get('min');
+    const high = defaultValue ? defaultValue[1] : this.model.get('max');
+
+    return Object.assign(
+      BaseExtraParameterView.prototype.templateHelpers.call(this), {
+        defaultValue,
+        low,
+        high,
+      },
+    );
+  },
+
   events: {
     'slideStop input[data-provide="slider"]': 'onSliderStop',
   },

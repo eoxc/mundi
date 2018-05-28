@@ -5,6 +5,19 @@ import template from './ExtraParameterSelectView.hbs';
 const ExtraParameterSelectView = BaseExtraParameterView.extend({
   template,
 
+  templateHelpers() {
+    const defaultValue = this.model.get('default');
+    return Object.assign(
+      BaseExtraParameterView.prototype.templateHelpers.call(this), {
+        options: this.model.get('options').map(
+          option => Object.assign({}, option, {
+            isSelected: option.value === defaultValue,
+          })
+        ),
+      },
+    );
+  },
+
   events: {
     'change select': 'onSelectChange',
   },
