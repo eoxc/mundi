@@ -76,6 +76,8 @@ function combineParameter(setting, param) {
     range: setting.range,
     min: setting.min,
     max: setting.max,
+    default: setting.default || setting.fixed,
+    fixed: setting.fixed,
   };
 }
 
@@ -227,7 +229,14 @@ window.Application = Marionette.Application.extend({
       .filter(layerModel => layerModel.get('search.protocol'))
       .map(layerModel => new SearchModel({
         layerModel,
-        filtersModel: new FiltersModel({ }),
+        // apply defaults / fixed values
+        filtersModel: new FiltersModel((layerModel.get('search.parameters') || []).reduce(
+          (acc, param) => (
+            (param.default || param.fixed)
+              ? Object.assign(acc, { [param.type]: (param.default || param.fixed) })
+              : acc
+            ), {}
+        )),
         mapModel,
         defaultPageSize: 50,
         maxCount: layerModel.get('search.searchLimit'),

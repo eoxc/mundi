@@ -581,6 +581,14 @@
                                     "max": {
                                         "description": "The upper boundary for the range. Mandatory for range parameters.",
                                         "type": "number"
+                                    },
+                                    "fixed": {
+                                        "description": "The fixed value of that parameter.",
+                                        "type": "string"
+                                    },
+                                    "default": {
+                                        "description": "The default value of this parameter. The type depends on the parameter type.",
+                                        "type": ["integer", "string", "array"]
                                     }
                                 }
                             }

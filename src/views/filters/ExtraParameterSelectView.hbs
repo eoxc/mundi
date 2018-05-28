@@ -7,7 +7,7 @@
   <select data-type="{{ type }}" class="form-control input-sm">
     <option value="">---</option>
     {{#each options}}
-    <option value="{{ this.value }}">{{ t this.label }}</option>
+    <option value="{{ this.value }}" {{#if this.isSelected}}selected="selected"{{/if}}>{{ t this.label }}</option>
     {{/each}}
   </select>
 </div>

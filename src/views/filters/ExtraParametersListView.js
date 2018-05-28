@@ -28,6 +28,11 @@ const ExtraParametersListView = Marionette.CompositeView.extend({
     return `#collapse-additional-filters-${this.searchModel.get('layerModel').cid}`;
   },
 
+  filter(parameter) {
+    // exclude 'fixed' parameters
+    return !parameter.get('fixed');
+  },
+
   getChildView(parameter) {
     if (parameter.get('range')) {
       return ExtraParameterRangeView;
