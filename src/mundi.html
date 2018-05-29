@@ -322,11 +322,24 @@
                 "loadMore": 600,
                 "parameters": [
                     {
+                        "type": "eo:cloudCover",
                         "max": 100,
                         "min": 0,
+                        // "default": [10, 50],
                         "range": true,
-                        "type": "eo:cloudCover",
                         "title": "Cloud Coverage in percent"
+                    },
+                    {
+                        "type": "DIAS:onlineStatus",
+                        "default": "ONLINE",
+                        // optons from OSDD
+                        // "options": [{
+                        //
+                        // }]
+                    },
+                    {
+                        "type": "DIAS:productDeliveryFormat",
+                        "fixed": "folder",
                     }
                 ],
                 "extraFields": {
