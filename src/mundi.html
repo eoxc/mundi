@@ -3,8 +3,9 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <meta charset="UTF-8">
+  <title>mundi web services - example</title>
 </head>
-<body class="page-catalogclient i18n-en">
+<body>
   <div id="app" style="width: 100%; top: 0; bottom: 0; position: absolute; margin: 0; padding:0;"></div>
   <script src="code-de.bundle.js"></script>
   <script>
@@ -28,13 +29,13 @@
         ],
         "constrainTimeDomain": true,
         "displayTimeDomain": [
-            "2018-01-01T00:00:00Z",
-            "2018-02-01T00:00:00Z",
+            "2018-04-01T00:00:00Z",
+            "2018-05-01T00:00:00Z",
         ],
         "displayInterval": "P365D",
         "selectedTimeDomain": [
-            "2018-01-07T00:00:00Z",
-            "2018-01-15T00:00:00Z",
+            "2018-04-24T00:00:00Z",
+            "2018-04-25T00:00:00Z",
         ],
         "selectableInterval": "P14D",
         "timeSliderControls": true,
@@ -358,6 +359,7 @@
                     "properties.mundi.formatCorrectness": "DIAS:formatCorrectness/text()",
 
                     "properties.mundi.onlineStatus": "DIAS:onlineStatus/text()",
+                    "properties.mundi.productDeliveryFormat": "DIAS:productDeliveryFormat/text()",
                     "properties.mundi.productDatapackSize": "DIAS:productDatapackSize/text()",
                     "properties.mundi.datatakeId": "DIAS:datatakeId/text()",
 
@@ -371,11 +373,11 @@
 
 //TODO
 //     <media:group>
-//         <media:content url="https://obs.eu-de.otc.t-systems.com/metadata/thumbnails/Sentinel2/S2A_MSIL1C_20180109T101401_N0206_R022_T32TNN_20180117T202124-th.jpg" type="image/jpeg" medium="image">
-//             <media:category scheme="http://www.opengis.net/spec/EOMPOM/1.0">THUMBNAIL</media:category>
+//         <media:content url="https://obs.eu-de.otc.t-systems.com/metadata/quicklooks/Sentinel2/S2A_MSIL1C_20180109T101401_N0206_R022_T32TNN_20180117T202124-ql.jpg" type="image/jpeg" medium="image">
+//             <media:category scheme="http://www.opengis.net/spec/EOMPOM/1.0">QUICKLOOK</media:category>
 //         </media:content>
 //     </media:group>
-//                    "properties.mundi.thumbnailUrl": "",
+//                    "properties.mundi.quicklookUrl": "",
                 },
                 "extraFieldsNamespaces": {
                     "DIAS": "http://tas/DIAS",
@@ -525,6 +527,7 @@
                     "properties.mundi.formatCorrectness": "DIAS:formatCorrectness/text()",
 
                     "properties.mundi.onlineStatus": "DIAS:onlineStatus/text()",
+                    "properties.mundi.productDeliveryFormat": "DIAS:productDeliveryFormat/text()",
                     "properties.mundi.productDatapackSize": "DIAS:productDatapackSize/text()",
                     "properties.mundi.datatakeId": "DIAS:datatakeId/text()",
 
@@ -538,11 +541,11 @@
 
 //TODO
 //     <media:group>
-//         <media:content url="https://obs.eu-de.otc.t-systems.com/metadata/thumbnails/Sentinel2/S2A_MSIL1C_20180109T101401_N0206_R022_T32TNN_20180117T202124-th.jpg" type="image/jpeg" medium="image">
-//             <media:category scheme="http://www.opengis.net/spec/EOMPOM/1.0">THUMBNAIL</media:category>
+//         <media:content url="https://obs.eu-de.otc.t-systems.com/metadata/quicklooks/Sentinel2/S2A_MSIL1C_20180109T101401_N0206_R022_T32TNN_20180117T202124-ql.jpg" type="image/jpeg" medium="image">
+//             <media:category scheme="http://www.opengis.net/spec/EOMPOM/1.0">QUICKLOOK</media:category>
 //         </media:content>
 //     </media:group>
-//                    "properties.mundi.thumbnailUrl": "",
+//                    "properties.mundi.quicklookUrl": "",
                 },
                 "extraFieldsNamespaces": {
                     "DIAS": "http://tas/DIAS",
