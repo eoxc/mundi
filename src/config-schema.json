@@ -350,7 +350,7 @@
                     "description": "An HTTP link for further information for the layer. This is rendered in the layer list.",
                     "type": "string"
                 },
-                "display": {
+                "display": {  // TODO Add "detailsDisplay"
                     "description": "Structure to describe how the layer is visually presented.",
                     "type": "object",
                     "properties": {
@@ -431,6 +431,10 @@
                         "useMilliseconds": {
                             "description": "Determines whether the granularity of the time parameter includes milliseconds. Defaults to 'true'.",
                             "type": "boolean"
+                        },
+                        "adjustTime": {
+                            "description": "The time parameter values of WMS/WMTS requests are increased by the given number of seconds.",
+                            "type": "integer",
                         },
                         "cqlParameterName": {
                             "description": "The name of the CQL parameter name for WMS requests. When set, the CQL filtering is enabled for this view layer.",
