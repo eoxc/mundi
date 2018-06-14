@@ -265,7 +265,10 @@
                 "tileSize": 512,
                 "useMilliseconds": false,
                 "discardZulu": true,
-                "adjustTime": 60 * 15, // 15 minutes adjustment
+                "adjustTime": [
+                    -60 * 9,  // 9 minutes earlier
+                    60 * 48  // 48 minutes later
+                ],
                 "extraParameters": {
                   "LAYERS": "2_COLOR_INFRARED__VEGETATION_",
                   "showLogo": "false",
