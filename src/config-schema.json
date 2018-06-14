@@ -61,12 +61,12 @@
                     "default": 2
                 },
                 "minZoom": {
-                    "description": "The minimum map zoom level.",
+                    "description": "The overall minimum map zoom level on any map.",
                     "type": "number",
                     "default": 0
                 },
                 "maxZoom": {
-                    "description": "The maximum map zoom level.",
+                    "description": "The overall maximum map zoom level on any map.",
                     "type": "number",
                     "default": 28
                 },
@@ -420,6 +420,16 @@
                             "description": "Override service version parameter. Default is '1.1.0'.",
                             "type": "string"
                         },
+                        "minZoom": {
+                            "description": "The minimum map zoom level for this layer. Used for map is maximum over all layers.",
+                            "type": "number",
+                            "default": 0
+                        },
+                        "maxZoom": {
+                            "description": "The maximum map zoom level for this layer. Used for map is minimum over all layers.",
+                            "type": "number",
+                            "default": 28
+                        },
                         "attribution": {
                             "description": "A string to be displayed when the layer is displayed. Can contain HTML for specific formatting.",
                             "type": "string"
@@ -433,8 +443,13 @@
                             "type": "boolean"
                         },
                         "adjustTime": {
-                            "description": "The time parameter values of WMS/WMTS requests are increased by the given number of seconds.",
-                            "type": "integer",
+                            "description": "The time parameter values of WMS/WMTS requests are decreased and increased by the given number of seconds.",
+                            "type": ["array", "integer"],
+                            "items": [{
+                                "type": "integer",
+                            }, {
+                                "type": "integer",
+                            }],
                         },
                         "cqlParameterName": {
                             "description": "The name of the CQL parameter name for WMS requests. When set, the CQL filtering is enabled for this view layer.",
