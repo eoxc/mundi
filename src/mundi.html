@@ -177,18 +177,13 @@
             "display": {
                 "id": "S2",
                 "visible": true,
-
                 "protocol": "WMTS",
                 "matrixSet": "WGS84",
                 "format": "image/png",
                 "projection": "EPSG:4326",
                 "url": "https://prerenderer-cache.ci.mundiwebservices.com/c/wmts/",
                 "useMilliseconds": false,
-
-
                 "maxZoom": 10,
-
-
                 // "id": "S2_MSI_L1C",
                 // "id": "S2_MSI_L1C",
                 // "visible": true,
@@ -265,15 +260,16 @@
                 "tileSize": 512,
                 "useMilliseconds": false,
                 "discardZulu": true,
-                "adjustTime": 60 * 15, // 15 minutes adjustment
+                "adjustTime": [
+                    -60 * 9,  // 9 minutes earlier
+                    60 * 48  // 48 minutes later
+                ],
                 "extraParameters": {
                   "LAYERS": "2_COLOR_INFRARED__VEGETATION_",
                   "showLogo": "false",
                 },
-
-                "minZoom": 10,
+                "minZoom": 9,
                 "maxZoom": 14,
-
                 "version": "1.1.1",
                 "options": [{
                     "name": "Style",
