@@ -328,6 +328,7 @@
                 "lightweightBuckets": true,
                 "searchLimit": 600,
                 "loadMore": 600,
+                "thumbnailUrlPattern": "^https://obs.eu-de.otc.t-systems.com/.*",
                 "parameters": [
                     {
                         "type": "eo:cloudCover",
@@ -337,18 +338,18 @@
                         "range": true,
                         "title": "Cloud Coverage in percent"
                     },
-                    {
-                        "type": "DIAS:onlineStatus",
-                        "default": "ONLINE",
-                        // optons from OSDD
-                        // "options": [{
-                        //
-                        // }]
-                    },
-                    {
-                        "type": "DIAS:productDeliveryFormat",
-                        "fixed": "folder",
-                    }
+                    // {
+                    //     "type": "DIAS:onlineStatus",
+                    //     "default": "ONLINE",
+                    //     // optons from OSDD
+                    //     // "options": [{
+                    //     //
+                    //     // }]
+                    // },
+                    // {
+                    //     "type": "DIAS:productDeliveryFormat",
+                    //     "fixed": "folder",
+                    // }
                 ],
                 "extraFields": {
                     "properties.mundi.date": "dc:date/text()",
