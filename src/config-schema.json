@@ -655,6 +655,21 @@
                             "type": "string",
                             "enum": ["GET", "POST"],
                             "default": "'GET' for URL based protocols, 'POST' for EO-WCS."
+                        },
+                        "rewrite": {
+                            "description": "Settings object to define URL rewrites.",
+                            "type": "object",
+                            "properties": {
+                                "from": {
+                                    "description": "The part of the URL that shall be rewritten (replaced). Will be interpreted as a regular expression.",
+                                    "type": "string"
+                                },
+                                "to": {
+                                    "description": "The value that shall replace the previously selected part of the URL (via 'from').",
+                                    "type": "string"
+                                }
+                            },
+                            "required": ["from", "to"]
                         }
                     },
                     "required": ["protocol", "url"]
