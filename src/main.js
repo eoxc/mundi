@@ -41,6 +41,7 @@ import SidePanelView from './views/SidePanelView';
 import StopSelectionView from './views/StopSelectionView';
 import WarningsView from './views/WarningsView';
 import RecordsDetailsModalView from './views/RecordsDetailsModalView';
+import SelectFilesModalView from './views/SelectFilesModalView';
 
 import WarningsCollection from './models/WarningsCollection';
 
@@ -316,6 +317,13 @@ window.Application = Marionette.Application.extend({
       }));
     };
 
+    const selectFiles = () => {
+      layout.showChildView('modals', new SelectFilesModalView({
+        collection: searchCollection,
+        onStartDownload: startDownload,
+      }));
+    };
+
     layersCollection.on('show-options', (layerModel, useDetailsDisplay) => {
       layout.showChildView('topModals', new LayerOptionsModalView({ model: layerModel, useDetailsDisplay }));
     });
@@ -412,6 +420,7 @@ window.Application = Marionette.Application.extend({
           highlightModel,
           collection: searchCollection,
           onStartDownload: startDownload,
+          onSelectFiles: selectFiles,
           termsAndConditionsUrl,
           downloadEnabled: settings.downloadEnabled,
         }),

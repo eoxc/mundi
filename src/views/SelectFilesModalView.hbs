@@ -1,0 +1,27 @@
+<div class="modal-dialog modal-lg" style="width: -moz-calc(100% - 20px); width: -webkit-calc(100% - 20px); width: -o-calc(100% - 20px); width: calc(100% - 20px); margin: 10px;" role="document">
+  <div class="modal-content" style="margin-bottom: 10px;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" style="display:inline">Select files for download.</h4>
+    </div>
+    <div class="modal-body">
+      <i class="fa fa-circle-o-notch fa-spin fa-fw spinner"></i>
+    </div>
+    <div class="modal-footer">
+      <span class="buttons">
+        <div class="btn-group" role="group">
+          <button class="btn btn-default download-as-metalink" type="button" disabled>{{t 'Download as Metalink'}}</button>
+          <button class="btn btn-default download-as-url-list" type="button" disabled>{{t 'Download as URL-List'}}</button>
+        </div>
+        <!-- <div class="btn-group dropup" role="group">
+          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button" disabled>{{t 'Download as'}} <span class="caret"></span></button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li><a href="#" class="download-as-metalink">{{t 'Download as Metalink'}}</a></li>
+            <li><a href="#" class="download-as-url-list">{{t 'Download as URL-List'}}</a></li>
+          </ul>
+        </div> -->
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{t 'Close' }}</button>
+      </span>
+    </div>
+  </div>
+</div>
