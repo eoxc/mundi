@@ -24,6 +24,7 @@ const FileStructureView = Marionette.ItemView.extend({
                 <label>
                   <input type="checkbox" class="record-file-checkbox" checked="checked" data-name="${name}" data-href="${href}">${name}
                 </label>
+                <a href="${href}" target="_blank"> <i class="fa fa-external-link"></i></a>
               </li>
             `).join('')}
           </ul>
