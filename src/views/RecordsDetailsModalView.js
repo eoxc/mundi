@@ -7,6 +7,7 @@ import HighlightModel from 'eoxc/src/core/models/HighlightModel';
 import MapModel from 'eoxc/src/core/models/MapModel';
 import LayersCollection from 'eoxc/src/core/models/LayersCollection';
 
+import LayerOptionsView from './LayerOptionsView';
 import template from './RecordsDetailsModalView.hbs';
 
 const RecordsDetailsModalView = ModalView.extend({
@@ -23,9 +24,14 @@ const RecordsDetailsModalView = ModalView.extend({
   events: {
     'click .records-next': 'onRecordsNextClicked',
     'click .records-prev': 'onRecordsPrevClicked',
-    'click .layer-options': 'onLayerOptionsClicked',
+    // 'click .layer-options': 'onLayerOptionsClicked',
     'shown.bs.modal': 'onModalShown',
     'change .is-selected': 'onDownloadSelectionChange',
+  },
+
+  regions: {
+    content: '.modal-body',
+    'layer-options': '.layer-options',
   },
 
   initialize(options) {
@@ -93,13 +99,16 @@ const RecordsDetailsModalView = ModalView.extend({
     this.$('.current-record').text(this.currentRecordIndex + 1);
     this.$('.record-count').text(this.records.length);
 
-    this.$('.layer-options').toggle(!!displayParams.options);
-
     const downloadSelection = searchModel.get('downloadSelection');
     const isSelectedForDownload = downloadSelection.findIndex(model => (
       model.get('id') === recordModel.get('id')
     )) !== -1;
     this.$('.is-selected').prop('checked', isSelectedForDownload);
+
+    this.$('.layer-options-dropdown').toggle(!!displayParams.options);
+    this.showChildView('layer-options', new LayerOptionsView({
+      model: layerModel, useDetailsDisplay: true
+    }));
   },
 
   onRecordsPrevClicked() {
@@ -114,12 +123,6 @@ const RecordsDetailsModalView = ModalView.extend({
       this.currentRecordIndex += 1;
       this.updateRecord(...this.records[this.currentRecordIndex]);
     }
-  },
-
-  onLayerOptionsClicked() {
-    const searchModel = this.records[this.currentRecordIndex][1];
-    const layerModel = searchModel.get('layerModel');
-    layerModel.trigger('show-options', layerModel, true);
   },
 
   onDownloadSelectionChange() {
