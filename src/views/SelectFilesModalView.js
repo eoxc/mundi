@@ -5,19 +5,20 @@ import { downloadCustom, getDownloadInfos } from 'eoxc/src/download/';
 import metalinkTemplate from 'eoxc/src/download/Metalink.hbs';
 
 import template from './SelectFilesModalView.hbs';
+import './SelectFilesModalView.css';
 
 
 const FileStructureView = Marionette.ItemView.extend({
-  template: ({ infos }) => `${infos.map(({ displayName, recordsAndFileInfos }) => `
+  template: ({ infos }) => `${infos.map(({ displayName, id, recordsAndFileInfos }) => `
     <h2>${displayName}</h2>
     <ul class="list-unstyled">
-      ${recordsAndFileInfos.map(({ recordId, fileInfos }) => `
+      ${recordsAndFileInfos.map(({ recordId, timestamp, fileInfos }) => `
         <li class="record-list-item checkbox">
           <label>
             <input type="checkbox" checked="true" class="record-checkbox">
-            <b>${recordId}</b>
+            <a href="#select-files-${id}-${recordId}" class="collapsed" data-toggle="collapse"><b>${timestamp}: ${recordId}</b><span class="caret"></span></a>
           </label>
-          <ul>
+          <ul class="collapse" id="select-files-${id}-${recordId}">
             ${fileInfos.map(({ name, href }) => `
               <li class="checkbox">
                 <label>
@@ -39,6 +40,9 @@ const FileStructureView = Marionette.ItemView.extend({
             .filter(({ fileInfos }) => fileInfos.length > 0)
             .map(({ recordModel, fileInfos }) => ({
               recordId: recordModel.get('id'),
+              timestamp: Array.isArray(recordModel.get('properties').time)
+                ? recordModel.get('properties').time[0].toISOString()
+                : recordModel.get('properties').time.toISOString(),
               fileInfos,
             })),
         }))

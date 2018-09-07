@@ -558,15 +558,15 @@ input {
 }
 
 
-.panel-title .caret,.dropdown.open .caret{
+.panel-title .caret,.dropdown.open .caret,[data-toggle="collapse"] .caret {
   -webkit-transform:rotate(0deg);
           transform:rotate(0deg);
 }
-.panel-title .caret,.panel-title .collapsed .caret,.dropdown .caret{
+.panel-title .caret,.panel-title .collapsed .caret,.dropdown .caret,[data-toggle="collapse"].collapsed .caret {
   -webkit-transition:.2s ease-in-out;
           transition:.2s ease-in-out;
 }
-.panel-title .collapsed .caret,.dropdown .caret {
+.panel-title .collapsed .caret,.dropdown .caret,[data-toggle="collapse"].collapsed .caret {
   -webkit-transform:rotate(-90deg);
           transform:rotate(-90deg);
 }

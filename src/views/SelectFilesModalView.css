@@ -1,0 +1,20 @@
+.modal-select-files {
+  height: calc(100% - 20px);
+}
+
+.modal-select-files .modal-content {
+  height: 100%;
+}
+
+.modal-select-files .modal-content .modal-body {
+  height: calc(100% - 118px);
+  overflow-y: scroll;
+}
+
+
+.modal-select-files .modal-content .modal-body .spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
