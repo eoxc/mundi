@@ -633,6 +633,14 @@
                         "description": "Namespace code to URL mapping for namespaces used in 'extraFields'.",
                         "type": "object"
                     },
+                    "countZeroRecords": {
+                        "description": "When this setting is set to true, the requested number of records is zero when only the count is required.",
+                        "type": "boolean"
+                    },
+                    "dropEmptyParameters": {
+                        "description": "When this setting is set to true, empty parameters (with no value set) will be dropped entirely.",
+                        "type": "boolean"
+                    },
                     "required": ["protocol", "url"]
                 },
                 "download": {
