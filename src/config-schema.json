@@ -61,12 +61,12 @@
                     "default": 2
                 },
                 "minZoom": {
-                    "description": "The minimum map zoom level.",
+                    "description": "The overall minimum map zoom level on any map.",
                     "type": "number",
                     "default": 0
                 },
                 "maxZoom": {
-                    "description": "The maximum map zoom level.",
+                    "description": "The overall maximum map zoom level on any map.",
                     "type": "number",
                     "default": 28
                 },
@@ -350,7 +350,7 @@
                     "description": "An HTTP link for further information for the layer. This is rendered in the layer list.",
                     "type": "string"
                 },
-                "display": {
+                "display": {  // TODO Add "detailsDisplay"
                     "description": "Structure to describe how the layer is visually presented.",
                     "type": "object",
                     "properties": {
@@ -420,6 +420,16 @@
                             "description": "Override service version parameter. Default is '1.1.0'.",
                             "type": "string"
                         },
+                        "minZoom": {
+                            "description": "The minimum map zoom level for this layer. Used for map is maximum over all layers.",
+                            "type": "number",
+                            "default": 0
+                        },
+                        "maxZoom": {
+                            "description": "The maximum map zoom level for this layer. Used for map is minimum over all layers.",
+                            "type": "number",
+                            "default": 28
+                        },
                         "attribution": {
                             "description": "A string to be displayed when the layer is displayed. Can contain HTML for specific formatting.",
                             "type": "string"
@@ -431,6 +441,15 @@
                         "useMilliseconds": {
                             "description": "Determines whether the granularity of the time parameter includes milliseconds. Defaults to 'true'.",
                             "type": "boolean"
+                        },
+                        "adjustTime": {
+                            "description": "The time parameter values of WMS/WMTS requests are decreased and increased by the given number of seconds.",
+                            "type": ["array", "integer"],
+                            "items": [{
+                                "type": "integer",
+                            }, {
+                                "type": "integer",
+                            }],
                         },
                         "cqlParameterName": {
                             "description": "The name of the CQL parameter name for WMS requests. When set, the CQL filtering is enabled for this view layer.",
@@ -614,6 +633,14 @@
                         "description": "Namespace code to URL mapping for namespaces used in 'extraFields'.",
                         "type": "object"
                     },
+                    "countZeroRecords": {
+                        "description": "When this setting is set to true, the requested number of records is zero when only the count is required.",
+                        "type": "boolean"
+                    },
+                    "dropEmptyParameters": {
+                        "description": "When this setting is set to true, empty parameters (with no value set) will be dropped entirely.",
+                        "type": "boolean"
+                    },
                     "required": ["protocol", "url"]
                 },
                 "download": {
@@ -636,6 +663,21 @@
                             "type": "string",
                             "enum": ["GET", "POST"],
                             "default": "'GET' for URL based protocols, 'POST' for EO-WCS."
+                        },
+                        "rewrite": {
+                            "description": "Settings object to define URL rewrites.",
+                            "type": "object",
+                            "properties": {
+                                "from": {
+                                    "description": "The part of the URL that shall be rewritten (replaced). Will be interpreted as a regular expression.",
+                                    "type": "string"
+                                },
+                                "to": {
+                                    "description": "The value that shall replace the previously selected part of the URL (via 'from').",
+                                    "type": "string"
+                                }
+                            },
+                            "required": ["from", "to"]
                         }
                     },
                     "required": ["protocol", "url"]
