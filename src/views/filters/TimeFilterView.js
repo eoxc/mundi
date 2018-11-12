@@ -27,7 +27,7 @@ const TimeFilterView = Marionette.ItemView.extend({
   onBeforeShow() {
     this.$('.time-buttons').hide();
     ['start', 'end'].forEach((label) => {
-      const $elem = this.$(`.datetime.${label}`);
+      const $elem = this.$(`input.${label}`);
       $elem.datetimepicker({
         locale: 'en',
         format: 'YYYY-MM-DD HH:mm:ss',
@@ -36,6 +36,10 @@ const TimeFilterView = Marionette.ItemView.extend({
         showTodayButton: true,
         showClose: true,
         timeZone: 'UTC',
+        widgetPositioning: {
+          horizontal: label === 'start' ? 'left' : 'right',
+          vertical: 'auto',
+        },
         keyBinds: {
           enter() {
             const value = $elem.find('input').val();
@@ -80,6 +84,7 @@ const TimeFilterView = Marionette.ItemView.extend({
 
   onClearTimeClicked() {
     this.mapModel.unset('extendedTime');
+    this.onMapTimeChanged();
   },
 
   // model event listeners
@@ -87,38 +92,34 @@ const TimeFilterView = Marionette.ItemView.extend({
   onMapTimeChanged() {
     const time = this.mapModel.get('time');
 
-    this.$('.map-time-start').val(moment.utc(time[0]).format('YYYY-MM-DD HH:mm:ss'));
-    this.$('.map-time-end').val(moment.utc(time[1]).format('YYYY-MM-DD HH:mm:ss'));
-
     // if a filter is set explicitly, do not update the text
     if (this.mapModel.get('extendedTime')) {
       return;
     }
 
+    // this.$('.start').val(moment.utc(time[0]).format('YYYY-MM-DD HH:mm:ss'));
+    // this.$('.end').val(moment.utc(time[1]).format('YYYY-MM-DD HH:mm:ss'));
+
     this.updatingTime = true;
-    this.$('.datetime.start').data('DateTimePicker').date(moment.utc(time[0]));
-    this.$('.datetime.end').data('DateTimePicker').date(moment.utc(time[1]));
-    this.$('.datetime.start').data('DateTimePicker').viewDate(moment.utc(time[0]));
-    this.$('.datetime.end').data('DateTimePicker').viewDate(moment.utc(time[1]));
+    this.$('.start').data('DateTimePicker').date(moment.utc(time[0]));
+    this.$('.end').data('DateTimePicker').date(moment.utc(time[1]));
+    this.$('.start').data('DateTimePicker').viewDate(moment.utc(time[0]));
+    this.$('.end').data('DateTimePicker').viewDate(moment.utc(time[1]));
     this.updatingTime = false;
   },
 
   onMapExtendedTimeChanged(mapModel) {
-    const time = mapModel.get('extendedTime');
+    const time = mapModel.get('extendedTime') || this.mapModel.get('time');
     this.updatingTime = true;
-    if (time) {
-      this.$('.datetime.start').data('DateTimePicker').date(moment.utc(time[0]));
-      this.$('.datetime.end').data('DateTimePicker').date(moment.utc(time[1]));
-      this.$('.datetime.start').data('DateTimePicker').viewDate(moment.utc(time[0]));
-      this.$('.datetime.end').data('DateTimePicker').viewDate(moment.utc(time[1]));
+    this.$('.start').data('DateTimePicker').date(moment.utc(time[0]));
+    this.$('.end').data('DateTimePicker').date(moment.utc(time[1]));
+    this.$('.start').data('DateTimePicker').viewDate(moment.utc(time[0]));
+    this.$('.end').data('DateTimePicker').viewDate(moment.utc(time[1]));
+
+    if (mapModel.get('extendedTime')) {
       this.$('.time-buttons').slideDown();
       this.$('#map-time-wrapper').slideUp();
     } else {
-      const mapTime = this.mapModel.get('time');
-      this.$('.datetime.start').data('DateTimePicker').date(moment.utc(mapTime[0]));
-      this.$('.datetime.end').data('DateTimePicker').date(moment.utc(mapTime[1]));
-      this.$('.datetime.start').data('DateTimePicker').viewDate(moment.utc(mapTime[0]));
-      this.$('.datetime.end').data('DateTimePicker').viewDate(moment.utc(mapTime[1]));
       this.$('.time-buttons').slideUp();
       this.$('#map-time-wrapper').slideDown();
     }

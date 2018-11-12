@@ -4,18 +4,32 @@
   </h3>
 </div>
 <div id="collapse-time-filter" class="panel-body collapse in">
-  <div id="map-time-wrapper" class="form-group">
-    <label for="">{{t 'Using same time as for map'}}</label>
-    <div class="form-group">
+  <div class="form-group">
+    <label id="map-time-wrapper" for="">{{t 'Using same time as for map'}}</label>
+    <!-- <div class="form-group">
       <div class="input-group">
         <input type='text' disabled="true" class="form-control input-sm map-time-start" />
         <span class="input-group-addon">-</span>
         <input type='text' disabled="true" class="form-control input-sm map-time-end" />
       </div>
+    </div> -->
+
+    <div class="form-group">
+      <div class="input-group">
+        <input type='text' class="form-control input-sm datetime start"/>
+        <!-- <span class="input-group-addon start">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span> -->
+        <span class="input-group-addon">-</span>
+        <input type='text' class="form-control input-sm datetime end"/>
+        <!-- <span class="input-group-addon end">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span> -->
+      </div>
     </div>
   </div>
 
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label for="">{{t 'Start'}}</label>
     <div class='input-group datetime start'>
       <input type='text' class="form-control input-sm" />
@@ -33,7 +47,7 @@
         <span class="glyphicon glyphicon-calendar"></span>
       </span>
     </div>
-  </div>
+  </div> -->
 
   <div class="form-group time-buttons">
     <div class="btn-group btn-group-justified" role="group" aria-label="...">
