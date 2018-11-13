@@ -7,6 +7,8 @@ import HighlightModel from 'eoxc/src/core/models/HighlightModel';
 import MapModel from 'eoxc/src/core/models/MapModel';
 import LayersCollection from 'eoxc/src/core/models/LayersCollection';
 
+import { isRecordDownloadable } from 'eoxc/src/download';
+
 import template from './RecordsDetailsModalView.hbs';
 
 const RecordsDetailsModalView = ModalView.extend({
@@ -100,6 +102,7 @@ const RecordsDetailsModalView = ModalView.extend({
       model.get('id') === recordModel.get('id')
     )) !== -1;
     this.$('.is-selected').prop('checked', isSelectedForDownload);
+    this.$('.is-selected').parent().toggle(!!isRecordDownloadable(layerModel, recordModel));
   },
 
   onRecordsPrevClicked() {
