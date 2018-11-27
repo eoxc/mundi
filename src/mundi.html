@@ -13,8 +13,8 @@
   today.setUTCHours(24, 0, 0, 0);
   var twoYearsAgo = new Date(new Date(today).setUTCFullYear(today.getUTCFullYear() - 2));
   var displayTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 28));
-  var selectedTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 10));
-  var selectedTimeDomainEnd = new Date(new Date(today).setUTCDate(today.getUTCDate()));
+  var selectedTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 8));
+  var selectedTimeDomainEnd = new Date(new Date(today).setUTCDate(today.getUTCDate() - 7));
 
   var config = {
     "settings": {
@@ -29,13 +29,13 @@
         ],
         "constrainTimeDomain": true,
         "displayTimeDomain": [
-            "2018-08-07T00:00:00Z",
-            "2018-09-07T00:00:00Z",
+            displayTimeDomainStart,
+            today.toISOString(),
         ],
         "displayInterval": "P365D",
         "selectedTimeDomain": [
-            "2018-09-04T00:00:00Z",
-            "2018-09-05T00:00:00Z",
+            selectedTimeDomainStart,
+            selectedTimeDomainEnd,
         ],
         "selectableInterval": "P7D",
         "timeSliderControls": true,
@@ -797,153 +797,161 @@
 //                  }
 //             },
 //         },
-// 		{
-//             "id": "S1_L1_GRD",
-// //            "link": "https://code-de.org\/en\/record\/39b6073d-7ef4-4aa9-a3e4-07f079709b52",
-//             "displayName": "Sentinel-1 - Level 1 GRD",
-//             "displayColor": "#EC1F00",
-//             "display": {
-//                 "id": "S1_L1_GRD",
-//                 "visible": false,
-//                 "protocol": "WMS",
-//                 "urls": [
-//                     ""
-//                 ],
-//                 "format": "image/png",
-//                 "projection": "EPSG:4326",
-//                 "style": "",
-//                 "attribution": "<a href=\"https://scihub.copernicus.eu/twiki/pub/SciHubWebPortal/TermsConditions/TC_Sentinel_Data_31072014.pdf\" target=\"_blank\">Terms &amp; Conditions for Sentinel-1 data</a>"
-//             },
-//             "search": {
-//                 "protocol": "OpenSearch",
-//                 "url": "http://mundiwebservices.com/geodata-frontend/catalog/S1_L1_GRD.osdd",
-//                 "id": "DIAS_CWS:S1_L1_GRD",
-//                 "histogramBinCount": 28,
-//                 "format": "application/atom+xml",
-//                 "method": "GET",
-//                 "histogramThreshold": 600,
-//                 "lightweightBuckets": true,
-//                 "searchLimit": 600,
-//                 "loadMore": 600,
-//                 "extraFields": {
-//                     "properties.mundi.date": "dc:date/text()",
-//                     "properties.mundi.processingDate": "eo:processingDate/text()",
-//                     "properties.mundi.published": "atom:published/text()",
-//                     "properties.mundi.updated": "atom:updated/text()",
+		{
+            "id": "S1_L1_GRD",
+//            "link": "https://code-de.org\/en\/record\/39b6073d-7ef4-4aa9-a3e4-07f079709b52",
+            "displayName": "Sentinel-1 - Level 1 GRD",
+            "displayColor": "#EC1F00",
+            "display": {
+                "id": "S1-GRD",
+                "visible": true,
+                "protocol": "WMTS",
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "urls": [
+                    "http://a.s1-grd.tiles.mundi.eox.at/c/wmts/",
+                    "http://b.s1-grd.tiles.mundi.eox.at/c/wmts/",
+                    "http://c.s1-grd.tiles.mundi.eox.at/c/wmts/",
+                    "http://d.s1-grd.tiles.mundi.eox.at/c/wmts/",
+                    "http://e.s1-grd.tiles.mundi.eox.at/c/wmts/",
+                    "http://f.s1-grd.tiles.mundi.eox.at/c/wmts/",
+                    "http://g.s1-grd.tiles.mundi.eox.at/c/wmts/",
+                    "http://h.s1-grd.tiles.mundi.eox.at/c/wmts/",
+                ],
+                "useMilliseconds": false,
+                "maxZoom": 10,
+            },
+            "search": {
+                "protocol": "OpenSearch",
+                "url": "http://mundiwebservices.com/geodata-frontend/catalog/S1_L1_GRD.osdd",
+                "id": "DIAS_CWS:S1_L1_GRD",
+                "histogramBinCount": 28,
+                "format": "application/atom+xml",
+                "method": "GET",
+                "histogramThreshold": 600,
+                "lightweightBuckets": true,
+                "searchLimit": 600,
+                "loadMore": 600,
+                "extraFields": {
+                    "properties.mundi.date": "dc:date/text()",
+                    "properties.mundi.processingDate": "eo:processingDate/text()",
+                    "properties.mundi.published": "atom:published/text()",
+                    "properties.mundi.updated": "atom:updated/text()",
 
-//                     "properties.mundi.platform": "eo:platform/text()",
-//                     "properties.mundi.instrument": "eo:instrument/text()",
-//                     "properties.mundi.processingLevel": "eo:processingLevel/text()",
+                    "properties.mundi.platform": "eo:platform/text()",
+                    "properties.mundi.instrument": "eo:instrument/text()",
+                    "properties.mundi.processingLevel": "eo:processingLevel/text()",
 
-//                     "properties.mundi.radiometricQuality": "DIAS:radiometricQuality/text()",
-//                     "properties.mundi.formatCorrectness": "DIAS:formatCorrectness/text()",
+                    "properties.mundi.radiometricQuality": "DIAS:radiometricQuality/text()",
+                    "properties.mundi.formatCorrectness": "DIAS:formatCorrectness/text()",
 
-//                     "properties.mundi.onlineStatus": "DIAS:onlineStatus/text()",
-//                     "properties.mundi.productDatapackSize": "DIAS:productDatapackSize/text()",
-//                     "properties.mundi.datatakeId": "DIAS:datatakeId/text()",
+                    "properties.mundi.onlineStatus": "DIAS:onlineStatus/text()",
+                    "properties.mundi.productDatapackSize": "DIAS:productDatapackSize/text()",
+                    "properties.mundi.datatakeId": "DIAS:datatakeId/text()",
 
-// //TODO
-// //     <link rel="search" type="application/atom+xml" href="http://cws-acdc-browse.default.ci.sparkindata.com/acdc/catalog/proxy/search/Sentinel2/opensearch?uid=S2A_MSIL1C_20180109T101401_N0206_R022_T32TNN_20180117T202124" />
-// //     <link rel="enclosure" href="https://obs.eu-de.otc.t-systems.com/staging-data/Sentinel2/S2A_MSIL1C_20180109T101401_N0206_R022_T32TNN_20180117T202124.zip" />
-//                     "properties.mundi.enclosure": "atom:link[@rel='search']/@href",
-//                     "properties.mundi.enclosure": "atom:link[@rel='enclosure']/@href",
-//                     "properties.mundi.externalUrl": "DIAS:externalUrls/text()",
-//                     "properties.mundi.format": "dc:format/text()",
+//TODO
+//     <link rel="search" type="application/atom+xml" href="http://cws-acdc-browse.default.ci.sparkindata.com/acdc/catalog/proxy/search/Sentinel2/opensearch?uid=S2A_MSIL1C_20180109T101401_N0206_R022_T32TNN_20180117T202124" />
+//     <link rel="enclosure" href="https://obs.eu-de.otc.t-systems.com/staging-data/Sentinel2/S2A_MSIL1C_20180109T101401_N0206_R022_T32TNN_20180117T202124.zip" />
+                    "properties.mundi.enclosure": "atom:link[@rel='search']/@href",
+                    "properties.mundi.enclosure": "atom:link[@rel='enclosure']/@href",
+                    "properties.mundi.externalUrl": "DIAS:externalUrls/text()",
+                    "properties.mundi.format": "dc:format/text()",
 
-// //TODO
-// //     <media:group>
-// //         <media:content url="https://obs.eu-de.otc.t-systems.com/metadata/thumbnails/Sentinel2/S2A_MSIL1C_20180109T101401_N0206_R022_T32TNN_20180117T202124-th.jpg" type="image/jpeg" medium="image">
-// //             <media:category scheme="http://www.opengis.net/spec/EOMPOM/1.0">THUMBNAIL</media:category>
-// //         </media:content>
-// //     </media:group>
-// //                    "properties.mundi.thumbnailUrl": "",
-//                 },
-//                 "extraFieldsNamespaces": {
-//                     "DIAS": "http://tas/DIAS",
-//                     "eo": "http://a9.com/-/spec/opensearch/extensions/eo/1.0/",
-//                     "dc": "http://purl.org/dc/elements/1.1/",
-//                     "atom": "http://www.w3.org/2005/Atom"
-//                 },
-//                 "descriptionTemplate":
-//                     "<table class='table table-condensed'>" +
-//                     "<tr>" +
-//                       "<td>Sensing Start Date</td>" +
-//                       "<td>{{properties.mundi.date}}</td>" +
-//                     "</tr>" +
-//                     "<tr>" +
-//                       "<td>Processing Date</td>" +
-//                       "<td>{{properties.mundi.processingDate}}</td>" +
-//                     "</tr>" +
-//                     "<tr>" +
-//                       "<td>Publishing Date</td>" +
-//                       "<td>{{properties.mundi.published}}</td>" +
-//                     "</tr>" +
-//                     "<tr>" +
-//                       "<td>Updating Date</td>" +
-//                       "<td>{{properties.mundi.updated}}</td>" +
-//                     "</tr>" +
-//                     "<tr>" +
-//                       "<td>Platform</td>" +
-//                       "<td>{{properties.mundi.platform}}</td>" +
-//                     "</tr>" +
-//                     "<tr>" +
-//                       "<td>Instrument</td>" +
-//                       "<td>{{properties.mundi.instrument}}</td>" +
-//                     "</tr>" +
-//                     "<tr>" +
-//                       "<td>Processing Level</td>" +
-//                       "<td>{{properties.mundi.processingLevel}}</td>" +
-//                     "</tr>" +
-//                     "<tr>" +
-//                       "<td>Cloud Cover</td>" +
-//                       "<td>{{properties.mundi.cloudCover}}&#37;</td>" +
-//                     "</tr>" +
-//                     "<tr>" +
-//                       "<td>Radiometric Quality</td>" +
-//                       "<td>{{properties.mundi.radiometricQuality}}</td>" +
-//                     "</tr>" +
-//                     "<tr>" +
-//                       "<td>Format Correctness</td>" +
-//                       "<td>{{properties.mundi.formatCorrectness}}</td>" +
-//                     "</tr>" +
-//                     "<tr>" +
-//                       "<td>Online Status</td>" +
-//                       "<td>{{properties.mundi.onlineStatus}}</td>" +
-//                     "</tr>" +
-//                     "<tr>" +
-//                       "<td>Product Datapack Size</td>" +
-//                       "<td>{{properties.mundi.productDatapackSize}}</td>" +
-//                     "</tr>" +
-//                     "<tr>" +
-//                       "<td>Datatake ID</td>" +
-//                       "<td>{{properties.mundi.datatakeId}}</td>" +
-//                     "</tr>" +
-//                     // "<tr>" +
-//                     //   "<td>Search</td>" +
-//                     //   "<td><a href=\"{{properties.mundi.search}}\" target=\"_blank\">{{properties.mundi.search}}</a></td>" +
-//                     // "</tr>" +
-//                     // "<tr>" +
-//                     //   "<td>Enclosure</td>" +
-//                     //   "<td><a href=\"{{properties.mundi.enclosure}}\" target=\"_blank\">{{properties.mundi.enclosure}}</a></td>" +
-//                     // "</tr>" +
-//                     "<tr>" +
-//                       "<td>External URL</td>" +
-//                       "<td><a href=\"{{properties.mundi.externalUrl}}\" target=\"_blank\">{{properties.mundi.externalUrl}}</a></td>" +
-//                     "</tr>" +
-//                     "<tr>" +
-//                       "<td>Format</td>" +
-//                       "<td>{{properties.mundi.format}}</td>" +
-//                     "</tr>" +
-//                     "</table>",
-//             },
-//             "download": {
-//                 "protocol": "OpenSearch",
-//                 "rewrite": {
-//                     "from": "^https:\/\/obs\.eu-de\.otc\.t-systems\.com\/",
-//                     "to": "https://dp.mundiwebservices.com/",
-//                 }
-//             },
-//         },
+//TODO
+//     <media:group>
+//         <media:content url="https://obs.eu-de.otc.t-systems.com/metadata/thumbnails/Sentinel2/S2A_MSIL1C_20180109T101401_N0206_R022_T32TNN_20180117T202124-th.jpg" type="image/jpeg" medium="image">
+//             <media:category scheme="http://www.opengis.net/spec/EOMPOM/1.0">THUMBNAIL</media:category>
+//         </media:content>
+//     </media:group>
+//                    "properties.mundi.thumbnailUrl": "",
+                },
+                "extraFieldsNamespaces": {
+                    "DIAS": "http://tas/DIAS",
+                    "eo": "http://a9.com/-/spec/opensearch/extensions/eo/1.0/",
+                    "dc": "http://purl.org/dc/elements/1.1/",
+                    "atom": "http://www.w3.org/2005/Atom"
+                },
+                "descriptionTemplate":
+                    "<table class='table table-condensed'>" +
+                    "<tr>" +
+                      "<td>Sensing Start Date</td>" +
+                      "<td>{{properties.mundi.date}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Processing Date</td>" +
+                      "<td>{{properties.mundi.processingDate}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Publishing Date</td>" +
+                      "<td>{{properties.mundi.published}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Updating Date</td>" +
+                      "<td>{{properties.mundi.updated}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Platform</td>" +
+                      "<td>{{properties.mundi.platform}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Instrument</td>" +
+                      "<td>{{properties.mundi.instrument}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Processing Level</td>" +
+                      "<td>{{properties.mundi.processingLevel}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Cloud Cover</td>" +
+                      "<td>{{properties.mundi.cloudCover}}&#37;</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Radiometric Quality</td>" +
+                      "<td>{{properties.mundi.radiometricQuality}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Format Correctness</td>" +
+                      "<td>{{properties.mundi.formatCorrectness}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Online Status</td>" +
+                      "<td>{{properties.mundi.onlineStatus}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Product Datapack Size</td>" +
+                      "<td>{{properties.mundi.productDatapackSize}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Datatake ID</td>" +
+                      "<td>{{properties.mundi.datatakeId}}</td>" +
+                    "</tr>" +
+                    // "<tr>" +
+                    //   "<td>Search</td>" +
+                    //   "<td><a href=\"{{properties.mundi.search}}\" target=\"_blank\">{{properties.mundi.search}}</a></td>" +
+                    // "</tr>" +
+                    // "<tr>" +
+                    //   "<td>Enclosure</td>" +
+                    //   "<td><a href=\"{{properties.mundi.enclosure}}\" target=\"_blank\">{{properties.mundi.enclosure}}</a></td>" +
+                    // "</tr>" +
+                    "<tr>" +
+                      "<td>External URL</td>" +
+                      "<td><a href=\"{{properties.mundi.externalUrl}}\" target=\"_blank\">{{properties.mundi.externalUrl}}</a></td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Format</td>" +
+                      "<td>{{properties.mundi.format}}</td>" +
+                    "</tr>" +
+                    "</table>",
+            },
+            "download": {
+                "protocol": "OpenSearch",
+                "rewrite": {
+                    "from": "^https:\/\/obs\.eu-de\.otc\.t-systems\.com\/",
+                    "to": "https://dp.mundiwebservices.com/",
+                }
+            },
+        },
 // 		{
 //             "id": "S3_OLCI_L1",
 // //            "link": "https://code-de.org\/en\/record\/39b6073d-7ef4-4aa9-a3e4-07f079709b52",
