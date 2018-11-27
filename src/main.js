@@ -404,7 +404,7 @@ window.Application = Marionette.Application.extend({
           collection: searchCollection,
         }),
       }, {
-        name: 'Download',
+        name: 'Basket',
         hasInfo: true,
         view: new DownloadSelectionView({
           mapModel,
