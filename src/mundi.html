@@ -333,6 +333,12 @@
                 "lightweightBuckets": true,
                 "searchLimit": 600,
                 "loadMore": 600,
+
+
+                "countZeroRecords": true,
+
+
+
                 "thumbnailUrlPattern": "^https://obs.eu-de.otc.t-systems.com/.*",
                 "parameters": [
                     {
@@ -469,6 +475,7 @@
                       "<td>{{properties.mundi.format}}</td>" +
                     "</tr>" +
                     "</table>",
+              "dropEmptyParameters": true,
             },
             "download": {
                 "protocol": "S3",
@@ -650,6 +657,135 @@
                 }
             },
         },
+        {
+            "id": "S1_L1_SLC",
+//            "link": "https://code-de.org\/en\/record\/39b6073d-7ef4-4aa9-a3e4-07f079709b52",
+            "displayName": "Sentinel-1 - Level 1 SLC",
+            "displayColor": "#1F00EC",
+            "display": {
+                "id": "S1_L1_SLC",
+                "visible": false,
+                "protocol": "WMS", //protocol is declared even if it is not used to avoid display errors
+                "urls": [ //Enpoint for the protocol specified above (WMS  or WMTS)
+                    ""
+                ],
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "style": "",
+                //"attribution": "<a href=\"http://sentinel-hub.com\" target=\"_blank\">Sentinel Hub</a>"
+            },
+            "search": {
+                "protocol": "OpenSearch",
+                "url": "S1_SLC.osdd",
+                "id": "DIAS_CWS:S1_L1_SLC",
+                "histogramBinCount": 28,
+                "format": "application/atom+xml",
+                "method": "GET",
+                "histogramThreshold": 300,
+                "lightweightBuckets": true,
+                "searchLimit": 300,
+                "loadMore": 300,
+				"parameters": [
+					{
+						"title": "Online Status",
+                        "options": [{
+                            "label": "Online or Staging",
+                            "value": "onlineStatus:(ONLINE OR STAGING)",
+                        }, {
+                            "label": "Online",
+                            "value": "onlineStatus:ONLINE",
+                        }, {
+                            "label": "Staging",
+                            "value": "onlineStatus:STAGING",
+                        }],
+						"type": "searchTerms"
+                    },
+					{
+						"type": "geo:uid",
+					},
+                    {
+                        "type": "eo:orbitNumber",
+                        "title": "Orbit Number"
+                    },
+					{
+                        "type": "eo:sensorMode",
+                        "title": "Sensor Mode"
+                    }
+                ],
+                "extraFields": {
+                    "properties.mundi.date": "dc:date/text()",
+                    "properties.mundi.processingDate": "eo:processingDate/text()",
+                    "properties.mundi.platform": "eo:platform/text()",
+                    "properties.mundi.instrument": "eo:instrument/text()",
+                    "properties.mundi.processingLevel": "eo:processingLevel/text()",
+					"properties.mundi.sensorType": "eo:sensorType/text()",
+					"properties.mundi.sensorMode": "eo:sensorMode/text()",
+					"properties.mundi.orbitNumber": "eo:orbitNumber/text()",
+                    "properties.mundi.onlineStatus": "DIAS:onlineStatus/text()",
+                    "properties.mundi.productDatapackSize": "DIAS:productDatapackSize/text()",
+                    "properties.mundi.enclosure": "atom:link[@rel='search']/@href",
+                    "properties.mundi.enclosure": "atom:link[@rel='enclosure']/@href",
+					"properties.mundi.acquisitionStation": "eo:acquisitionStation/text()",
+
+                },
+                "extraFieldsNamespaces": {
+                    "DIAS": "http://tas/DIAS",
+                    "eo": "http://a9.com/-/spec/opensearch/extensions/eo/1.0/",
+                    "dc": "http://purl.org/dc/elements/1.1/",
+                    "atom": "http://www.w3.org/2005/Atom"
+                },
+                "descriptionTemplate":
+                    "<table class='table table-condensed'>" +
+                    "<tr>" +
+                      "<td>Sensing Start Date</td>" +
+                      "<td>{{properties.mundi.date}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Processing Date</td>" +
+                      "<td>{{properties.mundi.processingDate}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Platform</td>" +
+                      "<td>{{properties.mundi.platform}}</td>" +
+                    "</tr>" +
+					"<tr>" +
+                      "<td>Orbit Number</td>" +
+                      "<td>{{properties.mundi.orbitNumber}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Instrument</td>" +
+                      "<td>{{properties.mundi.instrument}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+					  "<td>Sensor Type</td>" +
+					  "<td>{{properties.mundi.sensorType}}</td>" +
+					"</tr>" +
+					"<tr>" +
+					  "<td>Sensor Mode</td>" +
+					  "<td>{{properties.mundi.sensorMode}}</td>" +
+					"</tr>" +
+                    "<tr>" +
+                      "<td>Processing Level</td>" +
+                      "<td>{{properties.mundi.processingLevel}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Online Status</td>" +
+                      "<td>{{properties.mundi.onlineStatus}}</td>" +
+                    "</tr>" +
+					"<tr>" +
+                      "<td>Acquisition Station</td>" +
+                      "<td>{{properties.mundi.acquisitionStation}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Product Datapack Size</td>" +
+                      "<td>{{properties.mundi.productDatapackSize}}</td>" +
+                    "</tr>" +
+                    "</table>",
+            },
+            "download": {
+                "protocol": "OpenSearch"
+            },
+        },
 // 		{
 //             "id": "S1_L1_SLC",
 // //            "link": "https://code-de.org\/en\/record\/39b6073d-7ef4-4aa9-a3e4-07f079709b52",
@@ -824,7 +960,7 @@
             },
             "search": {
                 "protocol": "OpenSearch",
-                "url": "http://mundiwebservices.com/geodata-frontend/catalog/S1_L1_GRD.osdd",
+                "url": "S1_L1_GRD.osdd",
                 "id": "DIAS_CWS:S1_L1_GRD",
                 "histogramBinCount": 28,
                 "format": "application/atom+xml",
