@@ -15,7 +15,7 @@ Win10 | IE11 (sim.)  |         |            |              |            |       
 Win10 | Chrome       |         |            |              |            |            |
 Win10 | Firefox ESR  |         |            |              |            |            |
 Win10 | Firefox      |         |            |              |            |            |
-Win7  | IE11         |         |            |              |            |            |
+Win7  | IE11         | 11.0.96 | X          | X            | X          | X          | X
 Win7  | Chrome       |         |            |              |            |            |
 Win7  | Firefox ESR  |         |            |              |            |            |
 Win7  | Firefox      |         |            |              |            |            |

@@ -131,7 +131,7 @@ window.Application = Marionette.Application.extend({
 
     const promises = layersCollection.map((layerModel) => {
       const parameterSettings = layerModel.get('search.parameters') || config.settings.parameters;
-      if (parameterSettings) {
+      if (layerModel.get('search.protocol') && parameterSettings) {
         return getParameters(layerModel)
           .then(parameters => [layerModel, parameters, null])
           .catch(error => [layerModel, null, error]);
@@ -408,7 +408,7 @@ window.Application = Marionette.Application.extend({
           collection: searchCollection,
         }),
       }, {
-        name: 'Download',
+        name: 'Basket',
         hasInfo: true,
         view: new DownloadSelectionView({
           mapModel,
