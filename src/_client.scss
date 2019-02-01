@@ -11,6 +11,18 @@
 //
 @import './_variables.scss';
 
+
+
+@font-face {
+  font-family: 'Poppins-Light';
+  src: url('./fonts/Poppins-Light.otf')
+}
+
+@font-face {
+  font-family: 'Poppins-Medium';
+  src: url('./fonts/Poppins-Medium.otf')
+}
+
 body {
     position: fixed;
     top: 0;
@@ -25,7 +37,8 @@ body {
     color: $c_lo;
     background: #ddd;
 
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    // font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Poppins-Medium';
     font-size: 14px;
     line-height: 1.42857;
     color: #333333;
@@ -66,8 +79,9 @@ body {
     }
 }
 
-
-
+.download-view .selection-lists {
+  margin-left: unset;
+}
 
 input:focus,
 select:focus,
@@ -84,7 +98,7 @@ button:focus {
 }
 
 * {
-    border-radius: 0 !important;
+    // border-radius: 0 !important;
     outline: none;
     box-shadow: none !important;
     //border: none !important;
@@ -138,7 +152,7 @@ svg.timeslider,
 .side-panel.in,
 .side-panel.out {
     // background: fade-out($c_hi,1.0);
-    background: $c_hi;
+    background: transparent;
 }
 
 .side-panel-content {
@@ -146,13 +160,47 @@ svg.timeslider,
     padding: 3px;
 
     .panel {
-        background: transparent;
+        background: #ebebeb;
 
         .form-group > label, label.control-label {
-            color: #fff;
+            color: $c_blue;
         }
     }
 }
+
+.search-result-list .panel,.download-view .panel {
+  background: unset;
+  .panel-heading {
+    color: $c_gray;
+  }
+}
+
+
+.panel-body {
+  padding: 5px !important;
+}
+
+.form-control {
+  background: $c_blue;
+  border: 0;
+  color: white;
+
+}
+
+// rounded edges styles
+
+
+
+.btn {
+  border-radius: 4px;
+}
+
+.panel {
+  border-radius: 8px;
+}
+
+
+
 
 
 
@@ -187,10 +235,12 @@ svg.timeslider,
 }
 
 .panel-default > .panel-heading {
-    color: $c_hi;
+    color: $c_green;
     background-color: transparent;
     border: none;
     padding-bottom: 0 !important;
+
+    text-align: center;
 
     h3, h4 {
         font-weight: 700;
@@ -198,12 +248,12 @@ svg.timeslider,
         margin-bottom: 0;
 
         a:hover {
-            color: fade-out($c_hi,.5);
+            color: $c_green_hover;
             text-decoration: none;
         }
 
         a:focus {
-            color: $c_hi;
+            color: $c_green_hover;
             text-decoration: none;
         }
     }
@@ -213,17 +263,32 @@ input,
 .btn-default {
     border: none;
     font-weight: 700;
-    color: $c_lo;
-}
+    background: $c_blue;
+    color: white;
 
-.btn-default,
-input {
-    //.input-group-addon {
-    &:hover {
-        background: $c_hi;
-        transition: background .25s;
+    &:hover, &:active {
+      background: $c_blue_hover;
+      transition: background .25s;
     }
 }
+
+.btn-default.toggle-side-panel {
+  background: $c_gray;
+  color: $c_green;
+  &:hover, &:active {
+    background: $c_gray_hover;
+    transition: background .25s;
+  }
+}
+
+// .btn-default,
+// input {
+//     //.input-group-addon {
+//     &:hover {
+//         background: $c_hi;
+//         transition: background .25s;
+//     }
+// }
 
 
 .form-group {
@@ -330,8 +395,12 @@ input {
 
 .layer-control {
     .layer-list {
-        label {
-            color: #fff;
+        label,.form-control {
+            color: $c_green;
+
+            &:hover {
+                color: $c_green_hover
+            }
 
             span {
                 margin-right: 10px;
@@ -373,7 +442,7 @@ input {
     .fa-adjust,
     .fa-wrench,
     .ui-sortable-handle {
-        color: darken(#fff,15%);
+        color: $c_green;
         margin-right: 5px;
     }
 
@@ -382,13 +451,19 @@ input {
         + label span:before,
         + span:before {
             border: none !important;
-            color: $c_hi;
+            color: $c_green;
+            &:hover {
+              color: $c_green_hover;
+            }
         }
 
         &:checked {
             + label span:before,
             + span:before {
-                color: #fff;
+                color: $c_blue;
+                &:hover {
+                  color: $c_blue_hover;
+                }
             }
         }
     }
@@ -424,7 +499,7 @@ input {
 }
 
 .slider-handle {
-  background-color: $c_hi;
+  background-color: $c_blue;
   background-image: none;
 }
 

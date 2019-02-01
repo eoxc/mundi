@@ -57,7 +57,7 @@ module.exports = {
       { test: /\.hbs$/, loader: 'handlebars-loader?helperDirs[]=' + __dirname + '/src/helpers' },
 
       // for anything that might be included in a css
-      { test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=4000000' },
+      { test: /\.(png|woff|woff2|eot|ttf|otf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=4000000' },
     ],
   },
   plugins: [
