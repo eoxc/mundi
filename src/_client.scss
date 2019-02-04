@@ -168,14 +168,6 @@ svg.timeslider,
     }
 }
 
-.search-result-list .panel,.download-view .panel {
-  background: unset;
-  .panel-heading {
-    color: $c_gray;
-  }
-}
-
-
 .panel-body {
   padding: 5px !important;
 }
@@ -187,6 +179,11 @@ svg.timeslider,
 
 }
 
+
+.navbar, .panel {
+  margin-bottom: 10px !important;
+}
+
 // rounded edges styles
 
 
@@ -195,14 +192,9 @@ svg.timeslider,
   border-radius: 4px;
 }
 
-.panel {
+.panel,.side-panel-content {
   border-radius: 8px;
 }
-
-
-
-
-
 
 .nav-tabs > li {
   margin-bottom: 0;
@@ -258,6 +250,23 @@ svg.timeslider,
         }
     }
 }
+
+
+.search-result-list .panel,.download-view .panel {
+  background: unset;
+  .panel-heading {
+    h3, h4 {
+      color: $c_gray;
+      a {
+        &:active,&:hover {
+          color: $c_gray_hover;
+        }
+      }
+    }
+  }
+}
+
+
 
 input,
 .btn-default {
@@ -496,6 +505,12 @@ input,
   color: black;
   // background-color: $c_hi;
   background-color: white;
+  img {
+    width: 100px;
+  }
+  img.error {
+    width: 80px;
+  }
 }
 
 .slider-handle {
