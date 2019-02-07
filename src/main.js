@@ -427,6 +427,8 @@ window.Application = Marionette.Application.extend({
       }],
     }));
 
+    layout.$('.search-result-view .select-all,.download-view .download-control .btn').removeClass('btn-sm');
+
     // hook up record info modal
     searchCollection.each((searchModel) => {
       searchModel.on('showInfo', (recordModels) => {

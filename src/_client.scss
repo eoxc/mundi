@@ -81,6 +81,7 @@ body {
 
 .download-view .selection-lists {
   margin-left: unset;
+  height: calc(100% - 40px);
 }
 
 input:focus,
@@ -183,6 +184,9 @@ svg.timeslider,
 
 }
 
+.result-contents {
+  height: calc(100% - 75px);
+}
 
 .navbar, .panel {
   margin-bottom: 10px !important;
