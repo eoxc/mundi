@@ -13,6 +13,9 @@ import template from './RecordsDetailsModalView.hbs';
 
 const RecordsDetailsModalView = ModalView.extend({
   template,
+
+  className: 'record-details-modal-view modal fade',
+
   templateHelpers() {
     return {
       title: '',
