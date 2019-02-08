@@ -30,7 +30,7 @@ const LayerOptionsView = Marionette.ItemView.extend({
 
   getDisplayOptions() {
     const display = this.useDetailsDisplay ? this.model.get('detailsDisplay') : this.model.get('display');
-    const options = display.options
+    const options = (display.options || [])
       .map((option) => {
         let values = option.values;
         let low;

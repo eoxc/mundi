@@ -52,6 +52,8 @@ import i18next from './i18next';
 
 import { version as cdeVersion } from '../package.json';
 
+import fallbackThumbnailUrl from './images/no_thumbnail_available.png';
+
 // import './static/code-de.css';
 import './_client.scss';
 
@@ -406,6 +408,7 @@ window.Application = Marionette.Application.extend({
           filtersModel,
           highlightModel,
           collection: searchCollection,
+          fallbackThumbnailUrl,
         }),
       }, {
         name: 'Basket',
@@ -419,9 +422,12 @@ window.Application = Marionette.Application.extend({
           onSelectFiles: selectFiles,
           termsAndConditionsUrl,
           downloadEnabled: settings.downloadEnabled,
+          fallbackThumbnailUrl,
         }),
       }],
     }));
+
+    layout.$('.search-result-view .select-all,.download-view .download-control .btn').removeClass('btn-sm');
 
     // hook up record info modal
     searchCollection.each((searchModel) => {

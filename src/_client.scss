@@ -11,6 +11,18 @@
 //
 @import './_variables.scss';
 
+
+
+@font-face {
+  font-family: 'Poppins-Light';
+  src: url('./fonts/Poppins-Light.otf')
+}
+
+@font-face {
+  font-family: 'Poppins-Medium';
+  src: url('./fonts/Poppins-Medium.otf')
+}
+
 body {
     position: fixed;
     top: 0;
@@ -25,7 +37,8 @@ body {
     color: $c_lo;
     background: #ddd;
 
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    // font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Poppins-Medium';
     font-size: 14px;
     line-height: 1.42857;
     color: #333333;
@@ -46,7 +59,7 @@ body {
 }
 
 .side-panel {
-    // filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.3));
+    width: 400px;
 
     .side-panel-left {
         left: 25px;
@@ -66,8 +79,11 @@ body {
     }
 }
 
-
-
+.download-view .selection-lists {
+  margin-left: unset;
+  height: calc(100% - 59px);
+  margin-bottom: 15px;
+}
 
 input:focus,
 select:focus,
@@ -84,7 +100,7 @@ button:focus {
 }
 
 * {
-    border-radius: 0 !important;
+    // border-radius: 0 !important;
     outline: none;
     box-shadow: none !important;
     //border: none !important;
@@ -138,23 +154,63 @@ svg.timeslider,
 .side-panel.in,
 .side-panel.out {
     // background: fade-out($c_hi,1.0);
-    background: $c_hi;
+    background: transparent;
 }
 
 .side-panel-content {
     background: $c_lo;
-    padding: 3px;
+    padding: 15px 15px 0px 15px !important;
 
     .panel {
-        background: transparent;
+        background: #ebebeb;
 
         .form-group > label, label.control-label {
-            color: #fff;
+            color: $c_blue;
         }
+    }
+    .panel, .side-panel-content {
+      // margin: 10px !important;
+      margin-bottom: 20px !important;
     }
 }
 
+.panel-body {
+  padding: 5px !important;
+}
 
+.form-control {
+  background: $c_blue;
+  border: 0;
+  color: white;
+
+}
+
+.result-contents {
+  height: calc(100% - 90px);
+  margin-bottom: 10px;
+}
+
+.navbar, .panel {
+  margin-bottom: 10px !important;
+}
+
+// rounded edges styles
+
+
+
+.btn,.anno-btn {
+  border-radius: 4px !important;
+  -webkit-border-radius: 4px;
+}
+
+.panel,.side-panel-content,.modal-content,.anno-inner {
+  border-radius: 8px !important;
+  -webkit-border-radius: 8px;
+}
+
+.side-panel-content {
+  margin: 0;
+}
 
 .nav-tabs > li {
   margin-bottom: 0;
@@ -187,10 +243,12 @@ svg.timeslider,
 }
 
 .panel-default > .panel-heading {
-    color: $c_hi;
+    color: $c_green;
     background-color: transparent;
     border: none;
     padding-bottom: 0 !important;
+
+    text-align: center;
 
     h3, h4 {
         font-weight: 700;
@@ -198,32 +256,98 @@ svg.timeslider,
         margin-bottom: 0;
 
         a:hover {
-            color: fade-out($c_hi,.5);
+            color: $c_green_hover;
             text-decoration: none;
         }
 
         a:focus {
-            color: $c_hi;
+            color: $c_green_hover;
             text-decoration: none;
         }
     }
 }
+
+
+.search-result-list .panel,.download-view .panel {
+  background: unset;
+  .panel-heading {
+    h3, h4 {
+      color: $c_gray;
+      a {
+        &:active,&:hover {
+          color: $c_gray_hover;
+        }
+      }
+    }
+  }
+}
+
+// .search-result-list .panel-result-list {
+//   > .panel-body {
+//     padding: 0 !important;
+//     margin-left: 0 !important;
+//     margin-right: 0 !important;
+//   }
+// }
+
+.search-result-list > .panel,.selection-lists > div > .panel {
+  padding: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.record-item {
+  margin-left: 0;
+  margin-right: calc((100% - 3 * 110px) / 4);
+  width: 113px;
+}
+
+.record-item:nth-child(3n) {
+  margin-right: 0;
+}
+
+
+.search-result-view .btn.select-all {
+  position: relative;
+  width: 100%;
+}
+
+.download-control {
+  position: relative;
+  width: 100%;
+}
+
 
 input,
 .btn-default {
     border: none;
     font-weight: 700;
-    color: $c_lo;
-}
+    background: $c_blue;
+    color: white;
 
-.btn-default,
-input {
-    //.input-group-addon {
-    &:hover {
-        background: $c_hi;
-        transition: background .25s;
+    &:hover, &:active {
+      background: $c_blue_hover;
+      transition: background .25s;
     }
 }
+
+.btn-default.toggle-side-panel {
+  background: $c_gray;
+  color: $c_green;
+  &:hover, &:active {
+    background: $c_gray_hover;
+    transition: background .25s;
+  }
+}
+
+// .btn-default,
+// input {
+//     //.input-group-addon {
+//     &:hover {
+//         background: $c_hi;
+//         transition: background .25s;
+//     }
+// }
 
 
 .form-group {
@@ -294,6 +418,7 @@ input {
     display:flex;
     justify-content:center;
     align-items:center;
+    height: 18px;
   }
 
   svg.timeslider {
@@ -330,8 +455,12 @@ input {
 
 .layer-control {
     .layer-list {
-        label {
-            color: #fff;
+        label,.form-control {
+            color: $c_green;
+
+            &:hover {
+                color: $c_green_hover
+            }
 
             span {
                 margin-right: 10px;
@@ -373,7 +502,7 @@ input {
     .fa-adjust,
     .fa-wrench,
     .ui-sortable-handle {
-        color: darken(#fff,15%);
+        color: $c_green;
         margin-right: 5px;
     }
 
@@ -382,13 +511,19 @@ input {
         + label span:before,
         + span:before {
             border: none !important;
-            color: $c_hi;
+            color: $c_green;
+            &:hover {
+              color: $c_green_hover;
+            }
         }
 
         &:checked {
             + label span:before,
             + span:before {
-                color: #fff;
+                color: $c_blue;
+                &:hover {
+                  color: $c_blue_hover;
+                }
             }
         }
     }
@@ -421,10 +556,16 @@ input {
   color: black;
   // background-color: $c_hi;
   background-color: white;
+  img {
+    width: 100px;
+  }
+  img.error {
+    width: 80px;
+  }
 }
 
 .slider-handle {
-  background-color: $c_hi;
+  background-color: $c_blue;
   background-image: none;
 }
 
@@ -446,7 +587,7 @@ input {
 .ol-control, #infoPanel, #infoPanel div {
   border: none !important;
   box-shadow: none !important;
-  border-radius: 0px !important;
+  // border-radius: 0px !important;
   background-color: transparent;
   filter: none !important;
 
@@ -474,6 +615,10 @@ input {
     top: -1px;
   }
 
+  button {
+    border-radius: 4px;
+  }
+
   // &:hover {
   //   background-color: transparent;
   // }
@@ -490,10 +635,14 @@ input {
 
 .ol-attribution {
   z-index: 100;
+  background: transparent !important;
 }
 
 .ol-attribution ul {
   font-size: 13px !important;
+  background: rgba(255,255,255,0.8);
+  padding: 2px;
+  border-radius: 4px;
 }
 
 .ol-overlay-container .popover.in {
@@ -525,12 +674,34 @@ input {
   transition: visibility 0s .25s, opacity .25s linear;
 }
 
+.record-details-modal-view .modal-body {
+  padding: 0;
+}
+
+.record-details-view {
+  display: flex;
+  height: 100%;
+}
+
 .record-details-map .ol-mouse-position-eoxc {
   left: 10px;
 }
 
 .record-details-map {
-  height: 700px;
+  order: 2;
+  // height: 700px;
+  width: 70%;
+  height: 100%;
+  // margin: -15px auto -15px -15px;
+  margin: 0;
+}
+
+.record-details-description {
+  order: 1;
+  width: 30%;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 15px;
 }
 
 .bootstrap-datetimepicker-widget {
@@ -573,9 +744,12 @@ input {
 
 .modal {
   .modal-content {
+    border-radius: 8px !important;
     border: none;
 
     .modal-header {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
       background-color: $c_lo;
       color: $c_hi;
       border-bottom: none;
@@ -609,6 +783,8 @@ input {
     }
 
     .modal-footer {
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
       background-color: $c_lo;
       color: $c_hi;
       border-top: none;

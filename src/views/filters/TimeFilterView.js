@@ -37,7 +37,7 @@ const TimeFilterView = Marionette.ItemView.extend({
         showClose: true,
         timeZone: 'UTC',
         widgetPositioning: {
-          horizontal: label === 'start' ? 'left' : 'right',
+          horizontal: 'right',
           vertical: 'auto',
         },
         keyBinds: {
