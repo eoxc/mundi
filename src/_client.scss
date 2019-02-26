@@ -159,7 +159,7 @@ svg.timeslider,
 
 .side-panel-content {
     background: $c_lo;
-    padding: 15px 15px 0px 15px !important;
+    padding: 12px 12px 0px 12px !important;
 
     .panel {
         background: #ebebeb;
@@ -170,13 +170,23 @@ svg.timeslider,
     }
     .panel, .side-panel-content {
       // margin: 10px !important;
-      margin-bottom: 20px !important;
+      margin-bottom: 12px !important;
     }
 }
 
 .panel-body {
-  padding: 5px !important;
+  padding: 12px !important;
 }
+
+.search-result-list .panel-result-list > .panel-body {
+  padding: 0 !important;
+}
+
+.search-result-list {
+  padding-left: 0;
+  margin-left: 0;
+}
+
 
 .form-control {
   background: $c_blue;
@@ -186,19 +196,20 @@ svg.timeslider,
 }
 
 .result-contents {
-  height: calc(100% - 90px);
+  // height: calc(100% - 90px);
+  height: calc(100% - 124px);
   margin-bottom: 10px;
 }
 
 .navbar, .panel {
-  margin-bottom: 10px !important;
+  margin-bottom: 12px !important;
 }
 
 // rounded edges styles
 
 
 
-.btn,.anno-btn {
+button,.btn,.anno-btn {
   border-radius: 4px !important;
   -webkit-border-radius: 4px;
 }
@@ -206,6 +217,29 @@ svg.timeslider,
 .panel,.side-panel-content,.modal-content,.anno-inner {
   border-radius: 8px !important;
   -webkit-border-radius: 8px;
+}
+
+
+// button sizing
+
+input {
+  height: 24px;
+}
+
+.btn,.anno-btn {
+  height: 52px;
+}
+
+.btn-xs {
+  height: 20px;
+}
+
+.btn-sm {
+  height: 30px;
+}
+
+.toggle-side-panel {
+  height: 30px !important;
 }
 
 .side-panel-content {
@@ -274,7 +308,7 @@ svg.timeslider,
     h3, h4 {
       color: $c_gray;
       a {
-        &:active,&:hover {
+        &:active,&:hover,&:focus {
           color: $c_gray_hover;
         }
       }
@@ -303,6 +337,10 @@ svg.timeslider,
 }
 
 .record-item:nth-child(3n) {
+    margin-right: 0;
+}
+
+.record-item:nth-child(3n) {
   margin-right: 0;
 }
 
@@ -325,7 +363,7 @@ input,
     background: $c_blue;
     color: white;
 
-    &:hover, &:active {
+    &:hover, &:active, &:focus {
       background: $c_blue_hover;
       transition: background .25s;
     }
@@ -334,7 +372,7 @@ input,
 .btn-default.toggle-side-panel {
   background: $c_gray;
   color: $c_green;
-  &:hover, &:active {
+  &:hover, &:active, &:focus {
     background: $c_gray_hover;
     transition: background .25s;
   }
