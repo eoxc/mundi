@@ -280,7 +280,7 @@ input {
     color: $c_green;
     background-color: transparent;
     border: none;
-    padding-bottom: 0 !important;
+    // padding-bottom: 0 !important;
 
     text-align: center;
 
@@ -299,6 +299,11 @@ input {
             text-decoration: none;
         }
     }
+}
+
+.panel-heading {
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
 }
 
 
@@ -549,18 +554,18 @@ input,
         + label span:before,
         + span:before {
             border: none !important;
-            color: $c_green;
+            color: $c_blue;
             &:hover {
-              color: $c_green_hover;
+              color: $c_blue_hover;
             }
         }
 
         &:checked {
             + label span:before,
             + span:before {
-                color: $c_blue;
+                color: $c_green;
                 &:hover {
-                  color: $c_blue_hover;
+                  color: $c_green_hover;
                 }
             }
         }
@@ -887,4 +892,9 @@ body {
   display: block;
   background-size: contain;
   display: inline-block;
+}
+
+
+.modal-full-screen-scrolling .modal-content .modal-body {
+  height: calc(100% - 135px);
 }
