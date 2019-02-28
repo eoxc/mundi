@@ -81,7 +81,8 @@ body {
 
 .download-view .selection-lists {
   margin-left: unset;
-  height: calc(100% - 59px);
+  // height: calc(100% - 59px);
+  height: calc(100% - 110px) !important;
   margin-bottom: 15px;
 }
 
@@ -154,7 +155,7 @@ svg.timeslider,
 .side-panel.in,
 .side-panel.out {
     // background: fade-out($c_hi,1.0);
-    background: transparent;
+    background: transparent !important;
 }
 
 .side-panel-content {
@@ -903,4 +904,18 @@ body {
 .btn-load-more {
   margin: 0;
   width: calc(100% - 6px);
+}
+
+.record-details-view td {
+  word-break: break-word;
+}
+
+.record-details-modal-view .is-selected {
+  vertical-align: bottom;
+  position: relative;
+}
+
+.filters-view {
+  padding-right: 8px;
+  margin-right: -8px;
 }
