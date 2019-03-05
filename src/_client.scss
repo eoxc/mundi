@@ -158,7 +158,7 @@ svg.timeslider,
 
 .side-panel-content {
     background: $c_lo;
-    padding: 12px 12px 2px 12px !important;
+    padding: 12px 12px 8px 12px !important;
 
     .panel {
         background: #ebebeb;
@@ -354,7 +354,7 @@ input {
   position: absolute;
   width: calc(100% - 24px);
   bottom: 12px;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 
@@ -938,4 +938,8 @@ body {
 
 .dropdown-toggle {
   padding: 6px 4px;
+}
+
+.tab-content{
+  padding-bottom: 0px;
 }
