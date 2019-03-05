@@ -59,7 +59,7 @@ body {
 }
 
 .side-panel {
-    width: 400px;
+    width: 360px;
 
     .side-panel-left {
         left: 25px;
@@ -81,9 +81,7 @@ body {
 
 .download-view .selection-lists {
   margin-left: unset;
-  // height: calc(100% - 59px);
-  height: calc(100% - 110px) !important;
-  margin-bottom: 15px;
+  height: calc(100% - 80px) !important;
 }
 
 input:focus,
@@ -160,7 +158,7 @@ svg.timeslider,
 
 .side-panel-content {
     background: $c_lo;
-    padding: 12px 12px 0px 12px !important;
+    padding: 12px 12px 2px 12px !important;
 
     .panel {
         background: #ebebeb;
@@ -176,7 +174,7 @@ svg.timeslider,
 }
 
 .panel-body {
-  padding: 12px !important;
+  padding: 4px 12px 8px 12px !important;
 }
 
 .search-result-list .panel-result-list > .panel-body {
@@ -193,12 +191,10 @@ svg.timeslider,
   background: $c_blue;
   border: 0;
   color: white;
-
 }
 
 .result-contents {
-  // height: calc(100% - 90px);
-  height: calc(100% - 124px);
+  height: calc(100% - 92px);
   margin-bottom: 10px;
 }
 
@@ -211,7 +207,7 @@ svg.timeslider,
 
 
 button,.btn,.anno-btn {
-  border-radius: 4px !important;
+  border-radius: 4px;
   -webkit-border-radius: 4px;
 }
 
@@ -228,7 +224,7 @@ input {
 }
 
 .btn,.anno-btn {
-  height: 52px;
+  height: 35px;
 }
 
 .btn-xs {
@@ -253,7 +249,6 @@ input {
   > a {
     line-height: 1.25;
     background: #eee;
-    font-weight: 700;
 
     &:hover {
       background: $c_hi;
@@ -286,7 +281,6 @@ input {
     text-align: center;
 
     h3, h4 {
-        font-weight: 700;
         text-transform: uppercase;
         margin-bottom: 0;
 
@@ -338,8 +332,8 @@ input {
 
 .record-item {
   margin-left: 0;
-  margin-right: calc((100% - 3 * 110px) / 4);
-  width: 113px;
+  margin-right: calc((100% - 3 * 102px) / 4);
+  width: 102px;
 }
 
 .record-item:nth-child(3n) {
@@ -357,21 +351,29 @@ input {
 }
 
 .download-control {
-  position: relative;
-  width: 100%;
+  position: absolute;
+  width: calc(100% - 24px);
+  bottom: 12px;
+  margin-bottom: 2px;
 }
 
 
 input,
 .btn-default {
     border: none;
-    font-weight: 700;
     background: $c_blue;
     color: white;
 
     &:hover, &:active, &:focus {
       background: $c_blue_hover;
       transition: background .25s;
+      color: white;
+    }
+    
+    &:disabled{
+      &:hover, &:active, &:focus{
+        background: $c_blue;
+      } 
     }
 }
 
@@ -498,6 +500,7 @@ input,
 }
 
 .layer-control {
+    padding-right: 8px;
     .layer-list {
         label,.form-control {
             color: $c_green;
@@ -523,9 +526,9 @@ input,
 
     .display-name {
         white-space: nowrap;
-        max-width: 245px;
-        width: 245px;
+        width: 195px;
         overflow: hidden;
+        padding: 2px 2px 2px 0px!important;
     }
 
     .input-group-addon {
@@ -579,7 +582,9 @@ input,
         height: auto;
         padding: 2px 12px;
         // border-radius: 2px !important;
-
+        &:disabled{
+          background: fade-out($c_hi,.8)!important;
+        }
         a[href] {
           color: #fff;
           text-decoration: underline;
@@ -601,11 +606,13 @@ input,
   // background-color: $c_hi;
   background-color: white;
   img {
-    width: 100px;
+    width: 94px;
   }
   img.error {
     width: 80px;
   }
+  padding-left: 4px!important;
+  padding-right: 4px!important;
 }
 
 .slider-handle {
@@ -823,7 +830,6 @@ input,
       padding-right: 5px;
       a {
         color: $c_lo;
-        font-weight: 700;
       }
     }
 
@@ -903,6 +909,7 @@ body {
 
 .btn-load-more {
   margin: 0;
+  margin: 0;
   width: calc(100% - 6px);
 }
 
@@ -917,5 +924,18 @@ body {
 
 .filters-view {
   padding-right: 8px;
-  margin-right: -8px;
+  margin-right: 0px;
+  overflow-y: auto;
+}
+
+.layer-options {
+  min-width: 250px;
+}
+
+.control-label {
+  margin-bottom: 10px;
+}
+
+.dropdown-toggle {
+  padding: 6px 4px;
 }
