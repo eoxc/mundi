@@ -495,6 +495,54 @@ window.Application = Marionette.Application.extend({
       </style>
     `).appendTo('head');
 
+    // mundi specific behavior fix, hard-coding class names selectors
+    function updateStyleOnScrollPresent(selectorArray) {
+      // takes an array of jquery objects and if any has vertical scroll, set its padding-right, else remove padding-right
+      function hasVerticalScroll (node) {
+        // returns true if node has a visible scroll if a node, else false
+        return (node) ? node.scrollHeight > node.offsetHeight : false;
+      }
+      selectorArray.forEach(function(selector){
+        if (hasVerticalScroll(selector[0])){
+          $(selector).css("padding-right", "8px");
+        } else {
+          $(selector).css("padding-right", "0px");
+        }
+      });
+    }
+
+    // this is a Jquery plugin function that fires an event when the size of an element is changed
+    // usage: $().sizeChanged(function(){})
+    (function ($) {
+      $.fn.sizeChanged = function (handleFunction) {
+        var element = this;
+        var lastWidth = element.width();
+        var lastHeight = element.height();
+
+        setInterval(function () {
+          if (lastWidth === element.width() && lastHeight === element.height())
+            return;
+          if (typeof (handleFunction) == 'function') {
+            handleFunction({ width: lastWidth, height: lastHeight },
+                           { width: element.width(), height: element.height() });
+            lastWidth = element.width();
+            lastHeight = element.height();
+          }
+        }, 100);
+        return element;
+      };
+    }(jQuery));
+
+    updateStyleOnScrollPresent([$(".filters-view"), $(".layer-control")]);
+
+    $(window).on("resize", function(){
+      updateStyleOnScrollPresent([$(".filters-view"), $(".layer-control")]);
+    })
+
+    $(".panel").sizeChanged(function(){
+      updateStyleOnScrollPresent([$(".filters-view"), $(".layer-control")]);
+    })
+
     // layout.showChildView('infoPanel', new VendorInfoView({ eoxcVersion, cdeVersion }));
 
     // use set timeout here so that vendor info is always at the end of the attribution list
