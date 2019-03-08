@@ -369,11 +369,11 @@ input,
       transition: background .25s;
       color: white;
     }
-    
+
     &:disabled{
       &:hover, &:active, &:focus{
         background: $c_blue;
-      } 
+      }
     }
 }
 
@@ -939,4 +939,8 @@ body {
 
 .tab-content{
   padding-bottom: 0px;
+}
+
+.dropdown-menu {
+  max-width: 230px;
 }
