@@ -428,6 +428,7 @@ window.Application = Marionette.Application.extend({
     }));
 
     layout.$('.search-result-view .select-all,.download-view .download-control .btn').removeClass('btn-sm');
+    layout.$('.tools, .selections').removeClass('btn-group-justified');
 
     // hook up record info modal
     searchCollection.each((searchModel) => {

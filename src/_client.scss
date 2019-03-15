@@ -153,7 +153,10 @@ svg.timeslider,
 .side-panel.in,
 .side-panel.out {
     // background: fade-out($c_hi,1.0);
-    background: transparent !important;
+    background: rgba(0, 133, 116, 0) !important;
+    // old browsers support
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    -moz-opacity:0;
 }
 
 .side-panel-content {
@@ -174,7 +177,7 @@ svg.timeslider,
 }
 
 .panel-body {
-  padding: 4px 12px 8px 12px !important;
+  padding: 0px 12px 8px 12px !important;
 }
 
 .search-result-list .panel-result-list > .panel-body {
@@ -232,7 +235,7 @@ input {
 }
 
 .btn-sm {
-  height: 30px;
+  height: 28px;
 }
 
 .toggle-side-panel {
@@ -274,7 +277,10 @@ input {
 
 .panel-default > .panel-heading {
     color: $c_green;
-    background-color: transparent;
+    background: rgba(0, 133, 116, 0);
+    // old browsers support
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    -moz-opacity:0;
     border: none;
     // padding-bottom: 0 !important;
 
@@ -303,7 +309,7 @@ input {
 
 
 .search-result-list .panel,.download-view .panel {
-  background: unset;
+  background: rgba(0, 133, 116, 0);
   .panel-heading {
     h3, h4 {
       color: $c_gray;
@@ -531,7 +537,10 @@ input,
     }
 
     .input-group-addon {
-        background: transparent;
+        background: rgba(0, 133, 116, 0);
+        // old browsers support
+        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        -moz-opacity:0;
         padding: 0 6px;
 
         &:first-of-type {
@@ -638,7 +647,10 @@ input,
   border: none !important;
   box-shadow: none !important;
   // border-radius: 0px !important;
-  background-color: transparent;
+  background-color: rgba(0, 133, 116, 0);
+  // old browsers support
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  -moz-opacity:0;
   filter: none !important;
 
   a {
@@ -685,7 +697,10 @@ input,
 
 .ol-attribution {
   z-index: 100;
-  background: transparent !important;
+  background: rgba(0, 133, 116, 0) !important;
+  // old browsers support
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  -moz-opacity:0;
 }
 
 .ol-attribution ul {
@@ -903,7 +918,7 @@ body {
 
 
 .modal-full-screen-scrolling .modal-content .modal-body {
-  height: calc(100% - 135px);
+  height: calc(100% - 120px);
 }
 
 .btn-load-more {
@@ -913,7 +928,7 @@ body {
 }
 
 .record-details-view td {
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .record-details-modal-view .is-selected {
@@ -943,4 +958,23 @@ body {
 
 .dropdown-menu {
   max-width: 230px;
+}
+
+.tools {
+  display:flex;
+  justify-content:space-around;
+}
+
+.tool {
+  border-radius: 4px !important;
+  width: 100%;
+  margin: 2.5px 2.5px 0 2.5px !important;
+}
+
+.input-group {
+  margin: 0px 3px;
+}
+
+.checkbox input{
+  background: rgba(0, 133, 116, 0);
 }
