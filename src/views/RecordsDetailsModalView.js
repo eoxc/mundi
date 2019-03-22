@@ -10,6 +10,7 @@ import { isRecordDownloadable } from 'eoxc/src/download';
 
 import LayerOptionsView from './LayerOptionsView';
 import template from './RecordsDetailsModalView.hbs';
+import './RecordsDetailsModalView.css';
 
 const RecordsDetailsModalView = ModalView.extend({
   template,
@@ -89,6 +90,7 @@ const RecordsDetailsModalView = ModalView.extend({
       mapModel: this.mapModel,
       mapView: this.mapView,
       descriptionTemplate: layerModel.get('search.descriptionTemplate'),
+      headerText: 'Description of',
     });
     this.showChildView('content', detailsView);
 

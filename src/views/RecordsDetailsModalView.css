@@ -1,0 +1,13 @@
+.download-prod-option input {
+  margin-left: 0px!important;
+  top: 1px!important;
+}
+
+.download-prod-option label {
+  margin-right:5px;
+}
+
+.download-prod-option {
+  float: right!important;
+  margin: 0px!important;
+}

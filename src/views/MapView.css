@@ -11,6 +11,10 @@
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39);
 }
 
+.ol-attribution span {
+    top:1px!important;
+}
+
 .ol-attribution ul {
   font-size: .69em;
 }
@@ -29,4 +33,16 @@
   border: 1px solid black;
   border-radius: 4px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.39);
+}
+
+.ol-zoom-in {
+  border-radius: 2px 0 0 2px!important;
+}
+
+.ol-zoom-out {
+  border-radius: 0 2px 2px 0!important;
+}
+
+.ol-viewport {
+  border-radius: 8px;
 }

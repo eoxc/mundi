@@ -4,7 +4,7 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <h4 class="modal-title" style="display:inline">Select files for download.</h4>
     </div>
-    <div class="modal-body">
+    <div class="modal-body greyBg">
       <i class="fa fa-circle-o-notch fa-spin fa-fw spinner"></i>
     </div>
     <div class="modal-footer">
@@ -12,6 +12,7 @@
         <div class="btn-group" role="group">
           <button class="btn btn-default download-as-metalink" type="button" disabled>{{t 'Download as Metalink'}}</button>
           <button class="btn btn-default download-as-url-list" type="button" disabled>{{t 'Download as URL-List'}}</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">{{t 'Close' }}</button>
         </div>
         <!-- <div class="btn-group dropup" role="group">
           <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button" disabled>{{t 'Download as'}} <span class="caret"></span></button>
@@ -20,7 +21,6 @@
             <li><a href="#" class="download-as-url-list">{{t 'Download as URL-List'}}</a></li>
           </ul>
         </div> -->
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{t 'Close' }}</button>
       </span>
     </div>
   </div>

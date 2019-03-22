@@ -1,0 +1,18 @@
+.coordinate-input-container {
+  width: 100%;
+  margin: 0px!important;
+}
+
+.coordinate-input-container input {
+  margin: 3px!important;
+  border-radius: 4px!important;
+  min-width: 0;
+}
+
+.show-bbox input{
+  width: 100%;
+}
+
+.show-point input{
+  width: 100%;
+}
