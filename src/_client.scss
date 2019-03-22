@@ -780,6 +780,7 @@ input,
 
 .record-details-description td {
   overflow-wrap: break-word;
+  word-wrap: break-word; // ie11 fix only
 }
 
 .record-details-description td:first-child {
