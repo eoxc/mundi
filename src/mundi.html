@@ -487,16 +487,24 @@
             "displayName": "Sentinel-2 MSI - Level 2A (Bottom-of-Atmosphere Reflectance)",
             "displayColor": "#56EC00",
             "display": {
-                "id": "S2_MSI_L2A",
+                "id": "S2-L2A",
                 "visible": false,
-                "protocol": "WMS",
-                "urls": [
-                    ""
-                ],
+                "protocol": "WMTS",
+                "matrixSet": "WGS84",
                 "format": "image/png",
                 "projection": "EPSG:4326",
-                "style": "",
-                "attribution": "<a href=\"https://scihub.copernicus.eu/twiki/pub/SciHubWebPortal/TermsConditions/TC_Sentinel_Data_31072014.pdf\" target=\"_blank\">Terms &amp; Conditions for Sentinel-2 data</a>"
+                "urls": [
+                    "//a.s2-l2a.tiles.mundi.eox.at/c/wmts/",
+                    "//b.s2-l2a.tiles.mundi.eox.at/c/wmts/",
+                    "//c.s2-l2a.tiles.mundi.eox.at/c/wmts/",
+                    "//d.s2-l2a.tiles.mundi.eox.at/c/wmts/",
+                    "//e.s2-l2a.tiles.mundi.eox.at/c/wmts/",
+                    "//f.s2-l2a.tiles.mundi.eox.at/c/wmts/",
+                    "//g.s2-l2a.tiles.mundi.eox.at/c/wmts/",
+                    "//h.s2-l2a.tiles.mundi.eox.at/c/wmts/",
+                ],
+                "useMilliseconds": false,
+                "maxZoom": 10,
             },
             "search": {
                 "protocol": "OpenSearch",
