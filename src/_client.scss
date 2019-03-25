@@ -246,6 +246,10 @@ input {
   line-height: 28px;
 }
 
+.input-sm {
+  height: 21px!important;
+}
+
 .toggle-side-panel {
   height: 30px !important;
 }
@@ -946,7 +950,10 @@ body {
 
 .modal-full-screen-scrolling .modal-content .modal-body {
   height: calc(100% - 120px);
-  overflow-y: hidden;
+}
+
+.no-scroll-y {
+  overflow-y: hidden!important;
 }
 
 .btn-load-more {
