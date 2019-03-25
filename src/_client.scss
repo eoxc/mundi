@@ -230,14 +230,20 @@ input {
 
 .btn,.anno-btn {
   height: 35px;
+  line-height: 35px;
+  border:none;
+  padding: 0 6px !important;
 }
 
 .btn-xs {
   height: 20px;
+  line-height: 10px;
+  padding: 1px 5px!important;
 }
 
 .btn-sm {
   height: 28px;
+  line-height: 28px;
 }
 
 .toggle-side-panel {
@@ -397,7 +403,6 @@ input,
 .form-group {
 
     .btn-group .btn {
-        border: 2px solid transparent;
         font-size: 14px;
 
         // &:first-of-type {
@@ -751,11 +756,10 @@ input,
 
 .record-details-map {
   order: 2;
-  // height: 700px;
   width: 55%;
   height: 100%;
-  // margin: -15px auto -15px -15px;
   margin: 0;
+  margin-right: 12px;
 }
 
 .record-details-description {
@@ -942,6 +946,7 @@ body {
 
 .modal-full-screen-scrolling .modal-content .modal-body {
   height: calc(100% - 120px);
+  overflow-y: hidden;
 }
 
 .btn-load-more {
@@ -996,11 +1001,7 @@ body {
 }
 
 .tools {
-    a {
-      padding: 6px;
-    }
     .btn-sm {
-      padding: 2px!important;
       font-size: 13px!important;
     }
 }
@@ -1019,6 +1020,7 @@ body {
 
 .record-details-title {
   color: $c_blue;
+  margin-bottom: 25px;
 }
 
 .whitebutton {
