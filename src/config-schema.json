@@ -678,6 +678,10 @@
                                 }
                             },
                             "required": ["from", "to"]
+                        },
+                        "pathPrefix": {
+                            "description": "Part of the download path to be considered not part of the bucket and download prefix. Necessary for S3 URLs",
+                            "type": "string"
                         }
                     },
                     "required": ["protocol", "url"]
