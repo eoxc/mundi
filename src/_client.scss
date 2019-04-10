@@ -209,8 +209,6 @@ svg.timeslider,
 
 // rounded edges styles
 
-
-
 button,.btn,.anno-btn {
   border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -220,7 +218,6 @@ button,.btn,.anno-btn {
   border-radius: 8px !important;
   -webkit-border-radius: 8px;
 }
-
 
 // button sizing
 
@@ -232,7 +229,7 @@ input {
   height: 35px;
   line-height: 35px;
   border:none;
-  padding: 0 6px !important;
+  padding: 0 4px !important;
 }
 
 .btn-xs {
@@ -244,6 +241,10 @@ input {
 .btn-sm {
   height: 28px;
   line-height: 28px;
+}
+
+.input-sm {
+  height: 21px!important;
 }
 
 .toggle-side-panel {
@@ -330,13 +331,11 @@ input {
   }
 }
 
-// .search-result-list .panel-result-list {
-//   > .panel-body {
-//     padding: 0 !important;
-//     margin-left: 0 !important;
-//     margin-right: 0 !important;
-//   }
-// }
+.search-result-view {
+  h4, label {
+    color: $c_gray;
+  }
+}
 
 .search-result-list > .panel,.selection-lists > div > .panel {
   padding: 0 !important;
@@ -348,6 +347,9 @@ input {
   margin-left: 0;
   margin-right: calc((100% - 3 * 102px) / 4);
   width: 102px;
+  div {
+    color: $c_green;
+  }
 }
 
 .record-item:nth-child(3n) {
@@ -946,7 +948,10 @@ body {
 
 .modal-full-screen-scrolling .modal-content .modal-body {
   height: calc(100% - 120px);
-  overflow-y: hidden;
+}
+
+.no-scroll-y {
+  overflow-y: hidden!important;
 }
 
 .btn-load-more {
@@ -997,13 +1002,23 @@ body {
 .tool {
   border-radius: 4px !important;
   width: 100%;
-  margin: 3px !important;
+  margin: 3px 3px 0px 3px !important;
 }
 
 .tools {
     .btn-sm {
       font-size: 13px!important;
     }
+}
+
+.tools button:first-child,
+.tools a:first-child {
+  margin-left: 0px!important;
+}
+
+.tools button:last-child,
+.tools a:last-child {
+  margin-right: 0px!important;
 }
 
 .input-group {
@@ -1024,12 +1039,26 @@ body {
 }
 
 .whitebutton {
+  &:hover{
+    background-color: $c_gray_hover;
+    color: $c_green_hover;
+  }
+  &:disabled{
+    &:hover, &:active, &:focus {
+      background-color: $c_gray;
+      color: $c_green;
+    }
+  }
+  &:active, &:focus {
+    background-color: $c_gray;
+    color: $c_green;
+  }
   background-color: $c_gray;
   color: $c_green;
-}
-.whitebutton:hover {
-  background-color: $c_gray_hover;
-  color: $c_green_hover;
+  &.btn-selected-count.active {
+    color: $c_green_hover;
+    background-color: $c_gray_hover;
+  }
 }
 
 .greyBg {
@@ -1038,4 +1067,15 @@ body {
 
 .no-padding {
   padding: 0!important;
+}
+
+.fa-external-link {
+  color: $c_gray;
+}
+
+.terms_and_conditions_link {
+  color: $c_gray;
+  &:hover, &:focus, &:active{
+    color: $c_gray;
+  }
 }

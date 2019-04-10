@@ -1,0 +1,10 @@
+.search-result-list .spacer {
+  margin: 0;
+  padding: 0;
+  height: 0;
+  width: 100%;
+}
+
+.search-result-list .panel-body,.search-result-list .panel {
+  margin-bottom: 0px !important;
+}

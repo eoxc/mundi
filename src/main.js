@@ -42,6 +42,7 @@ import StopSelectionView from './views/StopSelectionView';
 import WarningsView from './views/WarningsView';
 import RecordsDetailsModalView from './views/RecordsDetailsModalView';
 import SelectFilesModalView from './views/SelectFilesModalView';
+import CombinedResultView from './views/combined/CombinedResultView';
 
 import WarningsCollection from './models/WarningsCollection';
 
@@ -212,6 +213,7 @@ window.Application = Marionette.Application.extend({
       downloadProjections: [],
       uploadEnabled: true,
       downloadEnabled: true,
+      searchEnabled: true,
     });
 
     // set up config
@@ -245,6 +247,7 @@ window.Application = Marionette.Application.extend({
         maxCount: layerModel.get('search.searchLimit'),
         loadMore: layerModel.get('search.loadMore'),
         extraParameters: layerModel.get('search.extraParameters'),
+        searchEnabled: (typeof layerModel.get('search.searchEnabled') !== 'undefined') ? layerModel.get('search.searchEnabled') : settings.searchEnabled,
         debounceTime: settings.searchDebounceTime,
       }));
     const searchCollection = new Backbone.Collection(searchModels);
@@ -386,7 +389,7 @@ window.Application = Marionette.Application.extend({
           filtersModel,
           baseLayersCollection,
           overlayLayersCollection,
-          layersCollection,
+          layersCollection: searchCollection.length === 1 ? undefined : layersCollection,
         }),
       }],
     }));
@@ -396,36 +399,61 @@ window.Application = Marionette.Application.extend({
       termsAndConditionsUrl = termsAndConditionsUrl[settings.language];
     }
 
-    layout.showChildView('rightPanel', new SidePanelView({
-      position: 'right',
-      icon: 'fa-list',
-      defaultOpen: settings.rightPanelOpen,
-      views: [{
-        name: 'Search Results',
-        hasInfo: true,
-        view: new SearchResultView({
-          mapModel,
-          filtersModel,
-          highlightModel,
-          collection: searchCollection,
-          fallbackThumbnailUrl,
-        }),
-      }, {
-        name: 'Basket',
-        hasInfo: true,
-        view: new DownloadSelectionView({
-          mapModel,
-          filtersModel,
-          highlightModel,
-          collection: searchCollection,
-          onStartDownload: startDownload,
-          onSelectFiles: selectFiles,
-          termsAndConditionsUrl,
-          downloadEnabled: settings.downloadEnabled,
-          fallbackThumbnailUrl,
-        }),
-      }],
-    }));
+    if (searchCollection.length === 1) {
+      // single layer view
+      layout.showChildView('rightPanel', new SidePanelView({
+        position: 'right',
+        icon: 'fa-list',
+        defaultOpen: settings.rightPanelOpen,
+        views: [{
+          name: 'Search Results',
+          hasInfo: true,
+          view: new CombinedResultView({
+            mapModel,
+            filtersModel,
+            highlightModel,
+            collection: searchCollection,
+            downloadEnabled: settings.downloadEnabled,
+            onStartDownload: startDownload,
+            onSelectFiles: selectFiles,
+            fallbackThumbnailUrl,
+            termsAndConditionsUrl,
+          }),
+        }],
+      }));
+    } else {
+      // multi layer view
+      layout.showChildView('rightPanel', new SidePanelView({
+        position: 'right',
+        icon: 'fa-list',
+        defaultOpen: settings.rightPanelOpen,
+        views: [{
+          name: 'Search Results',
+          hasInfo: true,
+          view: new SearchResultView({
+            mapModel,
+            filtersModel,
+            highlightModel,
+            collection: searchCollection,
+            fallbackThumbnailUrl,
+          }),
+        }, {
+          name: 'Basket',
+          hasInfo: true,
+          view: new DownloadSelectionView({
+            mapModel,
+            filtersModel,
+            highlightModel,
+            collection: searchCollection,
+            onStartDownload: startDownload,
+            onSelectFiles: selectFiles,
+            termsAndConditionsUrl,
+            downloadEnabled: settings.downloadEnabled,
+            fallbackThumbnailUrl,
+          }),
+        }],
+      }));
+    }
 
     layout.$('.search-result-view .select-all,.download-view .download-control .btn').removeClass('btn-sm');
     layout.$('.tools, .selections').removeClass('btn-group-justified');

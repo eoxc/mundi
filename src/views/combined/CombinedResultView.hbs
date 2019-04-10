@@ -1,57 +1,31 @@
-<div class="dropdown">
-  <button class="btn btn-default btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <span class="selected-layer-names"></span>
-    <span class="global-search-status"></span>
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <li>
-      <form>
-        {{#each layers}}
-        <div class="checkbox">
-          <label {{#unless this.display.visible}}style="display:none;"{{/unless}}>
-            <input type="checkbox" {{#if this.automaticSearch}}checked{{/if}} data-layer="{{this.id}}">
-            {{this.displayName}}
-            <span class="search-status">
-              {{#if this.isSearching}}
-                <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
-              {{else if this.hasError}}
-                <i class="fa fa-exclamation"></i>
-              {{else if this.isCancelled}}
-              {{else}}
-                {{this.hasLoaded}}/{{this.totalResults}}
-              {{/if}}
-            </span>
-          </label>
-        </div>
-        {{/each}}
-      </form>
-    </li>
-  </ul>
+<div class="checkbox checbox-switch search-results-toggle">
+  <label class="panel-title">
+    {{t 'Display search results'}}
+    <input type="checkbox" name="" {{#if automaticSearch}}checked{{/if}} data-layer="{{id}}">
+    <span></span>
+  </label>
 </div>
-
+<div class="search-results-header"></div>
 <div class="result-contents"></div>
-<!-- <button class="btn btn-sm btn-block btn-default select-all" disbled="disabled">{{t 'Select all'}}</button> -->
-
-
-<span class="btn-group btn-group-justified">
-  <div class="btn-group" role="group">
-    <button class="btn btn-default btn-sm start-download" type="button" disabled>{{t 'Download'}}</button>
-  </div>
-  <div class="btn-group dropup" role="group">
-    <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button" disabled>{{t 'Download as'}} <span class="caret"></span></button>
-    <ul class="dropdown-menu dropdown-menu-right">
-      <li><a href="#" class="download-as-metalink">{{t 'Download as Metalink'}}</a></li>
-      <li><a href="#" class="download-as-url-list">{{t 'Download as URL-List'}}</a></li>
-      {{#if selectFilesEnabled}}
-      <!-- <div class="btn-group" role="group">
-        <button class="btn btn-default btn-sm select-files" type="button" disabled>{{t 'Select files'}}</button>
-      </div> -->
-      <li><a href="#" class="select-files" type="button" disabled>{{t 'Download selected files...'}}</a></li>
-      {{/if}}
-    </ul>
-  </div>
-  <div class="btn-group" role="group">
-    <button class="btn btn-default btn-sm btn-danger deselect-all" type="button" disabled>{{t 'Deselect all'}}</button>
-  </div>
+<span class="btn-group tools search-results-footer">
+  {{#if anySelectedToDisplay}}
+      <button class="btn btn-default btn-sm tool start-download" type="button" disabled>{{t 'Download'}}</button>
+    <div class="btn-group dropup tool" role="group">
+      <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button" disabled>{{t 'Download as'}} <span class="caret"></span></button>
+      <ul class="dropdown-menu dropdown-menu-right">
+        <li><a href="#" class="download-as-metalink">{{t 'Download as Metalink'}}</a></li>
+        <li><a href="#" class="download-as-url-list">{{t 'Download as URL-List'}}</a></li>
+        {{#if selectFilesEnabled}}
+          <li><a href="#" class="select-files">{{t 'Download selected files...'}}</a></li>
+        {{/if}}
+        {{#if enableFullResolutionDownload}}
+          <li><a href="#" class="download-full-res">{{t 'Download full resolution'}}</a></li>
+        {{/if}}
+        {{#if enableProcessing}}
+          <li><a href="#" class="start-processing">{{t 'Start processing'}}</a></li>
+        {{/if}}
+      </ul>
+    </div>
+      <button class="btn btn-sm btn-danger tool deselect-all" type="button" disabled>{{t 'Deselect all'}}</button>
+  {{/if}}
 </span>

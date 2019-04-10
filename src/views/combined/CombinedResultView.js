@@ -1,220 +1,200 @@
 import Marionette from 'backbone.marionette';
-import _ from 'underscore';
+import _ from 'underscore'; // eslint-disable-line import/no-extraneous-dependencies
 import $ from 'jquery';
 
-import { isRecordDownloadable } from '../../download';
+import { isRecordDownloadable, downloadCustom, getDownloadInfos } from 'eoxc/src/download';
+import { metalinkTemplate } from 'eoxc/src/download/Metalink.hbs';
 
+import SearchResultHeaderView from './SearchResultHeaderView';
 import SearchResultListView from './SearchResultListView';
-
-import './SearchResultView.css';
-import template from './SearchResultView.hbs';
-
-import noLayerSelectedTemplate from './NoLayerSelected.hbs';
-import noLayersAvailableTemplate from './NoLayersAvailable.hbs';
-import nLayersSelectedTemplate from './NLayersSelected.hbs';
+import DownloadListView from './DownloadListView';
+import './CombinedResultView.css';
+import template from './CombinedResultView.hbs';
+import NoProductTemplate from './NoProductSelected.hbs';
 
 // eslint-disable-next-line max-len
-const SearchResultView = Marionette.CompositeView.extend(/** @lends search/views/layers.SearchResultView# */{
+const CombinedResultView = Marionette.LayoutView.extend({
   template,
   templateHelpers() {
+    const id = this.layerModel.get('id');
+    const enableFullResolutionDownload = this.layerModel.get('fullResolution.protocol');
+    const enableProcessing = this.layerModel.get('processing.url');
+    const selectFilesEnabled = typeof this.onSelectFiles !== 'undefined';
+    const automaticSearch = this.singleModel.get('automaticSearch');
+    const anySelectedToDisplay = this.singleModel.get('downloadSelection').length > 0 || automaticSearch;
     return {
-      layers: this.collection.map(model =>
-        Object.assign(model.toJSON(), model.get('layerModel').toJSON())
-      ),
+      id,
+      enableFullResolutionDownload,
+      enableProcessing,
+      selectFilesEnabled,
+      anySelectedToDisplay,
+      automaticSearch,
     };
   },
-  className: 'search-result-view',
 
-  childView: SearchResultListView,
-  childViewContainer: '.result-contents',
+  EmptyView: Marionette.ItemView.extend({
+    template: NoProductTemplate,
+  }),
 
-  buildChildView(child, ChildViewClass) {
-    return new ChildViewClass({
-      model: child,
-      referenceCollection: child.get('results'),
-      highlightModel: this.highlightModel,
-      fallbackThumbnailUrl: this.fallbackThumbnailUrl,
-    });
+  regions: {
+    results: '.result-contents',
+    header: '.search-results-header',
   },
+
+  className: 'search-result-view',
 
   events: {
     'change input[data-layer]': 'onLayerSelectionChange',
-    'click .select-all': 'onSelectAllClick',
+    'click .deselect-all': 'onDeselectAllClicked',
+    'click .select-files': 'onSelectFilesClicked',
+    'click .start-download': 'onStartDownloadClicked',
+    'click .download-as-metalink': 'onDownloadAsMetalinkClicked',
+    'click .download-as-url-list': 'onDownloadAsUrlListClicked',
+    'click .download-full-res': 'onDownloadFullResolutionClick',
+    'click .start-processing': 'onProcessingClick',
   },
 
   childEvents: {
-    'collapse:change': 'updateViews',
-    'before:render': 'onChildBeforeRender',
-    render: 'onChildRender',
-  },
-
-  onChildBeforeRender() {
-    // save the scrolling position for later to get around bug in FF and other
-    // browsers. Prevent additional updates to scrolling position.
-    if (typeof this.savedScrollTop === 'undefined') {
-      this.savedScrollTop = this.$('.result-contents')[0].scrollTop;
-    }
-  },
-
-  onChildRender() {
-    if (typeof this.savedScrollTop !== 'undefined') {
-      setTimeout(() => {
-        this.$('.result-contents').scrollTop(this.savedScrollTop);
-        this.savedScrollTop = undefined;
-      });
-    }
+    'click:selected-count': 'onSelectedCountClick',
+    'change:terms-and-conditions': 'onTermsAndAndConditionsChange',
+    'list:render': 'onSearchListRender',
   },
 
   initialize(options) {
+    this.singleModel = this.collection.models[0];
+    this.layerModel = this.singleModel.get('layerModel');
     this.filtersModel = options.filtersModel;
     this.highlightModel = options.highlightModel;
     this.fallbackThumbnailUrl = options.fallbackThumbnailUrl;
+    this.termsAndConditionsUrl = options.termsAndConditionsUrl;
+    this.downloadEnabled = options.downloadEnabled;
+    this.onStartDownload = options.onStartDownload;
+    this.onSelectFiles = options.onSelectFiles;
+
+    this.hasAcceptedTerms = false;
+    this.displaySelected = false;
 
     this.listenTo(this.collection, 'change', this.onSearchModelsChange);
 
-    this.collection.each((searchModel) => {
-      this.listenTo(searchModel.get('layerModel'), 'change:display.visible', (layerModel) => {
-        const $checkbox = this.$(`[data-layer="${layerModel.get('id')}"]`);
-        if (layerModel.get('display.visible')) {
-          $checkbox.closest('label').show();
-          $checkbox.prop('checked', true);
-        } else {
-          $checkbox.closest('label').hide();
-        }
-        this.render();
-        this.onSearchModelsChange();
-      });
-
-      this.listenTo(searchModel.get('results'), 'reset add', this.onResultsChange);
-    });
-  },
-
-  filter(model) {
-    return model.get('automaticSearch') && model.get('layerModel').get('display.visible');
+    this.listenTo(this.singleModel.get('downloadSelection'), 'reset update', this.onDownloadSelectionChange);
   },
 
   onAttach() {
-    this.onLayerSelectionChange();
+    this.updateHeaderArea();
+    this.updateResultsPanelSize();
   },
 
   onShown() {
     this.updateViews();
   },
 
-  onBeforeRender() {
-    this.$('.result-contents').off('scroll resize');
+  onRender() {
+    this.renderResultContent();
+    this.checkButtons();
   },
 
-  onRender() {
+  saveScrollPosition() {
+    // save the scrolling position for later to get around bug in FF and other
+    // browsers. Prevent additional updates to scrolling position.
+    if (typeof this.savedScrollTop === 'undefined') {
+      const scrolledElement = this.$('.result-contents');
+      this.savedScrollTop = scrolledElement.scrollTop();
+    }
+  },
+
+  onSearchListRender() {
+    // scroll position update from previous state
+    this.$('.result-contents').off('scroll resize');
     this.$('.result-contents').on('scroll resize', _.throttle((...args) => {
       this.updateViews(...args);
     }, 1000 / 60));
+    if (typeof this.savedScrollTop !== 'undefined') {
+      const scrolledElement = this.$('.result-contents')[0];
+      if (typeof scrolledElement !== 'undefined') {
+        setTimeout(() => {
+          this.$('.result-contents').scrollTop(this.savedScrollTop);
+          this.savedScrollTop = undefined;
+        });
+      }
+    }
   },
 
-  onResultsChange() {
-    const downloadableCount = this.collection
-      .filter(searchModel => searchModel.get('layerModel').get('display.visible'))
-      .map(searchModel =>
-        searchModel.get('results')
-          .filter(recordModel => isRecordDownloadable(searchModel.get('layerModel'), recordModel))
-          .length
-      )
-      .reduce((count, modelCount) => (
-        count + modelCount
-      ), 0);
+  renderResultContent() {
+    // create a child view in results region
+    const searchEnabled = this.singleModel.get('automaticSearch');
+    const anySelectedToDisplay = this.singleModel.get('downloadSelection').length > 0;
 
-    this.$('.select-all').prop('disabled', downloadableCount === 0);
+    if (!searchEnabled && !anySelectedToDisplay) {
+      // display empty template
+      this.showChildView('results', new this.EmptyView(), {});
+    } else if ((!searchEnabled && anySelectedToDisplay) || this.displaySelected) {
+      // display only selected products
+      const options = {
+        collection: this.singleModel.get('downloadSelection'),
+        highlightModel: this.highlightModel,
+        fallbackThumbnailUrl: this.fallbackThumbnailUrl,
+      };
+      this.showChildView('results', new DownloadListView(options));
+    } else {
+      // display search results
+      const options = {
+        searchModel: this.singleModel,
+        referenceCollection: this.singleModel.get('results'),
+        highlightModel: this.highlightModel,
+        fallbackThumbnailUrl: this.fallbackThumbnailUrl,
+      };
+      this.showChildView('results', new SearchResultListView(options));
+    }
+    this.checkButtons();
   },
 
   updateViews() {
+    // handle showing of only those products, which are in current scroll area
     const elem = this.$('.result-contents')[0];
     const scrollTop = elem.scrollTop;
     const height = elem.clientHeight;
     let sizeAccum = 0;
-    for (let i = 0; i < this.children.length; ++i) {
-      const view = this.children.findByIndex(i);
+    const view = this.getRegion('results').currentView;
+    if (typeof view.setSlice !== 'undefined') {
       view.setSlice(sizeAccum - scrollTop, height);
-      sizeAccum += view.$el.outerHeight(true);
     }
+    sizeAccum += view.$el.outerHeight(true);
     elem.scrollTop = scrollTop;
   },
 
-  setSelectedSearchModels(searchModels) {
-    // adjust events
-    const previousSearchModels = this.selectedSearchModels;
-    previousSearchModels.forEach((previousSearchModel) => {
-      if (!searchModels.indexOf(previousSearchModel) !== -1) {
-        // this.stopListening(previousSearchModel.get('results'));
-        previousSearchModel.stopSearching();
-      }
-    });
-    searchModels.forEach((searchModel) => {
-      if (!previousSearchModels.indexOf(searchModel) !== -1) {
-        // this.listenTo(searchModel.get('results'), 'reset add', this.onResultsChange);
-        searchModel.continueSearching();
-      }
-    });
+  updateHeaderArea() {
+    // create a child view in header region
+    const options = {
+      collection: this.collection,
+      singleModel: this.singleModel,
+      termsAndConditionsUrl: this.termsAndConditionsUrl,
+      downloadEnabled: this.downloadEnabled,
+      displaySelected: this.displaySelected,
+      hasAcceptedTerms: this.hasAcceptedTerms,
+    };
+    this.showChildView('header', new SearchResultHeaderView(options));
+  },
+
+  updateResultsPanelSize() {
+    // resize results holding div based on variable footer and header sizes
+    const restHeightCombined = this.$('.search-results-toggle').outerHeight(true) + this.$('.search-results-header').outerHeight(true) + this.$('.search-results-footer').outerHeight(true) + parseInt(this.$('.result-contents').css('marginBottom'), 10) + parseInt(this.$('.result-contents').css('marginTop'), 10);
+    this.$('.result-contents').height(`calc(100% - ${restHeightCombined}px)`);
   },
 
   onLayerSelectionChange(event) {
     if (event) {
       const $changed = $(event.target);
-      const searchModel = this.collection.find(
-        model => model.get('layerModel').get('id') === $changed.data('layer')
-      );
-      searchModel.set('automaticSearch', $changed.is(':checked'));
+      this.singleModel.set('automaticSearch', $changed.is(':checked'));
+      this.saveScrollPosition();
       this.render();
     }
-
     this.onSearchModelsChange();
   },
 
-  onSearchModelsChange(searchModel) {
-    if (searchModel) {
-      // update the layers status
-      const layerModel = searchModel.get('layerModel');
-      const $status = this.$(`[data-layer="${layerModel.get('id')}"]`)
-        .parent()
-        .find('.search-status');
-
-      if (searchModel.get('isSearching')) {
-        $status.html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>');
-      } else if (searchModel.get('hasError')) {
-        $status.html('<i class="fa fa-exclamation"></i>');
-      } else if (searchModel.get('isCancelled')) {
-        $status.html('');
-      } else {
-        $status.html(`${searchModel.get('hasLoaded')}/${searchModel.get('totalResults')}`);
-      }
-    }
-
+  onSearchModelsChange() {
     // update the global status
-    const $globalStatus = this.$('.global-search-status');
-    const isSearching = this.collection.any(model => model.get('isSearching'));
-    const hasError = this.collection.any(model => model.get('hasError') && model.get('layerModel').get('display.visible'));
-
-    const selectedSearchModels = this.collection.filter(model => model.get('automaticSearch'));
-
-    if (hasError) {
-      $globalStatus.html('<i class="fa fa-exclamation"></i>');
-    } else if (isSearching) {
-      $globalStatus.html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>');
-    } else if (selectedSearchModels.length) {
-      const sumTotalResults = selectedSearchModels.reduce(
-        (current, model) => (current + model.get('totalResults')), 0
-      );
-      const sumHasLoaded = selectedSearchModels.reduce(
-        (current, model) => (current + model.get('hasLoaded')), 0
-      );
-
-      if (!isNaN(sumTotalResults)) {
-        $globalStatus.html(`${sumHasLoaded}/${sumTotalResults}`);
-      } else {
-        $globalStatus.html('');
-      }
-    } else {
-      $globalStatus.html('');
-    }
+    const isSearching = this.singleModel.get('isSearching');
+    const hasError = this.singleModel.get('hasError');
 
     // update the tab header
     if (hasError) {
@@ -224,34 +204,134 @@ const SearchResultView = Marionette.CompositeView.extend(/** @lends search/views
     } else {
       this.triggerMethod('update:status', '');
     }
-
-    // update dropdown title
-    const visibleLayers = this.collection.filter(model => model.get('layerModel').get('display.visible'));
-    if (visibleLayers.length) {
-      if (selectedSearchModels.length) {
-        this.$('.selected-layer-names').html(nLayersSelectedTemplate({
-          count: selectedSearchModels.length
-        }));
-      } else {
-        this.$('.selected-layer-names').html(noLayerSelectedTemplate({}));
-      }
-      this.$('.dropdown button').prop('disabled', false);
-    } else {
-      this.$('.selected-layer-names').html(noLayersAvailableTemplate({}));
-      this.$('.dropdown button').prop('disabled', true);
-    }
-
     this.updateViews();
+    this.updateHeaderArea();
+    this.updateResultsPanelSize();
+  },
+
+  onTermsAndAndConditionsChange(childView, status) {
+    this.hasAcceptedTerms = status;
+    this.checkButtons();
+  },
+
+  onDeselectAllClicked() {
+    this.singleModel.get('downloadSelection').reset([]);
+  },
+
+  onDownloadFullResolutionClick() {
+    const layerModel = this.singleModel.get('layerModel');
+    layerModel.trigger('download-full-resolution', layerModel);
+  },
+
+  onProcessingClick() {
+    this.singleModel.trigger('start-processing', this.singleModel);
+  },
+
+  onStartDownloadClicked() {
+    this.onStartDownload();
+  },
+
+  onSelectFilesClicked() {
+    this.onSelectFiles();
+  },
+
+  onDownloadAsMetalinkClicked() {
+    this.getDownloadInfos()
+    .then((items) => {
+      let content = metalinkTemplate({
+        date: (new Date()).toISOString(),
+        items,
+      });
+      content = content.replace(/[\n]/g, '\r\n');
+      downloadCustom('download-files.meta4', 'application/metalink4+xml', content);
+    });
+  },
+
+  onDownloadAsUrlListClicked() {
+    this.getDownloadInfos()
+    .then((infos) => {
+      downloadCustom('url-list.txt', 'text/plain',
+        infos.map(info => info.href).join('\r\n')
+      );
+    });
   },
 
   onSelectAllClick() {
-    const selectedSearchModels = this.collection.filter(model => model.get('automaticSearch'));
-    selectedSearchModels.forEach((searchModel) => {
-      searchModel.get('results')
-        .filter(recordModel => isRecordDownloadable(searchModel.get('layerModel'), recordModel))
-        .forEach(recordModel => recordModel.selectForDownload());
-    });
-  }
+    this.singleModel.get('results')
+      .filter(recordModel => isRecordDownloadable(this.singleModel.get('layerModel'), recordModel))
+      .forEach(recordModel => recordModel.selectForDownload());
+  },
+
+  onDownloadSelectionChange() {
+    const downloadSelection = this.singleModel.get('downloadSelection');
+    if (typeof this.singleModel.get('downloadSelection') !== 'undefined') {
+      if (downloadSelection.length === 0) {
+        if (!this.singleModel.get('automaticSearch') || this.displaySelected) {
+          this.displaySelected = false;
+          this.renderResultContent();
+          this.onSearchModelsChange();
+        }
+        this.displaySelected = false;
+      }
+    }
+    this.checkButtons();
+  },
+
+  onSelectedCountClick() {
+    this.saveScrollPosition();
+    this.displaySelected = !this.displaySelected;
+    this.render();
+    this.onSearchModelsChange();
+  },
+
+  checkButtons() {
+    const totalCountNotS3 = this.collection
+      .filter(searchModel => searchModel.get('layerModel').get('download.protocol') !== 'S3')
+      .reduce((count, searchModel) => (
+        count + searchModel.get('downloadSelection').length
+      ), 0);
+
+    const totalCount = this.collection
+      .reduce((count, searchModel) => (
+        count + searchModel.get('downloadSelection').length
+      ), 0);
+
+    let fullDownloadEnabled = totalCountNotS3 > 0 && this.downloadEnabled;
+    let textDownloadEnabled = totalCount > 0 && this.downloadEnabled;
+    if (this.termsAndConditionsUrl) {
+      fullDownloadEnabled = fullDownloadEnabled && this.hasAcceptedTerms;
+      textDownloadEnabled = textDownloadEnabled && this.hasAcceptedTerms;
+    }
+
+    this.$('.start-download')
+      .prop('disabled', !fullDownloadEnabled);
+
+    this.$('.dropdown-toggle')
+      .prop('disabled', !textDownloadEnabled);
+
+    this.$('.select-files')
+      .prop('disabled', !textDownloadEnabled);
+
+    this.$('.deselect-all')
+      .prop('disabled', totalCount === 0);
+  },
+
+  getDownloadInfos(options) {
+    function flatten(arr) {
+      return arr.reduce((acc, val) => acc.concat(val), []);
+    }
+
+    const chunks = this.collection
+          .map(searchModel =>
+            searchModel.get('downloadSelection')
+              .map(recordModel => getDownloadInfos(
+                searchModel.get('layerModel'), this.filtersModel, recordModel, options)
+              )
+          );
+
+    return Promise.all(flatten(chunks))
+      .then(received => flatten(received));
+  },
 });
 
-export default SearchResultView;
+export default CombinedResultView;
