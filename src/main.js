@@ -47,7 +47,7 @@ import CombinedResultView from './views/combined/CombinedResultView';
 import WarningsCollection from './models/WarningsCollection';
 
 import getTutorialWidget from './tutorial';
-import { premultiplyColor } from './utils';
+import { premultiplyColor, sizeChangedEvent } from './utils';
 
 import i18next from './i18next';
 
@@ -542,27 +542,7 @@ window.Application = Marionette.Application.extend({
       });
     }
 
-    // this is a Jquery plugin function that fires an event when the size of an element is changed
-    // usage: $().sizeChanged(function(){})
-
-    $.fn.sizeChanged = function (handleFunction) {
-      const element = this;
-      let lastWidth = element.width();
-      let lastHeight = element.height();
-
-      setInterval(() => {
-        if (lastWidth === element.width() && lastHeight === element.height()) {
-          return;
-        }
-        if (typeof (handleFunction) === 'function') {
-          handleFunction({ width: lastWidth, height: lastHeight },
-                       { width: element.width(), height: element.height() });
-          lastWidth = element.width();
-          lastHeight = element.height();
-        }
-      }, 100);
-      return element;
-    };
+    $.fn.sizeChanged = sizeChangedEvent;
 
     updateStyleOnScrollPresent([$('.filters-view'), $('.layer-control')]);
 

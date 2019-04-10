@@ -95,6 +95,9 @@ const SelectFilesModalView = ModalView.extend({
   initialize(options) {
     this.searchCollection = options.searchCollection;
     this.onStartDownload = options.onStartDownload;
+    this.$el.sizeChanged(() => {
+      this.updateResultsPanelSize();
+    });
   },
 
   onRender() {
@@ -157,6 +160,12 @@ const SelectFilesModalView = ModalView.extend({
           recordsAndFileInfos,
         }))
       )));
+  },
+
+  updateResultsPanelSize() {
+    // resize results holding div based on variable footer and header sizes
+    const restHeightCombined = $('.modal-header').outerHeight(true) + $('.modal-footer').outerHeight(true);
+    $('.modal-body').height(`calc(100% - ${restHeightCombined}px)`);
   },
 
   _getSelectedDownloadInfos() {

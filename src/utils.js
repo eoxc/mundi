@@ -83,3 +83,25 @@ export function parseFeaturesFromFiles(fileList) {
   }
   return Promise.reject(`Could not parse any features from the given file${files.length === 1 ? '' : 's'}.`);
 }
+
+export function sizeChangedEvent(handleFunction) {
+  // a Jquery plugin function that fires an event when the size of an element is changed
+  // usage: $.fn.sizeChanged = sizeChangedEvent;
+  // $().sizeChanged(function(){})
+  const element = this;
+  let lastWidth = element.width();
+  let lastHeight = element.height();
+
+  setInterval(() => {
+    if (lastWidth === element.width() && lastHeight === element.height()) {
+      return;
+    }
+    if (typeof (handleFunction) === 'function') {
+      handleFunction({ width: lastWidth, height: lastHeight },
+                   { width: element.width(), height: element.height() });
+      lastWidth = element.width();
+      lastHeight = element.height();
+    }
+  }, 200);
+  return element;
+}
