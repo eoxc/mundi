@@ -1021,7 +1021,7 @@ body {
       color: $c_green_hover;
     }
   }
-  &:hover{
+  &:hover, &:focus{
     background-color: $c_gray_hover;
     color: $c_green_hover;
   }
