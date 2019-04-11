@@ -1,0 +1,60 @@
+h4.no-product-selected {
+  text-align: center;
+  position:absolute;
+  top: 45%;
+  width: calc(100% - 24px);
+}
+
+.checkbox.checbox-switch label {
+  display: inline-block;
+  position: relative;
+  padding-left: 0;
+}
+
+.checkbox.checbox-switch label input {
+  display: none;
+}
+
+.checkbox.checbox-switch label span {
+  width: 35px;
+  border-radius: 15px;
+  height: 15px;
+  background-color: white;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.checkbox.checbox-switch label span:before {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ebebeb;
+  content: " ";
+  top: -5px;
+  left: -8px;
+  position: relative;
+  border: 1px solid darkgrey;
+}
+
+.checkbox.checbox-switch label > input:checked + span:before {
+  left: 20px;
+}
+
+.checkbox.checbox-switch label > input:checked + span {
+  background-color: #87b9d2;
+}
+
+.result-contents {
+  padding:0;
+  margin:0;
+}
+
+.search-results-header {
+  margin-bottom: 6px;
+}
+
+.tool > .dropdown-toggle {
+  border-radius: 4px!important;
+}

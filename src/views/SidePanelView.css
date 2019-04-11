@@ -137,7 +137,8 @@
 
 .record-item {
   width: 110px;
-  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-top: 0px;
   margin-left: -moz-calc(100% - 3 * 110px) / 4);
   margin-left: -webkit-calc(100% - 3 * 110px) / 4);
   margin-left: -o-calc(100% - 3 * 110px) / 4);

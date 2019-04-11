@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import ModalView from 'eoxc/src/core/views/ModalView';
 import OpenLayersMapView from 'eoxc/src/contrib/OpenLayers/OpenLayersMapView';
 import RecordDetailsView from 'eoxc/src/search/views/RecordDetailsView';
@@ -56,10 +57,21 @@ const RecordsDetailsModalView = ModalView.extend({
     this.mapModel = new MapModel({ center: [0, 0], zoom: 5, noclick: true });
     this.highlightModel = new HighlightModel();
     this.filtersModel = new FiltersModel();
+
+    this.$el.sizeChanged(() => {
+      this.updateResultsPanelSize();
+    });
   },
 
   onModalShown() {
     this.updateRecord(...this.records[this.currentRecordIndex]);
+    this.updateResultsPanelSize();
+  },
+
+  updateResultsPanelSize() {
+    // resize results holding div based on variable footer and header sizes
+    const restHeightCombined = $('.modal-header').outerHeight(true) + $('.modal-footer').outerHeight(true);
+    $('.modal-body').height(`calc(100% - ${restHeightCombined}px)`);
   },
 
   updateRecord(recordModel, searchModel) {
