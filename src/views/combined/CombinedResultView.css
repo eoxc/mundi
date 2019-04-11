@@ -55,6 +55,6 @@ h4.no-product-selected {
   margin-bottom: 6px;
 }
 
-.dropdown-toggle {
+.tool > .dropdown-toggle {
   border-radius: 4px!important;
 }

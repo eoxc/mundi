@@ -186,6 +186,10 @@ svg.timeslider,
   padding: 0 !important;
 }
 
+.panel-result-list .btn {
+  margin-bottom: 12px;
+}
+
 .search-result-list {
   padding-left: 0;
   margin-left: 0;
@@ -199,8 +203,8 @@ svg.timeslider,
 }
 
 .result-contents {
-  height: calc(100% - 86px);
-  margin-bottom: 12px;
+  height: calc(100% - 79px);
+  margin-bottom: 5px;
 }
 
 .navbar, .panel {
@@ -335,6 +339,13 @@ input {
   h4, label {
     color: $c_gray;
   }
+}
+
+.search-result-view .dropdown-menu {
+  & label {
+    color: $c_green;
+  }
+  background-color: $c_gray
 }
 
 .search-result-list > .panel,.selection-lists > div > .panel {
@@ -1039,6 +1050,14 @@ body {
 }
 
 .whitebutton {
+  &.active {
+    background-color: darken($c_gray_hover, 3%);
+    color: $c_green;
+    &:hover{
+      background-color: darken($c_gray_hover, 10%);
+      color: $c_green_hover;
+    }
+  }
   &:hover{
     background-color: $c_gray_hover;
     color: $c_green_hover;
@@ -1049,16 +1068,9 @@ body {
       color: $c_green;
     }
   }
-  &:active, &:focus {
-    background-color: $c_gray;
-    color: $c_green;
-  }
   background-color: $c_gray;
   color: $c_green;
-  &.btn-selected-count.active {
-    color: $c_green_hover;
-    background-color: $c_gray_hover;
-  }
+
 }
 
 .greyBg {
