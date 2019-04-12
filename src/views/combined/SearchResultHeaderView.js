@@ -100,7 +100,8 @@ const SearchResultHeaderView = Marionette.ItemView.extend({
     this.$('.btn-selected-count').prop('disabled',
     selectedCount === 0 || this.singleModel.get('automaticSearch') === false);
     if (this.displaySelected && this.singleModel.get('automaticSearch') === true) {
-      this.$('.btn-selected-count').html('Loaded');
+      this.$('.btn-selected-count').html(`<span class="caret selected-count-caret"></span>
+ Show all products`);
     } else {
       this.$('.btn-selected-count').html(`Selected (${selectedCount})`);
     }

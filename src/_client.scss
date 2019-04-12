@@ -1027,14 +1027,6 @@ body {
 }
 
 .whitebutton {
-  &.active {
-    background-color: darken($c_gray_hover, 3%);
-    color: $c_green;
-    &:hover{
-      background-color: darken($c_gray_hover, 10%);
-      color: $c_green_hover;
-    }
-  }
   &:hover, &:focus{
     background-color: $c_gray_hover;
     color: $c_green_hover;
@@ -1045,8 +1037,10 @@ body {
       color: $c_green;
     }
   }
-  background-color: $c_gray;
-  color: $c_green;
+  &, &:focus {
+    background-color: $c_gray;
+    color: $c_green;
+  }
 }
 
 .greyBg {
