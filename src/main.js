@@ -22,6 +22,7 @@ import LayerOptionsModalView from 'eoxc/src/core/views/layers/LayerOptionsModalV
 import SearchResultView from 'eoxc/src/search/views/SearchResultView';
 import SearchModel from 'eoxc/src/search/models/SearchModel';
 import { getParameters } from 'eoxc/src/search';
+import { parseDuration } from 'eoxc/src/contrib/OpenLayers/utils';
 
 import { version as eoxcVersion } from 'eoxc/package.json';
 
@@ -197,6 +198,7 @@ window.Application = Marionette.Application.extend({
       selectableInterval: null,
       maxTooltips: null,
       timeSliderControls: false,
+      maxMapInterval: null,
       highlightFillColor: 'rgba(255, 255, 255, 0.2)',
       highlightStrokeColor: '#cccccc',
       highlightStrokeWidth: 1,
@@ -286,6 +288,7 @@ window.Application = Marionette.Application.extend({
       displayInterval: settings.displayInterval,
       selectableInterval: settings.selectableInterval,
       maxTooltips: settings.maxTooltips,
+      maxMapInterval: parseDuration(settings.maxMapInterval),
     }));
 
     // set up panels
@@ -319,6 +322,7 @@ window.Application = Marionette.Application.extend({
         filterStrokeColor: settings.filterStrokeColor,
         filterOutsideColor: settings.filterOutsideColor,
         onStartDownload: startDownload,
+        maxMapInterval: parseDuration(settings.maxMapInterval),
       }));
     };
 
@@ -367,6 +371,7 @@ window.Application = Marionette.Application.extend({
       onFeatureClicked(records) {
         showRecordDetails(records);
       },
+      maxMapInterval: parseDuration(settings.maxMapInterval),
     }));
 
     layout.showChildView('leftPanel', new SidePanelView({
@@ -381,6 +386,7 @@ window.Application = Marionette.Application.extend({
           highlightModel,
           searchCollection,
           uploadEnabled: settings.uploadEnabled,
+          maxMapInterval: parseDuration(settings.maxMapInterval),
         }),
       }, {
         name: 'Layers',
