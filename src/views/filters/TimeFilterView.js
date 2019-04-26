@@ -24,6 +24,7 @@ const TimeFilterView = Marionette.ItemView.extend({
   initialize(options) {
     this.mapModel = options.mapModel;
     this.maxMapInterval = options.maxMapInterval;
+    this.domain = options.domain;
     this.listenTo(this.mapModel, 'change:time', this.onMapTimeChanged);
     this.listenTo(this.mapModel, 'change:extendedTime', this.onMapExtendedTimeChanged);
     this.listenTo(this.mapModel,
@@ -63,7 +64,9 @@ const TimeFilterView = Marionette.ItemView.extend({
         },
         icons: {
           close: 'glyphicon glyphicon-ok'
-        }
+        },
+        minDate: this.domain.start,
+        maxDate: this.domain.end,
       });
     });
   },

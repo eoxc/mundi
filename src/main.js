@@ -387,6 +387,7 @@ window.Application = Marionette.Application.extend({
           searchCollection,
           uploadEnabled: settings.uploadEnabled,
           maxMapInterval: parseDuration(settings.maxMapInterval),
+          domain,
         }),
       }, {
         name: 'Layers',
