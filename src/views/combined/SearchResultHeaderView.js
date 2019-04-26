@@ -15,6 +15,16 @@ const SearchResultHeaderView = Marionette.ItemView.extend({
     const layerModel = this.singleModel.get('layerModel');
     const downloadSelection = this.singleModel.get('downloadSelection');
     const downloadSelectionSize = typeof downloadSelection !== 'undefined' ? downloadSelection.length : 0;
+    const downloadableCount = this.collection
+      .filter(searchModel => searchModel.get('layerModel').get('display.visible'))
+      .map(searchModel =>
+        searchModel.get('results')
+          .filter(recordModel => isRecordDownloadable(searchModel.get('layerModel'), recordModel))
+          .length
+      )
+      .reduce((count, modelCount) => (
+        count + modelCount
+      ), 0);
     return {
       termsAndConditionsUrl: this.termsAndConditionsUrl,
       hasMore,
@@ -27,6 +37,7 @@ const SearchResultHeaderView = Marionette.ItemView.extend({
       layerName: layerModel.get('displayName'),
       anySelectedToDisplay: downloadSelectionSize > 0 || this.singleModel.get('automaticSearch'),
       isSearching: this.singleModel.get('isSearching'),
+      downloadableListEmpty: downloadableCount === 0,
       searchRequest: this.searchRequest,
       downloadEnabled: this.downloadEnabled,
       displaySelected: this.displaySelected,
@@ -50,7 +61,6 @@ const SearchResultHeaderView = Marionette.ItemView.extend({
     this.hasAcceptedTerms = options.hasAcceptedTerms;
 
     this.listenTo(this.singleModel.get('downloadSelection'), 'reset update', this.onDownloadSelectionChange);
-    this.listenTo(this.singleModel.get('results'), 'reset add', this.onResultsChange);
   },
 
   onRender() {
@@ -105,21 +115,6 @@ const SearchResultHeaderView = Marionette.ItemView.extend({
     } else {
       this.$('.btn-selected-count').html(`Selected (${selectedCount})`);
     }
-  },
-
-  onResultsChange() {
-    // disable select-all if no product is downloadable
-    const downloadableCount = this.collection
-      .filter(searchModel => searchModel.get('layerModel').get('display.visible'))
-      .map(searchModel =>
-        searchModel.get('results')
-          .filter(recordModel => isRecordDownloadable(searchModel.get('layerModel'), recordModel))
-          .length
-      )
-      .reduce((count, modelCount) => (
-        count + modelCount
-      ), 0);
-    this.$('.select-all-combined').prop('disabled', downloadableCount === 0);
   },
 });
 

@@ -47,7 +47,7 @@
           {{else}}
             <button class="btn btn-sm btn-default whitebutton tool btn-load-more" type="button" disabled>{{t 'No results'}}</button>
           {{/if}}
-        <button class="btn btn-block btn-default btn-sm whitebutton tool select-all-combined">Select all</button>
+        <button class="btn btn-block btn-default btn-sm whitebutton tool select-all-combined" {{#if downloadableListEmpty}}disabled{{/if}}>Select all</button>
         {{/unless}}
       {{/if}}
         <button class="btn btn-sm btn-default whitebutton tool btn-selected-count" type="button">
