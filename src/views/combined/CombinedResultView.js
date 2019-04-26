@@ -29,6 +29,7 @@ const CombinedResultView = Marionette.LayoutView.extend({
       selectFilesEnabled,
       anySelectedToDisplay,
       automaticSearch,
+      downloadEnabled: this.downloadEnabled,
     };
   },
 
@@ -168,7 +169,6 @@ const CombinedResultView = Marionette.LayoutView.extend({
       collection: this.collection,
       singleModel: this.singleModel,
       termsAndConditionsUrl: this.termsAndConditionsUrl,
-      downloadEnabled: this.downloadEnabled,
       displaySelected: this.displaySelected,
       hasAcceptedTerms: this.hasAcceptedTerms,
     };
@@ -177,7 +177,7 @@ const CombinedResultView = Marionette.LayoutView.extend({
 
   updateResultsPanelSize() {
     // resize results holding div based on variable footer and header sizes
-    const restHeightCombined = this.$('.search-results-toggle').outerHeight(true) + this.$('.search-results-header').outerHeight(true) + this.$('.search-results-footer').outerHeight(true) + parseInt(this.$('.result-contents').css('marginBottom'), 10) + parseInt(this.$('.result-contents').css('marginTop'), 10);
+    const restHeightCombined = this.$('.search-results-toggle').outerHeight(true) + this.$('.search-results-header').outerHeight(true) + this.$('.download-disabled-warning').outerHeight(true) + this.$('.search-results-footer').outerHeight(true) + parseInt(this.$('.result-contents').css('marginBottom'), 10) + parseInt(this.$('.result-contents').css('marginTop'), 10);
     this.$('.result-contents').height(`calc(100% - ${restHeightCombined}px)`);
   },
 

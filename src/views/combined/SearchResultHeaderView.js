@@ -39,7 +39,6 @@ const SearchResultHeaderView = Marionette.ItemView.extend({
       isSearching: this.singleModel.get('isSearching'),
       downloadableListEmpty: downloadableCount === 0,
       searchRequest: this.searchRequest,
-      downloadEnabled: this.downloadEnabled,
       displaySelected: this.displaySelected,
       hasAcceptedTerms: this.hasAcceptedTerms,
     };
@@ -55,7 +54,6 @@ const SearchResultHeaderView = Marionette.ItemView.extend({
   initialize(options) {
     this.singleModel = options.singleModel;
     this.termsAndConditionsUrl = options.termsAndConditionsUrl;
-    this.downloadEnabled = options.downloadEnabled;
     this.searchRequest = this.singleModel.get('searchRequest');
     this.displaySelected = options.displaySelected;
     this.hasAcceptedTerms = options.hasAcceptedTerms;

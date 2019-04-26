@@ -7,6 +7,13 @@
 </div>
 <div class="search-results-header"></div>
 <div class="result-contents"></div>
+<div class="download-disabled-warning">
+  {{#if anySelectedToDisplay}}
+    {{#unless downloadEnabled}}
+      <p>{{t 'Log in to enable the download'}}</p>
+    {{/unless}}
+  {{/if}}
+</div>
 <span class="btn-group tools search-results-footer">
   {{#if anySelectedToDisplay}}
       <button class="btn btn-default btn-sm tool start-download" type="button" disabled>{{t 'Download'}}</button>
