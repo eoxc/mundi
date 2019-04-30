@@ -289,6 +289,7 @@ window.Application = Marionette.Application.extend({
       selectableInterval: settings.selectableInterval,
       maxTooltips: settings.maxTooltips,
       maxMapInterval: parseDuration(settings.maxMapInterval),
+      enableDynamicHistogram: settings.enableDynamicHistogram,
     }));
 
     // set up panels
