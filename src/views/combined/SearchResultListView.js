@@ -1,6 +1,5 @@
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
-import 'jquery-lazyload';
 
 import SearchResultItemView from './SearchResultItemView';
 import template from './SearchResultListView.hbs';
