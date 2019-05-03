@@ -5,16 +5,6 @@
 </div>
 <div id="collapse-time-filter" class="panel-body collapse in">
   <div class="form-group">
-    <!--label id="map-time-wrapper" for="">{{t 'Using same time as for map'}}</label -->
-    <!-- <div class="form-group">
-      <div class="input-group">
-        <input type='text' disabled="true" class="form-control input-sm map-time-start" />
-        <span class="input-group-addon">-</span>
-        <input type='text' disabled="true" class="form-control input-sm map-time-end" />
-      </div>
-    </div> -->
-
-    <div class="form-group">
       <div class="row">
         <label class="col-sm-4 control-label">Start date</label>
         <div class="col-sm-8 no-padding">
@@ -28,39 +18,16 @@
           <input type="text" class="form-control input-sm datetime end">
         </div>
       </div>
-
-      <!-- <div class="input-group">
-        <input type='text' class="form-control input-sm datetime start"/>
-        <span class="input-group-addon">-</span>
-        <input type='text' class="form-control input-sm datetime end"/>
-      </div> -->
+      <div class="row">
+        <div id="map-time-limit-exceeded"></div>
+      </div>
     </div>
-  </div>
-
-  <!-- <div class="form-group">
-    <label for="">{{t 'Start'}}</label>
-    <div class='input-group datetime start'>
-      <input type='text' class="form-control input-sm" />
-      <span class="input-group-addon">
-        <span class="glyphicon glyphicon-calendar"></span>
-      </span>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="">{{t 'End'}}</label>
-    <div class='input-group datetime end'>
-      <input type='text' class="form-control input-sm" />
-      <span class="input-group-addon">
-        <span class="glyphicon glyphicon-calendar"></span>
-      </span>
-    </div>
-  </div> -->
-
   <div class="form-group time-buttons">
     <div class="btn-group btn-group-justified tools" role="group" aria-label="...">
       <a href="#" role="button" class="btn btn-default btn-sm tool tool-show-time">{{t 'Zoom to Selection'}}</a>
-      <a href="#" role="button" class="btn btn-danger btn-sm tool tool-clear-time">{{t 'Clear Selection'}}</a>
+      {{#unless maxMapInterval}}
+        <a href="#" role="button" class="btn btn-danger btn-sm tool tool-clear-time">{{t 'Clear Selection'}}</a>
+      {{/unless}}
     </div>
   </div>
 </div>

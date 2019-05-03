@@ -1061,3 +1061,8 @@ body {
     color: $c_gray;
   }
 }
+
+#map-time-limit-exceeded {
+  color: $c_green;
+  font-size: 13px;
+}

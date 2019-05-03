@@ -9,6 +9,11 @@ import template from './TimeFilterView.hbs';
 
 const TimeFilterView = Marionette.ItemView.extend({
   template,
+  templateHelpers() {
+    return {
+      maxMapInterval: this.maxMapInterval,
+    };
+  },
   className: 'panel panel-default',
   events: {
     'dp.change .datetime': 'onDateInputChange',
@@ -18,14 +23,20 @@ const TimeFilterView = Marionette.ItemView.extend({
 
   initialize(options) {
     this.mapModel = options.mapModel;
+    this.maxMapInterval = options.maxMapInterval;
+    this.domain = options.domain;
     this.listenTo(this.mapModel, 'change:time', this.onMapTimeChanged);
     this.listenTo(this.mapModel, 'change:extendedTime', this.onMapExtendedTimeChanged);
+    this.listenTo(this.mapModel,
+    'exceed:maxMapInterval', this.onMapIntervalExceeded);
   },
 
   // Marionette event listeners
 
   onBeforeShow() {
-    this.$('.time-buttons').hide();
+    if (!this.maxMapInterval) {
+      this.$('.time-buttons').hide();
+    }
     ['start', 'end'].forEach((label) => {
       const $elem = this.$(`input.${label}`);
       $elem.datetimepicker({
@@ -53,7 +64,9 @@ const TimeFilterView = Marionette.ItemView.extend({
         },
         icons: {
           close: 'glyphicon glyphicon-ok'
-        }
+        },
+        minDate: this.domain.start,
+        maxDate: this.domain.end,
       });
     });
   },
@@ -72,9 +85,12 @@ const TimeFilterView = Marionette.ItemView.extend({
     if (!this.updatingTime && start && end) {
       const startDate = start.toDate();
       const endDate = end.toDate();
-      this.mapModel.set('extendedTime',
-        (startDate < endDate) ? [startDate, endDate] : [endDate, startDate]
-      );
+      const time = (startDate < endDate) ? [startDate, endDate] : [endDate, startDate];
+      this.mapModel.set('extendedTime', time);
+      if (this.maxMapInterval) {
+        this.mapModel.set('time', time);
+        this.onShowTimeClicked();
+      }
     }
   },
 
@@ -93,12 +109,9 @@ const TimeFilterView = Marionette.ItemView.extend({
     const time = this.mapModel.get('time');
 
     // if a filter is set explicitly, do not update the text
-    if (this.mapModel.get('extendedTime')) {
+    if (!this.maxMapInterval && this.mapModel.get('extendedTime')) {
       return;
     }
-
-    // this.$('.start').val(moment.utc(time[0]).format('YYYY-MM-DD HH:mm:ss'));
-    // this.$('.end').val(moment.utc(time[1]).format('YYYY-MM-DD HH:mm:ss'));
 
     this.updatingTime = true;
     this.$('.start').data('DateTimePicker').date(moment.utc(time[0]));
@@ -116,14 +129,23 @@ const TimeFilterView = Marionette.ItemView.extend({
     this.$('.start').data('DateTimePicker').viewDate(moment.utc(time[0]));
     this.$('.end').data('DateTimePicker').viewDate(moment.utc(time[1]));
 
-    if (mapModel.get('extendedTime')) {
+    if (mapModel.get('extendedTime') || this.maxMapInterval) {
       this.$('.time-buttons').slideDown();
-      this.$('#map-time-wrapper').slideUp();
     } else {
       this.$('.time-buttons').slideUp();
-      this.$('#map-time-wrapper').slideDown();
     }
     this.updatingTime = false;
+  },
+
+  onMapIntervalExceeded(newInterval) {
+    if (this.maxMapInterval && newInterval) {
+      const formattedStart = moment.utc(newInterval[0]).format('YYYY-MM-DD HH:mm:ss');
+      const formattedEnd = moment.utc(newInterval[1]).format('YYYY-MM-DD HH:mm:ss');
+      this.$('#map-time-limit-exceeded').slideDown();
+      this.$('#map-time-limit-exceeded').html(`Product map tiles display is limited to <br> <b>${formattedStart} - ${formattedEnd}</b>`);
+    } else {
+      this.$('#map-time-limit-exceeded').slideUp();
+    }
   },
 });
 
