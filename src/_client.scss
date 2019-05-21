@@ -968,6 +968,7 @@ body {
 
 .control-label {
   margin-bottom: 10px;
+  color: white;
 }
 
 .dropdown-toggle {
@@ -1065,4 +1066,8 @@ body {
 #map-time-limit-exceeded {
   color: $c_green;
   font-size: 13px;
+}
+
+.progress-bar {
+  background-color: $c_blue;
 }

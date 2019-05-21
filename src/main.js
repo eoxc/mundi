@@ -347,6 +347,10 @@ window.Application = Marionette.Application.extend({
       }));
     });
 
+    layersCollection.on('show-options', (layerModel, useDetailsDisplay) => {
+      layout.showChildView('topModals', new LayerOptionsModalView({ model: layerModel, useDetailsDisplay }));
+    });
+
     searchCollection.on('start-processing', (searchModel) => {
       sendProcessingRequest(searchModel, mapModel);
     });
@@ -380,6 +384,15 @@ window.Application = Marionette.Application.extend({
       icon: 'fa-cog',
       defaultOpen: settings.leftPanelOpen,
       views: [{
+        name: 'Layers',
+        view: new LayerControlLayoutView({
+          mapModel,
+          filtersModel,
+          baseLayersCollection,
+          overlayLayersCollection,
+          layersCollection: searchCollection.length === 1 ? undefined : layersCollection,
+        }),
+      }, {
         name: 'Filters',
         view: new RootFiltersView({
           filtersModel,
@@ -389,15 +402,6 @@ window.Application = Marionette.Application.extend({
           uploadEnabled: settings.uploadEnabled,
           maxMapInterval: parseDuration(settings.maxMapInterval),
           domain,
-        }),
-      }, {
-        name: 'Layers',
-        view: new LayerControlLayoutView({
-          mapModel,
-          filtersModel,
-          baseLayersCollection,
-          overlayLayersCollection,
-          layersCollection: searchCollection.length === 1 ? undefined : layersCollection,
         }),
       }],
     }));

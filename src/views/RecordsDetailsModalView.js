@@ -30,7 +30,7 @@ const RecordsDetailsModalView = ModalView.extend({
   events: {
     'click .records-next': 'onRecordsNextClicked',
     'click .records-prev': 'onRecordsPrevClicked',
-    // 'click .layer-options': 'onLayerOptionsClicked',
+    'click .layer-options': 'onLayerOptionsClicked',
     'shown.bs.modal': 'onModalShown',
     'change .is-selected': 'onDownloadSelectionChange',
   },
@@ -144,6 +144,12 @@ const RecordsDetailsModalView = ModalView.extend({
       this.currentRecordIndex += 1;
       this.updateRecord(...this.records[this.currentRecordIndex]);
     }
+  },
+
+  onLayerOptionsClicked() {
+    const searchModel = this.records[this.currentRecordIndex][1];
+    const layerModel = searchModel.get('layerModel');
+    layerModel.trigger('show-options', layerModel, true);
   },
 
   onDownloadSelectionChange() {
