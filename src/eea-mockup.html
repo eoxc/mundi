@@ -55,7 +55,7 @@
         "center": [13, 54.8666],
         "zoom": 6,
         "minZoom": 3,
-        "maxZoom": 18,
+        "maxZoom": 17,
         "footprintFillColor": "rgba(0, 0, 0, 0.2)",
         "footprintStrokeColor": "rgba(0, 0, 0, 1)",
         "filterFillColor": "rgba(0, 165, 255, 0)",
@@ -103,6 +103,35 @@
                 "Error: NoApplicableCode": "Search timed out. Please refine the filter criteria.",
             }
         },
+        "downloadFormats": [{
+          "name": "TIFF",
+          "mimeType": "image/tiff"
+        }, {
+          "name": "JPG",
+          "mimeType": "image/jpeg",
+          "maxBands": 3,
+        }, {
+          "name": "PNG",
+          "mimeType": "image/png",
+          "maxBands": 4,
+        }, {
+          "name": "NetCDF",
+          "mimeType": "application/x-netcdf"
+        }, {
+          "name": "PDF",
+          "mimeType": "application/pdf",
+          "maxBands": 3,
+        }],
+        "downloadProjections": [{
+          "name": "WGS-84",
+          "identifier": "http://www.opengis.net/def/crs/EPSG/0/4326"
+        }, {
+          "name": "Google Mercator",
+          "identifier": "http://www.opengis.net/def/crs/EPSG/0/3857"
+        }, {
+          "name": "ETRS89",
+          "identifier": "http://www.opengis.net/def/crs/EPSG/0/4258"
+        }],
     },
     "baseLayers": [
         {
@@ -428,7 +457,7 @@
                     "//h.tiles.mundi.eox.at/c/wmts/",
                 ],
                 "useMilliseconds": false,
-                "maxZoom": 10,
+                "maxZoom": 17,
             },
             "detailsDisplay": {
                 "id": "S2_MSI_L1C",
@@ -650,7 +679,7 @@
                     "//h.s2-l2a.tiles.mundi.eox.at/c/wmts/",
                 ],
                 "useMilliseconds": false,
-                "maxZoom": 10,
+                "maxZoom": 17,
             }, 
             // full resolution and processing taken from CODE-DE L1C
             "processing": {
@@ -875,7 +904,7 @@
                     "http://h.s1-grd.tiles.mundi.eox.at/c/wmts/",
                 ],
                 "useMilliseconds": false,
-                "maxZoom": 10,
+                "maxZoom": 17,
             },
             "search": {
                 "protocol": "OpenSearch",
