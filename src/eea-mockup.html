@@ -34,7 +34,7 @@
         "language": "en",
         "timeDomain": [
             "2016-01-01T00:00:00Z",
-            today.toISOString()
+            "2019-01-01T00:00:00Z"
         ],
         "constrainTimeDomain": true,
         "displayTimeDomain": [
@@ -54,8 +54,8 @@
         "leftPanelOpen": true,
         "center": [13, 54.8666],
         "zoom": 6,
-//        "minZoom": 4,
-        "maxZoom": 16,
+        "minZoom": 3,
+        "maxZoom": 18,
         "footprintFillColor": "rgba(0, 0, 0, 0.2)",
         "footprintStrokeColor": "rgba(0, 0, 0, 1)",
         "filterFillColor": "rgba(0, 165, 255, 0)",
@@ -651,6 +651,76 @@
                 ],
                 "useMilliseconds": false,
                 "maxZoom": 10,
+            }, 
+            // full resolution and processing taken from CODE-DE L1C
+            "processing": {
+                "url": "https://processing.code-de.org/injectInputSelection",
+                "method": "form"
+            },
+            "fullResolution": {
+                "protocol": "WCS",
+                "id": "Sentinel2__S2_MSI_L1C_FULL",
+                "url": "https://geoservice.code-de.org/Sentinel2/wcs?sortBy=time%20D&",
+                "cqlParameterName": "cql_filter",
+                "cqlMapping": {
+                    "eo:cloudCover": "cloudcover",
+                },
+                "maxSizeWarning": 500,
+                "maxSizeResolution": 0.0000858306884765625,
+                "axisNames": [
+                    'http://www.opengis.net/def/axis/OGC/0/Long',
+                    'http://www.opengis.net/def/axis/OGC/0/Lat'
+                ],
+                "fields": [{
+                  "name": "B01",
+                  "identifier": "B01"
+                }, {
+                  "name": "B02",
+                  "identifier": "B02"
+                }, {
+                  "name": "B03",
+                  "identifier": "B03"
+                }, {
+                  "name": "B04",
+                  "identifier": "B04"
+                }, {
+                  "name": "B05",
+                  "identifier": "B05"
+                }, {
+                  "name": "B06",
+                  "identifier": "B06"
+                }, {
+                  "name": "B07",
+                  "identifier": "B07"
+                }, {
+                  "name": "B08",
+                  "identifier": "B08"
+                }, {
+                  "name": "B09",
+                  "identifier": "B09"
+                }, {
+                  "name": "B10",
+                  "identifier": "B10"
+                }, {
+                  "name": "B11",
+                  "identifier": "B11"
+                }, {
+                  "name": "B12",
+                  "identifier": "B12"
+                }, {
+                  "name": "B8A",
+                  "identifier": "B8A"
+                }],
+                "interpolations": [{
+                  "name": "Nearest-Neighbor",
+                  "identifier": "http://www.opengis.net/def/interpolation/OGC/1/nearest-neighbor"
+                }, {
+                  "name": "Linear",
+                  "identifier": "http://www.opengis.net/def/interpolation/OGC/1/linear"
+                }, {
+                  "name": "Cubic",
+                  "identifier": "http://www.opengis.net/def/interpolation/OGC/1/cubic"
+                }]
             },
             "search": {
                 "protocol": "OpenSearch",
@@ -778,8 +848,9 @@
                 "protocol": "S3",
                 "rewrite": {
                     "from": "^https:\/\/obs\.eu-de\.otc\.t-systems\.com\/",
-                    "to": "https://dp.mundiwebservices.com/",
-                }
+                    "to": "https://mundiwebservices.com/",
+                },
+                "pathPrefix": "dp/"
             },
         },
         {

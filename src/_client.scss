@@ -190,10 +190,19 @@ svg.timeslider,
 }
 
 
-.form-control {
-  background: $c_blue;
+.form-control,  {
+  background-color: $c_blue;
   border: 0;
   color: white;
+  & input {
+    background-color: $c_blue!important;
+    color: white!important;
+  }
+}
+
+input.input-sm {
+  background-color: $c_blue!important;
+  color: white!important;
 }
 
 .result-contents {
