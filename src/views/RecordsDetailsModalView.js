@@ -62,6 +62,7 @@ const RecordsDetailsModalView = ModalView.extend({
       this.updateResultsPanelSize();
     });
     this.maxMapInterval = options.maxMapInterval;
+    this.XYZOnlyOverProducts = options.XYZOnlyOverProducts;
   },
 
   onModalShown() {
@@ -98,6 +99,7 @@ const RecordsDetailsModalView = ModalView.extend({
       staticHighlight: true,
       useDetailsDisplay: true,
       maxMapInterval: this.maxMapInterval,
+      XYZOnlyOverProducts: this.XYZOnlyOverProducts,
     });
     const detailsView = new RecordDetailsView({
       model: recordModel,

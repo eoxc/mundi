@@ -324,6 +324,7 @@ window.Application = Marionette.Application.extend({
         filterOutsideColor: settings.filterOutsideColor,
         onStartDownload: startDownload,
         maxMapInterval: parseDuration(settings.maxMapInterval),
+        XYZOnlyOverProducts: settings.XYZOnlyOverProducts,
       }));
     };
 
@@ -377,6 +378,7 @@ window.Application = Marionette.Application.extend({
         showRecordDetails(records);
       },
       maxMapInterval: parseDuration(settings.maxMapInterval),
+      XYZOnlyOverProducts: settings.XYZOnlyOverProducts,
     }));
 
     layout.showChildView('leftPanel', new SidePanelView({
