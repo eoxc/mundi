@@ -1,6 +1,6 @@
 {
   "name": "mundi",
-  "version": "1.1.0-rc.20",
+  "version": "1.1.0-rc.21",
   "description": "mundi",
   "scripts": {
     "build": "webpack -p",
