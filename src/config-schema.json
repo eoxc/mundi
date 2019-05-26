@@ -374,6 +374,11 @@
                             "type": "boolean",
                             "default": false
                         },
+                        "opacity": {
+                            "description": "Default opacity (0-1)",
+                            "type": "number",
+                            "default": 1
+                        },
                         "protocol": {
                             "description": "The protocol used to display the layer.",
                             "type": "string",

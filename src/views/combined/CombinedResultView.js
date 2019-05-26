@@ -3,7 +3,7 @@ import _ from 'underscore'; // eslint-disable-line import/no-extraneous-dependen
 import $ from 'jquery';
 
 import { isRecordDownloadable, downloadCustom, getDownloadInfos } from 'eoxc/src/download';
-import { metalinkTemplate } from 'eoxc/src/download/Metalink.hbs';
+import metalinkTemplate from 'eoxc/src/download/Metalink.hbs';
 
 import SearchResultHeaderView from './SearchResultHeaderView';
 import SearchResultListView from './SearchResultListView';

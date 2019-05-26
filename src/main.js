@@ -392,7 +392,8 @@ window.Application = Marionette.Application.extend({
           filtersModel,
           baseLayersCollection,
           overlayLayersCollection,
-          layersCollection: searchCollection.length === 1 ? undefined : layersCollection,
+          // layersCollection: searchCollection.length === 1 ? undefined : layersCollection,
+          layersCollection
         }),
       }, {
         name: 'Filters',
@@ -413,29 +414,29 @@ window.Application = Marionette.Application.extend({
       termsAndConditionsUrl = termsAndConditionsUrl[settings.language];
     }
 
-    if (searchCollection.length === 1) {
-      // single layer view
-      layout.showChildView('rightPanel', new SidePanelView({
-        position: 'right',
-        icon: 'fa-list',
-        defaultOpen: settings.rightPanelOpen,
-        views: [{
-          name: 'Search Results',
-          hasInfo: true,
-          view: new CombinedResultView({
-            mapModel,
-            filtersModel,
-            highlightModel,
-            collection: searchCollection,
-            downloadEnabled: settings.downloadEnabled,
-            onStartDownload: startDownload,
-            onSelectFiles: selectFiles,
-            fallbackThumbnailUrl,
-            termsAndConditionsUrl,
-          }),
-        }],
-      }));
-    } else {
+    // if (searchCollection.length === 1) {
+    //   // single layer view
+    //   layout.showChildView('rightPanel', new SidePanelView({
+    //     position: 'right',
+    //     icon: 'fa-list',
+    //     defaultOpen: settings.rightPanelOpen,
+    //     views: [{
+    //       name: 'Search Results',
+    //       hasInfo: true,
+    //       view: new CombinedResultView({
+    //         mapModel,
+    //         filtersModel,
+    //         highlightModel,
+    //         collection: searchCollection,
+    //         downloadEnabled: settings.downloadEnabled,
+    //         onStartDownload: startDownload,
+    //         onSelectFiles: selectFiles,
+    //         fallbackThumbnailUrl,
+    //         termsAndConditionsUrl,
+    //       }),
+    //     }],
+    //   }));
+    // } else {
       // multi layer view
       layout.showChildView('rightPanel', new SidePanelView({
         position: 'right',
@@ -467,7 +468,7 @@ window.Application = Marionette.Application.extend({
           }),
         }],
       }));
-    }
+    // }
 
     layout.$('.search-result-view .select-all,.download-view .download-control .btn').removeClass('btn-sm');
     layout.$('.tools, .selections').removeClass('btn-group-justified');
