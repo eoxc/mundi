@@ -153,6 +153,11 @@
                     "type": "boolean",
                     "default": false
                 },
+                "timeSliderAlternativeBrush": {
+                    "description": "If alternative TimeSlider selection brush (Mundi style) should be used.",
+                    "type": "boolean",
+                    "default": false
+                },
                 "enableDynamicHistogram": {
                   "description": "Whether or not current map extent and area filters are used for TimeSlider fetch.",
                   "type": "boolean",
