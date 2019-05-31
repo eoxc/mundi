@@ -61,7 +61,6 @@ const RecordsDetailsModalView = ModalView.extend({
     this.$el.sizeChanged(() => {
       this.updateResultsPanelSize();
     });
-    this.maxMapInterval = options.maxMapInterval;
   },
 
   onModalShown() {
@@ -97,7 +96,6 @@ const RecordsDetailsModalView = ModalView.extend({
       filterOutsideColor: this.filterOutsideColor,
       staticHighlight: true,
       useDetailsDisplay: true,
-      maxMapInterval: this.maxMapInterval,
     });
     const detailsView = new RecordDetailsView({
       model: recordModel,
