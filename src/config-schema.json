@@ -153,6 +153,11 @@
                     "type": "boolean",
                     "default": false
                 },
+                "timeSliderAlternativeBrush": {
+                    "description": "If alternative TimeSlider selection brush (Mundi style) should be used.",
+                    "type": "boolean",
+                    "default": false
+                },
                 "enableDynamicHistogram": {
                   "description": "Whether or not current map extent and area filters are used for TimeSlider fetch.",
                   "type": "boolean",
@@ -356,6 +361,11 @@
                 "displayColor": {
                     "description": "The color to distinguish the layer in the layer-list and the TimeSlider. Must be a valid HTML color definition.",
                     "type": "string"
+                },
+                "noTimeSliderBorder": {
+                  "description": "TimeSlider bins and records will not have a visible border",
+                  "type": "boolean",
+                  "default": "false"
                 },
                 "link": {
                     "description": "An HTTP link for further information for the layer. This is rendered in the layer list.",

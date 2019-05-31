@@ -435,6 +435,8 @@ input,
 }
 
 #timeSlider {
+  height: 7.5em;
+  bottom: 36px;
   .control {
     background: $c_lo;
     color: white;
@@ -445,7 +447,7 @@ input,
       color: $c_lo;
       transition: background .25s, color .25s;
     }
-    margin-top: -21px;
+    margin-top: -40px;
 
     display:flex;
     justify-content:center;
@@ -456,13 +458,21 @@ input,
   svg.timeslider {
     border: none !important;
     opacity: 1.0;
+    height: 7.5em;
+    background-color: $c_gray;
     // filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.3));
 
-    .brush .extent {
-      fill: $c_lo;
+    .brush .extent, .handle-circle {
+      fill: $c_blue;
       stroke: none;
-      cursor: grab !important;
-      cursor: -webkit-grab !important;
+      opacity: 1;
+    }
+    .brush .background {
+      fill: $c_lo;
+      visibility: visible!important;
+    }
+    .brush .extent {
+      cursor: pointer !important;
     }
 
     .mainaxis {
@@ -481,6 +491,10 @@ input,
     &.loading {
       opacity: 1.0;
     }
+  }
+  .timeslider-tooltip {
+    color: $c_gray;
+    background-color: #020a16;
   }
 }
 
