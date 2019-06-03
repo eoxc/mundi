@@ -224,6 +224,7 @@ window.Application = Marionette.Application.extend({
       zoom: settings.zoom,
       minZoom: settings.minZoom,
       maxZoom: settings.maxZoom,
+      projection: settings.projection,
       maxMapInterval: parseDuration(settings.maxMapInterval),
       time: [
         new Date(settings.selectedTimeDomain[0]),

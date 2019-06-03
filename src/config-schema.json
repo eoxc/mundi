@@ -70,6 +70,11 @@
                     "type": "number",
                     "default": 28
                 },
+                "projection": {
+                  "description": "Chosen map view projection EPSG format, all layers/features which do not share this CRS are (slowly) reprojected on the fly. Use with caution.",
+                  "type": "string",
+                  "default": "EPSG:4326"
+                },
                 "extent": {
                     "description": "The initially visible extent. This setting is mutually exclusive to 'center' and 'zoom'.",
                     "type": "array",
