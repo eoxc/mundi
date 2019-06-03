@@ -447,7 +447,7 @@ input,
       color: $c_lo;
       transition: background .25s, color .25s;
     }
-    margin-top: -40px;
+    margin-top: -43px;
 
     display:flex;
     justify-content:center;
@@ -458,10 +458,12 @@ input,
   svg.timeslider {
     border: none !important;
     opacity: 1.0;
-    height: 7.5em;
+    height: 7.4em;
     background-color: $c_gray;
-    // filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.3));
 
+    .brush {
+      fill: $c_gray;
+    }
     .brush .extent, .handle-circle {
       fill: $c_blue;
       stroke: none;
@@ -478,13 +480,17 @@ input,
     .mainaxis {
       line,
       path {
-        stroke: $c_lo !important;
+        visibility: hidden !important;
       }
 
       text {
         fill: $c_lo;
         font-family: $font-family-sans-serif;
         text-transform: uppercase;
+      }
+      & .mainaxis-overlay{
+        fill: $c_lo !important;
+        opacity: 1 !important;
       }
     }
 
