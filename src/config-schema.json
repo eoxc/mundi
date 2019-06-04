@@ -456,6 +456,11 @@
                             "type": "number",
                             "default": 28
                         },
+                        "noAntialiasing": {
+                          "description": "Disables canvas rendering antialiasing when larger zoom than which source does provide is requested (blurry vs sharp image)",
+                          "type": "boolean",
+                          "default": false
+                        },
                         "attribution": {
                             "description": "A string to be displayed when the layer is displayed. Can contain HTML for specific formatting.",
                             "type": "string"
