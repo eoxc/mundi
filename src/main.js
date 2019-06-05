@@ -325,6 +325,7 @@ window.Application = Marionette.Application.extend({
         filterStrokeColor: settings.filterStrokeColor,
         filterOutsideColor: settings.filterOutsideColor,
         onStartDownload: startDownload,
+        projection: settings.projection,
       }));
     };
 
