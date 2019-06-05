@@ -52,7 +52,8 @@
         "maxTooltips": 1,
         "rightPanelOpen": true,
         "leftPanelOpen": true,
-        "center": [10, 50],
+        "center": [1000000, 6000000],
+        "projection": "EPSG:3857",
         "zoom": 4,
         "minZoom": 2,
         "maxZoom": 18,
@@ -136,10 +137,10 @@
     },
     "baseLayers": [
         {
-            "id": "terrain-light",
+            "id": "terrain-light_3857",
             "displayName": "EOX Terrain-Light",
             "display": {
-                "id": "terrain-light",
+                "id": "terrain-light_3857",
                 "visible": false,
                 "protocol": "WMTS",
                 "urls": [
@@ -149,9 +150,9 @@
                     "//d.s2maps-tiles.eu/wmts/",
                     "//e.s2maps-tiles.eu/wmts/"
                 ],
-                "matrixSet": "WGS84",
+                "matrixSet": "GoogleMapsCompatible",
                 "format": "image/png",
-                "projection": "EPSG:4326",
+                "projection": "EPSG:3857",
                 "style": "default",
                 "attribution": "Terrain-Light { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> }"
             }
@@ -176,10 +177,10 @@
                 "attribution": "Terrain { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> }"
             }
         },  {
-            "id": "s2cloudless",
+            "id": "s2cloudless_3857",
             "displayName": "EOX Sentinel-2 cloudless",
             "display": {
-                "id": "s2cloudless",
+                "id": "s2cloudless_3857",
                 "visible": true,
                 "protocol": "WMTS",
                 "urls": [
@@ -189,9 +190,9 @@
                     "//d.s2maps-tiles.eu/wmts/",
                     "//e.s2maps-tiles.eu/wmts/"
                 ],
-                "matrixSet": "WGS84",
+                "matrixSet": "GoogleMapsCompatible",
                 "format": "image/png",
-                "projection": "EPSG:4326",
+                "projection": "EPSG:3857",
                 "style": "default",
                 "attribution": "<a xmlns:dct=\"http://purl.org/dc/terms/\" href=\"https://s2maps.eu\" property=\"dct:title\">Sentinel-2 cloudless - https://s2maps.eu</a> by <a xmlns:cc=\"http://creativecommons.org/ns#\" href=\"https://eox.at\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">EOX IT Services GmbH</a> (Contains modified Copernicus Sentinel data 2016 &amp; 2017)"
             }
@@ -208,6 +209,8 @@
             "opacity": 0.7,
             "protocol": "XYZ",
             "projection": "EPSG:3857",
+            "maxZoom": 13,
+            "noAntialiasing": true,
             "url":"https://landmonitoring.earth/tileserver/YYYYMM_Pheno_S2_20m_1_13/{z}/{x}/{y}.png",
             "timeRecords":[ 
             ['2016-01-01T00:00:00Z','2016-01-31T23:59:59Z'],
@@ -474,10 +477,10 @@
     ],
     "overlayLayers": [
         {
-            "id": "overlay_base",
+            "id": "overlay_base_3857",
             "displayName": "EOX Borders and Labels",
             "display": {
-                "id": "overlay_base",
+                "id": "overlay_base_3857",
                 "visible": true,
                 "protocol": "WMTS",
                 "urls": [
@@ -487,10 +490,10 @@
                     "//d.tiles.maps.eox.at/wmts/",
                     "//e.tiles.maps.eox.at/wmts/"
                 ],
-                "matrixSet": "WGS84",
+                "matrixSet": "GoogleMapsCompatible",
                 "style": "default",
                 "format": "image/png",
-                "projection": "EPSG:4326",
+                "projection": "EPSG:3857",
                 "attribution": "Overlay { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> and <a href=\"https://github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
             }
         },
