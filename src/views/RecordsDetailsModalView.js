@@ -53,15 +53,15 @@ const RecordsDetailsModalView = ModalView.extend({
     this.filterFillColor = options.filterFillColor;
     this.filterStrokeColor = options.filterStrokeColor;
     this.filterOutsideColor = options.filterOutsideColor;
+    this.projection = options.projection;
 
-    this.mapModel = new MapModel({ center: [0, 0], zoom: 5, noclick: true });
+    this.mapModel = new MapModel({ center: [0, 0], zoom: 5, noclick: true, projection: this.projection });
     this.highlightModel = new HighlightModel();
     this.filtersModel = new FiltersModel();
 
     this.$el.sizeChanged(() => {
       this.updateResultsPanelSize();
     });
-    this.maxMapInterval = options.maxMapInterval;
     this.XYZOnlyOverProducts = options.XYZOnlyOverProducts;
   },
 
@@ -98,7 +98,6 @@ const RecordsDetailsModalView = ModalView.extend({
       filterOutsideColor: this.filterOutsideColor,
       staticHighlight: true,
       useDetailsDisplay: true,
-      maxMapInterval: this.maxMapInterval,
       XYZOnlyOverProducts: this.XYZOnlyOverProducts,
     });
     const detailsView = new RecordDetailsView({

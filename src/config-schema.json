@@ -70,6 +70,11 @@
                     "type": "number",
                     "default": 28
                 },
+                "projection": {
+                  "description": "Chosen map view projection EPSG format, all layers/features which do not share this CRS are (slowly) reprojected on the fly. Use with caution.",
+                  "type": "string",
+                  "default": "EPSG:4326"
+                },
                 "extent": {
                     "description": "The initially visible extent. This setting is mutually exclusive to 'center' and 'zoom'.",
                     "type": "array",
@@ -150,6 +155,11 @@
                 },
                 "timeSliderControls": {
                     "description": "Whether or not control buttons should be shown for the TimeSlider.",
+                    "type": "boolean",
+                    "default": false
+                },
+                "timeSliderAlternativeBrush": {
+                    "description": "If alternative TimeSlider selection brush (Mundi style) should be used.",
                     "type": "boolean",
                     "default": false
                 },
@@ -357,6 +367,11 @@
                     "description": "The color to distinguish the layer in the layer-list and the TimeSlider. Must be a valid HTML color definition.",
                     "type": "string"
                 },
+                "noTimeSliderBorder": {
+                  "description": "TimeSlider bins and records will not have a visible border",
+                  "type": "boolean",
+                  "default": "false"
+                },
                 "link": {
                     "description": "An HTTP link for further information for the layer. This is rendered in the layer list.",
                     "type": "string"
@@ -445,6 +460,11 @@
                             "description": "The maximum map zoom level for this layer. Used for map is minimum over all layers.",
                             "type": "number",
                             "default": 28
+                        },
+                        "noAntialiasing": {
+                          "description": "Disables canvas rendering antialiasing when larger zoom than which source does provide is requested (blurry vs sharp image)",
+                          "type": "boolean",
+                          "default": false
                         },
                         "attribution": {
                             "description": "A string to be displayed when the layer is displayed. Can contain HTML for specific formatting.",

@@ -224,6 +224,8 @@ window.Application = Marionette.Application.extend({
       zoom: settings.zoom,
       minZoom: settings.minZoom,
       maxZoom: settings.maxZoom,
+      projection: settings.projection,
+      maxMapInterval: parseDuration(settings.maxMapInterval),
       time: [
         new Date(settings.selectedTimeDomain[0]),
         new Date(settings.selectedTimeDomain[1]),
@@ -285,10 +287,10 @@ window.Application = Marionette.Application.extend({
       display,
       constrainTimeDomain: settings.constrainTimeDomain,
       timeSliderControls: settings.timeSliderControls,
+      timeSliderAlternativeBrush: settings.timeSliderAlternativeBrush,
       displayInterval: settings.displayInterval,
       selectableInterval: settings.selectableInterval,
       maxTooltips: settings.maxTooltips,
-      maxMapInterval: parseDuration(settings.maxMapInterval),
       enableDynamicHistogram: settings.enableDynamicHistogram,
     }));
 
@@ -323,8 +325,7 @@ window.Application = Marionette.Application.extend({
         filterStrokeColor: settings.filterStrokeColor,
         filterOutsideColor: settings.filterOutsideColor,
         onStartDownload: startDownload,
-        maxMapInterval: parseDuration(settings.maxMapInterval),
-        XYZOnlyOverProducts: settings.XYZOnlyOverProducts,
+        projection: settings.projection,
       }));
     };
 
@@ -377,7 +378,6 @@ window.Application = Marionette.Application.extend({
       onFeatureClicked(records) {
         showRecordDetails(records);
       },
-      maxMapInterval: parseDuration(settings.maxMapInterval),
       XYZOnlyOverProducts: settings.XYZOnlyOverProducts,
     }));
 
