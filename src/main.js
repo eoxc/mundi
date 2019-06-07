@@ -211,6 +211,8 @@ window.Application = Marionette.Application.extend({
       selectedFootprintStrokeColor: '#ff0000',
       leftPanelOpen: false,
       rightPanelOpen: false,
+      leftPanelTabIndex: 0,
+      rightPanelTabIndex: 0,
       downloadFormats: [],
       downloadProjections: [],
       uploadEnabled: true,
@@ -380,6 +382,7 @@ window.Application = Marionette.Application.extend({
       position: 'left',
       icon: 'fa-cog',
       defaultOpen: settings.leftPanelOpen,
+      openTabIndex: settings.leftPanelTabIndex,
       views: [{
         name: 'Filters',
         view: new RootFiltersView({
@@ -436,6 +439,7 @@ window.Application = Marionette.Application.extend({
         position: 'right',
         icon: 'fa-list',
         defaultOpen: settings.rightPanelOpen,
+        openTabIndex: settings.rightPanelTabIndex,
         views: [{
           name: 'Search Results',
           hasInfo: true,

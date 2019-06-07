@@ -229,6 +229,16 @@
                     "type": "boolean",
                     "default": false
                 },
+                "leftPanelTabIndex": {
+                    "description": "Index of left panel tab to be opened on start, starting from 0.",
+                    "type": "integer",
+                    "default": 0
+                },
+                "rightPanelTabIndex": {
+                    "description": "Index of right panel tab to be opened on start, starting from 0.",
+                    "type": "integer",
+                    "default": 0
+                },
                 "parameters": {
                     "description": "Mapping the parameter type (such as eo:processingCenter) to a settings object.",
                     "type": "array",

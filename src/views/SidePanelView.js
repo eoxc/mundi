@@ -25,6 +25,7 @@ export default Marionette.LayoutView.extend({
     this.views = options.views;
     this.icon = options.icon;
     this.defaultOpen = options.defaultOpen;
+    this.openTabIndex = options.openTabIndex;
   },
 
   onBeforeShow() {
@@ -40,6 +41,19 @@ export default Marionette.LayoutView.extend({
 
     if (this.defaultOpen) {
       this.onToggleSidePanelClicked();
+    }
+
+    if (typeof this.openTabIndex !== 'undefined' && parseInt(this.openTabIndex, 10) > 0) {
+      // to trigger respective event
+      this.$(`a[href="#${this.position}-${this.openTabIndex}"]`).tab('show');
+      // to manually reset active on tab contents
+      for (let i = 0; i < this.views.length; i++) {
+        if (this.openTabIndex === i) {
+          this.$(`#${this.position}-${i}`).addClass('active');
+        } else {
+          this.$(`#${this.position}-${i}`).removeClass('active');
+        }
+      }
     }
   },
 
