@@ -25,6 +25,7 @@ const TimeFilterView = Marionette.ItemView.extend({
     this.mapModel = options.mapModel;
     this.maxMapInterval = options.maxMapInterval;
     this.domain = options.domain;
+    this.constrainTimeDomain = options.constrainTimeDomain;
     this.listenTo(this.mapModel, 'change:time', this.onMapTimeChanged);
     this.listenTo(this.mapModel, 'change:extendedTime', this.onMapExtendedTimeChanged);
     this.listenTo(this.mapModel,
@@ -37,6 +38,8 @@ const TimeFilterView = Marionette.ItemView.extend({
     if (!this.maxMapInterval) {
       this.$('.time-buttons').hide();
     }
+    const minDate = this.constrainTimeDomain ? this.domain.start : false;
+    const maxDate = this.constrainTimeDomain ? this.domain.end : false;
     ['start', 'end'].forEach((label) => {
       const $elem = this.$(`input.${label}`);
       $elem.datetimepicker({
@@ -65,8 +68,8 @@ const TimeFilterView = Marionette.ItemView.extend({
         icons: {
           close: 'glyphicon glyphicon-ok'
         },
-        minDate: this.domain.start,
-        maxDate: this.domain.end,
+        minDate,
+        maxDate,
       });
     });
   },

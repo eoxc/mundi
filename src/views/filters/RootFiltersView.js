@@ -38,6 +38,7 @@ const RootFiltersView = Marionette.LayoutView.extend({
     this.uploadEnabled = options.uploadEnabled;
     this.maxMapInterval = options.maxMapInterval;
     this.domain = options.domain;
+    this.constrainTimeDomain = options.constrainTimeDomain;
   },
 
   onBeforeShow() {
@@ -48,6 +49,7 @@ const RootFiltersView = Marionette.LayoutView.extend({
       uploadEnabled: this.uploadEnabled,
       maxMapInterval: this.maxMapInterval,
       domain: this.domain,
+      constrainTimeDomain: this.constrainTimeDomain,
     };
     this.showChildView('timeFilter', new TimeFilterView(options));
     this.showChildView('areaFilter', new AreaFilterView(options));

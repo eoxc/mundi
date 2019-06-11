@@ -393,6 +393,7 @@ window.Application = Marionette.Application.extend({
           uploadEnabled: settings.uploadEnabled,
           maxMapInterval: parseDuration(settings.maxMapInterval),
           domain,
+          constrainTimeDomain: settings.constrainTimeDomain,
         }),
       }, {
         name: 'Layers',
