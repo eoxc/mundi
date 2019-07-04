@@ -790,6 +790,7 @@ input,
 
 .record-details-description table {
   table-layout: fixed;
+  margin-bottom: 8px;
 }
 
 .record-details-description td {
@@ -1085,4 +1086,8 @@ body {
 #map-time-limit-exceeded {
   color: $c_green;
   font-size: 13px;
+}
+
+.download-confirm {
+  color: $c_gray;
 }
