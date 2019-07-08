@@ -652,6 +652,10 @@
                         "description": "The template string to construct a thumbnail URL. Use '{{' and '}}' to select values. e.g: 'http://landsat-pds.s3.amazonaws.com/{{properties.s3Path}}/{{properties.title}}_thumb_small.jpg'.",
                         "type": "string"
                     },
+                    "quickLookUrlTemplate": {
+                        "description": "The template string to construct a quickLook URL. Use '{{' and '}}' to select values. e.g: 'http://landsat-pds.s3.amazonaws.com/{{properties.s3Path}}/{{properties.title}}_thumb_small.jpg'. The URL will be used in case thumbnailUrl is not available.",
+                        "type": "string"
+                    },
                     "descriptionTemplate": {
                         "description": "The template string to construct a record description. Use '{{' and '}}' to select values.",
                         "type": "string"
