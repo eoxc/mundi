@@ -199,6 +199,7 @@ window.Application = Marionette.Application.extend({
       maxTooltips: null,
       timeSliderControls: false,
       maxMapInterval: null,
+      constrainOutCoords: false,
       highlightFillColor: 'rgba(255, 255, 255, 0.2)',
       highlightStrokeColor: '#cccccc',
       highlightStrokeWidth: 1,
@@ -376,6 +377,7 @@ window.Application = Marionette.Application.extend({
         showRecordDetails(records);
       },
       maxMapInterval: parseDuration(settings.maxMapInterval),
+      constrainOutCoords: settings.constrainOutCoords,
     }));
 
     layout.showChildView('leftPanel', new SidePanelView({
