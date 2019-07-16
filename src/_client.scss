@@ -497,6 +497,9 @@ input,
     &.loading {
       opacity: 1.0;
     }
+    .missing-interval {
+      display: none;
+    }
   }
   .timeslider-tooltip {
     color: $c_gray;

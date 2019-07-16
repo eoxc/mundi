@@ -98,7 +98,14 @@ const TimeFilterView = Marionette.ItemView.extend({
   },
 
   onShowTimeClicked() {
-    this.mapModel.showTime(this.mapModel.get('extendedTime'));
+    // modify time to show 1.1 * larger area on timeSlider
+    // this makes dragging of handles more user friendly
+    let extendedTime = this.mapModel.get('extendedTime');
+    const timeDiff = extendedTime[1] - extendedTime[0];
+    const startDateObjectSubtracted = new Date(extendedTime[0].getTime() - (timeDiff * 0.05));
+    const startDateObjectAdded = new Date(extendedTime[1].getTime() + (timeDiff * 0.05));
+    extendedTime = [startDateObjectSubtracted, startDateObjectAdded];
+    this.mapModel.showTime(extendedTime);
   },
 
   onClearTimeClicked() {
