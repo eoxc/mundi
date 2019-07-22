@@ -812,6 +812,11 @@ input,
 }
 
 .bootstrap-datetimepicker-widget {
+  min-height: 282px;
+  position: absolute;
+  .separator{
+    display:none;
+  }
   .datepicker {
     .active {
       background: $c_lo !important;

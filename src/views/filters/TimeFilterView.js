@@ -3,6 +3,7 @@ import moment from 'moment';
 import 'moment-timezone';
 import 'eonasdan-bootstrap-datetimepicker';
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css';
+import $ from 'jquery';
 
 import template from './TimeFilterView.hbs';
 
@@ -52,8 +53,9 @@ const TimeFilterView = Marionette.ItemView.extend({
         timeZone: 'UTC',
         widgetPositioning: {
           horizontal: 'right',
-          vertical: 'auto',
+          vertical: 'top',
         },
+        widgetParent: '#app',
         keyBinds: {
           enter() {
             const value = $elem.find('input').val();
@@ -70,6 +72,14 @@ const TimeFilterView = Marionette.ItemView.extend({
         },
         minDate,
         maxDate,
+      });
+      // mundi specific calendar absolute positioning floating above the app
+      $elem.on('dp.show', () => {
+        const dateInputRect = this.el.getBoundingClientRect();
+        $('.bootstrap-datetimepicker-widget').css({
+          left: `${dateInputRect.left}px`,
+          top: `${dateInputRect.top - 4}px`,
+        });
       });
     });
   },
