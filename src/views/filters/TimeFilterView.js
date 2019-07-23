@@ -3,6 +3,7 @@ import moment from 'moment';
 import 'moment-timezone';
 import 'eonasdan-bootstrap-datetimepicker';
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css';
+import $ from 'jquery';
 
 import template from './TimeFilterView.hbs';
 
@@ -25,6 +26,7 @@ const TimeFilterView = Marionette.ItemView.extend({
     this.mapModel = options.mapModel;
     this.maxMapInterval = this.mapModel.get('maxMapInterval');
     this.domain = options.domain;
+    this.constrainTimeDomain = options.constrainTimeDomain;
     this.listenTo(this.mapModel, 'change:time', this.onMapTimeChanged);
     this.listenTo(this.mapModel, 'change:extendedTime', this.onMapExtendedTimeChanged);
     this.listenTo(this.mapModel,
@@ -37,6 +39,8 @@ const TimeFilterView = Marionette.ItemView.extend({
     if (!this.maxMapInterval) {
       this.$('.time-buttons').hide();
     }
+    const minDate = this.constrainTimeDomain ? this.domain.start : false;
+    const maxDate = this.constrainTimeDomain ? this.domain.end : false;
     ['start', 'end'].forEach((label) => {
       const $elem = this.$(`input.${label}`);
       $elem.datetimepicker({
@@ -49,8 +53,9 @@ const TimeFilterView = Marionette.ItemView.extend({
         timeZone: 'UTC',
         widgetPositioning: {
           horizontal: 'right',
-          vertical: 'auto',
+          vertical: 'top',
         },
+        widgetParent: '#app',
         keyBinds: {
           enter() {
             const value = $elem.find('input').val();
@@ -65,8 +70,16 @@ const TimeFilterView = Marionette.ItemView.extend({
         icons: {
           close: 'glyphicon glyphicon-ok'
         },
-        minDate: this.domain.start,
-        maxDate: this.domain.end,
+        minDate,
+        maxDate,
+      });
+      // mundi specific calendar absolute positioning floating above the app
+      $elem.on('dp.show', () => {
+        const dateInputRect = this.el.getBoundingClientRect();
+        $('.bootstrap-datetimepicker-widget').css({
+          left: `${dateInputRect.left}px`,
+          top: `${dateInputRect.top - 4}px`,
+        });
       });
     });
   },
@@ -95,7 +108,14 @@ const TimeFilterView = Marionette.ItemView.extend({
   },
 
   onShowTimeClicked() {
-    this.mapModel.showTime(this.mapModel.get('extendedTime'));
+    // modify time to show 1.1 * larger area on timeSlider
+    // this makes dragging of handles more user friendly
+    let extendedTime = this.mapModel.get('extendedTime');
+    const timeDiff = extendedTime[1] - extendedTime[0];
+    const startDateObjectSubtracted = new Date(extendedTime[0].getTime() - (timeDiff * 0.05));
+    const startDateObjectAdded = new Date(extendedTime[1].getTime() + (timeDiff * 0.05));
+    extendedTime = [startDateObjectSubtracted, startDateObjectAdded];
+    this.mapModel.showTime(extendedTime);
   },
 
   onClearTimeClicked() {
