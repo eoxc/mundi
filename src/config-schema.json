@@ -587,6 +587,11 @@
                             "type": "number",
                             "default": 150
                         },
+                        "switchMultiPolygonCoordinates": {
+                          "description": "If catalog sends multipolygon coordinates for this layer in lon,lat instead of lat,lon - this needs to be set to true.",
+                          "type": "boolean",
+                          "default": false
+                        },
                         "parameters": {
                             "description": "Mapping the parameter type (such as eo:processingCenter) to a settings object.",
                             "type": "array",
@@ -650,6 +655,10 @@
                     },
                     "thumbnailUrlTemplate": {
                         "description": "The template string to construct a thumbnail URL. Use '{{' and '}}' to select values. e.g: 'http://landsat-pds.s3.amazonaws.com/{{properties.s3Path}}/{{properties.title}}_thumb_small.jpg'.",
+                        "type": "string"
+                    },
+                    "quickLookUrlTemplate": {
+                        "description": "The template string to construct a quickLook URL. Use '{{' and '}}' to select values. e.g: 'http://landsat-pds.s3.amazonaws.com/{{properties.s3Path}}/{{properties.title}}_thumb_small.jpg'. The URL will be used in case thumbnailUrl is not available.",
                         "type": "string"
                     },
                     "descriptionTemplate": {
