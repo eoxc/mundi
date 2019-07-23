@@ -813,10 +813,14 @@ input,
 }
 
 .bootstrap-datetimepicker-widget {
-  min-height: 282px;
+  min-height: 284px;
   position: absolute;
-  .separator{
-    display:none;
+  .separator {
+    display: none;
+  }
+  &.dropdown-menu::after,
+  &.dropdown-menu::before {
+    display: none;
   }
   .datepicker {
     .active {
