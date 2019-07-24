@@ -95,12 +95,13 @@ const AreaFilterView = Marionette.LayoutView.extend({
   onToolClearClicked(event) {
     event.preventDefault();
     this.mapModel.set('tool', null);
+    this.mapModel.set('drawnArea', null);
     this.mapModel.set('area', null);
   },
 
   onToolShowFeatureClicked(event) {
     event.preventDefault();
-    const area = this.mapModel.get('area');
+    const area = this.mapModel.get('drawnArea') || this.mapModel.get('area');
     this.mapModel.show(area);
   },
 

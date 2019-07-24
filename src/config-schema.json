@@ -70,6 +70,11 @@
                     "type": "number",
                     "default": 28
                 },
+                "projection": {
+                  "description": "Chosen map view projection EPSG format, all layers/features which do not share this CRS are (slowly) reprojected on the fly. Use with caution.",
+                  "type": "string",
+                  "default": "EPSG:4326"
+                },
                 "extent": {
                     "description": "The initially visible extent. This setting is mutually exclusive to 'center' and 'zoom'.",
                     "type": "array",
@@ -168,6 +173,11 @@
                   "type": "string",
                   "pattern": "^P(?:([0-9]+)Y|)?(?:([0-9]+)M|)?(?:([0-9]+)D|)?T?(?:([0-9]+)H|)?(?:([0-9]+)M|)?(?:([0-9]+)S|)?$",
                   "default": null
+                },
+                "constrainOutCoords" : {
+                  "description": "Coordinates sent to the catalog (from Polygon filter) will be forced to be in CRS bounds to conform to the OpenSeach geo standard",
+                  "type": "boolean",
+                  "default": false
                 },
                 "highlightFillColor": {
                     "description": "The fill color of highlighted footprints/bounding boxes on the map. Any valid CSS color defintion is supported.",
@@ -460,6 +470,11 @@
                             "description": "The maximum map zoom level for this layer. Used for map is minimum over all layers.",
                             "type": "number",
                             "default": 28
+                        },
+                        "noAntialiasing": {
+                          "description": "Disables canvas rendering antialiasing when larger zoom than which source does provide is requested (blurry vs sharp image)",
+                          "type": "boolean",
+                          "default": false
                         },
                         "attribution": {
                             "description": "A string to be displayed when the layer is displayed. Can contain HTML for specific formatting.",

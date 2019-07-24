@@ -56,6 +56,7 @@ const FeatureListView = Marionette.CompositeView.extend({
   },
 
   onItemClicked(childView) {
+    this.mapModel.set('drawnArea', null);
     this.mapModel.set('area', childView.model.attributes);
     this.dropdownMenu.hide();
   },

@@ -24,7 +24,7 @@ const TimeFilterView = Marionette.ItemView.extend({
 
   initialize(options) {
     this.mapModel = options.mapModel;
-    this.maxMapInterval = options.maxMapInterval;
+    this.maxMapInterval = this.mapModel.get('maxMapInterval');
     this.domain = options.domain;
     this.constrainTimeDomain = options.constrainTimeDomain;
     this.listenTo(this.mapModel, 'change:time', this.onMapTimeChanged);
