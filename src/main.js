@@ -377,6 +377,7 @@ window.Application = Marionette.Application.extend({
       onFeatureClicked(records) {
         showRecordDetails(records);
       },
+      constrainOutCoords: settings.constrainOutCoords,
     }));
 
     layout.showChildView('leftPanel', new SidePanelView({
