@@ -169,6 +169,11 @@
                   "pattern": "^P(?:([0-9]+)Y|)?(?:([0-9]+)M|)?(?:([0-9]+)D|)?T?(?:([0-9]+)H|)?(?:([0-9]+)M|)?(?:([0-9]+)S|)?$",
                   "default": null
                 },
+                "constrainOutCoords" : {
+                  "description": "Coordinates sent to the catalog (from Polygon filter) will be forced to be in CRS bounds to conform to the OpenSeach geo standard",
+                  "type": "boolean",
+                  "default": false
+                },
                 "highlightFillColor": {
                     "description": "The fill color of highlighted footprints/bounding boxes on the map. Any valid CSS color defintion is supported.",
                     "type": "string",
