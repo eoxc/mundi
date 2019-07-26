@@ -219,6 +219,7 @@ window.Application = Marionette.Application.extend({
       uploadEnabled: true,
       downloadEnabled: true,
       searchEnabled: true,
+      filterSettings: null,
     });
 
     // set up config
@@ -393,9 +394,9 @@ window.Application = Marionette.Application.extend({
           highlightModel,
           searchCollection,
           uploadEnabled: settings.uploadEnabled,
-          maxMapInterval: parseDuration(settings.maxMapInterval),
           domain,
           constrainTimeDomain: settings.constrainTimeDomain,
+          filterSettings: settings.filterSettings,
         }),
       }, {
         name: 'Layers',
