@@ -14,6 +14,7 @@ const ExtraParametersListView = Marionette.CompositeView.extend({
     return {
       name: layerModel.get('displayName'),
       id: layerModel.cid,
+      collapsed: this.collapsed,
     };
   },
   className: 'panel panel-default',
@@ -22,6 +23,17 @@ const ExtraParametersListView = Marionette.CompositeView.extend({
     this.searchModel = options.searchModel;
     this.filtersModel = options.searchModel.get('filtersModel');
     this.listenTo(this.searchModel, 'change automaticSearch', this.onChangeVisible);
+    // set according to configured filter
+    // additional filters are by default collapsed=true
+    if (options.settings) {
+      if (typeof options.settings.collapsed !== 'undefined') {
+        this.collapsed = options.settings.collapsed;
+      } else {
+        this.collapsed = true;
+      }
+    } else {
+      this.collapsed = true;
+    }
   },
 
   childViewContainer() {

@@ -87,6 +87,7 @@ const RootFiltersView = Marionette.LayoutView.extend({
           this.showChildView(`extraParameters${layerId}`, new ExtraParametersListView(Object.assign({}, options, {
             searchModel,
             collection: new Backbone.Collection(layerModel.get('search.parameters')),
+            settings: paramFs,
           })));
         }
       });
