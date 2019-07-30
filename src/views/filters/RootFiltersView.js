@@ -58,7 +58,7 @@ const RootFiltersView = Marionette.LayoutView.extend({
         this.areaSettings = fs.area;
         this.areaFilterHidden = this.areaSettings.hidden;
       }
-
+    }
 
     if (!this.timeFilterHidden) {
       this.showChildView('timeFilter', new TimeFilterView(Object.assign({}, options, {
@@ -91,7 +91,7 @@ const RootFiltersView = Marionette.LayoutView.extend({
           })));
         }
       });
-  },
+  }
 });
 
 export default RootFiltersView;
