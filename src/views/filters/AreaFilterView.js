@@ -77,6 +77,7 @@ const AreaFilterView = Marionette.LayoutView.extend({
       .map(parseFloat);
 
     if (coordinates.reduce((prev, current) => prev && !isNaN(current), true)) {
+      this.mapModel.set('drawnArea', null);
       this.mapModel.set('area', {
         geometry: { type: 'Point', coordinates },
         type: 'Feature',
@@ -91,6 +92,7 @@ const AreaFilterView = Marionette.LayoutView.extend({
       .map(parseFloat);
 
     if (bbox.reduce((prev, current) => prev && !isNaN(current), true)) {
+      this.mapModel.set('drawnArea', null);
       this.mapModel.set('area', bbox);
     }
   },
