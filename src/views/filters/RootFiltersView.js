@@ -38,6 +38,7 @@ const RootFiltersView = Marionette.LayoutView.extend({
     this.uploadEnabled = options.uploadEnabled;
     this.domain = options.domain;
     this.constrainTimeDomain = options.constrainTimeDomain;
+    this.filterSettings = options.filterSettings;
   },
 
   onBeforeShow() {
@@ -45,23 +46,50 @@ const RootFiltersView = Marionette.LayoutView.extend({
       mapModel: this.mapModel,
       highlightModel: this.highlightModel,
       filtersModel: this.filtersModel,
-      uploadEnabled: this.uploadEnabled,
-      domain: this.domain,
-      constrainTimeDomain: this.constrainTimeDomain,
     };
-    this.showChildView('timeFilter', new TimeFilterView(options));
-    this.showChildView('areaFilter', new AreaFilterView(options));
+    // check out which filters to show
+    if (this.filterSettings) {
+      const fs = this.filterSettings;
+      if (fs.time) {
+        this.timeSettings = fs.time;
+        this.timeFilterHidden = this.timeSettings.hidden;
+      }
+      if (fs.area) {
+        this.areaSettings = fs.area;
+        this.areaFilterHidden = this.areaSettings.hidden;
+      }
 
+
+    if (!this.timeFilterHidden) {
+      this.showChildView('timeFilter', new TimeFilterView(Object.assign({}, options, {
+        constrainTimeDomain: this.constrainTimeDomain,
+        domain: this.domain,
+        settings: this.timeSettings,
+      })));
+    }
+    if (!this.areaFilterHidden) {
+      this.showChildView('areaFilter', new AreaFilterView(Object.assign({}, options, {
+        uploadEnabled: this.uploadEnabled,
+        settings: this.areaSettings,
+      })));
+    }
     this.templateHelpers().searchModelsWithParameters
       .forEach((searchModel) => {
         const layerModel = searchModel.get('layerModel');
         const layerId = layerModel.cid;
-        this.addRegion(`extraParameters${layerId}`, `#extra-parameters-${layerId}`);
-        this.showChildView(`extraParameters${layerId}`, new ExtraParametersListView(Object.assign({}, options, {
-          searchModel,
-          collection: new Backbone.Collection(layerModel.get('search.parameters')),
-          // filtersModel: layerModel.get('filter')
-        })));
+        const paramFs = layerModel.get('parametersFilterSettings');
+        let additionalFilterHidden = false;
+        if (paramFs) {
+          additionalFilterHidden = paramFs.hidden;
+        }
+        if (!additionalFilterHidden) {
+          this.addRegion(`extraParameters${layerId}`, `#extra-parameters-${layerId}`);
+          this.showChildView(`extraParameters${layerId}`, new ExtraParametersListView(Object.assign({}, options, {
+            searchModel,
+            collection: new Backbone.Collection(layerModel.get('search.parameters')),
+            settings: paramFs,
+          })));
+        }
       });
   },
 });

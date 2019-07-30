@@ -55,11 +55,39 @@
         "maxTooltips": 1,
         "rightPanelOpen": true,
         "leftPanelOpen": true,
-        "leftPanelTabIndex": 1,
+        "leftPanelTabIndex": 0,
         "center": [2.3333, 48.8666],
         "zoom": 5,
         // "minZoom": 4,
         "maxZoom": 14,
+        "filterSettings": {
+            "time": {
+                "settings": {
+                    // "mapTime": [
+                    //     '2019-06-22T00:00:00Z',
+                    //     '2019-06-24T00:00:00Z',
+                    // ],
+                }
+            },
+            "area": {
+                "collapsed": false,
+                "hidden": false,
+                // "settings": {
+                //     "type": "Polygon",
+                //     "value": [
+                //         [[-2.3758542, 53.7682002],
+                //         [0.0901125, 46.2137099],
+                //         [3.8158568, 44.8714428],
+                //         [5.0795888, 55.489726],
+                //         [-2.3758542, 53.7682002]],
+                //     ],
+                //     // "type": "Rectangle",
+                //     // "value": [2, 44, 5, 50]
+                //     // "type": "Point",
+                //     // "value": [2, 44]
+                //     }
+            },
+        },
         "footprintFillColor": "rgba(0, 0, 0, 0.2)",
         "footprintStrokeColor": "rgba(0, 0, 0, 1)",
         "filterFillColor": "rgba(0, 165, 255, 0)",
@@ -1001,6 +1029,10 @@
                     "fixed": "L1_"
                   }
                 ],
+                "parametersFilterSettings": {
+                    "collapsed": true,
+                    "hidden": false,
+                },
                 "extraFields": {
                     "properties.mundi.date": "dc:date/text()",
                     "properties.mundi.ingestionDate": "DIAS:ingestionDate/text()",

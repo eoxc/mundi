@@ -13,6 +13,7 @@ const TimeFilterView = Marionette.ItemView.extend({
   templateHelpers() {
     return {
       maxMapInterval: this.maxMapInterval,
+      collapsed: this.collapsed,
     };
   },
   className: 'panel panel-default',
@@ -31,6 +32,14 @@ const TimeFilterView = Marionette.ItemView.extend({
     this.listenTo(this.mapModel, 'change:extendedTime', this.onMapExtendedTimeChanged);
     this.listenTo(this.mapModel,
     'exceed:maxMapInterval', this.onMapIntervalExceeded);
+    // set according to configured filter
+    if (options.settings) {
+      this.collapsed = options.settings.collapsed;
+      this.settings = options.settings.settings;
+    } else {
+      this.collapsed = false;
+      this.settings = null;
+    }
   },
 
   // Marionette event listeners
@@ -85,8 +94,19 @@ const TimeFilterView = Marionette.ItemView.extend({
   },
 
   onAttach() {
-    this.onMapExtendedTimeChanged(this.mapModel);
-    this.onMapTimeChanged();
+    // set according to configured filter
+    if (this.settings && Array.isArray(this.settings.mapTime)) {
+      const mapTime = this.settings.mapTime.map(t => moment.utc(t).toDate());
+      if (mapTime[1] < mapTime[0]) {
+        mapTime.reverse();
+      }
+      this.mapModel.set('extendedTime', mapTime);
+      this.mapModel.set('time', mapTime);
+      this.onShowTimeClicked();
+    } else {
+      this.onMapExtendedTimeChanged(this.mapModel);
+      this.onMapTimeChanged();
+    }
   },
 
   // DOM event listeners
