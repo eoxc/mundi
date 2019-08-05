@@ -915,8 +915,8 @@
                                       "type": "string",
                                       "enum": ["Polygon", "Point", "Rectangle"]
                                   },
-                                  "value": {
-                                    "description": "Area filter values from geojson spec with coordinates in map CRS. Example Point: [x, y], Rectangle (bbox): [minx, miny, maxx, maxy], Polygon [[[x,y], [x,y] ...]]. Supports setting polygon with inner ring this way, but catalog must accept it too.",
+                                  "coordinates": {
+                                    "description": "Area filter coordinates from geojson spec in map CRS. Example Point: [x, y], Rectangle (bbox): [minx, miny, maxx, maxy], Polygon [[[x,y], [x,y] ...]]. Supports setting polygon with inner ring this way, but catalog must accept it too.",
                                     "type": "array",
                                   }
                               }

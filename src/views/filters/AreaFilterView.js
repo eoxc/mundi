@@ -62,9 +62,9 @@ const AreaFilterView = Marionette.LayoutView.extend({
       $(this.el).find('[data-toggle="tooltip"]').tooltip();
     }
 
-    if (this.settings && this.settings.type && this.settings.value) {
+    if (this.settings && this.settings.type && this.settings.coordinates) {
       // delegate feature creation to eoxc because of OL dependency
-      this.mapModel.trigger('manual:filterFromConfig', this.settings.type, this.settings.value);
+      this.mapModel.trigger('manual:filterFromConfig', this.settings.type, this.settings.coordinates);
     }
   },
 
