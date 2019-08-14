@@ -435,6 +435,7 @@ input,
 }
 
 #timeSlider {
+  opacity: 0.9;
   height: 7.5em;
   bottom: 36px;
   .control {
@@ -478,24 +479,18 @@ input,
     }
 
     .mainaxis {
-      line,
-      path {
-        visibility: hidden !important;
-      }
-
       text {
         fill: $c_lo;
         font-family: $font-family-sans-serif;
         text-transform: uppercase;
       }
       & .mainaxis-overlay{
-        fill: $c_lo !important;
-        opacity: 1 !important;
+        display: none;
       }
     }
 
     &.loading {
-      opacity: 1.0;
+      opacity: 1;
     }
     .missing-interval {
       display: none;
