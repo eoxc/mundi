@@ -13,6 +13,7 @@ const AreaFilterView = Marionette.LayoutView.extend({
   templateHelpers() {
     return {
       uploadEnabled: this.uploadEnabled,
+      collapsed: this.collapsed,
     };
   },
   className: 'panel panel-default',
@@ -36,6 +37,15 @@ const AreaFilterView = Marionette.LayoutView.extend({
     this.listenTo(this.mapModel, 'change:area', this.onMapAreaChanged);
     this.listenTo(this.mapModel, 'change:tool', this.onMapToolChanged);
     this.listenTo(this.mapModel, 'change:bbox', this.onMapBBOXChanged);
+
+    // set according to configured filter
+    if (options.settings) {
+      this.collapsed = options.settings.collapsed;
+      this.settings = options.settings.settings;
+    } else {
+      this.collapsed = false;
+      this.settings = null;
+    }
   },
 
   // Marionette event listeners
@@ -50,6 +60,11 @@ const AreaFilterView = Marionette.LayoutView.extend({
       }));
 
       $(this.el).find('[data-toggle="tooltip"]').tooltip();
+    }
+
+    if (this.settings && this.settings.type && this.settings.coordinates) {
+      // delegate feature creation to eoxc because of OL dependency
+      this.mapModel.trigger('manual:filterFromConfig', this.settings.type, this.settings.coordinates);
     }
   },
 
