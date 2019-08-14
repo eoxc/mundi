@@ -390,19 +390,25 @@ window.Application = Marionette.Application.extend({
       icon: 'fa-cog',
       defaultOpen: settings.leftPanelOpen,
       openTabIndex: settings.leftPanelTabIndex,
-      views: [{
-        name: 'Filters',
-        view: new RootFiltersView({
-          filtersModel,
-          mapModel,
-          highlightModel,
-          filterSettings: settings.filterSettings,
-          constrainTimeDomain: settings.constrainTimeDomain,
-          searchCollection,
-          uploadEnabled: settings.uploadEnabled,
-          domain,
-        }),
-      }, {
+      views: [
+        //////////////////////////////////////////
+        // NOT USED FOR DCFS SHOWCASE AS NO FILTERS NECESSARY
+        //////////////////////////////////////////
+
+      //   {
+      //   name: 'Filters',
+      //   view: new RootFiltersView({
+      //     filtersModel,
+      //     mapModel,
+      //     highlightModel,
+      //     filterSettings: settings.filterSettings,
+      //     constrainTimeDomain: settings.constrainTimeDomain,
+      //     searchCollection,
+      //     uploadEnabled: settings.uploadEnabled,
+      //     domain,
+      //   }),
+      // },
+       {
         name: 'Layers',
         view: new LayerControlLayoutView({
           mapModel,
