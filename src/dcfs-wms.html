@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta charset="UTF-8">
+  <title>DCFS WMS SHOWCASE</title>
+</head>
+<body>
+  <div id="app" style="width: 100%; top: 0; bottom: 0; position: absolute; margin: 0; padding:0;"></div>
+  <script src="code-de.bundle.js"></script>
+  <script>
+  var today = new Date();
+  today.setUTCHours(24, 0, 0, 0);
+  var twoYearsAgo = new Date(new Date(today).setUTCFullYear(today.getUTCFullYear() - 2));
+  var displayTimeDomainEnd = new Date(new Date(today).setUTCDate(today.getUTCDate() - 14));
+  var displayTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 28));
+  var selectedTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 22));
+  var selectedTimeDomainEnd = new Date(new Date(today).setUTCDate(today.getUTCDate() - 19));
+
+  var config = {
+    "settings": {
+        "tutorial": "disabled",
+        "uploadEnabled": false,
+        "downloadEnabled": false,
+        "searchEnabled": false,
+        "language": "en",
+        "timeDomain": [
+            "2017-01-01T00:00:00Z",
+            today.toISOString()
+        ],
+        "constrainTimeDomain": true,
+        "displayTimeDomain": [
+            displayTimeDomainStart,
+            displayTimeDomainEnd,
+        ],
+        "displayInterval": "P365D",
+        "selectedTimeDomain": [
+            selectedTimeDomainStart,
+            selectedTimeDomainEnd,
+        ],
+        "selectableInterval": "P7D",
+        "timeSliderControls": true,
+        "timeSliderAlternativeBrush": true,
+        // just to trigger shared timefilter/timeslider
+        "maxMapInterval": "P8D", 
+        "maxTooltips": 1,
+        "rightPanelOpen": false,
+        "leftPanelOpen": true,
+        "center": [11.39, 47.26],
+        "zoom": 11,
+//        "minZoom": 4,
+        "maxZoom": 18,
+        "filterSettings": {
+            "area": {
+                "hidden": true,
+            }
+        },
+    },
+    "baseLayers": [
+        {
+            "id": "terrain-light",
+            "displayName": "EOX Terrain-Light",
+            "display": {
+                "id": "terrain-light",
+                "visible": true,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.s2maps-tiles.eu/wmts/",
+                    "//b.s2maps-tiles.eu/wmts/",
+                    "//c.s2maps-tiles.eu/wmts/",
+                    "//d.s2maps-tiles.eu/wmts/",
+                    "//e.s2maps-tiles.eu/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "style": "default",
+                "attribution": "Terrain-Light { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> }"
+            }
+        }, {
+            "id": "s2cloudless",
+            "displayName": "EOX Sentinel-2 cloudless",
+            "display": {
+                "id": "s2cloudless",
+                "visible": false,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.s2maps-tiles.eu/wmts/",
+                    "//b.s2maps-tiles.eu/wmts/",
+                    "//c.s2maps-tiles.eu/wmts/",
+                    "//d.s2maps-tiles.eu/wmts/",
+                    "//e.s2maps-tiles.eu/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "style": "default",
+                "attribution": "<a xmlns:dct=\"http://purl.org/dc/terms/\" href=\"https://s2maps.eu\" property=\"dct:title\">Sentinel-2 cloudless - https://s2maps.eu</a> by <a xmlns:cc=\"http://creativecommons.org/ns#\" href=\"https://eox.at\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">EOX IT Services GmbH</a> (Contains modified Copernicus Sentinel data 2016 &amp; 2017)"
+            }
+        }
+    ],
+    "layers": [
+        {
+            "id": "S2_L1C",
+            "displayName": "Sentinel-2 MSI L1C",
+            "displayColor": "#56EC00",
+            "display": {
+                "id": "S2L1C",
+                "visible": true,
+                "protocol": "WMS",
+                "format": "image/png",
+                "timeRecords" : {
+                  "start": "2016-01-01T12:00:00Z" ,
+                  "end": "2019-08-13T12:00:00Z",
+                },
+                "projection": "EPSG:4326",
+                "urls": [
+                    'https://ogc.dev.dcfs-a.eox.at'
+                ],
+                "useMilliseconds": false,
+                "style": "",
+                "tileSize": 512,
+                "discardZulu": true,
+                "version": "1.3.0",
+                "extraParameters": {
+                    "layers": "TRUE_COLOR"
+                },
+                "minZoom": 10,
+            },
+            "detailsDisplay": {
+                "id": "S2_L1C",
+                "visible": true,
+                "protocol": "WMS",
+                "urls": [
+                    'https://ogc.dev.dcfs-a.eox.at'
+                ],
+                "format": "image\/png",
+                "projection": "EPSG:4326",
+                "style": "",
+                "tileSize": 512,
+                "useMilliseconds": false,
+                "discardZulu": true,
+                "adjustTime": 60 * 15, // 15 minutes adjustment
+                "extraParameters": {
+                    "LAYERS": "TRUE_COLOR"
+                },
+                "version": "1.3.0",
+                "options": [{
+                    "name": "Band Combination",
+                    "target": "detailsDisplay.extraParameters.dim_bands",
+                    "values": [{
+                        "value": "TRUE_COLOR",
+                    }, {
+                        "value": "AGRICULTURE",
+                    }, {
+                        "value": "FALSE_COLOR",
+                    }, {
+                        "value": "NDVI",
+                    }, {
+                        "value": "FALSE_COLOR_URBAN",
+                    }, {
+                        "value": "MOISTURE_INDEX",
+                    }, {
+                        "value": "GEOLOGY",
+                    }, {
+                        "value": "BATHYMETRIC",
+                    }, {
+                        "value": "SWIR",
+                    }]
+                },{
+                  "name": "Layer display style",
+                  "target": "detailsDisplay.extraParameters.LAYERS",
+                  "values": [{
+                      "label": "Natural Color",
+                      "value": "TRUE_COLOR",
+                  }, {
+                      "label": "Agriculture",
+                      "value": "AGRICULTURE",
+                  }, {
+                      "label": "False Color",
+                      "value": "FALSE_COLOR",
+                  }, {
+                      "label": "Vegetation Index - NDVI",
+                      "value": "NDVI",
+                  }, {
+                      "label": "False Color Urban",
+                      "value": "FALSE_COLOR_URBAN",
+                  }, {
+                      "label": "Moisture index",
+                      "value": "MOISTURE_INDEX",
+                  }, {
+                      "label": "Geology",
+                      "value": "GEOLOGY",
+                  }, {
+                      "label": "Bathymetric",
+                      "value": "BATHYMETRIC",
+                  }, {
+                      "label": "SWIR",
+                      "value": "SWIR",
+                  }]
+                }],
+            },
+        },
+    ],
+    "overlayLayers": [
+        {
+            "id": "coastline",
+            "displayName": "EOX Coastline",
+            "display": {
+                "id": "coastline",
+                "visible": false,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/",
+                    "//f.tiles.maps.eox.at/wmts/",
+                    "//g.tiles.maps.eox.at/wmts/",
+                    "//h.tiles.maps.eox.at/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "style": "default",
+                "format": "image/png",
+                "attribution": "Overlay { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> and <a href=\"https://github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
+            }
+        },
+        {
+            "id": "overlay_base",
+            "displayName": "EOX Borders and Labels",
+            "display": {
+                "id": "overlay_base",
+                "visible": true,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/",
+                    "//f.tiles.maps.eox.at/wmts/",
+                    "//g.tiles.maps.eox.at/wmts/",
+                    "//h.tiles.maps.eox.at/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "style": "default",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "attribution": "Overlay { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> and <a href=\"https://github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
+            }
+        }
+    ]
+};
+    var app = new Application({
+      config: config,
+      container: document.getElementById('app'),
+    });
+    app.start();
+  </script>
+</body>
+</html>

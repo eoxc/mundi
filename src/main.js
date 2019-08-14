@@ -340,6 +340,10 @@ window.Application = Marionette.Application.extend({
       }));
     };
 
+    layersCollection.on('show-options', (layerModel, useDetailsDisplay) => {
+      layout.showChildView('topModals', new LayerOptionsModalView({ model: layerModel, useDetailsDisplay }));
+    });
+
     layersCollection.on('download-full-resolution', (layerModel) => {
       const searchModel = searchCollection.find(model => model.get('layerModel') === layerModel);
       layout.showChildView('modals', new FullResolutionDownloadOptionsModalView({
@@ -392,11 +396,11 @@ window.Application = Marionette.Application.extend({
           filtersModel,
           mapModel,
           highlightModel,
+          filterSettings: settings.filterSettings,
+          constrainTimeDomain: settings.constrainTimeDomain,
           searchCollection,
           uploadEnabled: settings.uploadEnabled,
           domain,
-          constrainTimeDomain: settings.constrainTimeDomain,
-          filterSettings: settings.filterSettings,
         }),
       }, {
         name: 'Layers',
@@ -414,63 +418,66 @@ window.Application = Marionette.Application.extend({
     if (typeof termsAndConditionsUrl === 'object') {
       termsAndConditionsUrl = termsAndConditionsUrl[settings.language];
     }
+    //////////////////////////////////////////
+    // NOT USED FOR DCFS SHOWCASE AS NO OPENSEARCH USED
+    //////////////////////////////////////////
 
-    if (searchCollection.length === 1) {
-      // single layer view
-      layout.showChildView('rightPanel', new SidePanelView({
-        position: 'right',
-        icon: 'fa-list',
-        defaultOpen: settings.rightPanelOpen,
-        views: [{
-          name: 'Search Results',
-          hasInfo: true,
-          view: new CombinedResultView({
-            mapModel,
-            filtersModel,
-            highlightModel,
-            collection: searchCollection,
-            downloadEnabled: settings.downloadEnabled,
-            onStartDownload: startDownload,
-            onSelectFiles: selectFiles,
-            fallbackThumbnailUrl,
-            termsAndConditionsUrl,
-          }),
-        }],
-      }));
-    } else {
-      // multi layer view
-      layout.showChildView('rightPanel', new SidePanelView({
-        position: 'right',
-        icon: 'fa-list',
-        defaultOpen: settings.rightPanelOpen,
-        openTabIndex: settings.rightPanelTabIndex,
-        views: [{
-          name: 'Search Results',
-          hasInfo: true,
-          view: new SearchResultView({
-            mapModel,
-            filtersModel,
-            highlightModel,
-            collection: searchCollection,
-            fallbackThumbnailUrl,
-          }),
-        }, {
-          name: 'Basket',
-          hasInfo: true,
-          view: new DownloadSelectionView({
-            mapModel,
-            filtersModel,
-            highlightModel,
-            collection: searchCollection,
-            onStartDownload: startDownload,
-            onSelectFiles: selectFiles,
-            termsAndConditionsUrl,
-            downloadEnabled: settings.downloadEnabled,
-            fallbackThumbnailUrl,
-          }),
-        }],
-      }));
-    }
+    // if (searchCollection.length === 1) {
+    //   // single layer view
+    //   layout.showChildView('rightPanel', new SidePanelView({
+    //     position: 'right',
+    //     icon: 'fa-list',
+    //     defaultOpen: settings.rightPanelOpen,
+    //     views: [{
+    //       name: 'Search Results',
+    //       hasInfo: true,
+    //       view: new CombinedResultView({
+    //         mapModel,
+    //         filtersModel,
+    //         highlightModel,
+    //         collection: searchCollection,
+    //         downloadEnabled: settings.downloadEnabled,
+    //         onStartDownload: startDownload,
+    //         onSelectFiles: selectFiles,
+    //         fallbackThumbnailUrl,
+    //         termsAndConditionsUrl,
+    //       }),
+    //     }],
+    //   }));
+    // } else {
+    //   // multi layer view
+    //   layout.showChildView('rightPanel', new SidePanelView({
+    //     position: 'right',
+    //     icon: 'fa-list',
+    //     defaultOpen: settings.rightPanelOpen,
+    //     openTabIndex: settings.rightPanelTabIndex,
+    //     views: [{
+    //       name: 'Search Results',
+    //       hasInfo: true,
+    //       view: new SearchResultView({
+    //         mapModel,
+    //         filtersModel,
+    //         highlightModel,
+    //         collection: searchCollection,
+    //         fallbackThumbnailUrl,
+    //       }),
+    //     }, {
+    //       name: 'Basket',
+    //       hasInfo: true,
+    //       view: new DownloadSelectionView({
+    //         mapModel,
+    //         filtersModel,
+    //         highlightModel,
+    //         collection: searchCollection,
+    //         onStartDownload: startDownload,
+    //         onSelectFiles: selectFiles,
+    //         termsAndConditionsUrl,
+    //         downloadEnabled: settings.downloadEnabled,
+    //         fallbackThumbnailUrl,
+    //       }),
+    //     }],
+    //   }));
+    // }
 
     layout.$('.search-result-view .select-all,.download-view .download-control .btn').removeClass('btn-sm');
     layout.$('.tools, .selections').removeClass('btn-group-justified');
@@ -485,42 +492,6 @@ window.Application = Marionette.Application.extend({
     });
 
     layout.showChildView('bottomPanel', new StopSelectionView({ mapModel }));
-
-    const warningsCollection = new WarningsCollection([]);
-    layout.showChildView('topPanel', new WarningsView({ collection: warningsCollection }));
-
-    // hook up the events that shall generate warnings
-    // filtersModel.on('change', () => {
-    //   // show warning when time filter is set
-    //   warningsCollection.setWarning(
-    //     i18next.t('timefilter_warning'),
-    //     filtersModel.get('time') || false
-    //   );
-
-    //   const otherFilters = Object.keys(filtersModel.attributes)
-    //     .filter(key => key !== 'time' && key !== 'area');
-    //   warningsCollection.setWarning(
-    //     i18next.t('advancedfilter_warning'),
-    //     otherFilters.length
-    //   );
-    // });
-
-    // show a warning for every layer that failed to be accessed
-    failedLayers.forEach(layer => warningsCollection.setWarning(
-      i18next.t('layer_failed', { value: layer.get('displayName') })
-    ));
-
-    // searchCollection.on('change', () => {
-    //   const show = searchCollection
-    //     .filter(searchModel => (
-    //       !searchModel.get('isSearching') && !searchModel.get('hasError')
-    //     ))
-    //     .reduce((acc, searchModel) => (
-    //       acc || searchModel.get('totalResults') > searchModel.get('hasLoaded')
-    //     ), false);
-    //   warningsCollection.setWarning(i18next.t('toomanyresults_warning'), show);
-    // });
-
 
     if (settings.extent) {
       mapModel.show({ bbox: settings.extent });
@@ -570,8 +541,6 @@ window.Application = Marionette.Application.extend({
     $('.panel').sizeChanged(() => {
       updateStyleOnScrollPresent([$('.filters-view'), $('.layer-control')]);
     });
-
-    // layout.showChildView('infoPanel', new VendorInfoView({ eoxcVersion, cdeVersion }));
 
     // use set timeout here so that vendor info is always at the end of the attribution list
     setTimeout(() => {
