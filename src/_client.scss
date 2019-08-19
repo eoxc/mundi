@@ -1098,3 +1098,10 @@ body {
 .control-label {
   color: $c_gray;
 }
+
+.input-group-addon .fa {
+  font-size: 1.5em;
+  &.ui-sortable-handle, &.fa-square {
+    display: none;
+  }
+}
