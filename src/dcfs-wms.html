@@ -10,6 +10,7 @@
   <script src="code-de.bundle.js"></script>
   <script>
   var today = new Date();
+  var timeRecordsStart = new Date(Date.UTC(2016, 0, 1, 0, 0, 0));
   today.setUTCHours(24, 0, 0, 0);
   var twoYearsAgo = new Date(new Date(today).setUTCFullYear(today.getUTCFullYear() - 2));
   var displayTimeDomainEnd = new Date(new Date(today));
@@ -112,7 +113,7 @@
                 "protocol": "WMS",
                 "format": "image/png",
                 "timeRecords" : {
-                  "start": "2016-01-01T12:00:00Z" ,
+                  "start": timeRecordsStart ,
                   "end": today,
                 },
                 "projection": "EPSG:4326",
