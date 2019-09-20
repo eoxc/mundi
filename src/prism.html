@@ -9,17 +9,17 @@
   <header id="header" style="width: 100%; height:70px;">
     <h3 style="width:100%;text-align:center;
     color: #006699;">PRISM Data Access Service (PDAS) Client powered by
-    <a href="https://eox.at"><img src="https://eox.at/wp-content/uploads/2017/09/EOX_Logo.svg" alt="EOX" style="height:25px;margin-left:10px"/></a>
+    <a href="//eox.at"><img src="//eox.at/wp-content/uploads/2017/09/EOX_Logo.svg" alt="EOX" style="height:25px;margin-left:10px"/></a>
     </h3>
   </header>
   <div id="app" style="width: 100%; top: 60px; bottom: 0; position: absolute; margin: 0; padding:0;"></div>
   <script src="prism.js"></script>
   <script>
-  var baseUrl = 'https://vhr18.pdas.prism.eox.at/';
+  var baseUrl = '//vhr18.pdas.prism.eox.at/';
   var config = {
     "settings": {
         "rightPanelOpen": true,
-        "leftPanelOpen": true,
+        "leftPanelOpen": false,
         "leftPanelTabIndex": 0,
         "tutorial": "disabled",
         "uploadEnabled": false,
@@ -83,7 +83,7 @@
                 "format": "image/png",
                 "projection": "EPSG:4326",
                 "style": "default",
-                "attribution": "Terrain-Light { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> }"
+                "attribution": "Terrain-Light { Data &copy; <a href=\"//www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"//eox.at\" target=\"_blank\">EOX</a> }"
             }
         }, {
             "id": "terrain",
@@ -103,7 +103,7 @@
                 "format": "image/png",
                 "projection": "EPSG:4326",
                 "style": "default",
-                "attribution": "Terrain { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> }"
+                "attribution": "Terrain { Data &copy; <a href=\"//www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"//eox.at\" target=\"_blank\">EOX</a> }"
             }
         },  {
             "id": "s2cloudless",
@@ -123,7 +123,7 @@
                 "format": "image/png",
                 "projection": "EPSG:4326",
                 "style": "default",
-                "attribution": "<a xmlns:dct=\"http://purl.org/dc/terms/\" href=\"https://s2maps.eu\" property=\"dct:title\">Sentinel-2 cloudless - https://s2maps.eu</a> by <a xmlns:cc=\"http://creativecommons.org/ns#\" href=\"https://eox.at\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">EOX IT Services GmbH</a> (Contains modified Copernicus Sentinel data 2016 &amp; 2017)"
+                "attribution": "<a xmlns:dct=\"//purl.org/dc/terms/\" href=\"//s2maps.eu\" property=\"dct:title\">Sentinel-2 cloudless - //s2maps.eu</a> by <a xmlns:cc=\"//creativecommons.org/ns#\" href=\"s://eox.at\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">EOX IT Services GmbH</a> (Contains modified Copernicus Sentinel data 2016 &amp; 2017)"
             }
         }
     ],
@@ -133,7 +133,7 @@
             "displayName": 'Very High Resolution 2018',
             "displayColor": '#eb3700',
             "display": {
-                "id": 'VHR_IMAGE_2018',
+                "id": 'VHR_IMAGE_2018__TRUE_COLOR',
                 "visible": true,
                 "protocol": 'WMS',
                 "url": baseUrl + 'cache/ows',
@@ -189,7 +189,7 @@
                 "url": baseUrl + 'ows',
                 "format": 'image/png',
                 "projection": 'EPSG:4326',
-                "style": 'yellow',
+                "style": 'red',
             },
         },
     ],
@@ -202,17 +202,17 @@
                 "visible": false,
                 "protocol": "WMTS",
                 "urls": [
-                    "https://a.tiles.maps.eox.at/wmts/",
-                    "https://b.tiles.maps.eox.at/wmts/",
-                    "https://c.tiles.maps.eox.at/wmts/",
-                    "https://d.tiles.maps.eox.at/wmts/",
-                    "https://e.tiles.maps.eox.at/wmts/"
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
                 ],
                 "matrixSet": "WGS84",
                 "style": "default",
                 "format": "image/png",
                 "projection": "EPSG:4326",
-                "attribution": "Overlay { Data &copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"http://eox.at\" target=\"_blank\">EOX</a> and <a href=\"https://github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
+                "attribution": "Overlay { Data &copy; <a href=\"//www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"//eox.at\" target=\"_blank\">EOX</a> and <a href=\"//github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
             }
         }
     ]
