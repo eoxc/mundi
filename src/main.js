@@ -61,10 +61,7 @@ import './_client.scss';
 
 es6Promise.polyfill();
 
-const germanFormalTranslation = require('./languages/de.json');
-const germanInformalTranslation = require('./languages/deinformal.json');
 const englishTranslation = require('./languages/en.json');
-
 
 function combineParameter(setting, param) {
   const options = setting.options || param.options;
@@ -111,12 +108,6 @@ window.Application = Marionette.Application.extend({
       lng: this.config.settings.language || 'en',
       fallbackLng: 'en',
       resources: {
-        de: {
-          translation: germanFormalTranslation,
-        },
-        deinformal: {
-          translation: germanInformalTranslation,
-        },
         en: {
           translation: englishTranslation,
         },
@@ -576,7 +567,7 @@ window.Application = Marionette.Application.extend({
     // use set timeout here so that vendor info is always at the end of the attribution list
     setTimeout(() => {
       const vendorInfoHTML = `<li>Powered&nbsp;by&nbsp;<a href="https://github.com/eoxc" target="_blank">EOxC</a>&nbsp;&copy;&nbsp;<a href="https://eox.at" target="_blank">EOX&nbsp;<i class="icon-eox-eye"/></a>
-      <!-- mundi Client version ${cdeVersion} https://github.com/eoxc/mundi/releases/tag/v${cdeVersion} -->
+      <!-- prism Client version ${cdeVersion} https://github.com/eoxc/prism/releases/tag/v${cdeVersion} -->
       <!-- eoxc version ${eoxcVersion} https://github.com/eoxc/eoxc/releases/tag/v${eoxcVersion} --></li>`;
       $(this.container).find('.ol-attribution ul').append(vendorInfoHTML);
     });
