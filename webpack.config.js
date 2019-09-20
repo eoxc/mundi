@@ -6,26 +6,15 @@ const eoxcPackageJson = require('eoxc/package.json');
 
 module.exports = {
   entry: {
-    'code-de': ['babel-polyfill', './src/preload.js', './src/main.js'],
+    prism: ['babel-polyfill', './src/preload.js', './src/main.js'],
   },
   resolve: {
-    // mainFields: ['module', 'main'],
     modulesDirectories: ['web_modules', 'node_modules', 'bower_components'],
-    // packageMains: ['webpack', 'web', 'browserify', ['jam', 'main'], 'main'],
     alias: {
       // necessary to avoid multiple packings of backbone due to marionette
       backbone: path.join(__dirname, 'node_modules', 'backbone', 'backbone'),
       handlebars: 'handlebars/dist/handlebars.min.js',
       'opensearch-browser': 'opensearch-browser/dist',
-
-      // Bind version of jquery
-      //jquery: path.join(__dirname, 'node_modules', 'jquery'),
-
-      // Bind version of jquery-ui
-      //'jquery-ui': path.join(__dirname, 'node_modules', 'jquery-ui'),
-
-      // jquery-ui doesn't contain a index file
-      // bind module to the complete module
     },
   },
   resolveLoader: {
@@ -33,8 +22,8 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].bundle.js',
-    library: 'code-de',
+    filename: '[name].js',
+    library: 'prism',
     libraryTarget: 'umd',
   },
   devServer: {
@@ -71,7 +60,7 @@ module.exports = {
       'window.jQuery': 'jquery',
     }),
     new webpack.BannerPlugin(
-      `CODE-DE version: ${packageJson.version}\neoxc version: ${eoxcPackageJson.version}`
+      `PRISM version: ${packageJson.version}\neoxc version: ${eoxcPackageJson.version}`
     ),
   ],
   postcss() {

@@ -61,10 +61,7 @@ import './_client.scss';
 
 es6Promise.polyfill();
 
-const germanFormalTranslation = require('./languages/de.json');
-const germanInformalTranslation = require('./languages/deinformal.json');
 const englishTranslation = require('./languages/en.json');
-
 
 function combineParameter(setting, param) {
   const options = setting.options || param.options;
@@ -111,12 +108,6 @@ window.Application = Marionette.Application.extend({
       lng: this.config.settings.language || 'en',
       fallbackLng: 'en',
       resources: {
-        de: {
-          translation: germanFormalTranslation,
-        },
-        deinformal: {
-          translation: germanInformalTranslation,
-        },
         en: {
           translation: englishTranslation,
         },
