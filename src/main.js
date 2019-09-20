@@ -396,7 +396,7 @@ window.Application = Marionette.Application.extend({
           filtersModel,
           baseLayersCollection,
           overlayLayersCollection,
-          layersCollection: searchCollection.length === 1 ? undefined : layersCollection,
+          layersCollection: layersCollection.length === 1 ? undefined : layersCollection,
         }),
       }],
     }));

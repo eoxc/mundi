@@ -15,9 +15,7 @@
   <div id="app" style="width: 100%; top: 60px; bottom: 0; position: absolute; margin: 0; padding:0;"></div>
   <script src="prism.js"></script>
   <script>
-
-  var baseUrl = 'http://vhr18.pdas.prism.eox.at/cache/';
-
+  var baseUrl = 'https://vhr18.pdas.prism.eox.at/';
   var config = {
     "settings": {
         "rightPanelOpen": true,
@@ -132,41 +130,22 @@
     "layers": [
         {
             "id": 'VHR_IMAGE_2018',
-            "displayName": 'Very High Resolution 2018 (VHR2018)',
+            "displayName": 'Very High Resolution 2018',
             "displayColor": '#eb3700',
             "display": {
                 "id": 'VHR_IMAGE_2018',
                 "visible": true,
                 "protocol": 'WMS',
-                "url": baseUrl + 'ows',
+                "url": baseUrl + 'cache/ows',
                 "format": 'image/png',
                 "projection": 'EPSG:4326',
                 "style": '',
-
-
-                // id: "terrain",
-                // visible: false,
-                // protocol: "WMTS",
-                // urls: [
-                //     "//a.vhr18.pdas.prism.eox.at/wmts/",
-                //     "//b.vhr18.pdas.prism.eox.at/wmts/",
-                //     "//c.vhr18.pdas.prism.eox.at/wmts/",
-                //     "//d.vhr18.pdas.prism.eox.at/wmts/",
-                //     "//e.vhr18.pdas.prism.eox.at/wmts/",
-                //     "//f.vhr18.pdas.prism.eox.at/wmts/",
-                //     "//g.vhr18.pdas.prism.eox.at/wmts/",
-                //     "//h.vhr18.pdas.prism.eox.at/wmts/",
-                // ],
-                // matrixSet: "WGS84",
-                // format: "image/png",
-                // projection: "EPSG:4326",
-                // style: "default",
             },
             "detailsDisplay": {
                 "id": 'VHR_IMAGE_2018__TRUE_COLOR',
                 "visible": true,
                 "protocol": 'WMS',
-                "url": baseUrl + 'ows',
+                "url": baseUrl + 'cache/ows',
                 "format": 'image/png',
                 "projection": 'EPSG:4326',
                 "style": '',
@@ -198,6 +177,20 @@
                 "loadMore": 600,
                 "countZeroRecords": true,
             }
+        },
+        {
+            "id": 'VHR_IMAGE_2018__outlines',
+            "displayName": 'VHR 2018 Outlines',
+            "displayColor": '#187465',
+            "display": {
+                "id": 'VHR_IMAGE_2018__outlines',
+                "visible": false,
+                "protocol": 'WMS',
+                "url": baseUrl + 'ows',
+                "format": 'image/png',
+                "projection": 'EPSG:4326',
+                "style": 'yellow',
+            },
         },
     ],
     "overlayLayers": [
