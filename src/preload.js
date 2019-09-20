@@ -1,1 +1,1 @@
-__webpack_public_path__ = require('script-path')('code-de.bundle');
+__webpack_public_path__ = require('script-path')('prism');

@@ -469,7 +469,7 @@ input,
       stroke: none;
       opacity: 1;
     }
-    .brush .background {
+    .brush {
       fill: $c_lo;
       visibility: visible!important;
     }
@@ -478,19 +478,10 @@ input,
     }
 
     .mainaxis {
-      line,
-      path {
-        visibility: hidden !important;
-      }
-
       text {
         fill: $c_lo;
         font-family: $font-family-sans-serif;
         text-transform: uppercase;
-      }
-      & .mainaxis-overlay{
-        fill: $c_lo !important;
-        opacity: 1 !important;
       }
     }
 
