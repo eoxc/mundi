@@ -4,6 +4,8 @@
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <meta charset="UTF-8">
   <title>PRISM Data Access Service</title>
+  <link rel="icon" href="//eox.at/wp-content/uploads/2015/06/cropped-eox_eye-192x192.png" sizes="192x192" />
+  <link rel="apple-touch-icon-precomposed" href="//eox.at/wp-content/uploads/2015/06/cropped-eox_eye-180x180.png" />
 </head>
 <body>
   <header id="header" style="width: 100%; height:70px;">
@@ -21,7 +23,7 @@
         "rightPanelOpen": true,
         "leftPanelOpen": false,
         "leftPanelTabIndex": 0,
-        "tutorial": "disabled",
+        "tutorial": "once",
         "uploadEnabled": false,
         "downloadEnabled": true,
         "searchEnabled" : true,
@@ -29,24 +31,24 @@
         "language": "en",
         "timeDomain": [
             "2017-01-01T00:00:00Z",
-            "2019-09-14T08:33:35Z",
+            "2019-12-31T23:59:59Z",
         ],
         "constrainTimeDomain": true,
         "displayTimeDomain": [
             "2018-08-01T00:00:00Z",
             "2018-10-01T00:00:00Z",
         ],
-        "displayInterval": "P730D",
+        "displayInterval": "P1096D",
         "selectedTimeDomain": [
             "2018-08-25T00:00:00Z",
             "2018-09-05T00:00:00Z",
         ],
-        "selectableInterval": "P730D",
+        "selectableInterval": "P1096D",
         "timeSliderControls": true,
         "maxTooltips": 1,
-        "center": [2.3333, 48.8666],
+        "center": [12, 49],
         "zoom": 5,
-        "maxZoom": 14,
+        "maxZoom": 15,
         "footprintFillColor": "rgba(0, 0, 0, 0.2)",
         "footprintStrokeColor": "rgba(0, 0, 0, 1)",
         "filterFillColor": "rgba(0, 165, 255, 0)",
@@ -109,7 +111,7 @@
             "id": "s2cloudless",
             "displayName": "EOX Sentinel-2 cloudless",
             "display": {
-                "id": "s2cloudless",
+                "id": "s2cloudless-2018",
                 "visible": false,
                 "protocol": "WMTS",
                 "urls": [
@@ -123,14 +125,14 @@
                 "format": "image/png",
                 "projection": "EPSG:4326",
                 "style": "default",
-                "attribution": "<a xmlns:dct=\"//purl.org/dc/terms/\" href=\"//s2maps.eu\" property=\"dct:title\">Sentinel-2 cloudless - //s2maps.eu</a> by <a xmlns:cc=\"//creativecommons.org/ns#\" href=\"s://eox.at\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">EOX IT Services GmbH</a> (Contains modified Copernicus Sentinel data 2016 &amp; 2017)"
+                "attribution": "<a xmlns:dct=\"//purl.org/dc/terms/\" href=\"//s2maps.eu\" property=\"dct:title\">Sentinel-2 cloudless - //s2maps.eu</a> by <a xmlns:cc=\"//creativecommons.org/ns#\" href=\"s://eox.at\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">EOX IT Services GmbH</a> (Contains modified Copernicus Sentinel data 2017 &amp; 2018)"
             }
         }
     ],
     "layers": [
         {
             "id": 'VHR_IMAGE_2018',
-            "displayName": 'Very High Resolution 2018',
+            "displayName": 'VHR Image 2018',
             "displayColor": '#eb3700',
             "display": {
                 "id": 'VHR_IMAGE_2018__TRUE_COLOR',
@@ -140,6 +142,8 @@
                 "format": 'image/png',
                 "projection": 'EPSG:4326',
                 "style": '',
+                "useMilliseconds": false,
+                "maxZoom": 15,
             },
             "detailsDisplay": {
                 "id": 'VHR_IMAGE_2018__TRUE_COLOR',
@@ -149,6 +153,8 @@
                 "format": 'image/png',
                 "projection": 'EPSG:4326',
                 "style": '',
+                "useMilliseconds": false,
+                "maxZoom": 15,
                 "options": [{
                     "name": "Style",
                     "target": "detailsDisplay.extraParameters.LAYERS",
@@ -190,6 +196,8 @@
                 "format": 'image/png',
                 "projection": 'EPSG:4326',
                 "style": 'red',
+                "useMilliseconds": false,
+                "maxZoom": 17,
             },
         },
     ],
