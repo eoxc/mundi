@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "id": "http://github.com/eoxc/CODE-DE/src/config-schema.json",
+    "id": "http://github.com/eoxc/prism/src/config-schema.json",
 
     "title": "Configuration",
     "description": "The main configuration object.",

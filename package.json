@@ -57,8 +57,7 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.15.0",
-    "webpack-dev-server": "^1.14.1",
-    "worker-loader": "^0.7.1"
+    "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
     "anno.js": "^1.0.3",
@@ -68,7 +67,7 @@
     "bootstrap": "^3.3.7",
     "bootstrap-slider": "^9.7.2",
     "eonasdan-bootstrap-datetimepicker": "^4.17.42",
-    "eoxc": "1.1.0-rc.18",
+    "eoxc": "eoxc/eoxc",
     "es6-promise": "^4.0.5",
     "i18next": "^3.4.1",
     "jquery": "^2.2.3",
