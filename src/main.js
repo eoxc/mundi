@@ -78,6 +78,7 @@ function combineParameter(setting, param) {
     range: setting.range,
     min: setting.min,
     max: setting.max,
+    step: setting.step || 1,
     default: setting.default || setting.fixed,
     fixed: setting.fixed,
   };

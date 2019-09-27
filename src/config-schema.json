@@ -293,7 +293,12 @@
                             "max": {
                                 "description": "The upper boundary for the range. Mandatory for range parameters.",
                                 "type": "number"
-                            }
+                            },
+                            "step": {
+                                "description": "Step for the range.",
+                                "type": "number",
+                                "default": 1
+                            },
                         }
                     }
                 },

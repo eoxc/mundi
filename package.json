@@ -65,7 +65,7 @@
     "backbone.marionette": "^2.4.7",
     "bluebird": "^3.4.6",
     "bootstrap": "^3.3.7",
-    "bootstrap-slider": "^9.7.2",
+    "bootstrap-slider": "^9.9.1",
     "eonasdan-bootstrap-datetimepicker": "^4.17.42",
     "eoxc": "eoxc/eoxc",
     "es6-promise": "^4.0.5",
