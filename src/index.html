@@ -175,22 +175,6 @@
                 "countZeroRecords": true,
             }
         },
-        {
-            "id": 'VHR_IMAGE_2018__outlines',
-            "displayName": 'VHR 2018 Outlines',
-            "displayColor": '#187465',
-            "display": {
-                "id": 'VHR_IMAGE_2018__outlines',
-                "visible": false,
-                "protocol": 'WMS',
-                "url": baseUrl + 'ows',
-                "format": 'image/png',
-                "projection": 'EPSG:4326',
-                "style": 'red',
-                "useMilliseconds": false,
-                "maxZoom": 17,
-            },
-        },
     ],
     "overlayLayers": [
         {
@@ -210,6 +194,23 @@
                 "projection": "EPSG:4326",
                 "attribution": "Overlay { Data &copy; <a href=\"//www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"//eox.at\" target=\"_blank\">EOX</a> and <a href=\"//github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
             }
+        },
+        {
+            "id": 'VHR_IMAGE_2018__outlines',
+            "displayName": 'VHR 2018 Outlines',
+            "displayColor": '#187465',
+            "display": {
+                "id": 'VHR_IMAGE_2018__outlines',
+                "visible": false,
+                "protocol": 'WMS',
+                "url": baseUrl + 'ows',
+                "format": 'image/png',
+                "projection": 'EPSG:4326',
+                "style": 'red',
+                "useMilliseconds": false,
+                "maxZoom": 17,
+                "synchronizeTime": true,
+            },
         }
     ]
 };
