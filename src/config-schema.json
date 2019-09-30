@@ -293,7 +293,12 @@
                             "max": {
                                 "description": "The upper boundary for the range. Mandatory for range parameters.",
                                 "type": "number"
-                            }
+                            },
+                            "step": {
+                                "description": "Step for the range.",
+                                "type": "number",
+                                "default": 1
+                            },
                         }
                     }
                 },
@@ -496,6 +501,11 @@
                             }, {
                                 "type": "integer",
                             }],
+                        },
+                        "synchronizeTime": {
+                          "description": "If time change triggers reload of layer parameters (time). Usable only for overlayLayers and baseLayers. Layers are reloaded always.",
+                          "type": "boolean",
+                          "default": false
                         },
                         "cqlParameterName": {
                             "description": "The name of the CQL parameter name for WMS requests. When set, the CQL filtering is enabled for this view layer.",
