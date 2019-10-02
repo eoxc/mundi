@@ -215,6 +215,7 @@ window.Application = Marionette.Application.extend({
       rightPanelOpen: false,
       leftPanelTabIndex: 0,
       rightPanelTabIndex: 0,
+      enableSingleLayerMode: true,
       downloadFormats: [],
       downloadProjections: [],
       uploadEnabled: true,
@@ -416,7 +417,7 @@ window.Application = Marionette.Application.extend({
       termsAndConditionsUrl = termsAndConditionsUrl[settings.language];
     }
 
-    if (searchCollection.length === 1) {
+    if (searchCollection.length === 1 && settings.enableSingleLayerMode) {
       // single layer view
       layout.showChildView('rightPanel', new SidePanelView({
         position: 'right',
