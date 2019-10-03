@@ -193,7 +193,7 @@ svg.timeslider,
 .form-control {
   background: $c_blue;
   border: 0;
-  color: white;
+  color: $c_gray;
 }
 
 .result-contents {
@@ -1095,6 +1095,34 @@ body {
 .download-confirm,
 .control-label {
   color: $c_gray;
+}
+
+.full-resolution-body {
+  color: $c_gray;
+  .input-group-addon {
+    background-color: $c_green;
+    color:$c_gray;
+  }
+  .form-control {
+    color:$c_green!important;
+    &.input-sm{
+      height: 35px!important;
+      text-align: center;
+    }
+    &:hover, &:active, &:focus, &:disabled {
+      background: $c_blue;
+      color:$c_green!important;
+      -webkit-text-fill-color: $c_green;
+    }
+  }
+}
+
+input[type=checkbox], input[type=radio] {
+  margin:-2px;
+}
+
+.has-error .radio {
+  color:red;
 }
 
 .input-group-addon .fa {
