@@ -77,7 +77,7 @@ const RootFiltersView = Marionette.LayoutView.extend({
       .forEach((searchModel) => {
         const layerModel = searchModel.get('layerModel');
         const layerId = layerModel.cid;
-        const paramFs = layerModel.get('parametersFilterSettings');
+        const paramFs = layerModel.get('search.parametersFilterSettings');
         let additionalFilterHidden = false;
         if (paramFs) {
           additionalFilterHidden = paramFs.hidden;

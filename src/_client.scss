@@ -776,6 +776,8 @@ input,
   overflow-y: auto;
   padding: 0px 8px 0px 12px;
   margin-right: 8px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .record-details-description-inner {
@@ -788,11 +790,6 @@ input,
 .record-details-description table {
   table-layout: fixed;
   margin-bottom: 8px;
-}
-
-.record-details-description td {
-  overflow-wrap: break-word;
-  word-wrap: break-word; // ie11 fix only
 }
 
 .record-details-description td:first-child {
@@ -977,7 +974,7 @@ body {
 
 .record-details-view td {
   overflow-wrap: break-word;
-  border:none!important;
+  word-wrap: break-word;  border:none!important;
 }
 
 .record-details-modal-view .is-selected {
