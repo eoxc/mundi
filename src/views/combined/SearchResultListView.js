@@ -71,41 +71,6 @@ const SearchResultListView = Marionette.CompositeView.extend({
     this.highlightModel.unHighlight(childView.model.attributes);
   },
 
-  setSlice(offset, sliceHeight) {
-    const size = this.calculateSize();
-    const headerHeight = 0;
-    const itemHeight = 153;
-    const numItems = this.referenceCollection.length;
-    let first = 0;
-    let last = 0;
-    if (offset + size < 0 // this view is completely above the current window
-        || offset > sliceHeight) { // this view is completely below the current window
-      first = last = numItems;
-    } else {
-      const firstOffset = offset + headerHeight;
-      if (firstOffset < -itemHeight) {
-        const firstRow = Math.floor(Math.abs(firstOffset) / itemHeight);
-        first = firstRow * 3;
-      }
-      const lastRow = Math.ceil(Math.abs(-firstOffset + sliceHeight) / itemHeight);
-      last = lastRow * 3;
-    }
-    this.collection.set(this.referenceCollection.slice(first, last));
-    this.$('.spacer-top').css('height', Math.ceil(first / 3) * itemHeight);
-    this.$('.spacer-bottom').css('height', Math.ceil((numItems - last) / 3) * itemHeight);
-  },
-
-  calculateItemsSize(numItems) {
-    const itemHeight = 153;
-    return Math.ceil(numItems / 3) * itemHeight;
-  },
-
-  calculateSize() {
-    const headerHeight = 0;
-    const footerHeight = 0;
-    return this.calculateItemsSize(this.referenceCollection.length)
-      + headerHeight + footerHeight;
-  },
 });
 
 export default SearchResultListView;

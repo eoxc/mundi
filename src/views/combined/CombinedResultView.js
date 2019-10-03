@@ -162,7 +162,8 @@ const CombinedResultView = Marionette.LayoutView.extend({
     const height = elem.clientHeight;
     let sizeAccum = 0;
     const view = this.getRegion('results').currentView;
-    view.setSlice(sizeAccum - scrollTop, height);
+    if (typeof view !== 'undefined')
+    this.setSlice(sizeAccum - scrollTop, height, view);
     sizeAccum += view.$el.outerHeight(true);
     elem.scrollTop = scrollTop;
   },
