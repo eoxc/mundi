@@ -28,10 +28,6 @@ const SearchResultListView = Marionette.CompositeView.extend({
     });
   },
 
-  events: {
-    render: 'onRender',
-  },
-
   childEvents: {
     'item:clicked': 'onItemClicked',
     'item:info': 'onItemInfo',
