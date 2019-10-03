@@ -385,33 +385,29 @@ window.Application = Marionette.Application.extend({
       defaultOpen: settings.leftPanelOpen,
       openTabIndex: settings.leftPanelTabIndex,
       views: [
-        //////////////////////////////////////////
-        // NOT USED FOR DCFS SHOWCASE AS NO FILTERS NECESSARY
-        //////////////////////////////////////////
-
-      //   {
-      //   name: 'Filters',
-      //   view: new RootFiltersView({
-      //     filtersModel,
-      //     mapModel,
-      //     highlightModel,
-      //     filterSettings: settings.filterSettings,
-      //     constrainTimeDomain: settings.constrainTimeDomain,
-      //     searchCollection,
-      //     uploadEnabled: settings.uploadEnabled,
-      //     domain,
-      //   }),
-      // },
-       {
-        name: 'Layers',
-        view: new LayerControlLayoutView({
-          mapModel,
-          filtersModel,
-          baseLayersCollection,
-          overlayLayersCollection,
-          layersCollection: searchCollection.length === 1 ? undefined : layersCollection,
-        }),
-      }],
+        {
+          name: 'Filters',
+          view: new RootFiltersView({
+            filtersModel,
+            mapModel,
+            highlightModel,
+            filterSettings: settings.filterSettings,
+            constrainTimeDomain: settings.constrainTimeDomain,
+            searchCollection,
+            uploadEnabled: settings.uploadEnabled,
+            domain,
+          }),
+        },
+        {
+          name: 'Layers',
+          view: new LayerControlLayoutView({
+            mapModel,
+            filtersModel,
+            baseLayersCollection,
+            overlayLayersCollection,
+            layersCollection: searchCollection.length === 1 ? undefined : layersCollection,
+          }),
+        }],
     }));
 
     let termsAndConditionsUrl = settings.termsAndConditionsUrl;
