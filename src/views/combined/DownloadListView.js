@@ -28,7 +28,6 @@ const DownloadListView = Marionette.CompositeView.extend({
     this.fallbackThumbnailUrl = options.fallbackThumbnailUrl;
     this.searchModel = options.searchModel;
     this.referenceCollection = options.referenceCollection;
-    // this.listenTo(this.model, 'change', this.render, this);
     this.listenTo(this.searchModel.get('downloadSelection'), 'update', this.onDownloadListItemRemoved);
   },
 

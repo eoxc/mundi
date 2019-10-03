@@ -121,8 +121,6 @@ const CombinedResultView = Marionette.LayoutView.extend({
   },
 
   downloadListItemRemoved() {
-    const view = this.getRegion('results').currentView;
-    view.referenceCollection.set(this.singleModel.get('downloadSelection'));
     this.updateViews();
   },
 

@@ -46,7 +46,6 @@ const SearchResultListView = Marionette.CompositeView.extend({
     this.highlightModel = options.highlightModel;
     this.fallbackThumbnailUrl = options.fallbackThumbnailUrl;
     this.referenceCollection = options.referenceCollection;
-    this.listenTo(this.model, 'change', this.render, this);
   },
 
   onRender() {
