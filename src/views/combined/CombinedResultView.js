@@ -45,6 +45,7 @@ const CombinedResultView = Marionette.LayoutView.extend({
   className: 'search-result-view',
 
   events: {
+    'change input[data-layer]': 'onLayerSelectionChange',
     'click .deselect-all': 'onDeselectAllClicked',
     'click .start-download': 'onStartDownloadClicked',
     'click .download-as-metalink': 'onDownloadAsMetalinkClicked',
@@ -122,7 +123,7 @@ const CombinedResultView = Marionette.LayoutView.extend({
   downloadListItemRemoved() {
     const view = this.getRegion('results').currentView;
     view.referenceCollection.set(this.singleModel.get('downloadSelection'));
-    this.onSearchListRender();
+    this.updateViews();
   },
 
   renderResultContent() {
@@ -160,11 +161,10 @@ const CombinedResultView = Marionette.LayoutView.extend({
     const elem = this.$('.result-contents')[0];
     const scrollTop = elem.scrollTop;
     const height = elem.clientHeight;
-    let sizeAccum = 0;
     const view = this.getRegion('results').currentView;
-    if (typeof view !== 'undefined')
-    this.setSlice(sizeAccum - scrollTop, height, view);
-    sizeAccum += view.$el.outerHeight(true);
+    if (typeof view !== 'undefined' && typeof view.referenceCollection !== 'undefined') {
+      this.setSlice(-scrollTop, height, view);
+    }
     elem.scrollTop = scrollTop;
   },
 
@@ -205,7 +205,7 @@ const CombinedResultView = Marionette.LayoutView.extend({
   },
 
   setSlice(offset, sliceHeight, view) {
-    const size = this.calculateSize();
+    const size = this.calculateSize(view);
     const headerHeight = 0;
     const itemHeight = 153;
     const numItems = view.referenceCollection.length;
@@ -238,6 +238,16 @@ const CombinedResultView = Marionette.LayoutView.extend({
     const footerHeight = 0;
     return this.calculateItemsSize(view.referenceCollection.length)
       + headerHeight + footerHeight;
+  },
+
+  onLayerSelectionChange(event) {
+    if (event) {
+      const $changed = $(event.target);
+      this.singleModel.set('automaticSearch', $changed.is(':checked'));
+      this.saveScrollPosition();
+      this.render();
+    }
+    this.onSearchModelsChange();
   },
 
   onTermsAndAndConditionsChange(childView, status) {
