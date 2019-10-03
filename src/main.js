@@ -334,13 +334,6 @@ window.Application = Marionette.Application.extend({
       }));
     };
 
-    const selectFiles = () => {
-      layout.showChildView('modals', new SelectFilesModalView({
-        collection: searchCollection,
-        onStartDownload: startDownload,
-      }));
-    };
-
     layersCollection.on('show-options', (layerModel, useDetailsDisplay) => {
       layout.showChildView('topModals', new LayerOptionsModalView({ model: layerModel, useDetailsDisplay }));
     });
@@ -350,7 +343,7 @@ window.Application = Marionette.Application.extend({
       layout.showChildView('modals', new FullResolutionDownloadOptionsModalView({
         layerModel,
         mapModel,
-        filtersModel: searchModel.get('filtersModel'),
+        filtersModel: searchModel ? searchModel.get('filtersModel') : null,
         model: new DownloadOptionsModel({
           availableDownloadFormats: settings.downloadFormats,
           availableProjections: settings.downloadProjections,

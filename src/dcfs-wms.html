@@ -124,6 +124,7 @@
                 "urls": [
                     '/'
                 ],
+                "extraDownloadIcon": true,
                 "useMilliseconds": false,
                 "tileSize": 512,
                 "discardZulu": true,
@@ -262,6 +263,70 @@
                     }],
                 }, 
               ],
+            },
+            "fullResolution": {
+                "protocol": "WCS",
+                "id": "S2L1C",
+                "url": "//",
+                "cqlParameterName": "cql_filter",
+                "cqlMapping": {
+                    "eo:cloudCover": "cloudcover",
+                },
+                "maxSizeWarning": 1000000, // total size of product in MB
+                "axisNames": [
+                    'Long',
+                    'Lat'
+                ],
+                "fields": [{
+                  "name": "B01",
+                  "identifier": "B01"
+                }, {
+                  "name": "B02",
+                  "identifier": "B02"
+                }, {
+                  "name": "B03",
+                  "identifier": "B03"
+                }, {
+                  "name": "B04",
+                  "identifier": "B04"
+                }, {
+                  "name": "B05",
+                  "identifier": "B05"
+                }, {
+                  "name": "B06",
+                  "identifier": "B06"
+                }, {
+                  "name": "B07",
+                  "identifier": "B07"
+                }, {
+                  "name": "B08",
+                  "identifier": "B08"
+                }, {
+                  "name": "B09",
+                  "identifier": "B09"
+                }, {
+                  "name": "B10",
+                  "identifier": "B10"
+                }, {
+                  "name": "B11",
+                  "identifier": "B11"
+                }, {
+                  "name": "B12",
+                  "identifier": "B12"
+                }, {
+                  "name": "B8A",
+                  "identifier": "B8A"
+                }],
+                "interpolations": [{
+                  "name": "Nearest-Neighbor",
+                  "identifier": "http://www.opengis.net/def/interpolation/OGC/1/nearest-neighbor"
+                }, {
+                  "name": "Linear",
+                  "identifier": "http://www.opengis.net/def/interpolation/OGC/1/linear"
+                }, {
+                  "name": "Cubic",
+                  "identifier": "http://www.opengis.net/def/interpolation/OGC/1/cubic"
+                }]
             },
         },
     ],
