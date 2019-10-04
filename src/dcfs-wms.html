@@ -21,7 +21,7 @@
   var displayTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 28));
   var selectedTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 16));
   var selectedTimeDomainEnd = new Date(new Date(today).setUTCDate(today.getUTCDate() - 14));
-
+  var whereAmI = "//" + window.location.hostname + "/";
   var config = {
     "settings": {
         "tutorial": "disabled",
@@ -45,7 +45,7 @@
         ],
         "selectableInterval": "P7D",
         "timeSliderControls": true,
-        "timeSliderAlternativeBrush": true,
+        "timeSliderAlternativeBrush": false,
         // just to trigger shared timefilter/timeslider
         "maxMapInterval": "P8D", 
         "maxTooltips": 1,
@@ -268,7 +268,7 @@
             "fullResolution": {
                 "protocol": "WCS",
                 "id": "S2L1C",
-                "url": "//",
+                "url": whereAmI,
                 // "cqlParameterName": "cql_filter",
                 // "cqlMapping": {
                 //     "eo:cloudCover": "cloudcover",
