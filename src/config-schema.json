@@ -806,7 +806,12 @@
                         "maxBboxEdgeSize": {
                             "description": "A warning is shown when any edge of bounding box exceeds this value in Map CRS.",
                             "type": "number",
-                            "default": 1
+                            "default": null
+                        },
+                        "disableTimeSubsetting": {
+                          "description": "Disable adding time subsetting to WCS request even if available from TimeSlider.",
+                          "type": "boolean",
+                          "default": false
                         },
                         "axisNames": {
                             "description": "The axis names to include the subset in WCS requests.",
