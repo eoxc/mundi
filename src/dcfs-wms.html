@@ -268,15 +268,16 @@
             "fullResolution": {
                 "protocol": "WCS",
                 "id": "S2L1C",
-                "url": "//ogc.dev.hub.eox.at/",
-                "cqlParameterName": "cql_filter",
-                "cqlMapping": {
-                    "eo:cloudCover": "cloudcover",
-                },
+                "url": "//",
+                // "cqlParameterName": "cql_filter",
+                // "cqlMapping": {
+                //     "eo:cloudCover": "cloudcover",
+                // }, // triggers error because we currently dont have searchModel for this layer
                 "maxSizeWarning": 1000000, // total size of product in MB
+                "maxBboxEdgeSize": 0.1,
                 "axisNames": [
-                    'Long',
-                    'Lat'
+                    'long',
+                    'lat'
                 ],
                 "fields": [{
                   "name": "B01",

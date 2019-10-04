@@ -803,6 +803,11 @@
                             "type": "number",
                             "default": 0.0000858306884765625
                         },
+                        "maxBboxEdgeSize": {
+                            "description": "A warning is shown when any edge of bounding box exceeds this value in Map CRS.",
+                            "type": "number",
+                            "default": 1
+                        },
                         "axisNames": {
                             "description": "The axis names to include the subset in WCS requests.",
                             "type": "array",
