@@ -47,7 +47,6 @@ const CombinedResultView = Marionette.LayoutView.extend({
   events: {
     'change input[data-layer]': 'onLayerSelectionChange',
     'click .deselect-all': 'onDeselectAllClicked',
-    'click .select-files': 'onSelectFilesClicked',
     'click .start-download': 'onStartDownloadClicked',
     'click .download-as-metalink': 'onDownloadAsMetalinkClicked',
     'click .download-as-url-list': 'onDownloadAsUrlListClicked',
@@ -59,6 +58,7 @@ const CombinedResultView = Marionette.LayoutView.extend({
     'click:selected-count': 'onSelectedCountClick',
     'change:terms-and-conditions': 'onTermsAndAndConditionsChange',
     'list:render': 'onSearchListRender',
+    'downloadlist:itemRemoved': 'downloadListItemRemoved',
   },
 
   initialize(options) {
@@ -120,6 +120,10 @@ const CombinedResultView = Marionette.LayoutView.extend({
     }
   },
 
+  downloadListItemRemoved() {
+    this.updateViews();
+  },
+
   renderResultContent() {
     // create a child view in results region
     const searchEnabled = this.singleModel.get('automaticSearch');
@@ -131,9 +135,10 @@ const CombinedResultView = Marionette.LayoutView.extend({
     } else if ((!searchEnabled && anySelectedToDisplay) || this.displaySelected) {
       // display only selected products
       const options = {
-        collection: this.singleModel.get('downloadSelection'),
+        referenceCollection: this.singleModel.get('downloadSelection'),
         highlightModel: this.highlightModel,
         fallbackThumbnailUrl: this.fallbackThumbnailUrl,
+        searchModel: this.singleModel,
       };
       this.showChildView('results', new DownloadListView(options));
     } else {
@@ -154,12 +159,10 @@ const CombinedResultView = Marionette.LayoutView.extend({
     const elem = this.$('.result-contents')[0];
     const scrollTop = elem.scrollTop;
     const height = elem.clientHeight;
-    let sizeAccum = 0;
     const view = this.getRegion('results').currentView;
-    if (typeof view.setSlice !== 'undefined') {
-      view.setSlice(sizeAccum - scrollTop, height);
+    if (typeof view !== 'undefined' && typeof view.referenceCollection !== 'undefined') {
+      this.setSlice(-scrollTop, height, view);
     }
-    sizeAccum += view.$el.outerHeight(true);
     elem.scrollTop = scrollTop;
   },
 
@@ -181,16 +184,6 @@ const CombinedResultView = Marionette.LayoutView.extend({
     this.$('.result-contents').height(`calc(100% - ${restHeightCombined}px)`);
   },
 
-  onLayerSelectionChange(event) {
-    if (event) {
-      const $changed = $(event.target);
-      this.singleModel.set('automaticSearch', $changed.is(':checked'));
-      this.saveScrollPosition();
-      this.render();
-    }
-    this.onSearchModelsChange();
-  },
-
   onSearchModelsChange() {
     // update the global status
     const isSearching = this.singleModel.get('isSearching');
@@ -207,6 +200,52 @@ const CombinedResultView = Marionette.LayoutView.extend({
     this.updateViews();
     this.updateHeaderArea();
     this.updateResultsPanelSize();
+  },
+
+  setSlice(offset, sliceHeight, view) {
+    const size = this.calculateSize(view);
+    const headerHeight = 0;
+    const itemHeight = 153;
+    const numItems = view.referenceCollection.length;
+    let first = 0;
+    let last = 0;
+    if (offset + size < 0 // this view is completely above the current window
+        || offset > sliceHeight) { // this view is completely below the current window
+      first = last = numItems;
+    } else {
+      const firstOffset = offset + headerHeight;
+      if (firstOffset < -itemHeight) {
+        const firstRow = Math.floor(Math.abs(firstOffset) / itemHeight);
+        first = firstRow * 3;
+      }
+      const lastRow = Math.ceil(Math.abs(-firstOffset + sliceHeight) / itemHeight);
+      last = lastRow * 3;
+    }
+    view.collection.set(view.referenceCollection.slice(first, last));
+    view.$('.spacer-top').css('height', Math.ceil(first / 3) * itemHeight);
+    view.$('.spacer-bottom').css('height', Math.ceil((numItems - last) / 3) * itemHeight);
+  },
+
+  calculateItemsSize(numItems) {
+    const itemHeight = 153;
+    return Math.ceil(numItems / 3) * itemHeight;
+  },
+
+  calculateSize(view) {
+    const headerHeight = 0;
+    const footerHeight = 0;
+    return this.calculateItemsSize(view.referenceCollection.length)
+      + headerHeight + footerHeight;
+  },
+
+  onLayerSelectionChange(event) {
+    if (event) {
+      const $changed = $(event.target);
+      this.singleModel.set('automaticSearch', $changed.is(':checked'));
+      this.saveScrollPosition();
+      this.render();
+    }
+    this.onSearchModelsChange();
   },
 
   onTermsAndAndConditionsChange(childView, status) {
@@ -229,10 +268,6 @@ const CombinedResultView = Marionette.LayoutView.extend({
 
   onStartDownloadClicked() {
     this.onStartDownload();
-  },
-
-  onSelectFilesClicked() {
-    this.onSelectFiles();
   },
 
   onDownloadAsMetalinkClicked() {
@@ -264,15 +299,13 @@ const CombinedResultView = Marionette.LayoutView.extend({
 
   onDownloadSelectionChange() {
     const downloadSelection = this.singleModel.get('downloadSelection');
-    if (typeof this.singleModel.get('downloadSelection') !== 'undefined') {
-      if (downloadSelection.length === 0) {
-        if (!this.singleModel.get('automaticSearch') || this.displaySelected) {
-          this.displaySelected = false;
-          this.renderResultContent();
-          this.onSearchModelsChange();
-        }
+    if (typeof downloadSelection !== 'undefined' && downloadSelection.length === 0) {
+      if (!this.singleModel.get('automaticSearch') || this.displaySelected) {
         this.displaySelected = false;
+        this.renderResultContent();
+        this.onSearchModelsChange();
       }
+      this.displaySelected = false;
     }
     this.checkButtons();
   },
