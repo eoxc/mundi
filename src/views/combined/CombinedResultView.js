@@ -4,7 +4,7 @@ import $ from 'jquery';
 
 import { isRecordDownloadable, downloadCustom, getDownloadInfos } from 'eoxc/src/download';
 import metalinkTemplate from 'eoxc/src/download/Metalink.hbs';
-
+import { setSlice } from 'eoxc/src/search/utils';
 import SearchResultHeaderView from './SearchResultHeaderView';
 import SearchResultListView from './SearchResultListView';
 import DownloadListView from './DownloadListView';
@@ -161,7 +161,10 @@ const CombinedResultView = Marionette.LayoutView.extend({
     const height = elem.clientHeight;
     const view = this.getRegion('results').currentView;
     if (typeof view !== 'undefined' && typeof view.referenceCollection !== 'undefined') {
-      this.setSlice(-scrollTop, height, view);
+      const headerSize = 0;
+      const footerSize = 0;
+      const itemHeight = 153;
+      setSlice(-scrollTop, height, view, headerSize, footerSize, itemHeight);
     }
     elem.scrollTop = scrollTop;
   },
@@ -200,42 +203,6 @@ const CombinedResultView = Marionette.LayoutView.extend({
     this.updateViews();
     this.updateHeaderArea();
     this.updateResultsPanelSize();
-  },
-
-  setSlice(offset, sliceHeight, view) {
-    const size = this.calculateSize(view);
-    const headerHeight = 0;
-    const itemHeight = 153;
-    const numItems = view.referenceCollection.length;
-    let first = 0;
-    let last = 0;
-    if (offset + size < 0 // this view is completely above the current window
-        || offset > sliceHeight) { // this view is completely below the current window
-      first = last = numItems;
-    } else {
-      const firstOffset = offset + headerHeight;
-      if (firstOffset < -itemHeight) {
-        const firstRow = Math.floor(Math.abs(firstOffset) / itemHeight);
-        first = firstRow * 3;
-      }
-      const lastRow = Math.ceil(Math.abs(-firstOffset + sliceHeight) / itemHeight);
-      last = lastRow * 3;
-    }
-    view.collection.set(view.referenceCollection.slice(first, last));
-    view.$('.spacer-top').css('height', Math.ceil(first / 3) * itemHeight);
-    view.$('.spacer-bottom').css('height', Math.ceil((numItems - last) / 3) * itemHeight);
-  },
-
-  calculateItemsSize(numItems) {
-    const itemHeight = 153;
-    return Math.ceil(numItems / 3) * itemHeight;
-  },
-
-  calculateSize(view) {
-    const headerHeight = 0;
-    const footerHeight = 0;
-    return this.calculateItemsSize(view.referenceCollection.length)
-      + headerHeight + footerHeight;
   },
 
   onLayerSelectionChange(event) {
