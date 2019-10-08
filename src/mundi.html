@@ -807,6 +807,226 @@
             },
         },
         {
+            "id": "S5P",
+            "displayName": "Sentinel-5P L2",
+            "displayColor": "#cbd450",
+            "noTimeSliderBorder": true,
+            "display": {
+                "id": "S5P_L1",
+                "visible": false,
+                "protocol": "WMTS",
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "urls": [],
+            },
+            "detailsDisplay": {
+                "id": "S5P",
+                "visible": true,
+                "protocol": "WMS",
+                "urls": [
+                  '//shservices.mundiwebservices.com/ogc/wms/9400667f-cb51-4509-8827-44232ccd507f'
+                ],
+                "format": "image\/png",
+                "projection": "EPSG:4326",
+                "style": "",
+                "attribution": "<a href=\"//mundiwebservices.com\" target=\"_blank\">Mundi</a>",
+                "tileSize": 512,
+                "useMilliseconds": false,
+                "discardZulu": true,
+                "adjustTime": 60 * 45,
+                "extraParameters": {
+                  "LAYERS": "NO2_VISUALIZED",
+                  "showLogo": "false",
+                },
+                "version": "1.1.1",
+                "options": [{
+                    "name": "Style",
+                    "target": "detailsDisplay.extraParameters.LAYERS",
+                    "values": [{
+                      "label": "AER AI 340 and 380 (AER AI)",
+                      "value": "AER_AI_340_AND_380_VISUALIZED"
+                      }, {
+                      "label": "AER AI 354 and 388 (AER AI)",
+                      "value": "AER_AI_354_AND_388_VISUALIZED"
+                      }, {
+                      "label": "Methane (CH4)",
+                      "value": "CH4_VISUALIZED"
+                      }, {
+                      "label": "Base Height (Cloud)",
+                      "value": "CLOUD_BASE_HEIGHT_VISUALIZED"
+                      }, {
+                      "label": "Base pressure (Cloud)",
+                      "value": "CLOUD_BASE_PRESSURE_VISUALIZED"
+                      }, {
+                      "label": "Effective radiometric cloud fraction (Cloud)",
+                      "value": "CLOUD_FRACTION_VISUALIZED"
+                      }, {
+                      "label": "Optical thickness (Cloud)",
+                      "value": "CLOUD_OPTICAL_THICKNESS_VISUALIZED"
+                      }, {
+                      "label": "Top height (Cloud)",
+                      "value": "CLOUD_TOP_HEIGHT_VISUALIZED"
+                      }, {
+                      "label": "Top pressure (Cloud)",
+                      "value": "CLOUD_TOP_PRESSURE_VISUALIZED"
+                      }, {
+                      "label": "Carbon Monoxide (CO)",
+                      "value": "CO_VISUALIZED"
+                      }, {
+                      "label": "Formaldehyde (HCHO)",
+                      "value": "HCHO_VISUALIZED"
+                      }, {
+                      "label": "Nitrogen Dioxide (NO2)",
+                      "value": "NO2_VISUALIZED"
+                      }, {
+                      "label": "Ozone (O3)",
+                      "value": "O3_VISUALIZED"
+                      }, {
+                      "label": "Sulfur Dioxide (S02)",
+                      "value": "SO2_VISUALIZED"
+                    }]
+                }],
+            },
+            "search": {
+                "protocol": "OpenSearch",
+                "url": "//ows.eox.at/mundi_staging/eoxc/S5P.osdd",
+                "id": "DIAS_CWS:S5P",
+                "histogramBinCount": 28,
+                "format": "application/atom+xml",
+                "method": "GET",
+                "switchMultiPolygonCoordinates": true,
+                "histogramThreshold": 300,
+                "lightweightBuckets": true,
+                "searchEnabled": true,
+                "searchLimit": 5,
+                "loadMore": 5,
+                "thumbnailUrlPattern": "^https://obs.eu-de.otc.t-systems.com/.*",
+                "parameters": [
+                  {
+                    "title": "Online Status",
+                      "options": [{
+                          "label": "Online or Staging",
+                          "value": "onlineStatus:(ONLINE OR STAGING)",
+                      }, {
+                          "label": "Online",
+                          "value": "onlineStatus:ONLINE",
+                      }, {
+                          "label": "Staging",
+                          "value": "onlineStatus:STAGING",
+                      }],
+                      "type": "searchTerms"
+                  },
+                  {
+                      "type": "eo:productType",
+                      "default": "L2__NO2___",
+                      "options": [{
+                          "label": "L2 AER AI",
+                          "value": "L2__AER_AI",
+                      }, {
+                          "label": "L2 CLOUD",
+                          "value": "L2__CLOUD_",
+                      }, {
+                          "label": "L2 CO",
+                          "value": "L2__CO____",
+                      }, {
+                          "label": "L2 HCHO",
+                          "value": "L2__HCHO__",
+                      }, {
+                          "label": "L2 NO2",
+                          "value": "L2__NO2___",
+                      }, {
+                          "label": "L2 NP BD3",
+                          "value": "L2__NP_BD3",
+                      }, {
+                          "label": "L2 NP BD6",
+                          "value": "L2__NP_BD6",
+                      }, {
+                          "label": "L2 NP BD7",
+                          "value": "L2__NP_BD7",
+                      }, {
+                          "label": "L2 O3",
+                          "value": "L2__O3____",
+                      }, {
+                          "label": "L2 SO2",
+                          "value": "L2__SO2___",
+                      }],
+                    },
+                    {
+                        "type": "eo:processingLevel",
+                        "fixed": "L2_"
+                    },
+                    {
+                        "type": "eo:startOrbitNumber",
+                    },
+                    {
+                        "type": "eo:orbitDirection",
+                    },
+          					{
+            						"type": "geo:uid",
+          					}
+                ],
+                "extraFields": {
+                    "properties.mundi.date": "dc:date/text()",
+                    "properties.mundi.processingDate": "eo:processingDate/text()",
+                    "properties.mundi.productDatapackSize": "DIAS:productDatapackSize/text()",
+                    "properties.mundi.imageFileFormat": "DIAS:imageFileFormat/text()",
+                    "properties.mundi.processingMode": "DIAS:processingMode/text()",
+                    "properties.mundi.productType": "eo:productType/text()",
+					          "properties.mundi.startOrbitNumber": "DIAS:startOrbitNumber/text()",
+                    "properties.mundi.orbitDirection": "eo:orbitDirection/text()",
+                    "properties.mundi.onlineStatus": "DIAS:onlineStatus/text()",
+                    "properties.mundi.processingLevel": "eo:processingLevel/text()",
+
+                },
+                "extraFieldsNamespaces": {
+                    "DIAS": "http://tas/DIAS",
+                    "eo": "http://a9.com/-/spec/opensearch/extensions/eo/1.0/",
+                    "dc": "http://purl.org/dc/elements/1.1/",
+                    "atom": "http://www.w3.org/2005/Atom"
+                },
+                "descriptionTemplate":
+                    "<table class='table table-condensed'>" +
+                    "<tr>" +
+                      "<td>Sensing Start Date</td>" +
+                      "<td>{{properties.mundi.date}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Processing Date</td>" +
+                      "<td>{{properties.mundi.processingDate}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Product Type</td>" +
+                      "<td>{{properties.mundi.productType}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Processing Level</td>" +
+                      "<td>{{properties.mundi.processingLevel}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Start Orbit Number</td>" +
+                      "<td>{{properties.mundi.startOrbitNumber}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Online Status</td>" +
+                      "<td>{{properties.mundi.onlineStatus}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Processing Mode</td>" +
+                      "<td>{{properties.mundi.processingMode}}</td>" +
+                    "</tr>" +
+					          "<tr>" +
+                      "<td>Image Format</td>" +
+                      "<td>{{properties.mundi.imageFileFormat}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Product Datapack Size</td>" +
+                      "<td>{{formatBytes(properties.mundi.productDatapackSize)}}</td>" +
+                    "</tr>" +
+                    "</table>",
+            },
+        },
+        {
             "id": "Landsat8",
             "displayName": "Landsat-8 - Level 1",
             "displayColor": "#c124ed",
@@ -1118,7 +1338,7 @@
         {
             "id": "S1_L1_SLC",
             "displayName": "Sentinel-1 L1 SLC",
-            "displayColor": "#ffcd5a",
+            "displayColor": "#45c4bc",
             "noTimeSliderBorder": true,
             "display": {
                 "id": "S1_L1_SLC",
