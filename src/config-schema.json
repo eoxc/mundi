@@ -179,6 +179,11 @@
                   "type": "boolean",
                   "default": false
                 },
+                "enableSingleLayerMode" : {
+                  "description": "If there is only one layer with search, enable single panel mode of Search Results.",
+                  "type": "boolean",
+                  "default": true
+                },
                 "highlightFillColor": {
                     "description": "The fill color of highlighted footprints/bounding boxes on the map. Any valid CSS color defintion is supported.",
                     "type": "string",

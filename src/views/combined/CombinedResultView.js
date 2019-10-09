@@ -4,7 +4,7 @@ import $ from 'jquery';
 
 import { isRecordDownloadable, downloadCustom, getDownloadInfos } from 'eoxc/src/download';
 import metalinkTemplate from 'eoxc/src/download/Metalink.hbs';
-
+import { setSlice } from 'eoxc/src/search/utils';
 import SearchResultHeaderView from './SearchResultHeaderView';
 import SearchResultListView from './SearchResultListView';
 import DownloadListView from './DownloadListView';
@@ -47,7 +47,6 @@ const CombinedResultView = Marionette.LayoutView.extend({
   events: {
     'change input[data-layer]': 'onLayerSelectionChange',
     'click .deselect-all': 'onDeselectAllClicked',
-    'click .select-files': 'onSelectFilesClicked',
     'click .start-download': 'onStartDownloadClicked',
     'click .download-as-metalink': 'onDownloadAsMetalinkClicked',
     'click .download-as-url-list': 'onDownloadAsUrlListClicked',
@@ -59,6 +58,7 @@ const CombinedResultView = Marionette.LayoutView.extend({
     'click:selected-count': 'onSelectedCountClick',
     'change:terms-and-conditions': 'onTermsAndAndConditionsChange',
     'list:render': 'onSearchListRender',
+    'downloadlist:itemRemoved': 'downloadListItemRemoved',
   },
 
   initialize(options) {
@@ -120,6 +120,10 @@ const CombinedResultView = Marionette.LayoutView.extend({
     }
   },
 
+  downloadListItemRemoved() {
+    this.updateViews();
+  },
+
   renderResultContent() {
     // create a child view in results region
     const searchEnabled = this.singleModel.get('automaticSearch');
@@ -131,9 +135,10 @@ const CombinedResultView = Marionette.LayoutView.extend({
     } else if ((!searchEnabled && anySelectedToDisplay) || this.displaySelected) {
       // display only selected products
       const options = {
-        collection: this.singleModel.get('downloadSelection'),
+        referenceCollection: this.singleModel.get('downloadSelection'),
         highlightModel: this.highlightModel,
         fallbackThumbnailUrl: this.fallbackThumbnailUrl,
+        searchModel: this.singleModel,
       };
       this.showChildView('results', new DownloadListView(options));
     } else {
@@ -154,12 +159,13 @@ const CombinedResultView = Marionette.LayoutView.extend({
     const elem = this.$('.result-contents')[0];
     const scrollTop = elem.scrollTop;
     const height = elem.clientHeight;
-    let sizeAccum = 0;
     const view = this.getRegion('results').currentView;
-    if (typeof view.setSlice !== 'undefined') {
-      view.setSlice(sizeAccum - scrollTop, height);
+    if (typeof view !== 'undefined' && typeof view.referenceCollection !== 'undefined') {
+      const headerSize = 0;
+      const footerSize = 0;
+      const itemHeight = 153;
+      setSlice(-scrollTop, height, view, headerSize, footerSize, itemHeight);
     }
-    sizeAccum += view.$el.outerHeight(true);
     elem.scrollTop = scrollTop;
   },
 
@@ -181,16 +187,6 @@ const CombinedResultView = Marionette.LayoutView.extend({
     this.$('.result-contents').height(`calc(100% - ${restHeightCombined}px)`);
   },
 
-  onLayerSelectionChange(event) {
-    if (event) {
-      const $changed = $(event.target);
-      this.singleModel.set('automaticSearch', $changed.is(':checked'));
-      this.saveScrollPosition();
-      this.render();
-    }
-    this.onSearchModelsChange();
-  },
-
   onSearchModelsChange() {
     // update the global status
     const isSearching = this.singleModel.get('isSearching');
@@ -207,6 +203,16 @@ const CombinedResultView = Marionette.LayoutView.extend({
     this.updateViews();
     this.updateHeaderArea();
     this.updateResultsPanelSize();
+  },
+
+  onLayerSelectionChange(event) {
+    if (event) {
+      const $changed = $(event.target);
+      this.singleModel.set('automaticSearch', $changed.is(':checked'));
+      this.saveScrollPosition();
+      this.render();
+    }
+    this.onSearchModelsChange();
   },
 
   onTermsAndAndConditionsChange(childView, status) {
@@ -229,10 +235,6 @@ const CombinedResultView = Marionette.LayoutView.extend({
 
   onStartDownloadClicked() {
     this.onStartDownload();
-  },
-
-  onSelectFilesClicked() {
-    this.onSelectFiles();
   },
 
   onDownloadAsMetalinkClicked() {
@@ -264,15 +266,13 @@ const CombinedResultView = Marionette.LayoutView.extend({
 
   onDownloadSelectionChange() {
     const downloadSelection = this.singleModel.get('downloadSelection');
-    if (typeof this.singleModel.get('downloadSelection') !== 'undefined') {
-      if (downloadSelection.length === 0) {
-        if (!this.singleModel.get('automaticSearch') || this.displaySelected) {
-          this.displaySelected = false;
-          this.renderResultContent();
-          this.onSearchModelsChange();
-        }
+    if (typeof downloadSelection !== 'undefined' && downloadSelection.length === 0) {
+      if (!this.singleModel.get('automaticSearch') || this.displaySelected) {
         this.displaySelected = false;
+        this.renderResultContent();
+        this.onSearchModelsChange();
       }
+      this.displaySelected = false;
     }
     this.checkButtons();
   },
