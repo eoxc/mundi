@@ -14,13 +14,13 @@
   <script src="code-de.bundle.js"></script>
   <script>
   var today = new Date();
-  var timeRecordsStart = new Date(Date.UTC(2016, 0, 1, 0, 0, 0));
+  var timeRecordsStart_S2 = new Date(Date.UTC(2015, 6, 23, 0, 0, 0));
   today.setUTCHours(24, 0, 0, 0);
   var twoYearsAgo = new Date(new Date(today).setUTCFullYear(today.getUTCFullYear() - 2));
   var displayTimeDomainEnd = new Date(new Date(today));
   var displayTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 28));
-  var selectedTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 16));
-  var selectedTimeDomainEnd = new Date(new Date(today).setUTCDate(today.getUTCDate() - 14));
+  var selectedTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 7));
+  var selectedTimeDomainEnd = new Date(new Date(today).setUTCDate(today.getUTCDate() - 2));
   var whereAmI = "//" + window.location.hostname + "/";
   var config = {
     "settings": {
@@ -30,7 +30,7 @@
         "searchEnabled": false,
         "language": "en",
         "timeDomain": [
-            "2017-01-01T00:00:00Z",
+            "2014-04-03T00:00:00Z",
             today.toISOString()
         ],
         "constrainTimeDomain": true,
@@ -55,7 +55,7 @@
         "center": [11.39, 47.26],
         "zoom": 11,
 //        "minZoom": 4,
-        "maxZoom": 18,
+        "maxZoom": 14,
         "filterSettings": {
             "time": {
                 "hidden": true,
@@ -109,7 +109,6 @@
         {
             "id": "S2_L1C",
             "displayName": "Sentinel-2 MSI L1C",
-            "opacity": 0.7,
             "displayColor": "#56EC00",
             "display": {
                 //default layer
@@ -118,7 +117,7 @@
                 "protocol": "WMS",
                 "format": "image/png",
                 "timeRecords" : {
-                  "start": timeRecordsStart ,
+                  "start": timeRecordsStart_S2 ,
                   "end": today,
                 },
                 "projection": "EPSG:4326",
@@ -131,7 +130,7 @@
                 "discardZulu": true,
                 "version": "1.3.0",
                 "opacity": 0.9,
-                "minZoom": 10,
+                "minZoom": 9,
                 "replace": {
                   "target": "display.extraParameters.LAYERS",
                   "value": "S2L1C" 
