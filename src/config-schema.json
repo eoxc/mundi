@@ -314,14 +314,15 @@
                         "type": "object",
                         "properties": {
                             "name": {
-                                "description": "The name of the download format for display.",
+                                "description": "The name of the download format for display. If not set, 'mimeType' is used.",
                                 "type": "string"
                             },
                             "mimeType": {
                                 "description": "The mime-type of the format that is sent to the server.",
                                 "type": "string"
                             }
-                        }
+                        },
+                        "required": ["mimeType"]
                     },
                     "default": []
                 },
@@ -332,14 +333,15 @@
                         "type": "object",
                         "properties": {
                             "name": {
-                                "description": "The name of the download projection for display.",
+                                "description": "The name of the download projection for display. If not set, 'identifier' is used.",
                                 "type": "string"
                             },
                             "identifier": {
                                 "description": "The identifier of the projection (e.g: EPSG-code) that is sent to the server.",
                                 "type": "string"
                             }
-                        }
+                        },
+                        "required": ["identifier"]
                     },
                     "default": []
                 },
@@ -643,7 +645,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "label": {
-                                                    "description": "The displayed label of a single option.",
+                                                    "description": "The displayed label of a single option. If not set, 'value' is used.",
                                                     "type": "string"
                                                 },
                                                 "value": {
@@ -651,7 +653,7 @@
                                                     "type": "string"
                                                 }
                                             },
-                                            "required": ["label", "value"]
+                                            "required": ["value"]
                                         }
                                     },
                                     "range": {
@@ -834,15 +836,16 @@
                                 "type": "object",
                                 "properties": {
                                     "name": {
-                                        "description": "The displayed name of the field",
+                                        "description": "The displayed name of the field. If not set, 'identifier' is used.",
                                         "type": "string"
                                     },
                                     "identifier": {
                                         "description": "The identifier of the field to be sent in the download request",
                                         "type": "string"
                                     }
-                                }
-                            }
+                                },
+                                "required": ["identifier"]
+                            },
                         },
                         "interpolations": {
                             "description": "Available interpolation methods to choose for download.",
@@ -851,14 +854,15 @@
                                 "type": "object",
                                 "properties": {
                                     "name": {
-                                        "description": "The displayed name of the interpolation",
+                                        "description": "The displayed name of the interpolation. If not set, 'identifier' is used.",
                                         "type": "string"
                                     },
                                     "identifier": {
                                         "description": "The identifier of the interpolation to be sent in the download request",
                                         "type": "string"
                                     }
-                                }
+                                },
+                                "required": ["identifier"]
                             }
                         }
                     }
