@@ -134,15 +134,14 @@
               "version": "1.3.0",
               "opacity": 0.9,
               "minZoom": 9,
-              "replace": {
+              "replace": [{
                 "target": "display.extraParameters.LAYERS",
                 "value": "S2L2A" 
-              },
+              }],
               "options": [
               //   { TODO - needs implementation on server
               //   "name": "Predefined display style",
               //   "target": "display.extraParameters.LAYERS",
-              //   "selectOne": true,
               //   "values": [{
               //       "label": "Natural Color",
               //       "value": "TRUE_COLOR",
@@ -177,8 +176,6 @@
                   "target": "display.extraParameters.dim_bands",
                   "selectThree" : true,
                   "values":[{
-                      "value": ""
-                  },{
                       "value": "B01",
                   },{
                       "value": "B02",
@@ -208,8 +205,6 @@
                   "target": "display.extraParameters.dim_wavelengths",
                   "selectThree" : true,
                   "values":[{
-                      "value": ""
-                  },{
                       "value": "442.7",
                   },{
                       "value": "492.4",
@@ -237,11 +232,8 @@
               },
               {
                  "name": "Single bands",
-                 "selectOne": true,
                  "target": "display.extraParameters.dim_bands",
                  "values":[{
-                     "value": ""
-                 },{
                      "label": "Scene Classification SCL",
                      "value": "SCL",
                  },{
@@ -333,14 +325,13 @@
                 "version": "1.3.0",
                 "opacity": 0.9,
                 "minZoom": 9,
-                "replace": {
+                "replace": [{
                   "target": "display.extraParameters.LAYERS",
                   "value": "S2L1C" 
-                },
+                }],
                 "options": [{
                   "name": "Predefined display style",
                   "target": "display.extraParameters.LAYERS",
-                  "selectOne": true,
                   "values": [{
                       "label": "Natural Color",
                       "value": "TRUE_COLOR",
@@ -374,8 +365,6 @@
                     "target": "display.extraParameters.dim_bands",
                     "selectThree" : true,
                     "values":[{
-                        "value": ""
-                    },{
                         "value": "B01",
                     },{
                         "value": "B02",
@@ -407,9 +396,6 @@
                     "target": "display.extraParameters.dim_wavelengths",
                     "selectThree" : true,
                     "values":[{
-                        "value": ""
-                    },{
-                        "label": "442.7",
                         "value": "442.7",
                     },{
                         "value": "492.4",
@@ -518,14 +504,13 @@
                 "version": "1.3.0",
                 "opacity": 0.9,
                 "minZoom": 9,
-                "replace": {
+                "replace": [{
                   "target": "display.extraParameters.LAYERS",
                   "value": "S3OLCI" 
-                },
+                }],
                 "options": [{
                   "name": "Predefined display style",
                   "target": "display.extraParameters.LAYERS",
-                  "selectOne": true,
                   "values": [{
                       "label": "S3OLCI True Color",
                       "value": "S3OLCI-TRUE-COLOR",
@@ -583,8 +568,6 @@
                     "target": "display.extraParameters.dim_bands",
                     "selectThree" : true,
                     "values":[{
-                        "value": ""
-                    },{
                         "value": "B01",
                     },{
                         "value": "B02",
@@ -722,14 +705,13 @@
                 "version": "1.3.0",
                 "opacity": 0.9,
                 "minZoom": 9,
-                "replace": {
+                "replace": [{
                   "target": "display.extraParameters.LAYERS",
                   "value": "S1GRD" 
-                },
+                }],
                 "options": [{
                   "name": "Predefined display style",
                   "target": "display.extraParameters.LAYERS",
-                  "selectOne": true,
                   "values": [{
                       "label": "IW VV linear gamma0",
                       "value": "IW_VV",
@@ -760,8 +742,6 @@
                     "target": "display.extraParameters.dim_bands",
                     "selectThree" : true,
                     "values":[{
-                        "value": ""
-                    },{
                         "value": "VV",
                     },{
                         "value": "VH",
