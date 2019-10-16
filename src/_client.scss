@@ -1129,12 +1129,24 @@ input[type=checkbox], input[type=radio] {
 }
 
 .has-error .radio {
-  color:red;
+  color: red;
 }
 
 .input-group-addon .fa {
   font-size: 1.5em;
   &.ui-sortable-handle, &.fa-square {
     display: none;
+  }
+}
+
+input[type=radio].visualization-selector {
+  + span:before {
+    color: $c_blue;
+  }
+
+  &:checked {
+    + span:before {
+      color: $c_gray;
+    }
   }
 }

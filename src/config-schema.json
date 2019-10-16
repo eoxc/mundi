@@ -540,6 +540,28 @@
                                         "description": "The dotted path of the parameter. e.g: 'display.style'",
                                         "type": "string"
                                     },
+                                    "selectThree": {
+                                        "description": "If option is of type combine-three, for example 'bands'. This will create three dropdowns instead of one.",
+                                        "type": "boolean",
+                                        "default": false
+                                    },
+                                    "replace": {
+                                        "description": "Array of dotted style request parameters, which when this option is set, will be replaced too. For example changing layer name.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "target": {
+                                                    "description": "The dotted path of the parameter. e.g: 'display.extraParameters.LAYERS'",
+                                                    "type": "string"
+                                                },
+                                                "value": {
+                                                    "description": "The actual value to be set.",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
                                     "values": {
                                         "description": "A list of possible options.",
                                         "type": "array",
@@ -559,6 +581,11 @@
                                     }
                                 }
                             }
+                        },
+                        "extraDownloadIcon": {
+                          "description": "If set to true, displays an extra download icon in layer list, triggering full resolution download panel. Can be used when search results panel is not used in the app.",
+                          "type": "boolean",
+                          "default": false
                         }
                     },
                     "required": ["id", "protocol", "format"],
