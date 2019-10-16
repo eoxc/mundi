@@ -419,7 +419,7 @@ window.Application = Marionette.Application.extend({
     // NOT USED FOR DCFS SHOWCASE AS NO OPENSEARCH USED
     //////////////////////////////////////////
 
-    // if (searchCollection.length === 1 && enableSingleLayerMode) {
+    // if (searchCollection.length === 1 && settings.enableSingleLayerMode) {
     //   // single layer view
     //   layout.showChildView('rightPanel', new SidePanelView({
     //     position: 'right',
@@ -435,7 +435,6 @@ window.Application = Marionette.Application.extend({
     //         collection: searchCollection,
     //         downloadEnabled: settings.downloadEnabled,
     //         onStartDownload: startDownload,
-    //         onSelectFiles: selectFiles,
     //         fallbackThumbnailUrl,
     //         termsAndConditionsUrl,
     //       }),
@@ -467,7 +466,6 @@ window.Application = Marionette.Application.extend({
     //         highlightModel,
     //         collection: searchCollection,
     //         onStartDownload: startDownload,
-    //         onSelectFiles: selectFiles,
     //         termsAndConditionsUrl,
     //         downloadEnabled: settings.downloadEnabled,
     //         fallbackThumbnailUrl,
