@@ -903,7 +903,7 @@
                 "loadMore": 20,
                 "thumbnailUrlPattern": "^//obs.eu-de.otc.t-systems.com/.*",
                 "parameters": [
-                  {
+                    {
                     "title": "Online Status",
                       "options": [{
                           "label": "Online or Staging",
@@ -916,13 +916,16 @@
                           "value": "onlineStatus:STAGING",
                       }],
                       "type": "searchTerms"
-                  },
-                  {
+                    },
+                    {
                       "type": "eo:productType",
                       "default": "L2__NO2___",
                       "options": [{
                           "label": "L2 AER AI",
                           "value": "L2__AER_AI",
+                      }, {
+                          "label": "L2 AER LH",
+                          "value": "L2__AER_LH",
                       }, {
                           "label": "L2 CLOUD",
                           "value": "L2__CLOUD_",
@@ -948,23 +951,29 @@
                           "label": "L2 O3",
                           "value": "L2__O3____",
                       }, {
+                          "label": "L2 O3 TCL",
+                          "value": "L2__O3_TCL",
+                      }, {
+                          "label": "L2 O3 PR",
+                          "value": "L2__O3__PR",
+                      }, {
+                          "label": "L2 O3 TPR",
+                          "value": "L2__O3_TPR",
+                      }, {
                           "label": "L2 SO2",
                           "value": "L2__SO2___",
+                      }, {
+                          "label": "L2 CH4",
+                          "value": "L2__CH4___",
                       }],
                     },
                     {
-                        "type": "eo:processingLevel",
-                        "fixed": "L2_"
+                      "type": "eo:processingLevel",
+                      "fixed": "L2_"
                     },
                     {
-                        "type": "eo:startOrbitNumber",
-                    },
-                    {
-                        "type": "eo:orbitDirection",
-                    },
-          					{
-            						"type": "geo:uid",
-          					}
+                      "type": "geo:uid",
+                    }
                 ],
                 "extraFields": {
                     "properties.mundi.date": "dc:date/text()",
@@ -974,10 +983,8 @@
                     "properties.mundi.processingMode": "DIAS:processingMode/text()",
                     "properties.mundi.productType": "eo:productType/text()",
 					          "properties.mundi.startOrbitNumber": "DIAS:startOrbitNumber/text()",
-                    "properties.mundi.orbitDirection": "eo:orbitDirection/text()",
                     "properties.mundi.onlineStatus": "DIAS:onlineStatus/text()",
                     "properties.mundi.processingLevel": "eo:processingLevel/text()",
-
                 },
                 "extraFieldsNamespaces": {
                     "DIAS": "http://tas/DIAS",
