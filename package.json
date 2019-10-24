@@ -63,7 +63,6 @@
     "anno.js": "^1.0.3",
     "autoprefixer": "^6.7.5",
     "backbone.marionette": "^2.4.7",
-    "bluebird": "^3.4.6",
     "bootstrap": "^3.4.1",
     "bootstrap-slider": "^9.9.1",
     "eonasdan-bootstrap-datetimepicker": "^4.17.42",
