@@ -108,7 +108,7 @@ label, input, text {
 }
 
 svg.timeslider,
-.ui-sortable-handle {
+.fa-sort {
   cursor: -webkit-grab;
   cursor: grab;
 }
@@ -193,7 +193,7 @@ svg.timeslider,
 .form-control {
   background: $c_blue;
   border: 0;
-  color: white;
+  color: $c_gray;
 }
 
 .result-contents {
@@ -421,6 +421,7 @@ input,
   .form-group label {
     text-align: left;
     width: 100%;
+    margin-right: 8px;
   }
 
   .checkbox,.checkbox-inline,.radio,.radio-inline {
@@ -486,7 +487,7 @@ input,
     }
 
     &.loading {
-      opacity: 1.0;
+      opacity: 1;
     }
     .missing-interval {
       display: none;
@@ -548,7 +549,8 @@ input,
   .fa-square,
   .fa-adjust,
   .fa-wrench,
-  .ui-sortable-handle {
+  .fa-arrow-down,
+  .fa-paint-brush {
     color: $c_green;
     margin-right: 5px;
   }
@@ -590,6 +592,14 @@ input,
       text-decoration: underline;
     }
   }
+}
+
+.col-sm-2.control-label {
+  color: $c_gray;
+}
+
+.layer-adjust-opacity, .layer-show-options, .layer-download-full-resolution, .slider-horizontal {
+  cursor: pointer;
 }
 
 .layer-adjust-opacity-popover {
@@ -1089,4 +1099,50 @@ body {
 
 .download-confirm {
   color: $c_gray;
+}
+
+.full-resolution-body {
+  color: $c_gray;
+  .input-group-addon {
+    background-color: $c_green;
+    color: $c_gray;
+  }
+  .form-control {
+    color: $c_green!important;
+    &::placeholder {
+      color: $c_green!important;
+    }
+    &.input-sm{
+      height: 35px!important;
+      text-align: center;
+    }
+    &:hover, &:active, &:focus, &:disabled {
+      background: $c_blue;
+      color: $c_green!important;
+      -webkit-text-fill-color: $c_green;
+    }
+  }
+  .btn-draw-bbox {
+    color: $c_gray;
+  }
+}
+
+.dropdown-menu input[type=checkbox], .dropdown-menu input[type=radio], .checkbox-inline input[type=checkbox], .checkbox-inline input[type=radio], .radio input[type=radio] {
+  margin-top: -2px;
+}
+
+.has-error .radio {
+  color: red;
+}
+
+input[type=radio].visualization-selector {
+  + span:before {
+    color: $c_blue;
+  }
+
+  &:checked {
+    + span:before {
+      color: $c_gray;
+    }
+  }
 }

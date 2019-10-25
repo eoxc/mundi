@@ -333,12 +333,16 @@ window.Application = Marionette.Application.extend({
       }));
     };
 
+    layersCollection.on('show-options', (layerModel, useDetailsDisplay) => {
+      layout.showChildView('topModals', new LayerOptionsModalView({ model: layerModel, useDetailsDisplay }));
+    });
+
     layersCollection.on('download-full-resolution', (layerModel) => {
       const searchModel = searchCollection.find(model => model.get('layerModel') === layerModel);
       layout.showChildView('modals', new FullResolutionDownloadOptionsModalView({
         layerModel,
         mapModel,
-        filtersModel: searchModel.get('filtersModel'),
+        filtersModel: searchModel ? searchModel.get('filtersModel') : null,
         model: new DownloadOptionsModel({
           availableDownloadFormats: settings.downloadFormats,
           availableProjections: settings.downloadProjections,
@@ -482,38 +486,10 @@ window.Application = Marionette.Application.extend({
     const warningsCollection = new WarningsCollection([]);
     layout.showChildView('topPanel', new WarningsView({ collection: warningsCollection }));
 
-    // hook up the events that shall generate warnings
-    // filtersModel.on('change', () => {
-    //   // show warning when time filter is set
-    //   warningsCollection.setWarning(
-    //     i18next.t('timefilter_warning'),
-    //     filtersModel.get('time') || false
-    //   );
-
-    //   const otherFilters = Object.keys(filtersModel.attributes)
-    //     .filter(key => key !== 'time' && key !== 'area');
-    //   warningsCollection.setWarning(
-    //     i18next.t('advancedfilter_warning'),
-    //     otherFilters.length
-    //   );
-    // });
-
     // show a warning for every layer that failed to be accessed
     failedLayers.forEach(layer => warningsCollection.setWarning(
       i18next.t('layer_failed', { value: layer.get('displayName') })
     ));
-
-    // searchCollection.on('change', () => {
-    //   const show = searchCollection
-    //     .filter(searchModel => (
-    //       !searchModel.get('isSearching') && !searchModel.get('hasError')
-    //     ))
-    //     .reduce((acc, searchModel) => (
-    //       acc || searchModel.get('totalResults') > searchModel.get('hasLoaded')
-    //     ), false);
-    //   warningsCollection.setWarning(i18next.t('toomanyresults_warning'), show);
-    // });
-
 
     if (settings.extent) {
       mapModel.show({ bbox: settings.extent });
@@ -563,8 +539,6 @@ window.Application = Marionette.Application.extend({
     $('.panel').sizeChanged(() => {
       updateStyleOnScrollPresent([$('.filters-view'), $('.layer-control')]);
     });
-
-    // layout.showChildView('infoPanel', new VendorInfoView({ eoxcVersion, cdeVersion }));
 
     // use set timeout here so that vendor info is always at the end of the attribution list
     setTimeout(() => {

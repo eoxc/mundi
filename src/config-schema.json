@@ -314,14 +314,15 @@
                         "type": "object",
                         "properties": {
                             "name": {
-                                "description": "The name of the download format for display.",
+                                "description": "The name of the download format for display. If not set, 'mimeType' is used.",
                                 "type": "string"
                             },
                             "mimeType": {
                                 "description": "The mime-type of the format that is sent to the server.",
                                 "type": "string"
                             }
-                        }
+                        },
+                        "required": ["mimeType"]
                     },
                     "default": []
                 },
@@ -332,14 +333,15 @@
                         "type": "object",
                         "properties": {
                             "name": {
-                                "description": "The name of the download projection for display.",
+                                "description": "The name of the download projection for display. If not set, 'identifier' is used.",
                                 "type": "string"
                             },
                             "identifier": {
                                 "description": "The identifier of the projection (e.g: EPSG-code) that is sent to the server.",
                                 "type": "string"
                             }
-                        }
+                        },
+                        "required": ["identifier"]
                     },
                     "default": []
                 },
@@ -538,6 +540,33 @@
                                         "description": "The dotted path of the parameter. e.g: 'display.style'",
                                         "type": "string"
                                     },
+                                    "selectThree": {
+                                        "description": "If option is of type combine-three, for example 'bands'. This will create three select elements instead of one.",
+                                        "type": "boolean",
+                                        "default": false
+                                    },
+                                    "replace": {
+                                        "description": "Array of dotted style request parameters, which when this option is set, will be replaced too. For example changing layer name.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "target": {
+                                                    "description": "The dotted path of the parameter. e.g: 'display.extraParameters.LAYERS'",
+                                                    "type": "string"
+                                                },
+                                                "value": {
+                                                    "description": "The actual value to be set.",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "isChosen": {
+                                        "description": "Set this option as pre-selected visualization.",
+                                        "type": "boolean",
+                                        "default": false
+                                    },
                                     "values": {
                                         "description": "A list of possible options.",
                                         "type": "array",
@@ -545,18 +574,38 @@
                                             "type": "object",
                                             "properties": {
                                                 "label": {
-                                                    "description": "The displayed name of the option value.",
+                                                    "description": "The displayed name of the option value. If not supplied, 'value' is used as label.",
                                                     "type": "string"
                                                 },
                                                 "value": {
                                                     "description": "The actual value.",
                                                     "type": "string"
+                                                },
+                                                "isCurrentB1": {
+                                                    "description": "Set this value as pre-selected option 1.",
+                                                    "type": "boolean",
+                                                    "default": false
+                                                },
+                                                "isCurrentB2": {
+                                                    "description": "Set this value as pre-selected option 2.",
+                                                    "type": "boolean",
+                                                    "default": false
+                                                },
+                                                "isCurrentB3": {
+                                                    "description": "Set this value as pre-selected option 3.",
+                                                    "type": "boolean",
+                                                    "default": false
                                                 }
                                             }
                                         }
                                     }
                                 }
                             }
+                        },
+                        "extraDownloadIcon": {
+                          "description": "If set to true, displays an extra download icon in layer list, triggering full resolution download panel. Can be used when search results panel is not used in the app.",
+                          "type": "boolean",
+                          "default": false
                         }
                     },
                     "required": ["id", "protocol", "format"],
@@ -643,7 +692,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "label": {
-                                                    "description": "The displayed label of a single option.",
+                                                    "description": "The displayed label of a single option. If not set, 'value' is used.",
                                                     "type": "string"
                                                 },
                                                 "value": {
@@ -651,7 +700,7 @@
                                                     "type": "string"
                                                 }
                                             },
-                                            "required": ["label", "value"]
+                                            "required": ["value"]
                                         }
                                     },
                                     "range": {
@@ -808,8 +857,18 @@
                             "type": "number",
                             "default": 0.0000858306884765625
                         },
+                        "maxBboxEdgeSize": {
+                            "description": "A warning is shown when any edge of bounding box exceeds this value in Map CRS.",
+                            "type": "number",
+                            "default": null
+                        },
+                        "disableTimeSubsetting": {
+                          "description": "Disable adding time subsetting to WCS request even if available from TimeSlider.",
+                          "type": "boolean",
+                          "default": false
+                        },
                         "axisNames": {
-                            "description": "The axis names to include the subset in WCS requests.",
+                            "description": "The axis names to include the subset in WCS requests. Example [lon, lat]",
                             "type": "array",
                             "items": {
                                 "type": "string"
@@ -824,15 +883,16 @@
                                 "type": "object",
                                 "properties": {
                                     "name": {
-                                        "description": "The displayed name of the field",
+                                        "description": "The displayed name of the field. If not set, 'identifier' is used.",
                                         "type": "string"
                                     },
                                     "identifier": {
                                         "description": "The identifier of the field to be sent in the download request",
                                         "type": "string"
                                     }
-                                }
-                            }
+                                },
+                                "required": ["identifier"]
+                            },
                         },
                         "interpolations": {
                             "description": "Available interpolation methods to choose for download.",
@@ -841,14 +901,15 @@
                                 "type": "object",
                                 "properties": {
                                     "name": {
-                                        "description": "The displayed name of the interpolation",
+                                        "description": "The displayed name of the interpolation. If not set, 'identifier' is used.",
                                         "type": "string"
                                     },
                                     "identifier": {
                                         "description": "The identifier of the interpolation to be sent in the download request",
                                         "type": "string"
                                     }
-                                }
+                                },
+                                "required": ["identifier"]
                             }
                         }
                     }
