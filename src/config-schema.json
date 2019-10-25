@@ -541,7 +541,7 @@
                                         "type": "string"
                                     },
                                     "selectThree": {
-                                        "description": "If option is of type combine-three, for example 'bands'. This will create three dropdowns instead of one.",
+                                        "description": "If option is of type combine-three, for example 'bands'. This will create three select elements instead of one.",
                                         "type": "boolean",
                                         "default": false
                                     },
@@ -562,6 +562,11 @@
                                             }
                                         }
                                     },
+                                    "isChosen": {
+                                        "description": "Set this option as pre-selected visualization.",
+                                        "type": "boolean",
+                                        "default": false
+                                    },
                                     "values": {
                                         "description": "A list of possible options.",
                                         "type": "array",
@@ -569,12 +574,27 @@
                                             "type": "object",
                                             "properties": {
                                                 "label": {
-                                                    "description": "The displayed name of the option value.",
+                                                    "description": "The displayed name of the option value. If not supplied, 'value' is used as label.",
                                                     "type": "string"
                                                 },
                                                 "value": {
                                                     "description": "The actual value.",
                                                     "type": "string"
+                                                },
+                                                "isCurrentB1": {
+                                                    "description": "Set this value as pre-selected option 1.",
+                                                    "type": "boolean",
+                                                    "default": false
+                                                },
+                                                "isCurrentB2": {
+                                                    "description": "Set this value as pre-selected option 2.",
+                                                    "type": "boolean",
+                                                    "default": false
+                                                },
+                                                "isCurrentB3": {
+                                                    "description": "Set this value as pre-selected option 3.",
+                                                    "type": "boolean",
+                                                    "default": false
                                                 }
                                             }
                                         }
@@ -848,7 +868,7 @@
                           "default": false
                         },
                         "axisNames": {
-                            "description": "The axis names to include the subset in WCS requests.",
+                            "description": "The axis names to include the subset in WCS requests. Example [lon, lat]",
                             "type": "array",
                             "items": {
                                 "type": "string"
