@@ -992,6 +992,10 @@ body {
   overflow-y: auto;
 }
 
+.progress-bar {
+  background: $c_blue_hover;
+}
+
 .layer-options {
   min-width: 250px;
   background: $c_green;
