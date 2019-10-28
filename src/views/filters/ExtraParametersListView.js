@@ -15,6 +15,7 @@ const ExtraParametersListView = Marionette.CompositeView.extend({
       name: layerModel.get('displayName'),
       id: layerModel.cid,
       collapsed: this.collapsed,
+      singleLayerModeUsed: this.singleLayerModeUsed,
     };
   },
   className: 'panel panel-default',
@@ -23,6 +24,7 @@ const ExtraParametersListView = Marionette.CompositeView.extend({
     this.searchModel = options.searchModel;
     this.filtersModel = options.searchModel.get('filtersModel');
     this.listenTo(this.searchModel, 'change display.visible', this.onChangeVisible);
+    this.singleLayerModeUsed = options.singleLayerModeUsed;
     // set according to configured filter
     // additional filters are by default collapsed=true
     if (options.settings) {

@@ -271,6 +271,8 @@ window.Application = Marionette.Application.extend({
       end: new Date(settings.displayTimeDomain[1]),
     } : domain;
 
+    const singleLayerModeUsed = searchCollection.length === 1 && settings.enableSingleLayerMode;
+
     layout.showChildView('timeSlider', new TimeSliderView({
       layersCollection,
       mapModel,
@@ -395,6 +397,7 @@ window.Application = Marionette.Application.extend({
           domain,
           constrainTimeDomain: settings.constrainTimeDomain,
           filterSettings: settings.filterSettings,
+          singleLayerModeUsed
         }),
       }, {
         name: 'Layers',
@@ -413,7 +416,7 @@ window.Application = Marionette.Application.extend({
       termsAndConditionsUrl = termsAndConditionsUrl[settings.language];
     }
 
-    if (searchCollection.length === 1 && settings.enableSingleLayerMode) {
+    if (singleLayerModeUsed) {
       // single layer view
       layout.showChildView('rightPanel', new SidePanelView({
         position: 'right',
