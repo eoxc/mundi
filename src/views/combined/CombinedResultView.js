@@ -47,6 +47,7 @@ const CombinedResultView = Marionette.LayoutView.extend({
   events: {
     'change input[data-layer]': 'onLayerSelectionChange',
     'click .deselect-all': 'onDeselectAllClicked',
+    'click .select-files': 'onSelectFilesClicked',
     'click .start-download': 'onStartDownloadClicked',
     'click .download-as-metalink': 'onDownloadAsMetalinkClicked',
     'click .download-as-url-list': 'onDownloadAsUrlListClicked',
@@ -235,6 +236,10 @@ const CombinedResultView = Marionette.LayoutView.extend({
 
   onStartDownloadClicked() {
     this.onStartDownload();
+  },
+
+  onSelectFilesClicked() {
+    this.onSelectFiles();
   },
 
   onDownloadAsMetalinkClicked() {
