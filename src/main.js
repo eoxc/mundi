@@ -212,6 +212,7 @@ window.Application = Marionette.Application.extend({
       uploadEnabled: true,
       downloadEnabled: true,
       searchEnabled: true,
+      selectFilesDownloadEnabled: true,
       filterSettings: null,
     });
 
@@ -326,12 +327,12 @@ window.Application = Marionette.Application.extend({
       }));
     };
 
-    const selectFiles = () => {
+    const selectFiles = settings.selectFilesDownloadEnabled ? () => {
       layout.showChildView('modals', new SelectFilesModalView({
         collection: searchCollection,
         onStartDownload: startDownload,
       }));
-    };
+    } : undefined;
 
     layersCollection.on('show-options', (layerModel, useDetailsDisplay) => {
       layout.showChildView('topModals', new LayerOptionsModalView({ model: layerModel, useDetailsDisplay }));

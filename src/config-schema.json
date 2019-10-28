@@ -364,8 +364,14 @@
                     "type": "object"
                 },
                 "uploadEnabled": {
-                    "description": "Whether or not the 'Upload' functionality shall be available. (Loading of shapefiles for geometries). Default is true",
-                    "type": "boolean"
+                    "description": "Whether or not the 'Upload' functionality shall be available. (Loading of shapefiles for geometries).",
+                    "type": "boolean",
+                    "default": true
+                },
+                "selectFilesDownloadEnabled": {
+                  "description": "Whether 'Download selected files' toggle option is visible.",
+                  "type": "boolean",
+                  "default": true
                 }
             },
             "oneOf": [
