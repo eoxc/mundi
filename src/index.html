@@ -219,6 +219,10 @@
             "download": {
                 "protocol": "EO-WCS",
                 "url": baseUrl + "ows/",
+                "rewrite": {
+                  "from": /<wcs:CoverageId>([\s\S]*?)<\/wcs:CoverageId>/gim,
+                  "to": "<wcs:CoverageId>$1__coverage</wcs:CoverageId>",
+                }
             }
         },
     ],
