@@ -679,6 +679,11 @@
                             "type": "number",
                             "default": 150
                         },
+                        "pageSize": {
+                          "description": "User defined items per page in catalog requests. Lower of server-defined & user-defined is used in the end.",
+                          "type": "number",
+                          "default": 50
+                        },
                         "switchMultiPolygonCoordinates": {
                           "description": "If catalog sends multipolygon coordinates for this layer in lon,lat instead of lat,lon - this needs to be set to true.",
                           "type": "boolean",
