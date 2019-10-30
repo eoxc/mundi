@@ -209,6 +209,7 @@ window.Application = Marionette.Application.extend({
       enableSingleLayerMode: true,
       downloadFormats: [],
       downloadProjections: [],
+      downloadInterpolations: [],
       uploadEnabled: true,
       downloadEnabled: true,
       searchEnabled: true,
@@ -309,6 +310,8 @@ window.Application = Marionette.Application.extend({
         model: new DownloadOptionsModel({
           availableDownloadFormats: settings.downloadFormats,
           availableProjections: settings.downloadProjections,
+          availableInterpolations:
+          settings.downloadInterpolations,
         }),
       }));
     };

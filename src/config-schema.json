@@ -347,6 +347,24 @@
                     },
                     "default": []
                 },
+                "downloadInterpolations": {
+                    "description": "Available interpolation methods to choose for download.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "description": "The displayed name of the interpolation. If not set, 'identifier' is used.",
+                                "type": "string"
+                            },
+                            "identifier": {
+                                "description": "The identifier of the interpolation to be sent in the download request",
+                                "type": "string"
+                            }
+                        },
+                        "required": ["identifier"]
+                    }
+                },
                 "termsAndConditionsUrl": {
                     "oneOf": [{
                         "description": "The URL to the terms and conditions document for the user to accept.",
