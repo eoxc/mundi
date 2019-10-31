@@ -348,7 +348,7 @@
                     "default": []
                 },
                 "downloadInterpolations": {
-                    "description": "Available interpolation methods to choose for download.",
+                    "description": "Available interpolation methods to choose for download via EO-WCS.",
                     "type": "array",
                     "items": {
                         "type": "object",
@@ -836,6 +836,15 @@
                             "enum": ["GET", "POST"],
                             "default": "'GET' for URL based protocols, 'POST' for EO-WCS."
                         },
+                        "axisNames": {
+                            "description": "The axis names to include the subset in WCS requests. Example [lon, lat]",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "minItems": 2,
+                            "maxItems": 2
+                        },
                         "rewrite": {
                             "description": "Settings object to define URL rewrites.",
                             "type": "object",
@@ -965,8 +974,6 @@
                             "type": "string",
                             "enum": ["fetch", "form"],
                         },
-
-
                 }
             },
             "filterSettings": {
