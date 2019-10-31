@@ -77,13 +77,13 @@
                 "mimeType": "image/tiff"
             },
             {
-                "name": "JPG",
-                "mimeType": "image/jpeg",
+                "name": "JPEG 2000",
+                "mimeType": "image/jp2"
             },
             {
-                "name": "PNG",
-                "mimeType": "image/png",
-            }
+                "name": "HDF",
+                "mimeType": "application/x-hdf",
+            },            
         ],
         "downloadProjections": [
             {
@@ -105,9 +105,29 @@
               "identifier": "http://www.opengis.net/def/interpolation/OGC/1/bilinear"
             },
             {
-                "name": "Bicubic",
-                "identifier": "http://www.opengis.net/def/interpolation/OGC/1/bicubic"
-            }
+                "name": "Nearest Neighbour",
+                "identifier": "http://www.opengis.net/def/interpolation/OGC/1/nearest-neighbour"
+            },
+            {
+                "name": "Cubic",
+                "identifier": "http://www.opengis.net/def/interpolation/OGC/1/cubic"
+            },
+            {
+                "name": "Cubic Spline",
+                "identifier": "http://www.opengis.net/def/interpolation/OGC/1/cubic-spline"
+            },
+            {
+                "name": "Average",
+                "identifier": "http://www.opengis.net/def/interpolation/OGC/1/average"
+            },
+            {
+                "name": "Lanczos",
+                "identifier": "http://www.opengis.net/def/interpolation/OGC/1/lanczos"
+            },
+            {
+                "name": "Mode",
+                "identifier": "http://www.opengis.net/def/interpolation/OGC/1/mode"
+            },
         ]
     },
     "baseLayers": [
@@ -233,12 +253,17 @@
             },
             "download": {
                 "protocol": "EO-WCS",
-                "url": baseUrl + "ows/",
-                "method": "GET",
+                "url": baseUrl + "ows",
+                // "method": "GET",
+                // "rewrite": {
+                //   // add __coverage to the coverageid parameter
+                //   "from": /(.*)(coverageid=[^&]+)(.*)/gm,
+                //   "to": "$1$2__coverage$3",
+                // },
                 "rewrite": {
-                  // add __coverage to the coverageid parameter
-                  "from": /(.*)(coverageid=[^&]+)(.*)/gm,
-                  "to": "$1$2__coverage$3",
+                  // add __coverage to the <wcs:coverageId> parameter
+                  "from": /<wcs:CoverageId>([\s\S]*)<\/wcs:CoverageId>/gm,
+                  "to": "<wcs:CoverageId>$1__coverage</wcs:CoverageId>",
                 }
             }
         },
