@@ -899,7 +899,7 @@
                             "default": 20
                         },
                         "maxSizeResolution": {
-                            "description": "Resolution used to calculate the estimate for 'maxSizeWarning'.",
+                            "description": "Resolution used to calculate the estimate for 'maxSizeWarning'. Default is around 10m in degrees around equator.",
                             "type": "number",
                             "default": 0.0000858306884765625
                         },
