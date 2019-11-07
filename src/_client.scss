@@ -993,7 +993,10 @@ body {
 }
 
 .layer-options {
-  min-width: 250px;
+  background: $c_green;
+  margin-left: 5px;
+  margin-top: 28px;
+  min-width: 300px;
 }
 
 .control-label {
