@@ -263,6 +263,7 @@
                 "lightweightBuckets": true,
                 "searchLimit": 300,
                 "loadMore": 300,
+                "pageSize": 50,
                 "switchMultiPolygonCoordinates": true,
                 "searchEnabled": true,
                 "parameters": [
@@ -396,8 +397,8 @@
             "download": {
                 "protocol": "S3",
                 "rewrite": {
-                    "from": "^\/\/obs\.eu-de\.otc\.t-systems\.com\/",
-                    "to": "//mundiwebservices.com/dp/",
+                    "from": "^https:\/\/obs\.eu-de\.otc\.t-systems\.com\/",
+                    "to": "https://mundiwebservices.com/dp/",
                 },
                 "pathPrefix": "dp/"
             },
