@@ -8,8 +8,8 @@ import HighlightModel from 'eoxc/src/core/models/HighlightModel';
 import MapModel from 'eoxc/src/core/models/MapModel';
 import LayersCollection from 'eoxc/src/core/models/LayersCollection';
 import { isRecordDownloadable } from 'eoxc/src/download';
+import LayerOptionsCoreView from 'eoxc/src/core/views/layers/LayerOptionsCoreView';
 
-import LayerOptionsView from './LayerOptionsView';
 import template from './RecordsDetailsModalView.hbs';
 import './RecordsDetailsModalView.css';
 
@@ -30,7 +30,6 @@ const RecordsDetailsModalView = ModalView.extend({
   events: {
     'click .records-next': 'onRecordsNextClicked',
     'click .records-prev': 'onRecordsPrevClicked',
-    // 'click .layer-options': 'onLayerOptionsClicked',
     'shown.bs.modal': 'onModalShown',
     'change .is-selected': 'onDownloadSelectionChange',
   },
@@ -126,7 +125,7 @@ const RecordsDetailsModalView = ModalView.extend({
     this.$('.is-selected').parent().toggle(!!isRecordDownloadable(layerModel, recordModel));
 
     this.$('.layer-options-dropdown').toggle(!!displayParams.options);
-    this.showChildView('layer-options', new LayerOptionsView({
+    this.showChildView('layer-options', new LayerOptionsCoreView({
       model: layerModel, useDetailsDisplay: true
     }));
   },
