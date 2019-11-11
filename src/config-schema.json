@@ -700,7 +700,7 @@
                         "pageSize": {
                           "description": "User defined items per page in catalog requests. Lower of server-defined & user-defined is used in the end.",
                           "type": "number",
-                          "default": 50
+                          "default": null
                         },
                         "switchMultiPolygonCoordinates": {
                           "description": "If catalog sends multipolygon coordinates for this layer in lon,lat instead of lat,lon - this needs to be set to true.",
@@ -904,7 +904,7 @@
                             "default": 0.0000858306884765625
                         },
                         "maxBboxEdgeSize": {
-                            "description": "A warning is shown when any edge of bounding box exceeds this value in Map CRS. Not used by default.",
+                            "description": "A warning is shown when any edge of bounding box exceeds this value in Map CRS.",
                             "type": "number",
                             "default": null
                         },
