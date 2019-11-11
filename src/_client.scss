@@ -1001,6 +1001,10 @@ body {
   overflow-y: auto;
 }
 
+.progress-bar {
+  background: $c_blue_hover;
+}
+
 .layer-options {
   min-width: 250px;
   background: $c_green;
@@ -1112,7 +1116,7 @@ body {
   color: $c_gray;
 }
 
-.full-resolution-body {
+.full-resolution-body, .download-options {
   color: $c_gray;
   .input-group-addon {
     background-color: $c_green;
@@ -1138,7 +1142,7 @@ body {
   }
 }
 
-.dropdown-menu input[type=checkbox], .dropdown-menu input[type=radio], .checkbox-inline input[type=checkbox], .checkbox-inline input[type=radio], .radio input[type=radio] {
+.dropdown-menu input[type=checkbox], .dropdown-menu input[type=radio], .checkbox-inline input[type=checkbox], .checkbox-inline input[type=radio], .radio input[type=radio], input.subset-by-bounds {
   margin-top: -2px;
 }
 

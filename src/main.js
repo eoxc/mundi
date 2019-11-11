@@ -218,9 +218,11 @@ window.Application = Marionette.Application.extend({
       enableSingleLayerMode: true,
       downloadFormats: [],
       downloadProjections: [],
+      downloadInterpolations: [],
       uploadEnabled: true,
       downloadEnabled: true,
       searchEnabled: true,
+      selectFilesDownloadEnabled: true,
       filterSettings: null,
     });
 
@@ -253,7 +255,7 @@ window.Application = Marionette.Application.extend({
             ), {}
         )),
         mapModel,
-        defaultPageSize: 50,
+        defaultPageSize: layerModel.get('search.pageSize'),
         maxCount: layerModel.get('search.searchLimit'),
         loadMore: layerModel.get('search.loadMore'),
         extraParameters: layerModel.get('search.extraParameters'),
@@ -278,6 +280,8 @@ window.Application = Marionette.Application.extend({
       start: new Date(settings.displayTimeDomain[0]),
       end: new Date(settings.displayTimeDomain[1]),
     } : domain;
+
+    const singleLayerModeUsed = searchCollection.length === 1 && settings.enableSingleLayerMode;
 
     layout.showChildView('timeSlider', new TimeSliderView({
       layersCollection,
@@ -315,6 +319,8 @@ window.Application = Marionette.Application.extend({
         model: new DownloadOptionsModel({
           availableDownloadFormats: settings.downloadFormats,
           availableProjections: settings.downloadProjections,
+          availableInterpolations:
+          settings.downloadInterpolations,
         }),
       }));
     };
@@ -335,12 +341,16 @@ window.Application = Marionette.Application.extend({
       }));
     };
 
-    const selectFiles = () => {
+    const selectFiles = settings.selectFilesDownloadEnabled ? () => {
       layout.showChildView('modals', new SelectFilesModalView({
         collection: searchCollection,
         onStartDownload: startDownload,
       }));
-    };
+    } : undefined;
+
+    layersCollection.on('show-options', (layerModel, useDetailsDisplay) => {
+      layout.showChildView('topModals', new LayerOptionsModalView({ model: layerModel, useDetailsDisplay }));
+    });
 
     layersCollection.on('show-options', (layerModel, useDetailsDisplay) => {
       layout.showChildView('topModals', new LayerOptionsModalView({ model: layerModel, useDetailsDisplay }));
@@ -403,6 +413,7 @@ window.Application = Marionette.Application.extend({
           domain,
           constrainTimeDomain: settings.constrainTimeDomain,
           filterSettings: settings.filterSettings,
+          singleLayerModeUsed
         }),
       }, {
         name: 'Layers',
@@ -411,7 +422,7 @@ window.Application = Marionette.Application.extend({
           filtersModel,
           baseLayersCollection,
           overlayLayersCollection,
-          layersCollection: searchCollection.length === 1 ? undefined : layersCollection,
+          layersCollection: layersCollection.length === 1 ? undefined : layersCollection,
         }),
       }],
     }));
@@ -421,7 +432,7 @@ window.Application = Marionette.Application.extend({
       termsAndConditionsUrl = termsAndConditionsUrl[settings.language];
     }
 
-    if (searchCollection.length === 1 && settings.enableSingleLayerMode) {
+    if (singleLayerModeUsed) {
       // single layer view
       layout.showChildView('rightPanel', new SidePanelView({
         position: 'right',

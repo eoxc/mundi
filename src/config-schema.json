@@ -26,9 +26,10 @@
             "description": "The initial settings object.",
             "properties": {
                 "tutorial": {
-                    "description": "Allows configuration of tutorial functionality. If not specified the default behavior will be 'disabled' ",
+                    "description": "Allows configuration of tutorial functionality.",
                     "type": "string",
-                    "enum": [ "always", "once", "button", "disabled" ]
+                    "enum": [ "always", "once", "button", "disabled" ],
+                    "default": "disabled"
                 },
                 "searchDebounceTime": {
                     "description": "Sets the time in milliseconds to wait for additional user input before actually sending a search request.",
@@ -36,9 +37,10 @@
                     "default": 250
                 },
                 "language": {
-                    "description": "The language used in the UI. Defaults to 'en'.",
+                    "description": "The language used in the UI.",
                     "type": "string",
-                    "enum": [ "en", "de", "deinformal" ]
+                    "enum": [ "en", "de", "deinformal" ],
+                    "default": "en"
                 },
                 "center": {
                     "description": "The initial center of the map view.",
@@ -205,32 +207,32 @@
                     "default": "rgba(0, 0, 0, 0)"
                 },
                 "filterStrokeColor": {
-                    "description": "The stroke color (or point color) of selected regions (both on map and on timeslider). Any valid CSS color defintion is supported.",
+                    "description": "The stroke color (or point color) of selected regions (both on map and on timeslider). Any valid CSS color definition is supported.",
                     "type": "string",
                     "default": "rgba(0, 0, 0, 0)"
                 },
                 "filterOutsideColor": {
-                    "description": "The fill color of selected regions (both on map and on timeslider). Any valid CSS color defintion is supported.",
+                    "description": "The fill color of selected regions (both on map and on timeslider). Any valid CSS color definition is supported.",
                     "type": "string",
                     "default": "rgba(0, 0, 0, 0.2)"
                 },
                 "footprintFillColor": {
-                    "description": "The fill color of footprints of the search result. Any valid CSS color defintion is supported.",
+                    "description": "The fill color of footprints of the search result. Any valid CSS color definition is supported.",
                     "type": "string",
                     "default": "rgba(255, 255, 255, 0.2)"
                 },
                 "footprintStrokeColor": {
-                    "description": "The stroke color of footprints of the search result. Any valid CSS color defintion is supported.",
+                    "description": "The stroke color of footprints of the search result. Any valid CSS color definition is supported.",
                     "type": "string",
                     "default": "#cccccc"
                 },
                 "selectedFootprintFillColor": {
-                    "description": "The fill color of footprints of records selected for download. Any valid CSS color defintion is supported.",
+                    "description": "The fill color of footprints of records selected for download. Any valid CSS color definition is supported.",
                     "type": "string",
                     "default": "rgba(255, 0, 0, 0.2)"
                 },
                 "selectedFootprintStrokeColor": {
-                    "description": "The fill color of footprints of records selected for download. Any valid CSS color defintion is supported.",
+                    "description": "The fill color of footprints of records selected for download. Any valid CSS color definition is supported.",
                     "type": "string",
                     "default": "#ff0000"
                 },
@@ -345,6 +347,24 @@
                     },
                     "default": []
                 },
+                "downloadInterpolations": {
+                    "description": "Available interpolation methods to choose for download via EO-WCS.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "description": "The displayed name of the interpolation. If not set, 'identifier' is used.",
+                                "type": "string"
+                            },
+                            "identifier": {
+                                "description": "The identifier of the interpolation to be sent in the download request",
+                                "type": "string"
+                            }
+                        },
+                        "required": ["identifier"]
+                    }
+                },
                 "termsAndConditionsUrl": {
                     "oneOf": [{
                         "description": "The URL to the terms and conditions document for the user to accept.",
@@ -356,16 +376,23 @@
                     }],
                 },
                 "downloadEnabled": {
-                    "description": "Whether or not the 'Download' button shall be enabled. Default is true.",
-                    "type": "boolean"
+                    "description": "Whether or not the 'Download' button shall be enabled.",
+                    "type": "boolean",
+                    "default": true
                 },
                 "translations": {
                     "description": "Additional translations not covered in the base translations. Keys can be one of the language specifiers: 'en', 'de', 'deinformal'. The values must be objects, mapping the (english) key to the translated value. Must not contain the '#' character.",
                     "type": "object"
                 },
                 "uploadEnabled": {
-                    "description": "Whether or not the 'Upload' functionality shall be available. (Loading of shapefiles for geometries). Default is true",
-                    "type": "boolean"
+                    "description": "Whether or not the 'Upload' functionality shall be available. (Loading of shapefiles for geometries).",
+                    "type": "boolean",
+                    "default": true
+                },
+                "selectFilesDownloadEnabled": {
+                  "description": "Whether 'Download selected files' toggle option is visible.",
+                  "type": "boolean",
+                  "default": true
                 }
             },
             "oneOf": [
@@ -446,7 +473,7 @@
                             "type": "string"
                         },
                         "tileSize": {
-                            "description": "The width and height (in pixels) for each WMS tile to be requested. Defaults to 256.",
+                            "description": "The width and height (in pixels) for each WMS tile to be requested.",
                             "type": ["array", "integer"],
                             "items": [{
                                 "type": "integer",
@@ -455,7 +482,8 @@
                                 "type": "integer",
                                 "minimum": 0
                             }],
-                            "minimum": 0
+                            "minimum": 0,
+                            "default": 256
                         },
                         "format": {
                             "description": "The transfer format used to retrieve tiles. For layers and overlayLayers this should be a format that allows transparency (e.g: PNG).",
@@ -470,8 +498,9 @@
                             "type": "string"
                         },
                         "version": {
-                            "description": "Override service version parameter. Default is '1.1.0'.",
-                            "type": "string"
+                            "description": "Override service version parameter.",
+                            "type": "string",
+                            "default": "1.1.0"
                         },
                         "minZoom": {
                             "description": "The minimum map zoom level for this layer. Used for map is maximum over all layers.",
@@ -493,12 +522,14 @@
                             "type": "string"
                         },
                         "discardZulu": {
-                            "description": "When this is set to 'true', the trailing 'Z' (for UTC Zulu) will be discarded for the WM(T)S time parameter. Default is 'false'.",
-                            "type": "boolean"
+                            "description": "When this is set to 'true', the trailing 'Z' (for UTC Zulu) will be discarded for the WM(T)S time parameter.",
+                            "type": "boolean",
+                            "default": false
                         },
                         "useMilliseconds": {
-                            "description": "Determines whether the granularity of the time parameter includes milliseconds. Defaults to 'true'.",
-                            "type": "boolean"
+                            "description": "Determines whether the granularity of the time parameter includes milliseconds.",
+                            "type": "boolean",
+                            "default": true
                         },
                         "adjustTime": {
                             "description": "The time parameter values of WMS/WMTS requests are decreased and increased by the given number of seconds.",
@@ -666,6 +697,11 @@
                             "type": "number",
                             "default": 150
                         },
+                        "pageSize": {
+                          "description": "User defined items per page in catalog requests. Lower of server-defined & user-defined is used in the end.",
+                          "type": "number",
+                          "default": null
+                        },
                         "switchMultiPolygonCoordinates": {
                           "description": "If catalog sends multipolygon coordinates for this layer in lon,lat instead of lat,lon - this needs to be set to true.",
                           "type": "boolean",
@@ -732,7 +768,7 @@
                             "type": "object",
                             "properties": {
                                 "collapsed": {
-                                    "description": "If a filter panel starts  collapsed.",
+                                    "description": "If a filter panel starts collapsed.",
                                     "type": "boolean",
                                     "default": true
                                 },
@@ -745,8 +781,9 @@
                         }
                     },
                     "maxUrlLength": {
-                        "description": "The maximum URL length of search requests to be sent. Longer URLs will not be sent, but an error will be raised directly. Default is 4000.",
-                        "type": "number"
+                        "description": "The maximum URL length of search requests to be sent. Longer URLs will not be sent, but an error will be raised directly.",
+                        "type": "number",
+                        "default": 4000
                     },
                     "thumbnailUrlTemplate": {
                         "description": "The template string to construct a thumbnail URL. Use '{{' and '}}' to select values. e.g: 'http://landsat-pds.s3.amazonaws.com/{{properties.s3Path}}/{{properties.title}}_thumb_small.jpg'.",
@@ -798,6 +835,15 @@
                             "type": "string",
                             "enum": ["GET", "POST"],
                             "default": "'GET' for URL based protocols, 'POST' for EO-WCS."
+                        },
+                        "axisNames": {
+                            "description": "The axis names to include the subset in WCS requests. Example [lon, lat]",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "minItems": 2,
+                            "maxItems": 2
                         },
                         "rewrite": {
                             "description": "Settings object to define URL rewrites.",
@@ -853,7 +899,7 @@
                             "default": 20
                         },
                         "maxSizeResolution": {
-                            "description": "Resolution used to calculate the estimate for 'maxSizeWarning'.",
+                            "description": "Resolution used to calculate the estimate for 'maxSizeWarning'. Default is around 10m in degrees around equator.",
                             "type": "number",
                             "default": 0.0000858306884765625
                         },
@@ -928,8 +974,6 @@
                             "type": "string",
                             "enum": ["fetch", "form"],
                         },
-
-
                 }
             },
             "filterSettings": {
