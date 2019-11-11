@@ -39,6 +39,7 @@ const RootFiltersView = Marionette.LayoutView.extend({
     this.domain = options.domain;
     this.constrainTimeDomain = options.constrainTimeDomain;
     this.filterSettings = options.filterSettings;
+    this.singleLayerModeUsed = options.singleLayerModeUsed;
   },
 
   onBeforeShow() {
@@ -88,6 +89,7 @@ const RootFiltersView = Marionette.LayoutView.extend({
             searchModel,
             collection: new Backbone.Collection(layerModel.get('search.parameters')),
             settings: paramFs,
+            singleLayerModeUsed: this.singleLayerModeUsed
           })));
         }
       });

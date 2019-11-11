@@ -199,6 +199,15 @@
                       "value": "B11",
                   },{
                       "value": "B12",
+                  },{
+                      "label": "Scene Classification",
+                      "value": "SCL",
+                  },{
+                      "label": "Cloud mask",
+                      "value": "CLD",
+                  },{
+                      "label": "Snow/Ice mask",
+                      "value": "SNW",
                   }],
               }, {
                   "name": "Wavelength Combination (RGB)",
@@ -234,20 +243,21 @@
                       "value": "2202.4",
                   }],
               },
-              {
-                 "name": "Single bands",
-                 "target": "display.extraParameters.dim_bands",
-                 "values":[{
-                     "label": "Scene Classification SCL",
-                     "value": "SCL",
-                 },{
-                     "label": "Cloud mask CLD",
-                     "value": "CLD",
-                 },{
-                     "label": "Snow/Ice mask SNW",
-                     "value": "SNW",
-                 }]
-             },
+              // needs implementation on server
+             //  {
+             //     "name": "Single bands",
+             //     "target": "display.extraParameters.dim_bands",
+             //     "values":[{
+             //         "label": "Scene Classification SCL",
+             //         "value": "SCL",
+             //     },{
+             //         "label": "Cloud mask CLD",
+             //         "value": "CLD",
+             //     },{
+             //         "label": "Snow/Ice mask SNW",
+             //         "value": "SNW",
+             //     }]
+             // },
             ],
           },
           "fullResolution": {

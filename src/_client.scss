@@ -108,7 +108,7 @@ label, input, text {
 }
 
 svg.timeslider,
-.ui-sortable-handle {
+.fa-sort {
   cursor: -webkit-grab;
   cursor: grab;
 }
@@ -554,7 +554,7 @@ input,
   .fa-adjust,
   .fa-wrench,
   .fa-arrow-down,
-  .ui-sortable-handle {
+  .fa-paint-brush {
     color: $c_green;
     margin-right: 5px;
   }
@@ -598,7 +598,11 @@ input,
   }
 }
 
-.layer-adjust-opacity {
+.col-sm-2.control-label {
+  color: $c_gray;
+}
+
+.layer-adjust-opacity, .layer-show-options, .layer-download-full-resolution, .slider-horizontal {
   cursor: pointer;
 }
 
@@ -992,6 +996,10 @@ body {
   overflow-y: auto;
 }
 
+.progress-bar {
+  background: $c_blue_hover;
+}
+
 .layer-options {
   background: $c_green;
   margin-left: 5px;
@@ -1105,31 +1113,34 @@ body {
   color: $c_gray;
 }
 
-.full-resolution-body {
+.full-resolution-body, .download-options {
   color: $c_gray;
   .input-group-addon {
     background-color: $c_green;
-    color:$c_gray;
+    color: $c_gray;
   }
   .form-control {
-    color:$c_green!important;
+    color: $c_green!important;
+    &::placeholder {
+      color: $c_green!important;
+    }
     &.input-sm{
       height: 35px!important;
       text-align: center;
     }
     &:hover, &:active, &:focus, &:disabled {
       background: $c_blue;
-      color:$c_green!important;
+      color: $c_green!important;
       -webkit-text-fill-color: $c_green;
     }
   }
   .btn-draw-bbox {
-    color: $c_green;
+    color: $c_gray;
   }
 }
 
-input[type=checkbox], input[type=radio] {
-  margin:-2px;
+.dropdown-menu input[type=checkbox], .dropdown-menu input[type=radio], .checkbox-inline input[type=checkbox], .checkbox-inline input[type=radio], .radio input[type=radio], input.subset-by-bounds {
+  margin-top: -2px;
 }
 
 .has-error .radio {

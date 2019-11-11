@@ -175,7 +175,7 @@ window.Application = Marionette.Application.extend({
     }
   },
 
-  onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, failedLayers) {
+  onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection) {
     const settings = config.settings;
 
     // allow custom translations from the settings
@@ -218,9 +218,11 @@ window.Application = Marionette.Application.extend({
       enableSingleLayerMode: true,
       downloadFormats: [],
       downloadProjections: [],
+      downloadInterpolations: [],
       uploadEnabled: true,
       downloadEnabled: true,
       searchEnabled: true,
+      selectFilesDownloadEnabled: true,
       filterSettings: null,
     });
 
@@ -279,6 +281,8 @@ window.Application = Marionette.Application.extend({
       end: new Date(settings.displayTimeDomain[1]),
     } : domain;
 
+    const singleLayerModeUsed = searchCollection.length === 1 && settings.enableSingleLayerMode;
+
     layout.showChildView('timeSlider', new TimeSliderView({
       layersCollection,
       mapModel,
@@ -315,6 +319,8 @@ window.Application = Marionette.Application.extend({
         model: new DownloadOptionsModel({
           availableDownloadFormats: settings.downloadFormats,
           availableProjections: settings.downloadProjections,
+          availableInterpolations:
+          settings.downloadInterpolations,
         }),
       }));
     };
@@ -334,6 +340,13 @@ window.Application = Marionette.Application.extend({
         projection: settings.projection,
       }));
     };
+
+    const selectFiles = settings.selectFilesDownloadEnabled ? () => {
+      layout.showChildView('modals', new SelectFilesModalView({
+        collection: searchCollection,
+        onStartDownload: startDownload,
+      }));
+    } : undefined;
 
     layersCollection.on('show-options', (layerModel, useDetailsDisplay) => {
       layout.showChildView('topModals', new LayerOptionsModalView({ model: layerModel, useDetailsDisplay }));
