@@ -253,7 +253,7 @@ window.Application = Marionette.Application.extend({
             ), {}
         )),
         mapModel,
-        defaultPageSize: 50,
+        defaultPageSize: layerModel.get('search.pageSize'),
         maxCount: layerModel.get('search.searchLimit'),
         loadMore: layerModel.get('search.loadMore'),
         extraParameters: layerModel.get('search.extraParameters'),
