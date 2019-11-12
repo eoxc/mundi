@@ -255,15 +255,10 @@
                 "protocol": "EO-WCS",
                 "url": baseUrl + "ows",
                 // "method": "GET",
-                // "rewrite": {
-                //   // add __coverage to the coverageid parameter
-                //   "from": /(.*)(coverageid=[^&]+)(.*)/gm,
-                //   "to": "$1$2__coverage$3",
-                // },
                 "rewrite": {
-                  // add __coverage to the <wcs:coverageId> parameter
-                  "from": /<wcs:CoverageId>([\s\S]*)<\/wcs:CoverageId>/gm,
-                  "to": "<wcs:CoverageId>$1__coverage</wcs:CoverageId>",
+                  // add __coverage to the coverageId
+                  "from": "({{id}})",
+                  "to": "$1__coverage"
                 }
             }
         },
