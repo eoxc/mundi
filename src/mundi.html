@@ -801,12 +801,11 @@
               "dropEmptyParameters": true,
             },
             "download": {
-                "protocol": "S3",
+                "protocol": "URL",
                 "rewrite": {
                     "from": "^https:\/\/obs\.eu-de\.otc\.t-systems\.com\/",
                     "to": "https://mundiwebservices.com/dp/",
                 },
-                "pathPrefix": "dp/"
             },
         },
         {
@@ -1036,6 +1035,13 @@
                     "</tr>" +
                     "</table>",
             },
+            "download": {
+                "protocol": "URL",
+                "rewrite": {
+                    "from": "^https:\/\/obs\.eu-de\.otc\.t-systems\.com\/",
+                    "to": "https://mundiwebservices.com/dp/",
+                },
+            },
         },
         {
             "id": "Landsat8",
@@ -1172,12 +1178,11 @@
               "dropEmptyParameters": true,
             },
             "download": {
-                "protocol": "S3",
-                "rewrite": {
-                    "from": "^https:\/\/obs\.eu-de\.otc\.t-systems\.com\/",
-                    "to": "https://mundiwebservices.com/dp/",
-                },
-                "pathPrefix": "dp/"
+              "protocol": "URL",
+              "rewrite": {
+                  "from": "^https:\/\/obs\.eu-de\.otc\.t-systems\.com\/",
+                  "to": "https://mundiwebservices.com/dp/",
+              },
             },
         },
         {
@@ -1486,12 +1491,11 @@
                     "</table>",
             },
             "download": {
-                "protocol": "S3",
+                "protocol": "URL",
                 "rewrite": {
                     "from": "^https:\/\/obs\.eu-de\.otc\.t-systems\.com\/",
                     "to": "https://mundiwebservices.com/dp/",
                 },
-                "pathPrefix": "dp/"
             },
         },
     ],
