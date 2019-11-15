@@ -1354,6 +1354,164 @@
             },
         },
         {
+            "id": "S1_L2_GRD",
+            "displayName": "Sentinel-1 L2 GRD",
+            "displayColor": "#f5a498",
+            "display": {
+                "id": "S1-L2-GRD",
+                "visible": false,
+                "protocol": "WMTS",
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "urls": [
+                ],
+            },
+            "search": {
+                "protocol": "OpenSearch",
+                "url": "//ows.eox.at/mundi_staging/eoxc/S1_L1_GRD.osdd",
+                "id": "DIAS_CWS:S1_L1_GRD",
+                "histogramBinCount": 28,
+                "format": "application/atom+xml",
+                "method": "GET",
+                "histogramThreshold": 300,
+                "lightweightBuckets": true,
+                "searchLimit": 300,
+                "loadMore": 300,
+                "pageSize": 50,
+                "countZeroRecords": true,
+                "dropEmptyParameters": true,
+                "switchMultiPolygonCoordinates": true,
+                "parameters": [
+                  {
+                    "title": "Online Status",
+                    "options": [{
+                        "label": "Online or Staging",
+                        "value": "onlineStatus:(ONLINE OR STAGING)",
+                    }, {
+                        "label": "Online",
+                        "value": "onlineStatus:ONLINE",
+                    }, {
+                        "label": "Staging",
+                        "value": "onlineStatus:STAGING",
+                      }],
+                      "type": "searchTerms"
+                  },
+                  {
+                    "type": "geo:uid",
+                  },
+                  {
+                      "type": "eo:relativeOrbitNumber",
+                      "title": "Relative Orbit Number"
+                  },
+                  {
+                    "type": "eo:orbitDirection",
+                    "title": "Orbit Direction"
+                  },
+                  {
+                      "type": "eo:sensorMode",
+                      "title": "Sensor Mode"
+                  },
+                  {
+                      "type": "eo:polarisationChannels",
+                      "title": "Polarisation Channels"
+                  },
+                  {
+                      "type": "DIAS:productDeliveryFormat",
+                      "title": "Product Delivery Format"
+                  },
+                  {
+                     "type": "eo:processingLevel",
+                     "fixed": "L2_"
+                  }
+                ],
+                "parametersFilterSettings": {
+                    "collapsed": true,
+                    "hidden": false,
+                },
+                "extraFields": {
+                    "properties.mundi.date": "dc:date/text()",
+                    "properties.mundi.ingestionDate": "DIAS:ingestionDate/text()",
+                    "properties.mundi.processingDate": "eo:processingDate/text()",
+                    "properties.mundi.productDatapackSize": "DIAS:productDatapackSize/text()",
+                    "properties.mundi.imageFileFormat": "DIAS:imageFileFormat/text()",
+                    "properties.mundi.productType": "eo:productType/text()",
+                    "properties.mundi.relativeOrbitNumber": "DIAS:relativeOrbitNumber/text()",
+                    "properties.mundi.sensorMode": "eo:sensorMode/text()",
+                    "properties.mundi.polarisationChannels": "eo:polarisationChannels/text()",
+                    "properties.mundi.orbitDirection": "eo:orbitDirection/text()",
+                    "properties.mundi.onlineStatus": "DIAS:onlineStatus/text()",
+                    "properties.mundi.productDeliveryFormat": "DIAS:productDeliveryFormat/text()",
+                    "properties.mundi.quicklookUrl": "media:group/media:content@url"
+                },
+                "extraFieldsNamespaces": {
+                    "DIAS": "http://tas/DIAS",
+                    "eo": "http://a9.com/-/spec/opensearch/extensions/eo/1.0/",
+                    "dc": "http://purl.org/dc/elements/1.1/",
+                    "atom": "http://www.w3.org/2005/Atom",
+                    "media": "http://search.yahoo.com/mrss/"
+                },
+                "descriptionTemplate":
+                    "<table class='table table-condensed'>" +
+                    "<tr>" +
+                      "<td>Sensing Start Date</td>" +
+                      "<td>{{properties.mundi.date}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Processing Date</td>" +
+                      "<td>{{properties.mundi.processingDate}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Ingestion Date</td>" +
+                      "<td>{{properties.mundi.ingestionDate}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Sensor Mode</td>" +
+                      "<td>{{properties.mundi.sensorMode}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Polarisation Channels</td>" +
+                      "<td>{{properties.mundi.polarisationChannels}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Relative Orbit Number</td>" +
+                      "<td>{{properties.mundi.relativeOrbitNumber}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Orbit Direction</td>" +
+                      "<td>{{properties.mundi.orbitDirection}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Online Status</td>" +
+                      "<td>{{properties.mundi.onlineStatus}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Image Format</td>" +
+                      "<td>{{properties.mundi.imageFileFormat}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Product Format</td>" +
+                      "<td>{{properties.mundi.productDeliveryFormat}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Product Datapack Size</td>" +
+                      "<td>{{formatBytes(properties.mundi.productDatapackSize)}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td colspan=\"2\" style=\"text-align:center\"><img src='{{properties.mundi.quicklookUrl}}' style=\"max-height:200px;\"></td>" +
+                    "</tr>" +
+                    "</table>",
+            },
+            "download": {
+                "protocol": "S3",
+                "rewrite": {
+                    "from": "^https:\/\/obs\.eu-de\.otc\.t-systems\.com\/",
+                    "to": "https://mundiwebservices.com/dp/",
+                },
+                "pathPrefix": "dp/"
+            },
+        },
+        {
             "id": "S1_L1_SLC",
             "displayName": "Sentinel-1 L1 SLC",
             "displayColor": "#45c4bc",
@@ -1419,6 +1577,150 @@
                     {
                       "type": "eo:processingLevel",
                       "fixed": "L1_"
+                    }
+                ],
+                "extraFields": {
+                    "properties.mundi.date": "dc:date/text()",
+                    "properties.mundi.ingestionDate": "DIAS:ingestionDate/text()",
+                    "properties.mundi.processingDate": "eo:processingDate/text()",
+                    "properties.mundi.productDatapackSize": "DIAS:productDatapackSize/text()",
+                    "properties.mundi.imageFileFormat": "DIAS:imageFileFormat/text()",
+                    "properties.mundi.productType": "eo:productType/text()",
+                    "properties.mundi.relativeOrbitNumber": "DIAS:relativeOrbitNumber/text()",
+                    "properties.mundi.sensorMode": "eo:sensorMode/text()",
+                    "properties.mundi.polarisationChannels": "eo:polarisationChannels/text()",
+                    "properties.mundi.orbitDirection": "eo:orbitDirection/text()",
+                    "properties.mundi.onlineStatus": "DIAS:onlineStatus/text()",
+                    "properties.mundi.productDeliveryFormat": "DIAS:productDeliveryFormat/text()",
+                    "properties.mundi.quicklookUrl": "media:group/media:content@url"
+                },
+                "extraFieldsNamespaces": {
+                    "DIAS": "http://tas/DIAS",
+                    "eo": "http://a9.com/-/spec/opensearch/extensions/eo/1.0/",
+                    "dc": "http://purl.org/dc/elements/1.1/",
+                    "atom": "http://www.w3.org/2005/Atom",
+                    "media": "http://search.yahoo.com/mrss/"
+                },
+                "descriptionTemplate":
+                    "<table class='table table-condensed'>" +
+                    "<tr>" +
+                      "<td>Sensing Start Date</td>" +
+                      "<td>{{properties.mundi.date}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Processing Date</td>" +
+                      "<td>{{properties.mundi.processingDate}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Ingestion Date</td>" +
+                      "<td>{{properties.mundi.ingestionDate}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Sensor Mode</td>" +
+                      "<td>{{properties.mundi.sensorMode}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Polarisation Channels</td>" +
+                      "<td>{{properties.mundi.polarisationChannels}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Relative Orbit Number</td>" +
+                      "<td>{{properties.mundi.relativeOrbitNumber}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Orbit Direction</td>" +
+                      "<td>{{properties.mundi.orbitDirection}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Online Status</td>" +
+                      "<td>{{properties.mundi.onlineStatus}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Image Format</td>" +
+                      "<td>{{properties.mundi.imageFileFormat}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Product Datapack Size</td>" +
+                      "<td>{{formatBytes(properties.mundi.productDatapackSize)}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td colspan=\"2\" style=\"text-align:center\"><img src='{{properties.mundi.quicklookUrl}}' style=\"max-height:200px;\"></td>" +
+                    "</tr>" +
+                    "</table>",
+            },
+            "download": {
+                "protocol": "URL",
+                "rewrite": {
+                    "from": "^https:\/\/obs\.eu-de\.otc\.t-systems\.com\/",
+                    "to": "https://mundiwebservices.com/dp/",
+                },
+            },
+        },
+        {
+            "id": "S1_L2_SLC",
+            "displayName": "Sentinel-1 L2 SLC",
+            "displayColor": "#a9d1d0",
+            "noTimeSliderBorder": true,
+            "display": {
+                "id": "S1_L1_SLC",
+                "visible": false,
+                "protocol": "WMS",
+                "urls": [
+                    ""
+                ],
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "style": "",
+            },
+            "search": {
+                "protocol": "OpenSearch",
+                "url": "//ows.eox.at/mundi_staging/eoxc/S1_L1_SLC.osdd",
+                "id": "DIAS_CWS:S1_L1_SLC",
+                "histogramBinCount": 28,
+                "format": "application/atom+xml",
+                "method": "GET",
+                "histogramThreshold": 300,
+                "lightweightBuckets": true,
+                "searchLimit": 300,
+                "loadMore": 300,
+                "switchMultiPolygonCoordinates": true,
+                "parameters": [
+                  {
+                      "title": "Online Status",
+                        "options": [{
+                            "label": "Online or Staging",
+                            "value": "onlineStatus:(ONLINE OR STAGING)",
+                        }, {
+                            "label": "Online",
+                            "value": "onlineStatus:ONLINE",
+                        }, {
+                            "label": "Staging",
+                            "value": "onlineStatus:STAGING",
+                        }],
+                        "type": "searchTerms"
+                    },
+                    {
+                       "type": "geo:uid",
+                    },
+                    {
+                        "type": "eo:relativeOrbitNumber",
+                        "title": "Relative Orbit Number"
+                    },
+                    {
+                      "type": "eo:orbitDirection",
+                      "title": "Orbit Direction"
+                    },
+                    {
+                        "type": "eo:sensorMode",
+                        "title": "Sensor Mode"
+                    },
+                    {
+                        "type": "eo:polarisationChannels",
+                        "title": "Polarisation Channels"
+                    },
+                    {
+                      "type": "eo:processingLevel",
+                      "fixed": "L2_"
                     }
                 ],
                 "extraFields": {
