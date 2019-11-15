@@ -698,7 +698,7 @@
                             "default": 150
                         },
                         "pageSize": {
-                          "description": "User defined items per page in catalog requests. Lower of server-defined & user-defined is used in the end.",
+                          "description": "User defined items per page in catalog requests. Lower of server-defined & user-defined is used in the end. Should be set for each layer to allow performance improvement when 'Load more' is used.",
                           "type": "number",
                           "default": null
                         },
@@ -850,7 +850,7 @@
                             "type": "object",
                             "properties": {
                                 "from": {
-                                    "description": "The part of the URL that shall be rewritten (replaced). Will be interpreted as a regular expression.",
+                                    "description": "The part of the URL that shall be rewritten (replaced). Either Will be interpreted as a regular expression - usage without quotes or a template can be used - '{{ and }}' to use Record properties in regex. For example {{ id }} to select ID of product.",
                                     "type": "string"
                                 },
                                 "to": {
