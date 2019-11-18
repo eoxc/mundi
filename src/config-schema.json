@@ -698,7 +698,7 @@
                             "default": 150
                         },
                         "pageSize": {
-                          "description": "User defined items per page in catalog requests. Lower of server-defined & user-defined is used in the end. Should be set for each layer to allow performance improvement when 'Load more' is used.",
+                          "description": "User defined items per page in catalog requests. Lower of server-defined & user-defined is used in the end.",
                           "type": "number",
                           "default": null
                         },
