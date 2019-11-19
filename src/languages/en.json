@@ -14,6 +14,7 @@
   "confirm_note": "Note, the browser might open multiple confirmation dialogs or issue a warning. Besides, typically browsers have a limit of 6 concurrent connections and thus too many product downloads will block the client.",
   "download_size_warning": "The estimated size of the download without compression is {{estimated_size}}MB. This might exceed the capabilities of the service.",
   "max_bbox_warning": "Maximum size of bounding box: {{max_bbox_size}} was exceeded by: {{max_bbox_exceed}} on axis: {{max_bbox_axis}}.",
+  "max_resolution_warning": "Maximum resolution: {{max_resolution}} was exceeded. Attempt to download might fail with an error.",
   "download_bands_warning": "The selected format supports at most {{maxBands}} bands, but {{requestedBands}} are requested.",
   "timefilter_warning": "Search results may differ from products shown on map because of using a separate time filter",
   "advancedfilter_warning": "Search results may differ from products shown on map because of using additional filters",
