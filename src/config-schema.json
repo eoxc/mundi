@@ -908,6 +908,11 @@
                             "type": "number",
                             "default": null
                         },
+                        "maxAllowedResolution": {
+                            "description": "A warning is shown when user input resolution is greater than this value in Map CRS.",
+                            "type": "number",
+                            "default": null
+                        },
                         "disableTimeSubsetting": {
                           "description": "Disable adding time subsetting to WCS request even if available from TimeSlider.",
                           "type": "boolean",
