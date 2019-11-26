@@ -1147,6 +1147,10 @@ body {
   color: red;
 }
 
+.export-tools{
+  z-index:2;
+}
+
 input[type=radio].visualization-selector {
   + span:before {
     color: $c_blue;
