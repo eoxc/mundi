@@ -69,6 +69,7 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
+      Promise: 'bluebird'
     }),
     new webpack.BannerPlugin(
       `CODE-DE version: ${packageJson.version}\neoxc version: ${eoxcPackageJson.version}`
