@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import $ from 'jquery';
 import 'jquery-ui';
-import es6Promise from 'es6-promise';
 
 import _ from 'underscore'; // eslint-disable-line import/no-extraneous-dependencies
 import Backbone from 'backbone'; // eslint-disable-line import/no-extraneous-dependencies
@@ -59,7 +58,6 @@ import fallbackThumbnailUrl from './images/no_thumbnail_available.png';
 // import './static/code-de.css';
 import './_client.scss';
 
-es6Promise.polyfill();
 
 const englishTranslation = require('./languages/en.json');
 
