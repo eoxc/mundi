@@ -186,12 +186,12 @@
     ],
     "layers": [
         {
-            "id": 'VHR_IMAGE_2018',
-            "displayName": 'VHR Image 2018',
+            "id": 'VHR_IMAGE_2018_Level_1',
+            "displayName": 'VHR Image 2018 Level 1',
             "displayColor": '#eb3700',
             "display": {
-                "id": 'VHR_IMAGE_2018__TRUE_COLOR',
-                "visible": true,
+                "id": 'VHR_IMAGE_2018_Level_1__TRUE_COLOR',
+                "visible": false,
                 "protocol": 'WMS',
                 "url": baseUrl + 'cache/ows',
                 "format": 'image/png',
@@ -204,21 +204,21 @@
                     "target": "display.extraParameters.LAYERS",
                     "values": [{
                       "label": "VHR Image 2018 True Color",
-                      "value": "VHR_IMAGE_2018__TRUE_COLOR",
+                      "value": "VHR_IMAGE_2018_Level_1__TRUE_COLOR",
                     }, {
                       "label": "VHR Image 2018 True Color with masked validity",
-                      "value": "VHR_IMAGE_2018__masked_validity",
+                      "value": "VHR_IMAGE_2018_Level_1__masked_validity",
                     }, {
                       "label": "VHR Image 2018 False Color",
-                      "value": "VHR_IMAGE_2018__FALSE_COLOR",
+                      "value": "VHR_IMAGE_2018_Level_1__FALSE_COLOR",
                     }, {
                       "label": "VHR Image 2018 NDVI",
-                      "value": "VHR_IMAGE_2018__NDVI",
+                      "value": "VHR_IMAGE_2018_Level_1__NDVI",
                     }]
                 }],
             },
             "detailsDisplay": {
-                "id": 'VHR_IMAGE_2018__TRUE_COLOR',
+                "id": 'VHR_IMAGE_2018_Level_1__TRUE_COLOR',
                 "visible": true,
                 "protocol": 'WMS',
                 "url": baseUrl + 'cache/ows',
@@ -232,23 +232,120 @@
                     "target": "detailsDisplay.extraParameters.LAYERS",
                     "values": [{
                       "label": "VHR Image 2018 True Color",
-                      "value": "VHR_IMAGE_2018__TRUE_COLOR",
+                      "value": "VHR_IMAGE_2018_Level_1__TRUE_COLOR",
                     }, {
                       "label": "VHR Image 2018 True Color with masked validity",
-                      "value": "VHR_IMAGE_2018__masked_validity",
+                      "value": "VHR_IMAGE_2018_Level_1__masked_validity",
                     }, {
                       "label": "VHR Image 2018 False Color",
-                      "value": "VHR_IMAGE_2018__FALSE_COLOR",
+                      "value": "VHR_IMAGE_2018_Level_1__FALSE_COLOR",
                     }, {
                       "label": "VHR Image 2018 NDVI",
-                      "value": "VHR_IMAGE_2018__NDVI",
+                      "value": "VHR_IMAGE_2018_Level_1__NDVI",
                     }]
                 }],
             },
             "search": {
                 "protocol": "OpenSearch",
-                "url": baseUrl + "opensearch/collections/VHR_IMAGE_2018/",
-                "id": "VHR_IMAGE_2018",
+                "url": baseUrl + "opensearch/collections/VHR_IMAGE_2018_Level_1/",
+                "id": "VHR_IMAGE_2018_Level_1",
+                "histogramBinCount": 28,
+                "format": "application/atom+xml",
+                "method": "GET",
+                "histogramThreshold": 600,
+                "lightweightBuckets": true,
+                "searchLimit": 600,
+                "loadMore": 600,
+                "pageSize": 200,
+                "countZeroRecords": true,
+                "parameters": [
+                  {
+                      "max": 100,
+                      "min": 0,
+                      "range": true,
+                      "type": "eo:cloudCover",
+                      "title": "Cloud Coverage"
+                  },
+                ],
+                "parametersFilterSettings": {
+                    "collapsed": false,
+                },
+            },
+            "download": {
+                "protocol": "EO-WCS",
+                "url": baseUrl + "ows",
+                // "method": "GET",
+                "rewrite": {
+                  // add __coverage to the coverageId
+                  "from": "({{id}})",
+                  "to": "$1__coverage"
+                }
+            }
+        },
+        {
+            "id": 'VHR_IMAGE_2018_Level_3',
+            "displayName": 'VHR Image 2018 Level 3',
+            "displayColor": '#37eb00',
+            "display": {
+                "id": 'VHR_IMAGE_2018_Level_3__TRUE_COLOR',
+                "visible": true,
+                "protocol": 'WMS',
+                "url": baseUrl + 'cache/ows',
+                "format": 'image/png',
+                "projection": 'EPSG:4326',
+                "style": '',
+                "useMilliseconds": false,
+                "maxZoom": 15,
+                "options": [{
+                    "name": "Style",
+                    "target": "display.extraParameters.LAYERS",
+                    "values": [{
+                      "label": "VHR Image 2018 True Color",
+                      "value": "VHR_IMAGE_2018_Level_3__TRUE_COLOR",
+                    }, {
+                      "label": "VHR Image 2018 True Color with masked validity",
+                      "value": "VHR_IMAGE_2018_Level_3__masked_validity",
+                    }, {
+                      "label": "VHR Image 2018 False Color",
+                      "value": "VHR_IMAGE_2018_Level_3__FALSE_COLOR",
+                    }, {
+                      "label": "VHR Image 2018 NDVI",
+                      "value": "VHR_IMAGE_2018_Level_3__NDVI",
+                    }]
+                }],
+            },
+            "detailsDisplay": {
+                "id": 'VHR_IMAGE_2018_Level_3__TRUE_COLOR',
+                "visible": true,
+                "protocol": 'WMS',
+                "url": baseUrl + 'cache/ows',
+                "format": 'image/png',
+                "projection": 'EPSG:4326',
+                "style": '',
+                "useMilliseconds": false,
+                "maxZoom": 15,
+                "options": [{
+                    "name": "Style",
+                    "target": "detailsDisplay.extraParameters.LAYERS",
+                    "values": [{
+                      "label": "VHR Image 2018 True Color",
+                      "value": "VHR_IMAGE_2018_Level_3__TRUE_COLOR",
+                    }, {
+                      "label": "VHR Image 2018 True Color with masked validity",
+                      "value": "VHR_IMAGE_2018_Level_3__masked_validity",
+                    }, {
+                      "label": "VHR Image 2018 False Color",
+                      "value": "VHR_IMAGE_2018_Level_3__FALSE_COLOR",
+                    }, {
+                      "label": "VHR Image 2018 NDVI",
+                      "value": "VHR_IMAGE_2018_Level_3__NDVI",
+                    }]
+                }],
+            },
+            "search": {
+                "protocol": "OpenSearch",
+                "url": baseUrl + "opensearch/collections/VHR_IMAGE_2018_Level_3/",
+                "id": "VHR_IMAGE_2018_Level_3",
                 "histogramBinCount": 28,
                 "format": "application/atom+xml",
                 "method": "GET",
@@ -303,11 +400,11 @@
             }
         },
         {
-            "id": 'VHR_IMAGE_2018__outlines',
-            "displayName": 'VHR 2018 Outlines',
+            "id": 'VHR_IMAGE_2018_Level_3__outlines',
+            "displayName": 'VHR 2018 Level 3 Outlines',
             "displayColor": '#187465',
             "display": {
-                "id": 'VHR_IMAGE_2018__outlines',
+                "id": 'VHR_IMAGE_2018_Level_3__outlines',
                 "visible": false,
                 "protocol": 'WMS',
                 "url": baseUrl + 'ows',
