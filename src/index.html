@@ -49,7 +49,7 @@
         "maxTooltips": 1,
         "center": [12, 49],
         "zoom": 5,
-        "maxZoom": 15,
+        "maxZoom": 17,
         "footprintFillColor": "rgba(0, 0, 0, 0.2)",
         "footprintStrokeColor": "rgba(0, 0, 0, 1)",
         "filterFillColor": "rgba(0, 165, 255, 0)",
@@ -198,7 +198,7 @@
                 "projection": 'EPSG:4326',
                 "style": '',
                 "useMilliseconds": false,
-                "maxZoom": 15,
+                "maxZoom": 17,
                 "options": [{
                     "name": "Style",
                     "target": "display.extraParameters.LAYERS",
@@ -226,7 +226,7 @@
                 "projection": 'EPSG:4326',
                 "style": '',
                 "useMilliseconds": false,
-                "maxZoom": 15,
+                "maxZoom": 17,
                 "options": [{
                     "name": "Style",
                     "target": "detailsDisplay.extraParameters.LAYERS",
@@ -295,7 +295,7 @@
                 "projection": 'EPSG:4326',
                 "style": '',
                 "useMilliseconds": false,
-                "maxZoom": 15,
+                "maxZoom": 17,
                 "options": [{
                     "name": "Style",
                     "target": "display.extraParameters.LAYERS",
@@ -323,7 +323,7 @@
                 "projection": 'EPSG:4326',
                 "style": '',
                 "useMilliseconds": false,
-                "maxZoom": 15,
+                "maxZoom": 17,
                 "options": [{
                     "name": "Style",
                     "target": "detailsDisplay.extraParameters.LAYERS",
@@ -401,7 +401,7 @@
         },
         {
             "id": 'VHR_IMAGE_2018_Level_3__outlines',
-            "displayName": 'VHR 2018 Level 3 Outlines',
+            "displayName": 'VHR Image 2018 Level 3 Outlines',
             "displayColor": '#187465',
             "display": {
                 "id": 'VHR_IMAGE_2018_Level_3__outlines',
@@ -414,6 +414,19 @@
                 "useMilliseconds": false,
                 "maxZoom": 17,
                 "synchronizeTime": true,
+            },
+        },
+        {
+            "id": 'VHR_IMAGE_2018_Level_3__Full',
+            "displayName": 'VHR Image 2018 Level 3 True Color Full Coverage',
+            "display": {
+                "id": 'VHR_IMAGE_2018_Level_3__Full',
+                "visible": false,
+                "protocol": 'WMS',
+                "url": baseUrl + 'cache/ows',
+                "format": 'image/png',
+                "projection": 'EPSG:4326',
+                "maxZoom": 17,
             },
         }
     ]
