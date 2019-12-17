@@ -541,9 +541,9 @@
                             }],
                         },
                         "synchronizeTime": {
-                          "description": "If time change triggers reload of layer parameters (time). Usable only for overlayLayers and baseLayers. Layers are reloaded always.",
+                          "description": "If set to true, time change triggers reload of layer parameters (time). Usable only for overlayLayers and baseLayers. Layers are reloaded always. If explicitly set to false, it disables adding TIME parameter to the query.",
                           "type": "boolean",
-                          "default": false
+                          "default": "undefined"
                         },
                         "cqlParameterName": {
                             "description": "The name of the CQL parameter name for WMS requests. When set, the CQL filtering is enabled for this view layer.",
