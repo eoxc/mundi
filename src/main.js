@@ -283,6 +283,8 @@ window.Application = Marionette.Application.extend({
 
     layout.showChildView('timeSlider', new TimeSliderView({
       layersCollection,
+      baseLayersCollection,
+      overlayLayersCollection,
       mapModel,
       filtersModel,
       highlightModel,

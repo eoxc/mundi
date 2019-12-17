@@ -1152,6 +1152,14 @@ body {
   color: red;
 }
 
+.export-tools{
+  z-index:2;
+  & i {
+    top: 1px;
+    position: relative;
+  }
+}
+
 input[type=radio].visualization-selector {
   + span:before {
     color: $c_blue;
@@ -1162,4 +1170,13 @@ input[type=radio].visualization-selector {
       color: $c_gray;
     }
   }
+}
+
+.export-wms-link {
+  padding: 3px 5px !important;
+  white-space: normal!important;
+}
+
+.export-wms-list {
+  margin-bottom: 10px !important;
 }
