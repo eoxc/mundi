@@ -1,1058 +1,1170 @@
-{
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "id": "http://github.com/eoxc/CODE-DE/src/config-schema.json",
-
-    "title": "Configuration",
-    "description": "The main configuration object.",
-    "type": "object",
-    "properties": {
-        "settings": {
-            "$ref": "#/definitions/settings"
-        },
-        "baseLayers": {
-            "$ref": "#/definitions/layerSet"
-        },
-        "layers": {
-            "$ref": "#/definitions/layerSet"
-        },
-        "overlayLayers": {
-            "$ref": "#/definitions/layerSet"
-        }
+{ 
+  "$schema":"http://json-schema.org/draft-04/schema#",
+  "id":"http://github.com/eoxc/CODE-DE/src/config-schema.json",
+  "title":"Configuration",
+  "description":"The main configuration object.",
+  "type":"object",
+  "properties":{ 
+    "settings":{ 
+      "$ref":"#/definitions/settings"
     },
-    "required": ["settings", "baseLayers", "layers", "overlayLayers"],
-
-    "definitions": {
-        "settings": {
-            "description": "The initial settings object.",
-            "properties": {
-                "tutorial": {
-                    "description": "Allows configuration of tutorial functionality.",
-                    "type": "string",
-                    "enum": [ "always", "once", "button", "disabled" ],
-                    "default": "disabled"
-                },
-                "searchDebounceTime": {
-                    "description": "Sets the time in milliseconds to wait for additional user input before actually sending a search request.",
-                    "type": "number",
-                    "default": 250
-                },
-                "language": {
-                    "description": "The language used in the UI.",
-                    "type": "string",
-                    "enum": [ "en", "de", "deinformal" ],
-                    "default": "en"
-                },
-                "center": {
-                    "description": "The initial center of the map view.",
-                    "type": "array",
-                    "items": [{
-                        "description": "The longitude component of the center point.",
-                        "type": "number",
-                        "minimum": -180,
-                        "maximum": 180
-                    }, {
-                        "description": "The latitude component of the center point.",
-                        "type": "number",
-                        "minimum": -90,
-                        "maximum": 90
-                    }]
-                },
-                "zoom": {
-                    "description": "The initial map zoom level.",
-                    "type": "number",
-                    "default": 2
-                },
-                "minZoom": {
-                    "description": "The overall minimum map zoom level on any map.",
-                    "type": "number",
-                    "default": 0
-                },
-                "maxZoom": {
-                    "description": "The overall maximum map zoom level on any map.",
-                    "type": "number",
-                    "default": 28
-                },
-                "projection": {
-                  "description": "Chosen map view projection EPSG format, all layers/features which do not share this CRS are (slowly) reprojected on the fly. Use with caution.",
-                  "type": "string",
-                  "default": "EPSG:4326"
-                },
-                "extent": {
-                    "description": "The initially visible extent. This setting is mutually exclusive to 'center' and 'zoom'.",
-                    "type": "array",
-                    "items": [{
-                        "description": "The lower longitude component of the extent.",
-                        "type": "number",
-                        "minimum": -180,
-                        "maximum": 180
-                    }, {
-                        "description": "The lower latitude component of the extent.",
-                        "type": "number",
-                        "minimum": -90,
-                        "maximum": 90
-                    }, {
-                        "description": "The upper longitude component of the extent.",
-                        "type": "number",
-                        "minimum": -180,
-                        "maximum": 180
-                    }, {
-                        "description": "The upper latitude component of the extent.",
-                        "type": "number",
-                        "minimum": -90,
-                        "maximum": 90
-                    }]
-                },
-                "timeDomain": {
-                    "description": "The overall time domain of the client. No time can be selected outside of this domain.",
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "minItems": 2,
-                    "maxItems": 2
-                },
-                "displayTimeDomain": {
-                    "description": "The initially displayed time interval.",
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "minItems": 2,
-                    "maxItems": 2,
-                    "default": "timeDomain"
-                },
-                "selectedTimeDomain": {
-                    "description": "The initially selected time of interest.",
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "minItems": 2,
-                    "maxItems": 2
-                },
-                "constrainTimeDomain": {
-                    "description": "Whether or not the zoomable area shall be confined to the interval of the 'timeDomain' setting.",
-                    "type": "boolean",
-                    "default": false
-                },
-                "displayInterval": {
-                    "description": "The maximum allowed interval to display on the time slider as an ISO 8601 period.",
-                    "type": "string",
-                    "pattern": "^P(?:([0-9]+)Y|)?(?:([0-9]+)M|)?(?:([0-9]+)D|)?T?(?:([0-9]+)H|)?(?:([0-9]+)M|)?(?:([0-9]+)S|)?$",
-                    "default": null
-                },
-                "selectableInterval": {
-                    "description": "The maximum allowed interval to select as an ISO 8601 period.",
-                    "type": "string",
-                    "pattern": "^P(?:([0-9]+)Y|)?(?:([0-9]+)M|)?(?:([0-9]+)D|)?T?(?:([0-9]+)H|)?(?:([0-9]+)M|)?(?:([0-9]+)S|)?$",
-                    "default": null
-                },
-                "maxTooltips": {
-                    "description": "The maximum number of individual tooltips, before only the beginning of the list is show and a '+ x more' is appended.",
-                    "type": "number",
-                    "default": null
-                },
-                "timeSliderControls": {
-                    "description": "Whether or not control buttons should be shown for the TimeSlider.",
-                    "type": "boolean",
-                    "default": false
-                },
-                "timeSliderAlternativeBrush": {
-                    "description": "If alternative TimeSlider selection brush (Mundi style) should be used.",
-                    "type": "boolean",
-                    "default": false
-                },
-                "enableDynamicHistogram": {
-                  "description": "Whether or not current map extent and area filters are used for TimeSlider fetch.",
-                  "type": "boolean",
-                  "default": false
-                },
-                "maxMapInterval": {
-                  "description": "The maximum time interval for WMTS if sharedTime mode should be used. If selected time would be larger, only maxMapInterval into the past from end of interval is shown. Format is an ISO 8601 period.",
-                  "type": "string",
-                  "pattern": "^P(?:([0-9]+)Y|)?(?:([0-9]+)M|)?(?:([0-9]+)D|)?T?(?:([0-9]+)H|)?(?:([0-9]+)M|)?(?:([0-9]+)S|)?$",
-                  "default": null
-                },
-                "constrainOutCoords" : {
-                  "description": "Coordinates sent to the catalog (from Polygon filter) will be forced to be in CRS bounds to conform to the OpenSeach geo standard",
-                  "type": "boolean",
-                  "default": false
-                },
-                "enableSingleLayerMode" : {
-                  "description": "If there is only one layer with search, enable single panel mode of Search Results.",
-                  "type": "boolean",
-                  "default": true
-                },
-                "highlightFillColor": {
-                    "description": "The fill color of highlighted footprints/bounding boxes on the map. Any valid CSS color defintion is supported.",
-                    "type": "string",
-                    "default": "rgba(255, 255, 255, 0.2)"
-                },
-                "highlightStrokeColor": {
-                    "description": "The stroke color of highlighted footprints/bounding boxes on the map. Any valid CSS color defintion is supported.",
-                    "type": "string",
-                    "default": "#cccccc"
-                },
-                "highlightStrokeWidth": {
-                    "description": "The stroke width (in pixels) for highlighted footprints/bounding boxes on the map.",
-                    "type": "number",
-                    "default": 1
-                },
-                "filterFillColor": {
-                    "description": "The fill color of selected regions (both on map and on timeslider). Any valid CSS color defintion is supported.",
-                    "type": "string",
-                    "default": "rgba(0, 0, 0, 0)"
-                },
-                "filterStrokeColor": {
-                    "description": "The stroke color (or point color) of selected regions (both on map and on timeslider). Any valid CSS color definition is supported.",
-                    "type": "string",
-                    "default": "rgba(0, 0, 0, 0)"
-                },
-                "filterOutsideColor": {
-                    "description": "The fill color of selected regions (both on map and on timeslider). Any valid CSS color definition is supported.",
-                    "type": "string",
-                    "default": "rgba(0, 0, 0, 0.2)"
-                },
-                "footprintFillColor": {
-                    "description": "The fill color of footprints of the search result. Any valid CSS color definition is supported.",
-                    "type": "string",
-                    "default": "rgba(255, 255, 255, 0.2)"
-                },
-                "footprintStrokeColor": {
-                    "description": "The stroke color of footprints of the search result. Any valid CSS color definition is supported.",
-                    "type": "string",
-                    "default": "#cccccc"
-                },
-                "selectedFootprintFillColor": {
-                    "description": "The fill color of footprints of records selected for download. Any valid CSS color definition is supported.",
-                    "type": "string",
-                    "default": "rgba(255, 0, 0, 0.2)"
-                },
-                "selectedFootprintStrokeColor": {
-                    "description": "The fill color of footprints of records selected for download. Any valid CSS color definition is supported.",
-                    "type": "string",
-                    "default": "#ff0000"
-                },
-                "leftPanelOpen": {
-                    "description": "Whether or not the left panel shall be open on start.",
-                    "type": "boolean",
-                    "default": false
-                },
-                "rightPanelOpen": {
-                    "description": "Whether or not the right panel shall be open on start.",
-                    "type": "boolean",
-                    "default": false
-                },
-                "leftPanelTabIndex": {
-                    "description": "Index of left panel tab to be opened on start, starting from 0.",
-                    "type": "integer",
-                    "default": 0
-                },
-                "rightPanelTabIndex": {
-                    "description": "Index of right panel tab to be opened on start, starting from 0.",
-                    "type": "integer",
-                    "default": 0
-                },
-                "parameters": {
-                    "description": "Mapping the parameter type (such as eo:processingCenter) to a settings object.",
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "description": "The mandatory parameter type. Use the OpenSeach type, e.g: eo:acquisitionStation.",
-                                "type": "string"
-                            },
-                            "title": {
-                                "description": "A short description of the parameter, used as a tooltip.",
-                                "type": "string"
-                            },
-                            "options": {
-                                "description": "Selectable options. Will be rendered as a dropdown.",
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "label": {
-                                            "description": "The displayed label of a single option.",
-                                            "type": "string"
-                                        },
-                                        "value": {
-                                            "description": "The search value to be sent in requests once selected",
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": ["label", "value"]
-                                }
-                            },
-                            "range": {
-                                "description": "Whether this search parameter shall be rendered as a dual-slider.",
-                                "type": "boolean",
-                                "default": false
-                            },
-                            "min": {
-                                "description": "The lower boundary for the range. Mandatory for range parameters.",
-                                "type": "number"
-                            },
-                            "max": {
-                                "description": "The upper boundary for the range. Mandatory for range parameters.",
-                                "type": "number"
-                            },
-                            "step": {
-                                "description": "Step for the range.",
-                                "type": "number",
-                                "default": 1
-                            },
-                        }
-                    }
-                },
-                "downloadFormats": {
-                    "description": "A list of download format descriptions that are being used in the download options view for the user to select for downloads via EO-WCS.",
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "description": "The name of the download format for display. If not set, 'mimeType' is used.",
-                                "type": "string"
-                            },
-                            "mimeType": {
-                                "description": "The mime-type of the format that is sent to the server.",
-                                "type": "string"
-                            }
-                        },
-                        "required": ["mimeType"]
-                    },
-                    "default": []
-                },
-                "downloadProjections": {
-                    "description": "A list of download projection descriptions that are being used in the download options view for the user to select for downloads via EO-WCS.",
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "description": "The name of the download projection for display. If not set, 'identifier' is used.",
-                                "type": "string"
-                            },
-                            "identifier": {
-                                "description": "The identifier of the projection (e.g: EPSG-code) that is sent to the server.",
-                                "type": "string"
-                            }
-                        },
-                        "required": ["identifier"]
-                    },
-                    "default": []
-                },
-                "downloadInterpolations": {
-                    "description": "Available interpolation methods to choose for download via EO-WCS.",
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "description": "The displayed name of the interpolation. If not set, 'identifier' is used.",
-                                "type": "string"
-                            },
-                            "identifier": {
-                                "description": "The identifier of the interpolation to be sent in the download request",
-                                "type": "string"
-                            }
-                        },
-                        "required": ["identifier"]
-                    }
-                },
-                "termsAndConditionsUrl": {
-                    "oneOf": [{
-                        "description": "The URL to the terms and conditions document for the user to accept.",
-                        "type": "string",
-                        "default": null
-                    }, {
-                        "description": "An object, mapping the language specifier (as specified in settings.language) to a URL.",
-                        "type": "object"
-                    }],
-                },
-                "downloadEnabled": {
-                    "description": "Whether or not the 'Download' button shall be enabled.",
-                    "type": "boolean",
-                    "default": true
-                },
-                "translations": {
-                    "description": "Additional translations not covered in the base translations. Keys can be one of the language specifiers: 'en', 'de', 'deinformal'. The values must be objects, mapping the (english) key to the translated value. Must not contain the '#' character.",
-                    "type": "object"
-                },
-                "uploadEnabled": {
-                    "description": "Whether or not the 'Upload' functionality shall be available. (Loading of shapefiles for geometries).",
-                    "type": "boolean",
-                    "default": true
-                },
-                "selectFilesDownloadEnabled": {
-                  "description": "Whether 'Download selected files' toggle option is visible.",
-                  "type": "boolean",
-                  "default": true
-                }
-            },
-            "oneOf": [
-                { "required": ["center", "zoom", "timeDomain", "selectedTimeDomain"] },
-                { "required": ["extent", "timeDomain", "selectedTimeDomain"] }
-            ]
-
-        },
-        "layerSet": {
-            "type": "array",
-            "items": { "$ref": "#/definitions/layer" }
-        },
-        "layer": {
-            "description": "The definition of a single layer.",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "description": "The unique identifier of this layer.",
-                    "type": "string"
-                },
-                "displayName": {
-                    "description": "The layers name to be presented to the user",
-                    "type": "string"
-                },
-                "displayColor": {
-                    "description": "The color to distinguish the layer in the layer-list and the TimeSlider. Must be a valid HTML color definition.",
-                    "type": "string"
-                },
-                "noTimeSliderBorder": {
-                  "description": "TimeSlider bins and records will not have a visible border",
-                  "type": "boolean",
-                  "default": "false"
-                },
-                "link": {
-                    "description": "An HTTP link for further information for the layer. This is rendered in the layer list.",
-                    "type": "string"
-                },
-                "display": {  // TODO Add "detailsDisplay"
-                    "description": "Structure to describe how the layer is visually presented.",
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "description": "The ID used for the protocol to identify the layer.",
-                            "type": "string"
-                        },
-                        "visible": {
-                            "description": "Whether the layer shall be visible on start.",
-                            "type": "boolean",
-                            "default": false
-                        },
-                        "protocol": {
-                            "description": "The protocol used to display the layer.",
-                            "type": "string",
-                            "enum": ["WMS", "WMTS"]
-                        },
-                        "urls": {
-                            "description": "A list of base-URLs to retrieve tiles",
-                            "items": {
-                                "type": "string",
-                                "format": "uri"
-                            }
-                        },
-                        "url": {
-                            "description": "A single base-URL to retrieve tiles",
-                            "type": "string",
-                            "format": "uri"
-                        },
-                        "matrixSet": {
-                            "description": "The matrix set used to retrieve tiles. Required for WMTS.",
-                            "type": "string"
-                        },
-                        "matrixIdPrefix": {
-                            "description": "A prefix to be prepended to the numerical part of the tile matrix ID.",
-                            "type": "string"
-                        },
-                        "matrixIdPostfix": {
-                            "description": "A postfix to be appended to the numerical part of the tile matrix ID.",
-                            "type": "string"
-                        },
-                        "tileSize": {
-                            "description": "The width and height (in pixels) for each WMS tile to be requested.",
-                            "type": ["array", "integer"],
-                            "items": [{
-                                "type": "integer",
-                                "minimum": 0
-                            }, {
-                                "type": "integer",
-                                "minimum": 0
-                            }],
-                            "minimum": 0,
-                            "default": 256
-                        },
-                        "format": {
-                            "description": "The transfer format used to retrieve tiles. For layers and overlayLayers this should be a format that allows transparency (e.g: PNG).",
-                            "type": "string"
-                        },
-                        "projection": {
-                            "description": "The projection identifier in which the tiles will be transferred. E.g: 'EPSG:4326'.",
-                            "type": "string"
-                        },
-                        "style": {
-                            "description": "The style in which the tiles will be retrieved.",
-                            "type": "string"
-                        },
-                        "version": {
-                            "description": "Override service version parameter.",
-                            "type": "string",
-                            "default": "1.1.0"
-                        },
-                        "minZoom": {
-                            "description": "The minimum map zoom level for this layer. Used for map is maximum over all layers.",
-                            "type": "number",
-                            "default": 0
-                        },
-                        "maxZoom": {
-                            "description": "The maximum map zoom level for this layer. Used for map is minimum over all layers.",
-                            "type": "number",
-                            "default": 28
-                        },
-                        "noAntialiasing": {
-                          "description": "Disables canvas rendering antialiasing when larger zoom than which source does provide is requested (blurry vs sharp image)",
-                          "type": "boolean",
-                          "default": false
-                        },
-                        "attribution": {
-                            "description": "A string to be displayed when the layer is displayed. Can contain HTML for specific formatting.",
-                            "type": "string"
-                        },
-                        "discardZulu": {
-                            "description": "When this is set to 'true', the trailing 'Z' (for UTC Zulu) will be discarded for the WM(T)S time parameter.",
-                            "type": "boolean",
-                            "default": false
-                        },
-                        "useMilliseconds": {
-                            "description": "Determines whether the granularity of the time parameter includes milliseconds.",
-                            "type": "boolean",
-                            "default": true
-                        },
-                        "adjustTime": {
-                            "description": "The time parameter values of WMS/WMTS requests are decreased and increased by the given number of seconds.",
-                            "type": ["array", "integer"],
-                            "items": [{
-                                "type": "integer",
-                            }, {
-                                "type": "integer",
-                            }],
-                        },
-                        "synchronizeTime": {
-                          "description": "If set to true, time change triggers reload of layer parameters (time). Usable only for overlayLayers and baseLayers. Layers are reloaded always. If explicitly set to false, it disables adding TIME parameter to the query.",
-                          "type": "boolean",
-                          "default": "undefined"
-                        },
-                        "cqlParameterName": {
-                            "description": "The name of the CQL parameter name for WMS requests. When set, the CQL filtering is enabled for this view layer.",
-                            "type": "string"
-                        },
-                        "cqlMapping": {
-                            "description": "The mapping of the search filter name to the attribute names used for CQL.",
-                            "type": "object"
-                        },
-                        "extraParameters": {
-                            "description": "Addtional key-value pairs to add to WMS requests.",
-                            "type": "object"
-                        },
-                        "options": {
-                            "description": "Names layer parameters the user is allowed to adjust.",
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "description": "The displayed name of the config option.",
-                                        "type": "string"
-                                    },
-                                    "target": {
-                                        "description": "The dotted path of the parameter. e.g: 'display.style'",
-                                        "type": "string"
-                                    },
-                                    "selectThree": {
-                                        "description": "If option is of type combine-three, for example 'bands'. This will create three select elements instead of one.",
-                                        "type": "boolean",
-                                        "default": false
-                                    },
-                                    "replace": {
-                                        "description": "Array of dotted style request parameters, which when this option is set, will be replaced too. For example changing layer name.",
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "target": {
-                                                    "description": "The dotted path of the parameter. e.g: 'display.extraParameters.LAYERS'",
-                                                    "type": "string"
-                                                },
-                                                "value": {
-                                                    "description": "The actual value to be set.",
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "isChosen": {
-                                        "description": "Set this option as pre-selected visualization.",
-                                        "type": "boolean",
-                                        "default": false
-                                    },
-                                    "values": {
-                                        "description": "A list of possible options.",
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "label": {
-                                                    "description": "The displayed name of the option value. If not supplied, 'value' is used as label.",
-                                                    "type": "string"
-                                                },
-                                                "value": {
-                                                    "description": "The actual value.",
-                                                    "type": "string"
-                                                },
-                                                "isCurrentB1": {
-                                                    "description": "Set this value as pre-selected option 1.",
-                                                    "type": "boolean",
-                                                    "default": false
-                                                },
-                                                "isCurrentB2": {
-                                                    "description": "Set this value as pre-selected option 2.",
-                                                    "type": "boolean",
-                                                    "default": false
-                                                },
-                                                "isCurrentB3": {
-                                                    "description": "Set this value as pre-selected option 3.",
-                                                    "type": "boolean",
-                                                    "default": false
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "extraDownloadIcon": {
-                          "description": "If set to true, displays an extra download icon in layer list, triggering full resolution download panel. Can be used when search results panel is not used in the app.",
-                          "type": "boolean",
-                          "default": false
-                        }
-                    },
-                    "required": ["id", "protocol", "format"],
-                    "//Note": "Either 'url' or 'urls' is required. For WMTS matrixSet is mandatory as-well."
-                },
-                "search": {
-                    "description": "An object to define how the layer can be searched.",
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "description": "The identifier used for search requests. Required for EO-WCS only.",
-                            "type": "string"
-                        },
-                        "protocol": {
-                            "description": "The protocol used to search for records",
-                            "type": "string",
-                            "enum": ["EO-WCS", "OpenSearch"],
-                            "//TODO": "This list will also include 'WFS', once it's implemented"
-                        },
-                        "url": {
-                            "description": "The base-URL to send search requests to.",
-                            "type": "string",
-                            "format": "uri"
-                        },
-                        "format": {
-                            "description": "The format (mime-type) to use for OpenSearch requests.",
-                            "type": "string",
-                            "default": null
-                        },
-                        "method": {
-                            "description": "The preferred HTTP method to send requests.",
-                            "type": "string",
-                            "enum": ["GET", "POST"],
-                            "default": "GET"
-                        },
-                        "lightweightBuckets": {
-                            "description": "Whether or not leightweight buckets shall be used for the timeslider. Lightweight buckets only request the number of records for the given histogram bucket. When the total count is below the given histogramThreshold, then the records will be displayed directly.",
-                            "type": "boolean",
-                            "default": false
-                        },
-                        "histogramThreshold": {
-                            "description": "The threshold of number of records in the whole visible interval to display the dataset as a histogram instead of individual records. When not specified, the records are always shown.",
-                            "type": "number",
-                            "default": null
-                        },
-                        "histogramBinCount": {
-                            "description": "The number of histogram bins to display in histogram mode.",
-                            "type": "number",
-                            "default": 20
-                        },
-                        "searchLimit": {
-                            "description": "This is the limit for how many records will be displayed in the search results panel. A warning will be displayed if more items are matched.",
-                            "type": "number",
-                            "default": 150
-                        },
-                        "loadMore": {
-                            "description": "This is the count of elements to be fetched when 'Load more' is clicked.",
-                            "type": "number",
-                            "default": 150
-                        },
-                        "pageSize": {
-                          "description": "User defined items per page in catalog requests. Lower of server-defined & user-defined is used in the end.",
-                          "type": "number",
-                          "default": null
-                        },
-                        "switchMultiPolygonCoordinates": {
-                          "description": "If catalog sends multipolygon coordinates for this layer in lon,lat instead of lat,lon - this needs to be set to true.",
-                          "type": "boolean",
-                          "default": false
-                        },
-                        "parameters": {
-                            "description": "Mapping the parameter type (such as eo:processingCenter) to a settings object.",
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "type": {
-                                        "description": "The mandatory parameter type. Use the OpenSeach type, e.g: eo:acquisitionStation.",
-                                        "type": "string"
-                                    },
-                                    "title": {
-                                        "description": "A short description of the parameter, used as a tooltip.",
-                                        "type": "string"
-                                    },
-                                    "options": {
-                                        "description": "Selectable options. Will be rendered as a dropdown.",
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "label": {
-                                                    "description": "The displayed label of a single option. If not set, 'value' is used.",
-                                                    "type": "string"
-                                                },
-                                                "value": {
-                                                    "description": "The search value to be sent in requests once selected",
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "required": ["value"]
-                                        }
-                                    },
-                                    "range": {
-                                        "description": "Whether this search parameter shall be rendered as a dual-slider.",
-                                        "type": "boolean",
-                                        "default": false
-                                    },
-                                    "min": {
-                                        "description": "The lower boundary for the range. Mandatory for range parameters.",
-                                        "type": "number"
-                                    },
-                                    "max": {
-                                        "description": "The upper boundary for the range. Mandatory for range parameters.",
-                                        "type": "number"
-                                    },
-                                    "fixed": {
-                                        "description": "The fixed value of that parameter.",
-                                        "type": "string"
-                                    },
-                                    "default": {
-                                        "description": "The default value of this parameter. The type depends on the parameter type.",
-                                        "type": ["integer", "string", "array"]
-                                    }
-                                }
-                            }
-                        },
-                        "parametersFilterSettings": {
-                            "description": "General settings for additional - parameter filters panel.",
-                            "type": "object",
-                            "properties": {
-                                "collapsed": {
-                                    "description": "If a filter panel starts collapsed.",
-                                    "type": "boolean",
-                                    "default": true
-                                },
-                                "hidden": {
-                                    "description": "If set to true, the filter is hidden and not rendered.",
-                                    "type": "boolean",
-                                    "default": false
-                                },
-                            }
-                        }
-                    },
-                    "maxUrlLength": {
-                        "description": "The maximum URL length of search requests to be sent. Longer URLs will not be sent, but an error will be raised directly.",
-                        "type": "number",
-                        "default": 4000
-                    },
-                    "thumbnailUrlTemplate": {
-                        "description": "The template string to construct a thumbnail URL. Use '{{' and '}}' to select values. e.g: 'http://landsat-pds.s3.amazonaws.com/{{properties.s3Path}}/{{properties.title}}_thumb_small.jpg'.",
-                        "type": "string"
-                    },
-                    "quickLookUrlTemplate": {
-                        "description": "The template string to construct a quickLook URL. Use '{{' and '}}' to select values. e.g: 'http://landsat-pds.s3.amazonaws.com/{{properties.s3Path}}/{{properties.title}}_thumb_small.jpg'. The URL will be used in case thumbnailUrl is not available.",
-                        "type": "string"
-                    },
-                    "descriptionTemplate": {
-                        "description": "The template string to construct a record description. Use '{{' and '}}' to select values.",
-                        "type": "string"
-                    },
-                    "extraFields": {
-                        "description": "Extra fields to be parsed. Object keys are the JSON path where the output of the simple XPath shall be stored. Values are simple XPath expressions, always relative to a single Atom entry/RSS item.",
-                        "type": "object"
-                    },
-                    "extraFieldsNamespaces": {
-                        "description": "Namespace code to URL mapping for namespaces used in 'extraFields'.",
-                        "type": "object"
-                    },
-                    "countZeroRecords": {
-                        "description": "When this setting is set to true, the requested number of records is zero when only the count is required.",
-                        "type": "boolean"
-                    },
-                    "dropEmptyParameters": {
-                        "description": "When this setting is set to true, empty parameters (with no value set) will be dropped entirely.",
-                        "type": "boolean"
-                    },
-                    "required": ["protocol", "url"]
-                },
-                "download": {
-                    "description": "An object to define how records of the layer can be downloaded.",
-                    "type": "object",
-                    "properties": {
-                        "protocol": {
-                            "description": "The protocol used to download records.",
-                            "type": "string",
-                            "enum": ["EO-WCS", "URL", "S3"],
-                            "//TODO": "This list will be extended in the future. Currently, this setting is not used with OpenSearch, as the download information is embedded in the search response."
-                        },
-                        "url": {
-                            "description": "The base-URL to send download requests to.",
-                            "type": "string",
-                            "format": "uri"
-                        },
-                        "method": {
-                            "description": "The preferred HTTP method to send requests.",
-                            "type": "string",
-                            "enum": ["GET", "POST"],
-                            "default": "'GET' for URL based protocols, 'POST' for EO-WCS."
-                        },
-                        "axisNames": {
-                            "description": "The axis names to include the subset in WCS requests. Example [lon, lat]",
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            },
-                            "minItems": 2,
-                            "maxItems": 2
-                        },
-                        "rewrite": {
-                            "description": "Settings object to define URL rewrites.",
-                            "type": "object",
-                            "properties": {
-                                "from": {
-                                    "description": "The part of the URL that shall be rewritten (replaced). Either Will be interpreted as a regular expression - usage without quotes or a template can be used - '{{ and }}' to use Record properties in regex. For example {{ id }} to select ID of product.",
-                                    "type": "string"
-                                },
-                                "to": {
-                                    "description": "The value that shall replace the previously selected part of the URL (via 'from').",
-                                    "type": "string"
-                                }
-                            },
-                            "required": ["from", "to"]
-                        },
-                        "pathPrefix": {
-                            "description": "Part of the download path to be considered not part of the bucket and download prefix. Necessary for S3 URLs",
-                            "type": "string"
-                        }
-                    },
-                    "required": ["protocol", "url"]
-                },
-                "fullResolution": {
-                    "description": "Configuration settings for the full resolution download",
-                    "type": "object",
-                    "properties": {
-                        "protocol": {
-                            "description": "The protocol used for full resolution download.",
-                            "type": "string",
-                            "enum": ["EO-WCS"],
-                        },
-                        "id": {
-                            "description": "The ID used for the protocol to identify the coverage.",
-                            "type": "string"
-                        },
-                        "url": {
-                            "description": "The base-URL to send full resolution download requests to.",
-                            "type": "string",
-                            "format": "uri"
-                        },
-                        "cqlParameterName": {
-                            "description": "The name of the CQL parameter name for WCS requests. When set, the CQL filtering is enabled for this layer.",
-                            "type": "string"
-                        },
-                        "cqlMapping": {
-                            "description": "The mapping of the search filter name to the attribute names used for CQL.",
-                            "type": "object"
-                        },
-                        "maxSizeWarning": {
-                            "description": "A warning is shown when the download is expected to be bigger than the configured number in MB. The estimate is calculated as 'sizeX * sizeY * #bands * 8 / 1024 / 1024'.",
-                            "type": "number",
-                            "default": 20
-                        },
-                        "maxSizeResolution": {
-                            "description": "Resolution used to calculate the estimate for 'maxSizeWarning'. Default is around 10m in degrees around equator.",
-                            "type": "number",
-                            "default": 0.0000858306884765625
-                        },
-                        "maxBboxEdgeSize": {
-                            "description": "A warning is shown when any edge of bounding box exceeds this value in Map CRS.",
-                            "type": "number",
-                            "default": null
-                        },
-                        "maxAllowedResolution": {
-                            "description": "A warning is shown when user input resolution is greater than this value in Map CRS.",
-                            "type": "number",
-                            "default": null
-                        },
-                        "disableTimeSubsetting": {
-                          "description": "Disable adding time subsetting to WCS request even if available from TimeSlider.",
-                          "type": "boolean",
-                          "default": false
-                        },
-                        "axisNames": {
-                            "description": "The axis names to include the subset in WCS requests. Example [lon, lat]",
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            },
-                            "minItems": 2,
-                            "maxItems": 2
-                        },
-                        "fields": {
-                            "description": "Available fields to select for download.",
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "description": "The displayed name of the field. If not set, 'identifier' is used.",
-                                        "type": "string"
-                                    },
-                                    "identifier": {
-                                        "description": "The identifier of the field to be sent in the download request",
-                                        "type": "string"
-                                    }
-                                },
-                                "required": ["identifier"]
-                            },
-                        },
-                        "interpolations": {
-                            "description": "Available interpolation methods to choose for download.",
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "description": "The displayed name of the interpolation. If not set, 'identifier' is used.",
-                                        "type": "string"
-                                    },
-                                    "identifier": {
-                                        "description": "The identifier of the interpolation to be sent in the download request",
-                                        "type": "string"
-                                    }
-                                },
-                                "required": ["identifier"]
-                            }
-                        }
-                    }
-                },
-                "processing": {
-                    "description": "Configuration settings for the processing button",
-                    "type": "object",
-                    "properties": {
-                        "url": {
-                            "description": "The URL to send processing POST requests to.",
-                            "type": "string",
-                            "format": "uri"
-                        },
-                        "method": {
-                            "description": "The method used to send processing requests. 'fetch' sends a POST request with a JSON payload in the current tab, 'form' simulates sending a form in a new tab with JSON as the value of the 'request' field.",
-                            "type": "string",
-                            "enum": ["fetch", "form"],
-                        },
-                }
-            },
-            "filterSettings": {
-                "description": "Configuration settings for preset filter filters",
-                "type": "object",
-                "properties": {
-                    "time": {
-                        "description": "General configuration settings for a time filter",
-                        "type": "object",
-                        "properties": {
-                            "collapsed": {
-                                "description": "If a filter panel starts collapsed.",
-                                "type": "boolean",
-                                "default": false
-                            },
-                            "hidden": {
-                                "description": "If set to true, the filter is hidden and not rendered.",
-                                "type": "boolean",
-                                "default": false
-                            },
-                            "settings": {
-                                "description": "Concrete configuration settings for time filter",
-                                "type": "object",
-                                "properties": {
-                                    "mapTime": {
-                                        "description": "The initially selected Time Filter. If maxMapInterval is enabled, also overwrites the selectedTimeDomain.",
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string",
-                                            "format": "date-time"
-                                        },
-                                        "minItems": 2,
-                                        "maxItems": 2,
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "area": {
-                      "description": "General configuration settings for an area filter",
-                      "type": "object",
-                      "properties": {
-                          "collapsed": {
-                              "description": "If a filter panel starts collapsed.",
-                              "type": "boolean",
-                              "default": false
-                          },
-                          "hidden": {
-                              "description": "If set to true, the filter is hidden and not rendered.",
-                              "type": "boolean",
-                              "default": false
-                          },
-                          "settings": {
-                              "description": "Concrete configuration settings for area filter",
-                              "type": "object",
-                              "properties": {
-                                  "type": {
-                                      "description": "Name of the area filter to be preset.",
-                                      "type": "string",
-                                      "enum": ["Polygon", "Point", "Rectangle"]
-                                  },
-                                  "coordinates": {
-                                    "description": "Area filter coordinates from geojson spec in map CRS. Example Point: [x, y], Rectangle (bbox): [minx, miny, maxx, maxy], Polygon [[[x,y], [x,y] ...]]. Supports setting polygon with inner ring this way, but catalog must accept it too.",
-                                    "type": "array",
-                                  }
-                              }
-                          }
-                      }
-                    },
-                }
-            },
-            "required": ["id", "displayName", "display"],
-            "//Note": "For searchable layers (not base/overlay layers) the 'displayColor' and 'search' properties are mandatory. When the search protocol is NOT OpenSearch, then the 'download' is also mandatory."
-        }
+    "baseLayers":{ 
+      "$ref":"#/definitions/layerSet"
+    },
+    "layers":{ 
+      "$ref":"#/definitions/layerSet"
+    },
+    "overlayLayers":{ 
+      "$ref":"#/definitions/layerSet"
     }
-}
+  },
+  "required":[ 
+    "settings",
+    "baseLayers",
+    "layers",
+    "overlayLayers"
+  ],
+  "definitions":{ 
+    "settings":{ 
+      "description":"The initial settings object.",
+      "properties":{ 
+        "tutorial":{ 
+          "description":"Allows configuration of tutorial functionality.",
+          "type":"string",
+          "enum":[ 
+            "always",
+            "once",
+            "button",
+            "disabled"
+          ],
+          "default":"disabled"
+        },
+        "searchDebounceTime":{ 
+          "description":"Sets the time in milliseconds to wait for additional user input before actually sending a search request.",
+          "type":"number",
+          "default":250
+        },
+        "language":{ 
+          "description":"The language used in the UI.",
+          "type":"string",
+          "enum":[ 
+            "en",
+            "de",
+            "deinformal"
+          ],
+          "default":"en"
+        },
+        "center":{ 
+          "description":"The initial center of the map view.",
+          "type":"array",
+          "items":[ 
+            { 
+              "description":"The longitude component of the center point.",
+              "type":"number",
+              "minimum":-180,
+              "maximum":180
+            },
+            { 
+              "description":"The latitude component of the center point.",
+              "type":"number",
+              "minimum":-90,
+              "maximum":90
+            }
+          ]
+        },
+        "zoom":{ 
+          "description":"The initial map zoom level.",
+          "type":"number",
+          "default":2
+        },
+        "minZoom":{ 
+          "description":"The overall minimum map zoom level on any map.",
+          "type":"number",
+          "default":0
+        },
+        "maxZoom":{ 
+          "description":"The overall maximum map zoom level on any map.",
+          "type":"number",
+          "default":28
+        },
+        "projection":{ 
+          "description":"Chosen map view projection EPSG format, all layers/features which do not share this CRS are (slowly) reprojected on the fly. Use with caution.",
+          "type":"string",
+          "default":"EPSG:4326"
+        },
+        "extent":{ 
+          "description":"The initially visible extent. This setting is mutually exclusive to 'center' and 'zoom'.",
+          "type":"array",
+          "items":[ 
+            { 
+              "description":"The lower longitude component of the extent.",
+              "type":"number",
+              "minimum":-180,
+              "maximum":180
+            },
+            { 
+              "description":"The lower latitude component of the extent.",
+              "type":"number",
+              "minimum":-90,
+              "maximum":90
+            },
+            { 
+              "description":"The upper longitude component of the extent.",
+              "type":"number",
+              "minimum":-180,
+              "maximum":180
+            },
+            { 
+              "description":"The upper latitude component of the extent.",
+              "type":"number",
+              "minimum":-90,
+              "maximum":90
+            }
+          ]
+        },
+        "timeDomain":{ 
+          "description":"The overall time domain of the client. No time can be selected outside of this domain.",
+          "type":"array",
+          "items":{ 
+            "type":"string",
+            "format":"date-time"
+          },
+          "minItems":2,
+          "maxItems":2
+        },
+        "displayTimeDomain":{ 
+          "description":"The initially displayed time interval.",
+          "type":"array",
+          "items":{ 
+            "type":"string",
+            "format":"date-time"
+          },
+          "minItems":2,
+          "maxItems":2,
+          "default":"timeDomain"
+        },
+        "selectedTimeDomain":{ 
+          "description":"The initially selected time of interest.",
+          "type":"array",
+          "items":{ 
+            "type":"string",
+            "format":"date-time"
+          },
+          "minItems":2,
+          "maxItems":2
+        },
+        "constrainTimeDomain":{ 
+          "description":"Whether or not the zoomable area shall be confined to the interval of the 'timeDomain' setting.",
+          "type":"boolean",
+          "default":false
+        },
+        "displayInterval":{ 
+          "description":"The maximum allowed interval to display on the time slider as an ISO 8601 period.",
+          "type":"string",
+          "pattern":"^P(?:([0-9]+)Y|)?(?:([0-9]+)M|)?(?:([0-9]+)D|)?T?(?:([0-9]+)H|)?(?:([0-9]+)M|)?(?:([0-9]+)S|)?$",
+          "default":null
+        },
+        "selectableInterval":{ 
+          "description":"The maximum allowed interval to select as an ISO 8601 period.",
+          "type":"string",
+          "pattern":"^P(?:([0-9]+)Y|)?(?:([0-9]+)M|)?(?:([0-9]+)D|)?T?(?:([0-9]+)H|)?(?:([0-9]+)M|)?(?:([0-9]+)S|)?$",
+          "default":null
+        },
+        "maxTooltips":{ 
+          "description":"The maximum number of individual tooltips, before only the beginning of the list is show and a '+ x more' is appended.",
+          "type":"number",
+          "default":null
+        },
+        "timeSliderControls":{ 
+          "description":"Whether or not control buttons should be shown for the TimeSlider.",
+          "type":"boolean",
+          "default":false
+        },
+        "timeSliderAlternativeBrush":{ 
+          "description":"If alternative TimeSlider selection brush (Mundi style) should be used.",
+          "type":"boolean",
+          "default":false
+        },
+        "enableDynamicHistogram":{ 
+          "description":"Whether or not current map extent and area filters are used for TimeSlider fetch.",
+          "type":"boolean",
+          "default":false
+        },
+        "maxMapInterval":{ 
+          "description":"The maximum time interval for WMTS if sharedTime mode should be used. If selected time would be larger, only maxMapInterval into the past from end of interval is shown. Format is an ISO 8601 period.",
+          "type":"string",
+          "pattern":"^P(?:([0-9]+)Y|)?(?:([0-9]+)M|)?(?:([0-9]+)D|)?T?(?:([0-9]+)H|)?(?:([0-9]+)M|)?(?:([0-9]+)S|)?$",
+          "default":null
+        },
+        "constrainOutCoords":{ 
+          "description":"Coordinates sent to the catalog (from Polygon filter) will be forced to be in CRS bounds to conform to the OpenSeach geo standard",
+          "type":"boolean",
+          "default":false
+        },
+        "enableSingleLayerMode":{ 
+          "description":"If there is only one layer with search, enable single panel mode of Search Results.",
+          "type":"boolean",
+          "default":true
+        },
+        "highlightFillColor":{ 
+          "description":"The fill color of highlighted footprints/bounding boxes on the map. Any valid CSS color defintion is supported.",
+          "type":"string",
+          "default":"rgba(255, 255, 255, 0.2)"
+        },
+        "highlightStrokeColor":{ 
+          "description":"The stroke color of highlighted footprints/bounding boxes on the map. Any valid CSS color defintion is supported.",
+          "type":"string",
+          "default":"#cccccc"
+        },
+        "highlightStrokeWidth":{ 
+          "description":"The stroke width (in pixels) for highlighted footprints/bounding boxes on the map.",
+          "type":"number",
+          "default":1
+        },
+        "filterFillColor":{ 
+          "description":"The fill color of selected regions (both on map and on timeslider). Any valid CSS color defintion is supported.",
+          "type":"string",
+          "default":"rgba(0, 0, 0, 0)"
+        },
+        "filterStrokeColor":{ 
+          "description":"The stroke color (or point color) of selected regions (both on map and on timeslider). Any valid CSS color definition is supported.",
+          "type":"string",
+          "default":"rgba(0, 0, 0, 0)"
+        },
+        "filterOutsideColor":{ 
+          "description":"The fill color of selected regions (both on map and on timeslider). Any valid CSS color definition is supported.",
+          "type":"string",
+          "default":"rgba(0, 0, 0, 0.2)"
+        },
+        "footprintFillColor":{ 
+          "description":"The fill color of footprints of the search result. Any valid CSS color definition is supported.",
+          "type":"string",
+          "default":"rgba(255, 255, 255, 0.2)"
+        },
+        "footprintStrokeColor":{ 
+          "description":"The stroke color of footprints of the search result. Any valid CSS color definition is supported.",
+          "type":"string",
+          "default":"#cccccc"
+        },
+        "selectedFootprintFillColor":{ 
+          "description":"The fill color of footprints of records selected for download. Any valid CSS color definition is supported.",
+          "type":"string",
+          "default":"rgba(255, 0, 0, 0.2)"
+        },
+        "selectedFootprintStrokeColor":{ 
+          "description":"The fill color of footprints of records selected for download. Any valid CSS color definition is supported.",
+          "type":"string",
+          "default":"#ff0000"
+        },
+        "leftPanelOpen":{ 
+          "description":"Whether or not the left panel shall be open on start.",
+          "type":"boolean",
+          "default":false
+        },
+        "rightPanelOpen":{ 
+          "description":"Whether or not the right panel shall be open on start.",
+          "type":"boolean",
+          "default":false
+        },
+        "leftPanelTabIndex":{ 
+          "description":"Index of left panel tab to be opened on start, starting from 0.",
+          "type":"integer",
+          "default":0
+        },
+        "rightPanelTabIndex":{ 
+          "description":"Index of right panel tab to be opened on start, starting from 0.",
+          "type":"integer",
+          "default":0
+        },
+        "parameters":{ 
+          "description":"Mapping the parameter type (such as eo:processingCenter) to a settings object.",
+          "type":"array",
+          "items":{ 
+            "type":"object",
+            "properties":{ 
+              "type":{ 
+                "description":"The mandatory parameter type. Use the OpenSeach type, e.g: eo:acquisitionStation.",
+                "type":"string"
+              },
+              "title":{ 
+                "description":"A short description of the parameter, used as a tooltip.",
+                "type":"string"
+              },
+              "options":{ 
+                "description":"Selectable options. Will be rendered as a dropdown.",
+                "type":"array",
+                "items":{ 
+                  "type":"object",
+                  "properties":{ 
+                    "label":{ 
+                      "description":"The displayed label of a single option.",
+                      "type":"string"
+                    },
+                    "value":{ 
+                      "description":"The search value to be sent in requests once selected",
+                      "type":"string"
+                    }
+                  },
+                  "required":[ 
+                    "label",
+                    "value"
+                  ]
+                }
+              },
+              "range":{ 
+                "description":"Whether this search parameter shall be rendered as a dual-slider.",
+                "type":"boolean",
+                "default":false
+              },
+              "min":{ 
+                "description":"The lower boundary for the range. Mandatory for range parameters.",
+                "type":"number"
+              },
+              "max":{ 
+                "description":"The upper boundary for the range. Mandatory for range parameters.",
+                "type":"number"
+              },
+              "step":{ 
+                "description":"Step for the range.",
+                "type":"number",
+                "default":1
+              }
+            }
+          }
+        },
+        "downloadFormats":{ 
+          "description":"A list of download format descriptions that are being used in the download options view for the user to select for downloads via EO-WCS.",
+          "type":"array",
+          "items":{ 
+            "type":"object",
+            "properties":{ 
+              "name":{ 
+                "description":"The name of the download format for display. If not set, 'mimeType' is used.",
+                "type":"string"
+              },
+              "mimeType":{ 
+                "description":"The mime-type of the format that is sent to the server.",
+                "type":"string"
+              }
+            },
+            "required":[ 
+              "mimeType"
+            ]
+          },
+          "default":[ 
+
+          ]
+        },
+        "downloadProjections":{ 
+          "description":"A list of download projection descriptions that are being used in the download options view for the user to select for downloads via EO-WCS.",
+          "type":"array",
+          "items":{ 
+            "type":"object",
+            "properties":{ 
+              "name":{ 
+                "description":"The name of the download projection for display. If not set, 'identifier' is used.",
+                "type":"string"
+              },
+              "identifier":{ 
+                "description":"The identifier of the projection (e.g: EPSG-code) that is sent to the server.",
+                "type":"string"
+              }
+            },
+            "required":[ 
+              "identifier"
+            ]
+          },
+          "default":[ 
+
+          ]
+        },
+        "downloadInterpolations":{ 
+          "description":"Available interpolation methods to choose for download via EO-WCS.",
+          "type":"array",
+          "items":{ 
+            "type":"object",
+            "properties":{ 
+              "name":{ 
+                "description":"The displayed name of the interpolation. If not set, 'identifier' is used.",
+                "type":"string"
+              },
+              "identifier":{ 
+                "description":"The identifier of the interpolation to be sent in the download request",
+                "type":"string"
+              }
+            },
+            "required":[ 
+              "identifier"
+            ]
+          }
+        },
+        "termsAndConditionsUrl":{ 
+          "oneOf":[ 
+            { 
+              "description":"The URL to the terms and conditions document for the user to accept.",
+              "type":"string",
+              "default":null
+            },
+            { 
+              "description":"An object, mapping the language specifier (as specified in settings.language) to a URL.",
+              "type":"object"
+            }
+          ]
+        },
+        "downloadEnabled":{ 
+          "description":"Whether or not the 'Download' button shall be enabled.",
+          "type":"boolean",
+          "default":true
+        },
+        "translations":{ 
+          "description":"Additional translations not covered in the base translations. Keys can be one of the language specifiers: 'en', 'de', 'deinformal'. The values must be objects, mapping the (english) key to the translated value. Must not contain the '#' character.",
+          "type":"object"
+        },
+        "uploadEnabled":{ 
+          "description":"Whether or not the 'Upload' functionality shall be available. (Loading of shapefiles for geometries).",
+          "type":"boolean",
+          "default":true
+        },
+        "selectFilesDownloadEnabled":{ 
+          "description":"Whether 'Download selected files' toggle option is visible.",
+          "type":"boolean",
+          "default":true
+        }
+      },
+      "oneOf":[ 
+        { 
+          "required":[ 
+            "center",
+            "zoom",
+            "timeDomain",
+            "selectedTimeDomain"
+          ]
+        },
+        { 
+          "required":[ 
+            "extent",
+            "timeDomain",
+            "selectedTimeDomain"
+          ]
+        }
+      ]
+    },
+    "layerSet":{ 
+      "type":"array",
+      "items":{ 
+        "$ref":"#/definitions/layer"
+      }
+    },
+    "layer":{ 
+      "description":"The definition of a single layer.",
+      "type":"object",
+      "properties":{ 
+        "id":{ 
+          "description":"The unique identifier of this layer.",
+          "type":"string"
+        },
+        "displayName":{ 
+          "description":"The layers name to be presented to the user",
+          "type":"string"
+        },
+        "displayColor":{ 
+          "description":"The color to distinguish the layer in the layer-list and the TimeSlider. Must be a valid HTML color definition.",
+          "type":"string"
+        },
+        "noTimeSliderBorder":{ 
+          "description":"TimeSlider bins and records will not have a visible border",
+          "type":"boolean",
+          "default":"false"
+        },
+        "link":{ 
+          "description":"An HTTP link for further information for the layer. This is rendered in the layer list.",
+          "type":"string"
+        },
+        "display":{ 
+          "description":"Structure to describe how the layer is visually presented. Functionally same parameter 'detailsDisplay' with same options can be used to describe how layer is displayed when single item details panel is shown.",
+          "type":"object",
+          "properties":{ 
+            "id":{ 
+              "description":"The ID used for the protocol to identify the layer.",
+              "type":"string"
+            },
+            "visible":{ 
+              "description":"Whether the layer shall be visible on start.",
+              "type":"boolean",
+              "default":false
+            },
+            "protocol":{ 
+              "description":"The protocol used to display the layer.",
+              "type":"string",
+              "enum":[ 
+                "WMS",
+                "WMTS"
+              ]
+            },
+            "urls":{ 
+              "description":"A list of base-URLs to retrieve tiles",
+              "items":{ 
+                "type":"string",
+                "format":"uri"
+              }
+            },
+            "url":{ 
+              "description":"A single base-URL to retrieve tiles",
+              "type":"string",
+              "format":"uri"
+            },
+            "matrixSet":{ 
+              "description":"The matrix set used to retrieve tiles. Required for WMTS.",
+              "type":"string"
+            },
+            "matrixIdPrefix":{ 
+              "description":"A prefix to be prepended to the numerical part of the tile matrix ID.",
+              "type":"string"
+            },
+            "matrixIdPostfix":{ 
+              "description":"A postfix to be appended to the numerical part of the tile matrix ID.",
+              "type":"string"
+            },
+            "tileSize":{ 
+              "description":"The width and height (in pixels) for each WMS tile to be requested.",
+              "type":[ 
+                "array",
+                "integer"
+              ],
+              "items":[ 
+                { 
+                  "type":"integer",
+                  "minimum":0
+                },
+                { 
+                  "type":"integer",
+                  "minimum":0
+                }
+              ],
+              "minimum":0,
+              "default":256
+            },
+            "format":{ 
+              "description":"The transfer format used to retrieve tiles. For layers and overlayLayers this should be a format that allows transparency (e.g: PNG).",
+              "type":"string"
+            },
+            "projection":{ 
+              "description":"The projection identifier in which the tiles will be transferred. E.g: 'EPSG:4326'.",
+              "type":"string"
+            },
+            "style":{ 
+              "description":"The style in which the tiles will be retrieved.",
+              "type":"string"
+            },
+            "version":{ 
+              "description":"Override service version parameter.",
+              "type":"string",
+              "default":"1.1.0"
+            },
+            "minZoom":{ 
+              "description":"The minimum map zoom level for this layer. Used for map is maximum over all layers.",
+              "type":"number",
+              "default":0
+            },
+            "maxZoom":{ 
+              "description":"The maximum map zoom level for this layer. Used for map is minimum over all layers.",
+              "type":"number",
+              "default":28
+            },
+            "noAntialiasing":{ 
+              "description":"Disables canvas rendering antialiasing when larger zoom than which source does provide is requested (blurry vs sharp image)",
+              "type":"boolean",
+              "default":false
+            },
+            "attribution":{ 
+              "description":"A string to be displayed when the layer is displayed. Can contain HTML for specific formatting.",
+              "type":"string"
+            },
+            "discardZulu":{ 
+              "description":"When this is set to 'true', the trailing 'Z' (for UTC Zulu) will be discarded for the WM(T)S time parameter.",
+              "type":"boolean",
+              "default":false
+            },
+            "useMilliseconds":{ 
+              "description":"Determines whether the granularity of the time parameter includes milliseconds.",
+              "type":"boolean",
+              "default":true
+            },
+            "adjustTime":{ 
+              "description":"The time parameter values of WMS/WMTS requests are decreased and increased by the given number of seconds.",
+              "type":[ 
+                "array",
+                "integer"
+              ],
+              "items":[ 
+                { 
+                  "type":"integer"
+                },
+                { 
+                  "type":"integer"
+                }
+              ]
+            },
+            "synchronizeTime":{ 
+              "description":"If set to true, time change triggers reload of layer parameters (time). Usable only for overlayLayers and baseLayers. Layers are reloaded always. If explicitly set to false, it disables adding TIME parameter to the query.",
+              "type":"boolean",
+              "default":"undefined"
+            },
+            "cqlParameterName":{ 
+              "description":"The name of the CQL parameter name for WMS requests. When set, the CQL filtering is enabled for this view layer.",
+              "type":"string"
+            },
+            "cqlMapping":{ 
+              "description":"The mapping of the search filter name to the attribute names used for CQL.",
+              "type":"object"
+            },
+            "extraParameters":{ 
+              "description":"Addtional key-value pairs to add to WMS requests.",
+              "type":"object"
+            },
+            "options":{ 
+              "description":"Names layer parameters the user is allowed to adjust.",
+              "type":"array",
+              "items":{ 
+                "type":"object",
+                "properties":{ 
+                  "name":{ 
+                    "description":"The displayed name of the config option.",
+                    "type":"string"
+                  },
+                  "target":{ 
+                    "description":"The dotted path of the parameter. e.g: 'display.style'",
+                    "type":"string"
+                  },
+                  "selectThree":{ 
+                    "description":"If option is of type combine-three, for example 'bands'. This will create three select elements instead of one.",
+                    "type":"boolean",
+                    "default":false
+                  },
+                  "replace":{ 
+                    "description":"Array of dotted style request parameters, which when this option is set, will be replaced too. For example changing layer name.",
+                    "type":"array",
+                    "items":{ 
+                      "type":"object",
+                      "properties":{ 
+                        "target":{ 
+                          "description":"The dotted path of the parameter. e.g: 'display.extraParameters.LAYERS'",
+                          "type":"string"
+                        },
+                        "value":{ 
+                          "description":"The actual value to be set.",
+                          "type":"string"
+                        }
+                      }
+                    }
+                  },
+                  "isChosen":{ 
+                    "description":"Set this option as pre-selected visualization.",
+                    "type":"boolean",
+                    "default":false
+                  },
+                  "values":{ 
+                    "description":"A list of possible options.",
+                    "type":"array",
+                    "items":{ 
+                      "type":"object",
+                      "properties":{ 
+                        "label":{ 
+                          "description":"The displayed name of the option value. If not supplied, 'value' is used as label.",
+                          "type":"string"
+                        },
+                        "value":{ 
+                          "description":"The actual value.",
+                          "type":"string"
+                        },
+                        "isCurrentB1":{ 
+                          "description":"Set this value as pre-selected option 1.",
+                          "type":"boolean",
+                          "default":false
+                        },
+                        "isCurrentB2":{ 
+                          "description":"Set this value as pre-selected option 2.",
+                          "type":"boolean",
+                          "default":false
+                        },
+                        "isCurrentB3":{ 
+                          "description":"Set this value as pre-selected option 3.",
+                          "type":"boolean",
+                          "default":false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "extraDownloadIcon":{ 
+              "description":"If set to true, displays an extra download icon in layer list, triggering full resolution download panel. Can be used when search results panel is not used in the app.",
+              "type":"boolean",
+              "default":false
+            }
+          },
+          "required":[ 
+            "id",
+            "protocol",
+            "format"
+          ]
+        },
+        "search":{ 
+          "description":"An object to define how the layer can be searched.",
+          "type":"object",
+          "properties":{ 
+            "id":{ 
+              "description":"The identifier used for search requests. Required for EO-WCS only.",
+              "type":"string"
+            },
+            "protocol":{ 
+              "description":"The protocol used to search for records",
+              "type":"string",
+              "enum":[ 
+                "EO-WCS",
+                "OpenSearch"
+              ],
+              "//TODO":"This list will also include 'WFS', once it's implemented"
+            },
+            "url":{ 
+              "description":"The base-URL to send search requests to.",
+              "type":"string",
+              "format":"uri"
+            },
+            "format":{ 
+              "description":"The format (mime-type) to use for OpenSearch requests.",
+              "type":"string",
+              "default":null
+            },
+            "method":{ 
+              "description":"The preferred HTTP method to send requests.",
+              "type":"string",
+              "enum":[ 
+                "GET",
+                "POST"
+              ],
+              "default":"GET"
+            },
+            "lightweightBuckets":{ 
+              "description":"Whether or not leightweight buckets shall be used for the timeslider. Lightweight buckets only request the number of records for the given histogram bucket. When the total count is below the given histogramThreshold, then the records will be displayed directly.",
+              "type":"boolean",
+              "default":false
+            },
+            "histogramThreshold":{ 
+              "description":"The threshold of number of records in the whole visible interval to display the dataset as a histogram instead of individual records. When not specified, the records are always shown.",
+              "type":"number",
+              "default":null
+            },
+            "histogramBinCount":{ 
+              "description":"The number of histogram bins to display in histogram mode.",
+              "type":"number",
+              "default":20
+            },
+            "searchLimit":{ 
+              "description":"This is the limit for how many records will be displayed in the search results panel. A warning will be displayed if more items are matched.",
+              "type":"number",
+              "default":150
+            },
+            "loadMore":{ 
+              "description":"This is the count of elements to be fetched when 'Load more' is clicked.",
+              "type":"number",
+              "default":150
+            },
+            "pageSize":{ 
+              "description":"User defined items per page in catalog requests. Lower of server-defined & user-defined is used in the end.",
+              "type":"number",
+              "default":null
+            },
+            "switchMultiPolygonCoordinates":{ 
+              "description":"If catalog sends multipolygon coordinates for this layer in lon,lat instead of lat,lon - this needs to be set to true.",
+              "type":"boolean",
+              "default":false
+            },
+            "parameters":{ 
+              "description":"Mapping the parameter type (such as eo:processingCenter) to a settings object.",
+              "type":"array",
+              "items":{ 
+                "type":"object",
+                "properties":{ 
+                  "type":{ 
+                    "description":"The mandatory parameter type. Use the OpenSeach type, e.g: eo:acquisitionStation.",
+                    "type":"string"
+                  },
+                  "title":{ 
+                    "description":"A short description of the parameter, used as a tooltip.",
+                    "type":"string"
+                  },
+                  "options":{ 
+                    "description":"Selectable options. Will be rendered as a dropdown.",
+                    "type":"array",
+                    "items":{ 
+                      "type":"object",
+                      "properties":{ 
+                        "label":{ 
+                          "description":"The displayed label of a single option. If not set, 'value' is used.",
+                          "type":"string"
+                        },
+                        "value":{ 
+                          "description":"The search value to be sent in requests once selected",
+                          "type":"string"
+                        }
+                      },
+                      "required":[ 
+                        "value"
+                      ]
+                    }
+                  },
+                  "range":{ 
+                    "description":"Whether this search parameter shall be rendered as a dual-slider.",
+                    "type":"boolean",
+                    "default":false
+                  },
+                  "min":{ 
+                    "description":"The lower boundary for the range. Mandatory for range parameters.",
+                    "type":"number"
+                  },
+                  "max":{ 
+                    "description":"The upper boundary for the range. Mandatory for range parameters.",
+                    "type":"number"
+                  },
+                  "fixed":{ 
+                    "description":"The fixed value of that parameter.",
+                    "type":"string"
+                  },
+                  "default":{ 
+                    "description":"The default value of this parameter. The type depends on the parameter type.",
+                    "type":[ 
+                      "integer",
+                      "string",
+                      "array"
+                    ]
+                  }
+                }
+              }
+            },
+            "parametersFilterSettings":{ 
+              "description":"General settings for additional - parameter filters panel.",
+              "type":"object",
+              "properties":{ 
+                "collapsed":{ 
+                  "description":"If a filter panel starts collapsed.",
+                  "type":"boolean",
+                  "default":true
+                },
+                "hidden":{ 
+                  "description":"If set to true, the filter is hidden and not rendered.",
+                  "type":"boolean",
+                  "default":false
+                }
+              }
+            }
+          },
+          "maxUrlLength":{ 
+            "description":"The maximum URL length of search requests to be sent. Longer URLs will not be sent, but an error will be raised directly.",
+            "type":"number",
+            "default":4000
+          },
+          "thumbnailUrlTemplate":{ 
+            "description":"The template string to construct a thumbnail URL. Use '{{' and '}}' to select values. e.g: 'http://landsat-pds.s3.amazonaws.com/{{properties.s3Path}}/{{properties.title}}_thumb_small.jpg'.",
+            "type":"string"
+          },
+          "quickLookUrlTemplate":{ 
+            "description":"The template string to construct a quickLook URL. Use '{{' and '}}' to select values. e.g: 'http://landsat-pds.s3.amazonaws.com/{{properties.s3Path}}/{{properties.title}}_thumb_small.jpg'. The URL will be used in case thumbnailUrl is not available.",
+            "type":"string"
+          },
+          "descriptionTemplate":{ 
+            "description":"The template string to construct a record description. Use '{{' and '}}' to select values.",
+            "type":"string"
+          },
+          "extraFields":{ 
+            "description":"Extra fields to be parsed. Object keys are the JSON path where the output of the simple XPath shall be stored. Values are simple XPath expressions, always relative to a single Atom entry/RSS item.",
+            "type":"object"
+          },
+          "extraFieldsNamespaces":{ 
+            "description":"Namespace code to URL mapping for namespaces used in 'extraFields'.",
+            "type":"object"
+          },
+          "countZeroRecords":{ 
+            "description":"When this setting is set to true, the requested number of records is zero when only the count is required.",
+            "type":"boolean"
+          },
+          "dropEmptyParameters":{ 
+            "description":"When this setting is set to true, empty parameters (with no value set) will be dropped entirely.",
+            "type":"boolean"
+          },
+          "required":[ 
+            "protocol",
+            "url"
+          ]
+        },
+        "download":{ 
+          "description":"An object to define how records of the layer can be downloaded.",
+          "type":"object",
+          "properties":{ 
+            "protocol":{ 
+              "description":"The protocol used to download records.",
+              "type":"string",
+              "enum":[ 
+                "EO-WCS",
+                "URL",
+                "S3"
+              ],
+              "//TODO":"This list will be extended in the future. Currently, this setting is not used with OpenSearch, as the download information is embedded in the search response."
+            },
+            "url":{ 
+              "description":"The base-URL to send download requests to.",
+              "type":"string",
+              "format":"uri"
+            },
+            "method":{ 
+              "description":"The preferred HTTP method to send requests.",
+              "type":"string",
+              "enum":[ 
+                "GET",
+                "POST"
+              ],
+              "default":"'GET' for URL based protocols, 'POST' for EO-WCS."
+            },
+            "axisNames":{ 
+              "description":"The axis names to include the subset in WCS requests. Example [lon, lat]",
+              "type":"array",
+              "items":{ 
+                "type":"string"
+              },
+              "minItems":2,
+              "maxItems":2
+            },
+            "rewrite":{ 
+              "description":"Settings object to define URL rewrites.",
+              "type":"object",
+              "properties":{ 
+                "from":{ 
+                  "description":"The part of the URL that shall be rewritten (replaced). Either Will be interpreted as a regular expression - usage without quotes or a template can be used - '{{ and }}' to use Record properties in regex. For example {{ id }} to select ID of product.",
+                  "type":"string"
+                },
+                "to":{ 
+                  "description":"The value that shall replace the previously selected part of the URL (via 'from').",
+                  "type":"string"
+                }
+              },
+              "required":[ 
+                "from",
+                "to"
+              ]
+            },
+            "pathPrefix":{ 
+              "description":"Part of the download path to be considered not part of the bucket and download prefix. Necessary for S3 URLs",
+              "type":"string"
+            }
+          },
+          "required":[ 
+            "protocol",
+            "url"
+          ]
+        },
+        "fullResolution":{ 
+          "description":"Configuration settings for the full resolution download",
+          "type":"object",
+          "properties":{ 
+            "protocol":{ 
+              "description":"The protocol used for full resolution download.",
+              "type":"string",
+              "enum":[ 
+                "EO-WCS"
+              ]
+            },
+            "id":{ 
+              "description":"The ID used for the protocol to identify the coverage.",
+              "type":"string"
+            },
+            "url":{ 
+              "description":"The base-URL to send full resolution download requests to.",
+              "type":"string",
+              "format":"uri"
+            },
+            "cqlParameterName":{ 
+              "description":"The name of the CQL parameter name for WCS requests. When set, the CQL filtering is enabled for this layer.",
+              "type":"string"
+            },
+            "cqlMapping":{ 
+              "description":"The mapping of the search filter name to the attribute names used for CQL.",
+              "type":"object"
+            },
+            "maxSizeWarning":{ 
+              "description":"A warning is shown when the download is expected to be bigger than the configured number in MB. The estimate is calculated as 'sizeX * sizeY * #bands * 8 / 1024 / 1024'.",
+              "type":"number",
+              "default":20
+            },
+            "maxSizeResolution":{ 
+              "description":"Resolution used to calculate the estimate for 'maxSizeWarning'. Default is around 10m in degrees around equator.",
+              "type":"number",
+              "default":0.0000858306884765625
+            },
+            "maxBboxEdgeSize":{ 
+              "description":"A warning is shown when any edge of bounding box exceeds this value in Map CRS.",
+              "type":"number",
+              "default":null
+            },
+            "maxAllowedResolution":{ 
+              "description":"A warning is shown when user input resolution is greater than this value in Map CRS.",
+              "type":"number",
+              "default":null
+            },
+            "disableTimeSubsetting":{ 
+              "description":"Disable adding time subsetting to WCS request even if available from TimeSlider.",
+              "type":"boolean",
+              "default":false
+            },
+            "axisNames":{ 
+              "description":"The axis names to include the subset in WCS requests. Example [lon, lat]",
+              "type":"array",
+              "items":{ 
+                "type":"string"
+              },
+              "minItems":2,
+              "maxItems":2
+            },
+            "fields":{ 
+              "description":"Available fields to select for download.",
+              "type":"array",
+              "items":{ 
+                "type":"object",
+                "properties":{ 
+                  "name":{ 
+                    "description":"The displayed name of the field. If not set, 'identifier' is used.",
+                    "type":"string"
+                  },
+                  "identifier":{ 
+                    "description":"The identifier of the field to be sent in the download request",
+                    "type":"string"
+                  }
+                },
+                "required":[ 
+                  "identifier"
+                ]
+              }
+            },
+            "interpolations":{ 
+              "description":"Available interpolation methods to choose for download.",
+              "type":"array",
+              "items":{ 
+                "type":"object",
+                "properties":{ 
+                  "name":{ 
+                    "description":"The displayed name of the interpolation. If not set, 'identifier' is used.",
+                    "type":"string"
+                  },
+                  "identifier":{ 
+                    "description":"The identifier of the interpolation to be sent in the download request",
+                    "type":"string"
+                  }
+                },
+                "required":[ 
+                  "identifier"
+                ]
+              }
+            }
+          }
+        },
+        "processing":{ 
+          "description":"Configuration settings for the processing button",
+          "type":"object",
+          "properties":{ 
+            "url":{ 
+              "description":"The URL to send processing POST requests to.",
+              "type":"string",
+              "format":"uri"
+            },
+            "method":{ 
+              "description":"The method used to send processing requests. 'fetch' sends a POST request with a JSON payload in the current tab, 'form' simulates sending a form in a new tab with JSON as the value of the 'request' field.",
+              "type":"string",
+              "enum":[ 
+                "fetch",
+                "form"
+              ]
+            }
+          }
+        },
+        "filterSettings":{ 
+          "description":"Configuration settings for preset filter filters",
+          "type":"object",
+          "properties":{ 
+            "time":{ 
+              "description":"General configuration settings for a time filter",
+              "type":"object",
+              "properties":{ 
+                "collapsed":{ 
+                  "description":"If a filter panel starts collapsed.",
+                  "type":"boolean",
+                  "default":false
+                },
+                "hidden":{ 
+                  "description":"If set to true, the filter is hidden and not rendered.",
+                  "type":"boolean",
+                  "default":false
+                },
+                "settings":{ 
+                  "description":"Concrete configuration settings for time filter",
+                  "type":"object",
+                  "properties":{ 
+                    "mapTime":{ 
+                      "description":"The initially selected Time Filter. If maxMapInterval is enabled, also overwrites the selectedTimeDomain.",
+                      "type":"array",
+                      "items":{ 
+                        "type":"string",
+                        "format":"date-time"
+                      },
+                      "minItems":2,
+                      "maxItems":2
+                    }
+                  }
+                }
+              }
+            },
+            "area":{ 
+              "description":"General configuration settings for an area filter",
+              "type":"object",
+              "properties":{ 
+                "collapsed":{ 
+                  "description":"If a filter panel starts collapsed.",
+                  "type":"boolean",
+                  "default":false
+                },
+                "hidden":{ 
+                  "description":"If set to true, the filter is hidden and not rendered.",
+                  "type":"boolean",
+                  "default":false
+                },
+                "settings":{ 
+                  "description":"Concrete configuration settings for area filter",
+                  "type":"object",
+                  "properties":{ 
+                    "type":{ 
+                      "description":"Name of the area filter to be preset.",
+                      "type":"string",
+                      "enum":[ 
+                        "Polygon",
+                        "Point",
+                        "Rectangle"
+                      ]
+                    },
+                    "coordinates":{ 
+                      "description":"Area filter coordinates from geojson spec in map CRS. Example Point: [x, y], Rectangle (bbox): [minx, miny, maxx, maxy], Polygon [[[x,y], [x,y] ...]]. Supports setting polygon with inner ring this way, but catalog must accept it too.",
+                      "type":"array"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required":[ 
+          "id",
+          "displayName",
+          "display"
+        ]
+      }
+    }
+  }
 }
