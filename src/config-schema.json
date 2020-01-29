@@ -474,7 +474,7 @@
         "noTimeSliderBorder":{ 
           "description":"TimeSlider bins and records will not have a visible border",
           "type":"boolean",
-          "default":"false"
+          "default":false
         },
         "link":{ 
           "description":"An HTTP link for further information for the layer. This is rendered in the layer list.",
@@ -498,7 +498,8 @@
               "type":"string",
               "enum":[ 
                 "WMS",
-                "WMTS"
+                "WMTS",
+                "XYZ"
               ]
             },
             "urls":{ 
@@ -606,7 +607,7 @@
               ]
             },
             "synchronizeTime":{ 
-              "description":"If set to true, time change triggers reload of layer parameters (time). Usable only for overlayLayers and baseLayers. Layers are reloaded always. If explicitly set to false, it disables adding TIME parameter to the query.",
+              "description":"If set to 'true', time change triggers reload of layer parameters (time). Usable only for overlayLayers and baseLayers. Layers are reloaded always. If explicitly set to 'false', it disables adding TIME parameter to the query.",
               "type":"boolean",
               "default":"undefined"
             },
@@ -724,8 +725,7 @@
               "enum":[ 
                 "EO-WCS",
                 "OpenSearch"
-              ],
-              "//TODO":"This list will also include 'WFS', once it's implemented"
+              ]
             },
             "url":{ 
               "description":"The base-URL to send search requests to.",
@@ -777,7 +777,7 @@
               "default":null
             },
             "switchMultiPolygonCoordinates":{ 
-              "description":"If catalog sends multipolygon coordinates for this layer in lon,lat instead of lat,lon - this needs to be set to true.",
+              "description":"If catalog sends multipolygon coordinates for this layer in lon,lat instead of lat,lon - this needs to be set to 'true'.",
               "type":"boolean",
               "default":false
             },
@@ -844,7 +844,7 @@
               }
             },
             "parametersFilterSettings":{ 
-              "description":"General settings for additional - parameter filters panel.",
+              "description":"General settings for additional-parameters filter panel.",
               "type":"object",
               "properties":{ 
                 "collapsed":{ 
@@ -874,7 +874,7 @@
             "type":"string"
           },
           "descriptionTemplate":{ 
-            "description":"The template string to construct a record description. Use '{{' and '}}' to select values.",
+            "description":"The template string to construct a record description. Use '{{' and '}}' to select values. For example {{properties.mundi.cloudCover}}",
             "type":"string"
           },
           "extraFields":{ 
