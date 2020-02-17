@@ -61,7 +61,9 @@ const ExtraParametersListView = Marionette.CompositeView.extend({
   },
 
   onChangeVisible() {
-    this.$el.css('display', this.searchModel.get('layerModel').get('display.visible') ? '' : 'none');
+    if (!this.singleLayerModeUsed) {
+      this.$el.css('display', this.searchModel.get('layerModel').get('display.visible') ? '' : 'none');
+    }
   },
 
   childEvents: {

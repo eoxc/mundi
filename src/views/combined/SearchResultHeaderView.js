@@ -16,7 +16,6 @@ const SearchResultHeaderView = Marionette.ItemView.extend({
     const downloadSelection = this.singleModel.get('downloadSelection');
     const downloadSelectionSize = typeof downloadSelection !== 'undefined' ? downloadSelection.length : 0;
     const downloadableCount = this.collection
-      .filter(searchModel => searchModel.get('layerModel').get('display.visible'))
       .map(searchModel =>
         searchModel.get('results')
           .filter(recordModel => isRecordDownloadable(searchModel.get('layerModel'), recordModel))

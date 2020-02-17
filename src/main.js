@@ -280,6 +280,16 @@ window.Application = Marionette.Application.extend({
     } : domain;
 
     const singleLayerModeUsed = searchCollection.length === 1 && settings.enableSingleLayerMode;
+    if (singleLayerModeUsed) {
+      // re-enable search when display is disabled, but search is enabled
+      searchCollection.each((searchModel) => {
+        const layerModel = searchModel.get('layerModel');
+        const searchEnabled = (typeof layerModel.get('search.searchEnabled') !== 'undefined') ? layerModel.get('search.searchEnabled') : settings.searchEnabled;
+        searchModel.set('automaticSearch', searchEnabled);
+        // decouple display and search on model
+        searchModel.stopListening(layerModel, 'change:display.visible');
+      });
+    }
 
     layout.showChildView('timeSlider', new TimeSliderView({
       layersCollection,
@@ -302,6 +312,7 @@ window.Application = Marionette.Application.extend({
       selectableInterval: settings.selectableInterval,
       maxTooltips: settings.maxTooltips,
       enableDynamicHistogram: settings.enableDynamicHistogram,
+      singleLayerModeUsed
     }));
 
     // set up panels
@@ -391,6 +402,7 @@ window.Application = Marionette.Application.extend({
         showRecordDetails(records);
       },
       constrainOutCoords: settings.constrainOutCoords,
+      singleLayerModeUsed
     }));
 
     layout.showChildView('leftPanel', new SidePanelView({
