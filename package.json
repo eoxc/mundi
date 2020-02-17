@@ -68,6 +68,7 @@
     "backbone.marionette": "^2.4.7",
     "bootstrap": "^3.4.1",
     "bootstrap-slider": "^9.9.1",
+    "convict": "^5.2.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.42",
     "eoxc": "1.1.0-rc.25",
     "i18next": "^3.4.1",

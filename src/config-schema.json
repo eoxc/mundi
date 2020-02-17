@@ -398,6 +398,79 @@
             ]
           }
         },
+        "filterSettings":{ 
+          "description":"Configuration settings for preset filter filters",
+          "type":"object",
+          "properties":{ 
+            "time":{ 
+              "description":"General configuration settings for a time filter",
+              "type":"object",
+              "properties":{ 
+                "collapsed":{ 
+                  "description":"If a filter panel starts collapsed.",
+                  "type":"boolean",
+                  "default":false
+                },
+                "hidden":{ 
+                  "description":"If set to true, the filter is hidden and not rendered.",
+                  "type":"boolean",
+                  "default":false
+                },
+                "settings":{ 
+                  "description":"Concrete configuration settings for time filter",
+                  "type":"object",
+                  "properties":{ 
+                    "mapTime":{ 
+                      "description":"The initially selected Time Filter. If maxMapInterval is enabled, also overwrites the selectedTimeDomain.",
+                      "type":"array",
+                      "items":{ 
+                        "type":"string",
+                        "format":"date-time"
+                      },
+                      "minItems":2,
+                      "maxItems":2
+                    }
+                  }
+                }
+              }
+            },
+            "area":{ 
+              "description":"General configuration settings for an area filter",
+              "type":"object",
+              "properties":{ 
+                "collapsed":{ 
+                  "description":"If a filter panel starts collapsed.",
+                  "type":"boolean",
+                  "default":false
+                },
+                "hidden":{ 
+                  "description":"If set to true, the filter is hidden and not rendered.",
+                  "type":"boolean",
+                  "default":false
+                },
+                "settings":{ 
+                  "description":"Concrete configuration settings for area filter",
+                  "type":"object",
+                  "properties":{ 
+                    "type":{ 
+                      "description":"Name of the area filter to be preset.",
+                      "type":"string",
+                      "enum":[ 
+                        "Polygon",
+                        "Point",
+                        "Rectangle"
+                      ]
+                    },
+                    "coordinates":{ 
+                      "description":"Area filter coordinates from geojson spec in map CRS. Example Point: [x, y], Rectangle (bbox): [minx, miny, maxx, maxy], Polygon [[[x,y], [x,y] ...]]. Supports setting polygon with inner ring this way, but catalog must accept it too.",
+                      "type":"array"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "termsAndConditionsUrl":{ 
           "oneOf":[ 
             { 
@@ -1083,79 +1156,6 @@
                 "fetch",
                 "form"
               ]
-            }
-          }
-        },
-        "filterSettings":{ 
-          "description":"Configuration settings for preset filter filters",
-          "type":"object",
-          "properties":{ 
-            "time":{ 
-              "description":"General configuration settings for a time filter",
-              "type":"object",
-              "properties":{ 
-                "collapsed":{ 
-                  "description":"If a filter panel starts collapsed.",
-                  "type":"boolean",
-                  "default":false
-                },
-                "hidden":{ 
-                  "description":"If set to true, the filter is hidden and not rendered.",
-                  "type":"boolean",
-                  "default":false
-                },
-                "settings":{ 
-                  "description":"Concrete configuration settings for time filter",
-                  "type":"object",
-                  "properties":{ 
-                    "mapTime":{ 
-                      "description":"The initially selected Time Filter. If maxMapInterval is enabled, also overwrites the selectedTimeDomain.",
-                      "type":"array",
-                      "items":{ 
-                        "type":"string",
-                        "format":"date-time"
-                      },
-                      "minItems":2,
-                      "maxItems":2
-                    }
-                  }
-                }
-              }
-            },
-            "area":{ 
-              "description":"General configuration settings for an area filter",
-              "type":"object",
-              "properties":{ 
-                "collapsed":{ 
-                  "description":"If a filter panel starts collapsed.",
-                  "type":"boolean",
-                  "default":false
-                },
-                "hidden":{ 
-                  "description":"If set to true, the filter is hidden and not rendered.",
-                  "type":"boolean",
-                  "default":false
-                },
-                "settings":{ 
-                  "description":"Concrete configuration settings for area filter",
-                  "type":"object",
-                  "properties":{ 
-                    "type":{ 
-                      "description":"Name of the area filter to be preset.",
-                      "type":"string",
-                      "enum":[ 
-                        "Polygon",
-                        "Point",
-                        "Rectangle"
-                      ]
-                    },
-                    "coordinates":{ 
-                      "description":"Area filter coordinates from geojson spec in map CRS. Example Point: [x, y], Rectangle (bbox): [minx, miny, maxx, maxy], Polygon [[[x,y], [x,y] ...]]. Supports setting polygon with inner ring this way, but catalog must accept it too.",
-                      "type":"array"
-                    }
-                  }
-                }
-              }
             }
           }
         },
