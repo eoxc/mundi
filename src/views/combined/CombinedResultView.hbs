@@ -1,7 +1,12 @@
-<div class="checkbox checbox-switch search-results-toggle">
+<div class="checkbox checbox-switch">
   <label class="panel-title">
     {{t 'Search'}}
-    <input type="checkbox" name="" {{#if automaticSearch}}checked{{/if}} data-layer="{{id}}">
+    <input type="checkbox" class="search-toggle" {{#if automaticSearch}}checked{{/if}} data-layer="{{id}}">
+    <span></span>
+  </label>
+  <label class="panel-title">
+    {{t 'Display'}}
+    <input type="checkbox" class="display-toggle" {{#if initialDisplay}}checked{{/if}} data-layer="{{id}}">
     <span></span>
   </label>
 </div>
