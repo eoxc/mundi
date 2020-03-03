@@ -22,11 +22,11 @@ h4.no-product-selected {
   background-color: white;
   display: inline-block;
   vertical-align: middle;
-  margin-left: 4px;
+  margin-left: 9px;
 }
 
 .checkbox.checbox-switch label span:before {
-  display: inline-block;
+  display: inline-block; 
   width: 24px;
   height: 24px;
   border-radius: 50%;

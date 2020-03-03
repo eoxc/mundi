@@ -19,6 +19,7 @@ const CombinedResultView = Marionette.LayoutView.extend({
     const id = this.layerModel.get('id');
     const enableFullResolutionDownload = this.layerModel.get('fullResolution.protocol');
     const enableProcessing = this.layerModel.get('processing.url');
+    const isValidDisplay = typeof this.layerModel.get('display').urls !== 'undefined' ? this.layerModel.get('display').urls[0] !== '' : this.layerModel.get('display').url !== '';
     const selectFilesEnabled = typeof this.onSelectFiles !== 'undefined';
     const automaticSearch = this.singleModel.get('automaticSearch');
     const anySelectedToDisplay = this.singleModel.get('downloadSelection').length > 0 || automaticSearch;
@@ -29,6 +30,7 @@ const CombinedResultView = Marionette.LayoutView.extend({
       enableProcessing,
       selectFilesEnabled,
       anySelectedToDisplay,
+      isValidDisplay,
       automaticSearch,
       downloadEnabled: this.downloadEnabled,
       initialDisplay

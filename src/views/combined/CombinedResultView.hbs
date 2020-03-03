@@ -4,11 +4,13 @@
     <input type="checkbox" class="search-toggle" {{#if automaticSearch}}checked{{/if}} data-layer="{{id}}">
     <span></span>
   </label>
-  <label class="panel-title">
-    {{t 'Display'}}
-    <input type="checkbox" class="display-toggle" {{#if initialDisplay}}checked{{/if}} data-layer="{{id}}">
-    <span></span>
-  </label>
+  {{#if isValidDisplay}}
+    <label class="panel-title">
+      {{t 'Display'}}
+      <input type="checkbox" class="display-toggle" {{#if initialDisplay}}checked{{/if}} data-layer="{{id}}">
+      <span></span>
+    </label>
+  {{/if}}
 </div>
 <div class="search-results-header"></div>
 <div class="result-contents"></div>
