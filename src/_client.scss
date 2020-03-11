@@ -1180,3 +1180,17 @@ input[type=radio].visualization-selector {
 .export-wms-list {
   margin-bottom: 10px !important;
 }
+
+
+.upload-input {
+  background-color: $c_blue !important;
+  height: 28px !important;
+  &::placeholder {
+    color: $c_gray;
+  }
+}
+
+#dynamic-histogram.active{
+  background-color: $c_green_hover !important;
+}
+

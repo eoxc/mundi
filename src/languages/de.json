@@ -89,6 +89,7 @@
   "Error: Could not parse response of type TODO Type": "Fehler: Antwort vom Typ konnte nicht analysiert werden",
   "Start processing": "Prozessierung starten",
   "Download full resolution raster": "Rasterdatei mit voller Auflösung herunterladen",
+  "dynamic-histogram-title": "",
   "Tutorial": "Anleitung",
   "tutorial1": "<p><b>Willkommen im Katalog-Client</b></p><p>Schauen wir uns kurz die wichtigsten Funktionen gemeinsam an. Drücken Sie <i>Weiter</i> zum starten.</p><p>Sie können diese Anleitung jederzeit <i>Überspringen</i> und mit der <i class='fa fa-book'/> Schaltfläche unten rechts wieder zurückkommen.</p>",
   "tutorial2": "<p><b>Die Karte</b></p><p>Haben Sie die Karte im Hintergrund bemerkt? Sie zeigt die verfügbaren Satellitendaten.</p><p>Navigieren Sie zu dem Gebiet das Sie interessiert indem Sie die Karte verschieben und zoomen, entweder mit <i>Links-Klick + Ziehen</i> und <i>Mausrad scrollen</i> oder <i>Ein-Finger-Ziehen</i> und <i>Zwei-Finger-Zoom</i>.</p><p>Sind Sie zufrieden mit den angezeigten Daten? Noch nicht? Lassen Sie uns den Zeitraum anpassen.</p>",
