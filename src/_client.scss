@@ -1190,7 +1190,14 @@ input[type=radio].visualization-selector {
   }
 }
 
-#dynamic-histogram.active{
-  background-color: $c_green_hover !important;
+.feature-list button {
+  background-color: $c_blue !important;
 }
 
+.histogram-switch {
+  right:6px;
+}
+
+.histogram-switch label span:before {
+  color: white;
+}
