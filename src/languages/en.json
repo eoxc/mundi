@@ -19,7 +19,7 @@
   "timefilter_warning": "Search results may differ from products shown on map because of using a separate time filter",
   "advancedfilter_warning": "Search results may differ from products shown on map because of using additional filters",
   "toomanyresults_warning": "Search results may differ from products shown on map because search results are too big",
-  "dynamic-histogram-title": "Set or unset dynamic histogram mode of Timeslider.&#10;Time distributions will then be shown for current spatial filter.",
+  "dynamic-histogram-title": "If enabled, time distributions are shown for current spatial filter.\nIf disabled, they are shown globally.",
   "tutorial1": "<p><b>Welcome to the Catalog Client</b></p><p>Let's briefly walk through the main functionalities. Hit <i>Next</i> to start.</p><p>Feel free to <i>Skip</i> any time and to resume later using the <i class='fa fa-book'/> button at the bottom right.</p>",
   "tutorial2": "<p><b>The Map</b></p><p>Noticed the map in the back? It displays available satellite data.</p><p>Navigate to your area of interest by panning and zooming, either using <i>left click + drag</i> and <i>mouse wheel scroll</i> or <i>one finger drag</i> and <i>two finger pinch</i>.</p><p>Satisfied with the displayed data? Not yet? Let's change the time of interest <i>Next</i>.</p>",
   "tutorial3": "<p><b>The Timeslider</b></p><p>The timeslider displays the distribution of data over time. The gray area shows the currently selected time interval.</p><p>Navigate to your time of interest again by panning (only in the bottom area) and zooming. Change the time interval selection by using <i>left click + drag</i> in the top area.</p><p>Did you notice how the data displayed on the map and the search results changed?</p>",
