@@ -1,5 +1,7 @@
 import parseColor from 'parse-color';
 import shp from 'shpjs';
+import moment from 'moment';
+import { parseDuration } from 'eoxc/src/contrib/OpenLayers/utils';
 
 export function readFileAsArraybuffer(file) {
   return new Promise((resolve, reject) => {
@@ -104,4 +106,67 @@ export function sizeChangedEvent(handleFunction) {
     }
   }, 200);
   return element;
+}
+
+export function updateConfigBySearchParams(config) {
+  if (config.disableSearchParams) {
+    return config;
+  }
+  const configUpdate = Object.assign({}, config);
+  const params = new URLSearchParams(window.location.search);
+  // validate and set time filter
+  const timeStartStr = params.get('timestart') || params.get('time_start');
+  const timeEndStr = params.get('timeend') || params.get('time_end');
+  if (typeof timeStartStr === 'string' && typeof timeEndStr === 'string') {
+    const timestart = moment.utc(timeStartStr).toDate();
+    let timeend = moment.utc(timeEndStr).toDate();
+    // validate start with timeDomain
+    if (timestart >= moment.utc(config.timeDomain[0]).toDate() && timestart <= moment.utc(config.timeDomain[1]).toDate()) {
+      configUpdate.selectedTimeDomain[0] = timestart;
+      // validate timeend vs timestart
+      if ((timeend - timestart) === 0 || timeend < timestart) {
+        timeend = moment.utc(timestart).add(1, 'days');
+      }
+      // end needs more validation
+      const selectableInterval = parseDuration(config.selectableInterval);
+      if (selectableInterval !== null) {
+        if (timeend - timestart > (selectableInterval * 1000)) {
+          // shorten interval to selectableInterval
+          timeend = moment.utc(timestart).add(selectableInterval, 'seconds').toDate();
+        }
+      }
+      if (timeend > moment.utc(config.timeDomain[1]).toDate()) {
+        timeend = moment.utc(config.timeDomain[1]).toDate();
+      }
+      configUpdate.selectedTimeDomain[1] = timeend;
+      // modify display time to show 1.1 * larger area on timeSlider to make dragging easier
+      const timeDiff = timeend - timestart;
+      const displayTimeStart = moment.utc(timestart).subtract(timeDiff * 0.05, 'milliseconds').toDate();
+      const displayTimeEnd = moment.utc(timeend).add(timeDiff * 0.05, 'milliseconds').toDate();
+      configUpdate.displayTimeDomain = [displayTimeStart, displayTimeEnd];
+    }
+  }
+  // set map position
+  const xStr = params.get('x');
+  const yStr = params.get('y');
+  if (typeof xStr === 'string' && typeof yStr === 'string') {
+    const x = parseFloat(xStr.replace(',', '.'));
+    const y = parseFloat(yStr.replace(',', '.'));
+    if (!isNaN(x) && !isNaN(y)) {
+      // TODO: validate if actually fits into CRS bounds if necessary
+      configUpdate.center = [x, y];
+    }
+  }
+  // set map zoom
+  const zStr = params.get('z');
+  if (typeof xStr === 'string' && typeof yStr === 'string') {
+    const z = parseInt(zStr.replace(',', '.'), 10);
+    if (!isNaN(z)) {
+      // not checking maxzoom or minzoom on layers/main config, it is validated by OL anyway
+      configUpdate.zoom = z - 1;
+    }
+  }
+  // validate and set other filters
+  parameters
+  return configUpdate;
 }

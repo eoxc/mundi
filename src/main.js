@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import $ from 'jquery';
 import 'jquery-ui';
+import 'url-search-params-polyfill';
 
 import _ from 'underscore'; // eslint-disable-line import/no-extraneous-dependencies
 import Backbone from 'backbone'; // eslint-disable-line import/no-extraneous-dependencies
@@ -47,7 +48,7 @@ import CombinedResultView from './views/combined/CombinedResultView';
 import WarningsCollection from './models/WarningsCollection';
 
 import getTutorialWidget from './tutorial';
-import { premultiplyColor, sizeChangedEvent } from './utils';
+import { premultiplyColor, sizeChangedEvent, updateConfigBySearchParams } from './utils';
 
 import i18next from './i18next';
 
@@ -174,19 +175,19 @@ window.Application = Marionette.Application.extend({
   },
 
   onRun(config, baseLayersCollection, layersCollection, overlayLayersCollection, failedLayers) {
-    const settings = config.settings;
+    const configSettings = config.settings;
 
     // allow custom translations from the settings
-    if (settings.translations) {
-      Object.keys(settings.translations)
+    if (configSettings.translations) {
+      Object.keys(configSettings.translations)
         .forEach(
           lng => i18next.addResourceBundle(
-            lng, 'translation', settings.translations[lng], true, true
+            lng, 'translation', configSettings.translations[lng], true, true
           )
         );
     }
 
-    _.defaults(settings, {
+    _.defaults(configSettings, {
       center: [0, 0],
       zoom: 2,
       minZoom: 0,
@@ -214,6 +215,7 @@ window.Application = Marionette.Application.extend({
       leftPanelTabIndex: 0,
       rightPanelTabIndex: 0,
       enableSingleLayerMode: true,
+      disableSearchParams: false,
       downloadFormats: [],
       downloadProjections: [],
       downloadInterpolations: [],
@@ -223,6 +225,8 @@ window.Application = Marionette.Application.extend({
       selectFilesDownloadEnabled: true,
       filterSettings: null,
     });
+    // intercept searchParams to see if config change from user
+    const settings = updateConfigBySearchParams(configSettings);
 
     // set up config
     const mapModel = new MapModel({
@@ -379,8 +383,7 @@ window.Application = Marionette.Application.extend({
     searchCollection.on('start-processing', (searchModel) => {
       sendProcessingRequest(searchModel, mapModel);
     });
-
-    layout.showChildView('content', new OpenLayersMapView({
+    const mainOLView = new OpenLayersMapView({
       mapModel,
       filtersModel,
       baseLayersCollection,
@@ -403,7 +406,14 @@ window.Application = Marionette.Application.extend({
       },
       constrainOutCoords: settings.constrainOutCoords,
       singleLayerModeUsed
-    }));
+    });
+
+    layout.showChildView('content', mainOLView);
+    if (!config.disableSearchParams && typeof mainOLView.setupSearchParamsEvents === 'function') {
+      mainOLView.setupSearchParamsEvents();
+      mainOLView.setSearchParamCenter();
+      // zoom is not explicitely set, as some other event already triggers it
+    }
 
     layout.showChildView('leftPanel', new SidePanelView({
       position: 'left',

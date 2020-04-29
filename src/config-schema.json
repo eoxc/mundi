@@ -186,6 +186,11 @@
                   "type": "boolean",
                   "default": true
                 },
+                "disableSearchParams" : {
+                  "description": "Disable using URL parameters for partial initial app config",
+                  "type": "boolean",
+                  "default": false
+                },
                 "highlightFillColor": {
                     "description": "The fill color of highlighted footprints/bounding boxes on the map. Any valid CSS color defintion is supported.",
                     "type": "string",
