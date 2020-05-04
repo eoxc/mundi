@@ -437,6 +437,9 @@ window.Application = Marionette.Application.extend({
         name: 'Filters',
         view: new RootFiltersView({
           filtersModel,
+          layersCollection,
+          baseLayersCollection,
+          overlayLayersCollection,
           mapModel,
           highlightModel,
           searchCollection,
