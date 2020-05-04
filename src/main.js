@@ -396,38 +396,6 @@ window.Application = Marionette.Application.extend({
     searchCollection.on('start-processing', (searchModel) => {
       sendProcessingRequest(searchModel, mapModel);
     });
-    const mainOLView = new OpenLayersMapView({
-      mapModel,
-      filtersModel,
-      baseLayersCollection,
-      overlayLayersCollection,
-      layersCollection,
-      searchCollection,
-      highlightModel,
-      highlightFillColor: settings.highlightFillColor,
-      highlightStrokeColor: settings.highlightStrokeColor,
-      highlightStrokeWidth: settings.highlightStrokeWidth,
-      filterFillColor: settings.filterFillColor,
-      filterStrokeColor: settings.filterStrokeColor,
-      filterOutsideColor: settings.filterOutsideColor,
-      footprintFillColor: settings.footprintFillColor,
-      footprintStrokeColor: settings.footprintStrokeColor,
-      selectedFootprintFillColor: settings.selectedFootprintFillColor,
-      selectedFootprintStrokeColor: settings.selectedFootprintStrokeColor,
-      onFeatureClicked(records) {
-        showRecordDetails(records);
-      },
-      constrainOutCoords: settings.constrainOutCoords,
-      singleLayerModeUsed
-    });
-
-    layout.showChildView('content', mainOLView);
-    if (!config.disableSearchParams && typeof mainOLView.setupSearchParamsEvents === 'function') {
-      mainOLView.setupSearchParamsEvents();
-      mainOLView.setSearchParamCenter();
-      // zoom is not explicitely set, as some other event already triggers it
-    }
-
     layout.showChildView('leftPanel', new SidePanelView({
       position: 'left',
       icon: 'fa-cog',
@@ -460,6 +428,40 @@ window.Application = Marionette.Application.extend({
         }),
       }],
     }));
+
+    const mainOLView = new OpenLayersMapView({
+      mapModel,
+      filtersModel,
+      baseLayersCollection,
+      overlayLayersCollection,
+      layersCollection,
+      searchCollection,
+      highlightModel,
+      highlightFillColor: settings.highlightFillColor,
+      highlightStrokeColor: settings.highlightStrokeColor,
+      highlightStrokeWidth: settings.highlightStrokeWidth,
+      filterFillColor: settings.filterFillColor,
+      filterStrokeColor: settings.filterStrokeColor,
+      filterOutsideColor: settings.filterOutsideColor,
+      footprintFillColor: settings.footprintFillColor,
+      footprintStrokeColor: settings.footprintStrokeColor,
+      selectedFootprintFillColor: settings.selectedFootprintFillColor,
+      selectedFootprintStrokeColor: settings.selectedFootprintStrokeColor,
+      onFeatureClicked(records) {
+        showRecordDetails(records);
+      },
+      constrainOutCoords: settings.constrainOutCoords,
+      singleLayerModeUsed
+    });
+
+    layout.showChildView('content', mainOLView);
+    if (!config.disableSearchParams && typeof mainOLView.setupSearchParamsEvents === 'function') {
+      mainOLView.setupSearchParamsEvents();
+      mainOLView.setSearchParamCenter();
+      // zoom is not explicitely set, as some other event already triggers it
+    }
+
+    
 
     let termsAndConditionsUrl = settings.termsAndConditionsUrl;
     if (typeof termsAndConditionsUrl === 'object') {
