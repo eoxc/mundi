@@ -48,7 +48,7 @@ import CombinedResultView from './views/combined/CombinedResultView';
 import WarningsCollection from './models/WarningsCollection';
 
 import getTutorialWidget from './tutorial';
-import { premultiplyColor, sizeChangedEvent, updateConfigBySearchParams } from './utils';
+import { premultiplyColor, sizeChangedEvent, updateConfigBySearchParams, updateFiltersBySearchParams, setSearchParamsFilterChange } from './utils';
 
 import i18next from './i18next';
 
@@ -225,8 +225,16 @@ window.Application = Marionette.Application.extend({
       selectFilesDownloadEnabled: true,
       filterSettings: null,
     });
-    // intercept searchParams to see if config change from user
+    // determine if singleLayerModeUsed
+    const searchEnabledLayers = layersCollection.filter(layerModel => layerModel.get('search.protocol'));
+    const singleLayerModeUsed = searchEnabledLayers.length === 1 && configSettings.enableSingleLayerMode;
+
+    // intercept searchParams to see if config change from user (url)
     const settings = updateConfigBySearchParams(configSettings);
+    if (singleLayerModeUsed && !config.disableSearchParams) {
+      // intercept searchParams to see if custom filters set from user (url)
+      updateFiltersBySearchParams(searchEnabledLayers);
+    }
 
     // set up config
     const mapModel = new MapModel({
@@ -244,8 +252,7 @@ window.Application = Marionette.Application.extend({
     const filtersModel = new FiltersModel({ });
     const highlightModel = new HighlightModel();
 
-    const searchModels = layersCollection
-      .filter(layerModel => layerModel.get('search.protocol'))
+    const searchModels = searchEnabledLayers
       .map(layerModel => new SearchModel({
         layerModel,
         // apply defaults / fixed values
@@ -266,6 +273,13 @@ window.Application = Marionette.Application.extend({
       }));
     const searchCollection = new Backbone.Collection(searchModels);
 
+    if (singleLayerModeUsed && !config.disableSearchParams) {
+      // update url searchParams when filter change listener
+      searchModels[0].get('filtersModel').on('change', (fModel) => {
+        setSearchParamsFilterChange(fModel);
+      });
+    }
+
     // set up layout
     const layout = new RootLayoutView({
       el: $(this.container),
@@ -283,7 +297,6 @@ window.Application = Marionette.Application.extend({
       end: new Date(settings.displayTimeDomain[1]),
     } : domain;
 
-    const singleLayerModeUsed = searchCollection.length === 1 && settings.enableSingleLayerMode;
     if (singleLayerModeUsed) {
       // re-enable search when display is disabled, but search is enabled
       searchCollection.each((searchModel) => {
