@@ -40,6 +40,9 @@ const RootFiltersView = Marionette.LayoutView.extend({
     this.constrainTimeDomain = options.constrainTimeDomain;
     this.filterSettings = options.filterSettings;
     this.singleLayerModeUsed = options.singleLayerModeUsed;
+    this.layersCollection = options.layersCollection;
+    this.baseLayersCollection = options.baseLayersCollection;
+    this.overlayLayersCollection = options.overlayLayersCollection;
   },
 
   onBeforeShow() {
@@ -66,6 +69,9 @@ const RootFiltersView = Marionette.LayoutView.extend({
         constrainTimeDomain: this.constrainTimeDomain,
         domain: this.domain,
         settings: this.timeSettings,
+        layersCollection: this.layersCollection,
+        overlayLayersCollection: this.overlayLayersCollection,
+        baseLayersCollection: this.baseLayersCollection,
       })));
     }
     if (!this.areaFilterHidden) {

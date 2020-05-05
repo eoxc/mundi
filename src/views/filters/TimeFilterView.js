@@ -25,13 +25,16 @@ const TimeFilterView = Marionette.ItemView.extend({
 
   initialize(options) {
     this.mapModel = options.mapModel;
+    this.layersCollection = options.layersCollection;
+    this.baseLayersCollection = options.baseLayersCollection;
+    this.overlayLayersCollection = options.overlayLayersCollection;
     this.maxMapInterval = this.mapModel.get('maxMapInterval');
     this.domain = options.domain;
     this.constrainTimeDomain = options.constrainTimeDomain;
     this.listenTo(this.mapModel, 'change:time', this.onMapTimeChanged);
     this.listenTo(this.mapModel, 'change:extendedTime', this.onMapExtendedTimeChanged);
     this.listenTo(this.mapModel,
-    'exceed:maxMapInterval', this.onMapIntervalExceeded);
+    'change:exceedMaxMapInterval', this.onMapIntervalExceeded);
     // set according to configured filter
     if (options.settings) {
       this.collapsed = options.settings.collapsed;
@@ -107,6 +110,7 @@ const TimeFilterView = Marionette.ItemView.extend({
       this.onMapExtendedTimeChanged(this.mapModel);
       this.onMapTimeChanged();
     }
+    this.onMapIntervalExceeded(this.mapModel);
   },
 
   // DOM event listeners
@@ -177,12 +181,17 @@ const TimeFilterView = Marionette.ItemView.extend({
     this.updatingTime = false;
   },
 
-  onMapIntervalExceeded(newInterval) {
-    if (this.maxMapInterval && newInterval) {
+  onMapIntervalExceeded(mapModel) {
+    const newInterval = mapModel.changed.exceedMaxMapInterval;
+    const visibleLayers = this.layersCollection.filter(model => model.get('display.visible'));
+    const visibleTimeBaselayers = this.baseLayersCollection.filter(model => model.get('display.visible') && model.get('display.synchronizeTime'));
+    const visibleTimeOverlays = this.overlayLayersCollection.filter(model => model.get('display.visible') && model.get('display.synchronizeTime'));
+    const anyTimeLayerVisible = visibleLayers.length + visibleTimeBaselayers.length + visibleTimeOverlays.length;
+    if (this.maxMapInterval && anyTimeLayerVisible && newInterval) {
       const formattedStart = moment.utc(newInterval[0]).format('YYYY-MM-DD HH:mm:ss');
       const formattedEnd = moment.utc(newInterval[1]).format('YYYY-MM-DD HH:mm:ss');
       this.$('#map-time-limit-exceeded').slideDown();
-      this.$('#map-time-limit-exceeded').html(`Product map tiles display is limited to <br> <b>${formattedStart} - ${formattedEnd}</b>`);
+      this.$('#map-time-limit-exceeded').html(`Map tiles display is limited to <br> <b>${formattedStart} - ${formattedEnd}</b>`);
     } else {
       this.$('#map-time-limit-exceeded').slideUp();
     }

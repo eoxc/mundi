@@ -11,13 +11,12 @@ const ExtraParameterRangeView = BaseExtraParameterView.extend({
 
   templateHelpers() {
     const defaultValue = this.model.get('default');
-    const low = defaultValue ? defaultValue[0] : this.model.get('min');
-    const high = defaultValue ? defaultValue[1] : this.model.get('max');
-    const step = (defaultValue) ? defaultValue[2] : this.model.get('step');
+    const low = defaultValue ? defaultValue[0] || defaultValue.min : this.model.get('min');
+    const high = defaultValue ? defaultValue[1] || defaultValue.max : this.model.get('max');
+    const step = this.model.get('step');
 
     return Object.assign(
       BaseExtraParameterView.prototype.templateHelpers.call(this), {
-        defaultValue,
         low,
         high,
         step,
