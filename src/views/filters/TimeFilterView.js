@@ -34,7 +34,7 @@ const TimeFilterView = Marionette.ItemView.extend({
     this.listenTo(this.mapModel, 'change:time', this.onMapTimeChanged);
     this.listenTo(this.mapModel, 'change:extendedTime', this.onMapExtendedTimeChanged);
     this.listenTo(this.mapModel,
-    'exceed:maxMapInterval', this.onMapIntervalExceeded);
+    'change:exceedMaxMapInterval', this.onMapIntervalExceeded);
     // set according to configured filter
     if (options.settings) {
       this.collapsed = options.settings.collapsed;
@@ -110,6 +110,7 @@ const TimeFilterView = Marionette.ItemView.extend({
       this.onMapExtendedTimeChanged(this.mapModel);
       this.onMapTimeChanged();
     }
+    this.onMapIntervalExceeded(this.mapModel);
   },
 
   // DOM event listeners
@@ -180,7 +181,8 @@ const TimeFilterView = Marionette.ItemView.extend({
     this.updatingTime = false;
   },
 
-  onMapIntervalExceeded(newInterval) {
+  onMapIntervalExceeded(mapModel) {
+    const newInterval = mapModel.changed.exceedMaxMapInterval;
     const visibleLayers = this.layersCollection.filter(model => model.get('display.visible'));
     const visibleTimeBaselayers = this.baseLayersCollection.filter(model => model.get('display.visible') && model.get('display.synchronizeTime'));
     const visibleTimeOverlays = this.overlayLayersCollection.filter(model => model.get('display.visible') && model.get('display.synchronizeTime'));

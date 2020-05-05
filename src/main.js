@@ -396,38 +396,6 @@ window.Application = Marionette.Application.extend({
     searchCollection.on('start-processing', (searchModel) => {
       sendProcessingRequest(searchModel, mapModel);
     });
-    layout.showChildView('leftPanel', new SidePanelView({
-      position: 'left',
-      icon: 'fa-cog',
-      defaultOpen: settings.leftPanelOpen,
-      openTabIndex: settings.leftPanelTabIndex,
-      views: [{
-        name: 'Filters',
-        view: new RootFiltersView({
-          filtersModel,
-          layersCollection,
-          baseLayersCollection,
-          overlayLayersCollection,
-          mapModel,
-          highlightModel,
-          searchCollection,
-          uploadEnabled: settings.uploadEnabled,
-          domain,
-          constrainTimeDomain: settings.constrainTimeDomain,
-          filterSettings: settings.filterSettings,
-          singleLayerModeUsed
-        }),
-      }, {
-        name: 'Layers',
-        view: new LayerControlLayoutView({
-          mapModel,
-          filtersModel,
-          baseLayersCollection,
-          overlayLayersCollection,
-          layersCollection: layersCollection.length === 1 ? undefined : layersCollection,
-        }),
-      }],
-    }));
 
     const mainOLView = new OpenLayersMapView({
       mapModel,
@@ -461,7 +429,38 @@ window.Application = Marionette.Application.extend({
       // zoom is not explicitely set, as some other event already triggers it
     }
 
-    
+    layout.showChildView('leftPanel', new SidePanelView({
+      position: 'left',
+      icon: 'fa-cog',
+      defaultOpen: settings.leftPanelOpen,
+      openTabIndex: settings.leftPanelTabIndex,
+      views: [{
+        name: 'Filters',
+        view: new RootFiltersView({
+          filtersModel,
+          layersCollection,
+          baseLayersCollection,
+          overlayLayersCollection,
+          mapModel,
+          highlightModel,
+          searchCollection,
+          uploadEnabled: settings.uploadEnabled,
+          domain,
+          constrainTimeDomain: settings.constrainTimeDomain,
+          filterSettings: settings.filterSettings,
+          singleLayerModeUsed
+        }),
+      }, {
+        name: 'Layers',
+        view: new LayerControlLayoutView({
+          mapModel,
+          filtersModel,
+          baseLayersCollection,
+          overlayLayersCollection,
+          layersCollection: layersCollection.length === 1 ? undefined : layersCollection,
+        }),
+      }],
+    }));
 
     let termsAndConditionsUrl = settings.termsAndConditionsUrl;
     if (typeof termsAndConditionsUrl === 'object') {
