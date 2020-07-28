@@ -113,9 +113,13 @@ export function updateConfigBySearchParams(config) {
   if (config.disableSearchParams) {
     return config;
   }
+  let actualWindowObject = window;
+  if (window.self !== window.top) { // checking if it is an iframe
+    actualWindowObject = window.parent;
+  }
   // extracts search parameters in url and update settings replacing keys with user supported ones
   const configUpdate = Object.assign({}, config);
-  const params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(actualWindowObject.location.search);
   // validate and set time filter
   const timeStartStr = params.get('timestart') || params.get('time_start');
   const timeEndStr = params.get('timeend') || params.get('time_end');
@@ -173,7 +177,11 @@ export function updateConfigBySearchParams(config) {
 
 export function updateFiltersBySearchParams(layerCollection) {
   // for single layer mode, update values of search filters from url search params
-  const params = new URLSearchParams(window.location.search);
+  let actualWindowObject = window;
+  if (window.self !== window.top) { // checking if it is an iframe
+    actualWindowObject = window.parent;
+  }
+  const params = new URLSearchParams(actualWindowObject.location.search);
   const configuredFilters = layerCollection[0].get('search.parameters') || [];
   configuredFilters.forEach((filter, i) => {
     const searchParam = params.get(filter.type);
