@@ -48,7 +48,7 @@ import CombinedResultView from './views/combined/CombinedResultView';
 import WarningsCollection from './models/WarningsCollection';
 
 import getTutorialWidget from './tutorial';
-import { premultiplyColor, sizeChangedEvent, updateConfigBySearchParams, updateFiltersBySearchParams, setSearchParamsFilterChange } from './utils';
+import { premultiplyColor, sizeChangedEvent, updateConfigBySearchParams, updateFiltersBySearchParams, setSearchParamsFilterChange, updateAreaBySearchParams } from './utils';
 
 import i18next from './i18next';
 
@@ -426,6 +426,9 @@ window.Application = Marionette.Application.extend({
     if (!config.disableSearchParams && typeof mainOLView.setupSearchParamsEvents === 'function') {
       mainOLView.setupSearchParamsEvents();
       mainOLView.setSearchParamCenter();
+      if (typeof mainOLView.filterFromSearchParams === 'function') {
+        updateAreaBySearchParams(mainOLView);
+      }
       // zoom is not explicitely set, as some other event already triggers it
     }
 

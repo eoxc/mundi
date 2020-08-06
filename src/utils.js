@@ -2,7 +2,7 @@ import parseColor from 'parse-color';
 import shp from 'shpjs';
 import moment from 'moment';
 import { parseDuration } from 'eoxc/src/contrib/OpenLayers/utils';
-import { setSearchParam } from 'eoxc/src/core/util'
+import { setSearchParam } from 'eoxc/src/core/util';
 
 export function readFileAsArraybuffer(file) {
   return new Promise((resolve, reject) => {
@@ -173,6 +173,19 @@ export function updateConfigBySearchParams(config) {
     }
   }
   return configUpdate;
+}
+
+export function updateAreaBySearchParams(mapModel) {
+  let actualWindowObject = window;
+  if (window.self !== window.top) { // checking if it is an iframe
+    actualWindowObject = window.parent;
+  }
+  // extracts search parameters in url and update settings replacing keys with user supported ones
+  const params = new URLSearchParams(actualWindowObject.location.search);
+  const area = params.get('area');
+  if (typeof area === 'string') {
+    mapModel.filterFromSearchParams(area);
+  }
 }
 
 export function updateFiltersBySearchParams(layerCollection) {
