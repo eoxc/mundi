@@ -271,6 +271,10 @@
                                 "description": "The mandatory parameter type. Use the OpenSeach type, e.g: eo:acquisitionStation.",
                                 "type": "string"
                             },
+                            "name": {
+                                "description": "Parameter name to be displayed. If not set, 'type' is used.",
+                                "type": "string"
+                            },
                             "title": {
                                 "description": "A short description of the parameter, used as a tooltip.",
                                 "type": "string"
