@@ -69,7 +69,7 @@ function combineParameter(setting, param) {
   const options = setting.options || param.options;
   return {
     type: param.type,
-    name: param.name,
+    name: setting.name || param.name,
     title: param.title || setting.title,
     mandatory: setting.mandatory || param.mandatory,
     options,
