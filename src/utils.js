@@ -115,7 +115,7 @@ export function updateConfigBySearchParams(config) {
   }
   let actualWindowObject = window;
   if (window.self !== window.top) { // checking if it is an iframe
-    actualWindowObject = window.parent;
+    actualWindowObject = window.top;
   }
   // extracts search parameters in url and update settings replacing keys with user supported ones
   const configUpdate = Object.assign({}, config);
@@ -178,7 +178,7 @@ export function updateConfigBySearchParams(config) {
 export function updateAreaBySearchParams(mapModel) {
   let actualWindowObject = window;
   if (window.self !== window.top) { // checking if it is an iframe
-    actualWindowObject = window.parent;
+    actualWindowObject = window.top;
   }
   // extracts search parameters in url and update settings replacing keys with user supported ones
   const params = new URLSearchParams(actualWindowObject.location.search);
@@ -192,7 +192,7 @@ export function updateFiltersBySearchParams(layerCollection) {
   // for single layer mode, update values of search filters from url search params
   let actualWindowObject = window;
   if (window.self !== window.top) { // checking if it is an iframe
-    actualWindowObject = window.parent;
+    actualWindowObject = window.top;
   }
   const params = new URLSearchParams(actualWindowObject.location.search);
   const configuredFilters = layerCollection[0].get('search.parameters') || [];
