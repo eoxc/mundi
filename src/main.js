@@ -426,6 +426,7 @@ window.Application = Marionette.Application.extend({
     if (!config.disableSearchParams && typeof mainOLView.setupSearchParamsEvents === 'function') {
       mainOLView.setupSearchParamsEvents();
       mainOLView.setSearchParamCenter();
+      mainOLView.setSearchParamTime();
       if (typeof mainOLView.filterFromSearchParams === 'function') {
         updateAreaBySearchParams(mainOLView);
       }
