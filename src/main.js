@@ -231,7 +231,7 @@ window.Application = Marionette.Application.extend({
 
     // intercept searchParams to see if config change from user (url)
     const settings = updateConfigBySearchParams(configSettings);
-    if (singleLayerModeUsed && !config.disableSearchParams) {
+    if (singleLayerModeUsed && !settings.disableSearchParams) {
       // intercept searchParams to see if custom filters set from user (url)
       updateFiltersBySearchParams(searchEnabledLayers);
     }
@@ -273,7 +273,7 @@ window.Application = Marionette.Application.extend({
       }));
     const searchCollection = new Backbone.Collection(searchModels);
 
-    if (singleLayerModeUsed && !config.disableSearchParams) {
+    if (singleLayerModeUsed && !settings.disableSearchParams) {
       // update url searchParams when filter change listener
       searchModels[0].get('filtersModel').on('change', (fModel) => {
         setSearchParamsFilterChange(fModel);
@@ -423,7 +423,7 @@ window.Application = Marionette.Application.extend({
     });
 
     layout.showChildView('content', mainOLView);
-    if (!config.disableSearchParams && typeof mainOLView.setupSearchParamsEvents === 'function') {
+    if (!settings.disableSearchParams && typeof mainOLView.setupSearchParamsEvents === 'function') {
       mainOLView.setupSearchParamsEvents();
       mainOLView.setSearchParamCenter();
       mainOLView.setSearchParamTime();
@@ -438,6 +438,7 @@ window.Application = Marionette.Application.extend({
       icon: 'fa-cog',
       defaultOpen: settings.leftPanelOpen,
       openTabIndex: settings.leftPanelTabIndex,
+      config,
       views: [{
         name: 'Filters',
         view: new RootFiltersView({
@@ -476,6 +477,7 @@ window.Application = Marionette.Application.extend({
       layout.showChildView('rightPanel', new SidePanelView({
         position: 'right',
         icon: 'fa-list',
+        config,
         defaultOpen: settings.rightPanelOpen,
         views: [{
           name: 'Search Results',
@@ -500,6 +502,7 @@ window.Application = Marionette.Application.extend({
         icon: 'fa-list',
         defaultOpen: settings.rightPanelOpen,
         openTabIndex: settings.rightPanelTabIndex,
+        config,
         views: [{
           name: 'Search Results',
           hasInfo: true,

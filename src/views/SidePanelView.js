@@ -1,4 +1,5 @@
 import Marionette from 'backbone.marionette';
+import { setSearchParam } from 'eoxc/src/core/util';
 
 require('./SidePanelView.css');
 const template = require('./SidePanelView.hbs');
@@ -26,6 +27,7 @@ export default Marionette.LayoutView.extend({
     this.icon = options.icon;
     this.defaultOpen = options.defaultOpen;
     this.openTabIndex = options.openTabIndex;
+    this.appConfig = options.config; // whole app config before search params
   },
 
   onBeforeShow() {
@@ -60,10 +62,22 @@ export default Marionette.LayoutView.extend({
   onToggleSidePanelClicked() {
     this.$('.side-panel').toggleClass('in');
     this.$('.toggle-side-panel-out').toggleClass('out');
+    // search parameters updates
+    const panelShown = this.$('.side-panel').hasClass('in');
+    if (!this.appConfig.settings.disableSearchParams) {
+      // sets only when different from config.defaultOpen
+      setSearchParam(`${this.position}panel`, panelShown !== this.appConfig.settings[`${this.position}PanelOpen`] ? panelShown : null);
+    }
   },
 
   onTabShown(e) {
-    const view = this.views[parseInt(e.target.href.split('#')[1].split('-')[1])].view;
+    const ind = parseInt(e.target.href.split('#')[1].split('-')[1], 10);
+    const view = this.views[ind].view;
     view.triggerMethod('shown');
+    // search parameters updates
+    if (!this.appConfig.settings.disableSearchParams) {
+      // sets only when different from config.OpenTabIndex
+      setSearchParam(`${this.position}paneltab`, ind !== this.appConfig.settings[`${this.position}PanelTabIndex`] ? ind : null);
+    }
   },
 });

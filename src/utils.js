@@ -172,6 +172,30 @@ export function updateConfigBySearchParams(config) {
       configUpdate.zoom = z - 1;
     }
   }
+
+  // set open panels and tabs
+  const leftPanelOpen = params.get('leftpanel');
+  if (leftPanelOpen === 'true') {
+    configUpdate.leftPanelOpen = true;
+  } else if (leftPanelOpen === 'false') {
+    configUpdate.leftPanelOpen = false;
+  }
+  const rightPanelOpen = params.get('rightpanel');
+  if (rightPanelOpen === 'true') {
+    configUpdate.rightPanelOpen = true;
+  } else if (rightPanelOpen === 'false') {
+    configUpdate.rightPanelOpen = false;
+  }
+  const lptab = params.get('leftpaneltab');
+  if (typeof lptab === 'string') {
+    const lpi = parseInt(lptab, 10);
+    configUpdate.leftPanelTabIndex = lpi;
+  }
+  const rptab = params.get('rightpaneltab');
+  if (typeof rptab === 'string') {
+    const rpi = parseInt(rptab, 10);
+    configUpdate.rightPanelTabIndex = rpi;
+  }
   return configUpdate;
 }
 
