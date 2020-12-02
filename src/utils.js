@@ -121,8 +121,8 @@ export function updateConfigBySearchParams(config) {
   const configUpdate = Object.assign({}, config);
   const params = new URLSearchParams(actualWindowObject.location.search);
   // validate and set time filter
-  const timeStartStr = params.get('timestart') || params.get('time_start');
-  const timeEndStr = params.get('timeend') || params.get('time_end');
+  const timeStartStr = params.get('start');
+  const timeEndStr = params.get('end');
   if (typeof timeStartStr === 'string' && typeof timeEndStr === 'string') {
     const timestart = moment.utc(timeStartStr).toDate();
     let timeend = moment.utc(timeEndStr).toDate();
