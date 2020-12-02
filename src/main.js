@@ -48,7 +48,7 @@ import CombinedResultView from './views/combined/CombinedResultView';
 import WarningsCollection from './models/WarningsCollection';
 
 import getTutorialWidget from './tutorial';
-import { premultiplyColor, sizeChangedEvent, updateConfigBySearchParams, updateFiltersBySearchParams, setSearchParamsFilterChange, updateAreaBySearchParams } from './utils';
+import { premultiplyColor, sizeChangedEvent, updateConfigBySearchParams, updateFiltersBySearchParams, setSearchParamsFilterChange, updateAreaBySearchParams, updateLayersBySearchParams, setSearchParamsLayersChange } from './utils';
 
 import i18next from './i18next';
 
@@ -235,7 +235,10 @@ window.Application = Marionette.Application.extend({
       // intercept searchParams to see if custom filters set from user (url)
       updateFiltersBySearchParams(searchEnabledLayers);
     }
-
+    if (!settings.disableSearchParams) {
+      // intercept searchParams, substituting layers visibility and search
+      updateLayersBySearchParams(baseLayersCollection, overlayLayersCollection, layersCollection);
+    }
     // set up config
     const mapModel = new MapModel({
       center: settings.center,
@@ -272,7 +275,10 @@ window.Application = Marionette.Application.extend({
         debounceTime: settings.searchDebounceTime,
       }));
     const searchCollection = new Backbone.Collection(searchModels);
-
+    if (!settings.disableSearchParams) {
+      // setting listeners for visibility and search changes
+      setSearchParamsLayersChange(baseLayersCollection, overlayLayersCollection, layersCollection, searchCollection, config);
+    }
     if (singleLayerModeUsed && !settings.disableSearchParams) {
       // update url searchParams when filter change listener
       searchModels[0].get('filtersModel').on('change', (fModel) => {
