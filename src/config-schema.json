@@ -402,6 +402,11 @@
                   "description": "Whether 'Download selected files' toggle option is visible.",
                   "type": "boolean",
                   "default": true
+                },
+                "areaFilterLayerExtent": {
+                  "description": "Whether area filter limits layer extent, effectively requesting tiles only for bbox of area filter.",
+                  "type": "boolean",
+                  "default": false
                 }
             },
             "oneOf": [

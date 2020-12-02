@@ -224,6 +224,7 @@ window.Application = Marionette.Application.extend({
       searchEnabled: true,
       selectFilesDownloadEnabled: true,
       filterSettings: null,
+      areaFilterLayerExtent: false,
     });
     // determine if singleLayerModeUsed
     const searchEnabledLayers = layersCollection.filter(layerModel => layerModel.get('search.protocol'));
@@ -425,6 +426,7 @@ window.Application = Marionette.Application.extend({
         showRecordDetails(records);
       },
       constrainOutCoords: settings.constrainOutCoords,
+      areaFilterLayerExtent: settings.areaFilterLayerExtent,
       singleLayerModeUsed
     });
 
