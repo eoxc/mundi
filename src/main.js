@@ -87,25 +87,35 @@ function combineParameter(setting, param) {
 }
 
 window.Application = Marionette.Application.extend({
-  initialize({ config, configPath, container, navbarTemplate }) {
+  initialize({ config, configPath, container, navbarTemplate, dynamicConfig }) {
     this.config = config;
     this.configPath = configPath;
     this.container = container;
     this.navbarTemplate = navbarTemplate;
+    this.dynamicConfig = dynamicConfig;
   },
 
   onStart() {
     if (this.config) {
-      this.onConfigLoaded(this.config);
+      this.onConfigLoaded(this.config, this.dynamicConfig);
     } else {
       $.getJSON(this.configPath, (config) => {
-        this.onConfigLoaded(config);
+        this.onConfigLoaded(config, this.dynamicConfig);
       });
     }
   },
 
-  onConfigLoaded(config) {
-    this.config = config;
+  onConfigLoaded(config, dynamicConfig) {
+    if (dynamicConfig) {
+      // using {{{ param }}} template allowing to dynamically update configuration coming from JSON file
+      this.config = JSON.parse(
+        _.template(JSON.stringify(config), {
+          interpolate: /\{\{\{(.+?)\}\}\}/g
+        })(dynamicConfig)
+      );
+    } else {
+      this.config = config;
+    }
     i18next.init({
       nsSeparator: '#',
       lng: this.config.settings.language || 'en',
@@ -122,7 +132,7 @@ window.Application = Marionette.Application.extend({
         },
       },
     }, () => {
-      this.onI18NextInitialized(config);
+      this.onI18NextInitialized(this.config);
     });
   },
 
