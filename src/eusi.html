@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta charset="UTF-8">
+  <title>mundi web services - example</title>
+</head>
+<body>
+  <div id="app" style="width: 100%; top: 0; bottom: 0; position: absolute; margin: 0; padding:0;"></div>
+  <script src="code-de.bundle.js"></script>
+  <script>
+  var today = new Date();
+  today.setUTCHours(24, 0, 0, 0);
+  var twoYearsAgo = new Date(new Date(today).setUTCFullYear(today.getUTCFullYear() - 2));
+  var displayTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 28));
+  var selectedTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 8));
+  var selectedTimeDomainEnd = new Date(new Date(today).setUTCDate(today.getUTCDate() - 7));
+
+  function formatBytes(bytes,decimals) {
+  if(bytes == 0) return '0 Bytes';
+  var k = 1024,
+      dm = decimals <= 0 ? 0 : decimals || 2,
+      sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+      i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+
+  var config = {
+    "settings": {
+        "tutorial": "once",
+        "uploadEnabled": false,
+        "downloadEnabled": true,
+        "searchEnabled": true,
+        "searchDebounceTime": 500,
+        "language": "en",
+        "timeDomain": [
+            "2016-01-01T00:00:00Z",
+            today.toISOString()
+        ],
+        "constrainTimeDomain": true,
+        "displayTimeDomain": [
+            displayTimeDomainStart,
+            today.toISOString(),
+        ],
+        "displayInterval": "P365D",
+        "selectedTimeDomain": [
+            selectedTimeDomainStart,
+            selectedTimeDomainEnd,
+        ],
+        "selectableInterval": "P365D",
+        "timeSliderControls": true,
+        "timeSliderAlternativeBrush": true,
+        "maxMapInterval": "P7D",
+        "enableDynamicHistogram": true,
+        "areaFilterLayerExtent": true,
+        "maxTooltips": 1,
+        "rightPanelOpen": true,
+        "leftPanelOpen": true,
+        "center": [2.3333, 48.8666],
+        "zoom": 5,
+//        "minZoom": 4,
+        "maxZoom": 14,
+        "footprintFillColor": "rgba(0, 0, 0, 0.2)",
+        "footprintStrokeColor": "rgba(0, 0, 0, 1)",
+        "filterFillColor": "rgba(0, 165, 255, 0)",
+        "filterStrokeColor": "rgba(0, 165, 255, 1)",
+        "filterOutsideColor": "rgba(0, 0, 0, 0.5)",
+        "selectedFootprintFillColor": "rgba(255, 0, 0, 0.2)",
+        "selectedFootprintStrokeColor": "rgba(255, 0, 0, 1)",
+        "highlightFillColor": "rgba(246, 182, 0, 0.5)",
+        "highlightStrokeColor": "rgba(246, 182, 0, 1)",
+        "highlightStrokeWidth": 3,
+        "translations": {
+            "en": {
+                "Cloud Cover": "Cloud coverage (%)",
+                "Error: NoApplicableCode": "Search timed out. Please refine the filter criteria.",
+            }
+        },
+    },
+    "baseLayers": [
+        {
+            "id": "terrain-light",
+            "displayName": "EOX Terrain-Light",
+            "display": {
+                "id": "terrain-light",
+                "visible": true,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.s2maps-tiles.eu/wmts/",
+                    "//b.s2maps-tiles.eu/wmts/",
+                    "//c.s2maps-tiles.eu/wmts/",
+                    "//d.s2maps-tiles.eu/wmts/",
+                    "//e.s2maps-tiles.eu/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "style": "default",
+                "attribution": "Terrain-Light { Data &copy; <a href=\"//openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"//eox.at\" target=\"_blank\">EOX</a> }"
+            }
+        }, {
+            "id": "terrain",
+            "displayName": "EOX Terrain",
+            "display": {
+                "id": "terrain",
+                "visible": false,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.s2maps-tiles.eu/wmts/",
+                    "//b.s2maps-tiles.eu/wmts/",
+                    "//c.s2maps-tiles.eu/wmts/",
+                    "//d.s2maps-tiles.eu/wmts/",
+                    "//e.s2maps-tiles.eu/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "style": "default",
+                "attribution": "Terrain { Data &copy; <a href=\"//openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"//eox.at\" target=\"_blank\">EOX</a> }"
+            }
+        },  {
+            "id": "s2cloudless",
+            "displayName": "EOX Sentinel-2 cloudless",
+            "display": {
+                "id": "s2cloudless",
+                "visible": false,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.s2maps-tiles.eu/wmts/",
+                    "//b.s2maps-tiles.eu/wmts/",
+                    "//c.s2maps-tiles.eu/wmts/",
+                    "//d.s2maps-tiles.eu/wmts/",
+                    "//e.s2maps-tiles.eu/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "style": "default",
+                "attribution": "<a xmlns:dct=\"//purl.org/dc/terms/\" href=\"//s2maps.eu\" property=\"dct:title\">Sentinel-2 cloudless - //s2maps.eu</a> by <a xmlns:cc=\"//creativecommons.org/ns#\" href=\"//eox.at\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">EOX IT Services GmbH</a> (Contains modified Copernicus Sentinel data 2016 &amp; 2017)"
+            }
+        }
+    ],
+    "layers": [
+        {
+            "id": "S2_MSI_L2A",
+            "displayName": "EUSI",
+            "displayColor": "#562234",
+            "display": {
+                "id": "EUSI",
+                "visible": false,
+                "protocol": "WMTS",
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "urls": [
+                  ""
+                ],
+                "useMilliseconds": false,
+            },
+            "search": {
+                "protocol": "OpenSearch",
+                "url": "//eusi-api.pvs.mundiwebservices.com/opensearch",
+                // "id": "DIAS_CWS:S2_MSI_L2A",
+                "histogramBinCount": 28,
+                "format": "application/atom+xml",
+                "method": "GET",
+                "histogramThreshold": 300,
+                "lightweightBuckets": true,
+                "searchLimit": 300,
+                "loadMore": 300,
+                "pageSize": 100,
+                "switchMultiPolygonCoordinates": true,
+                "searchEnabled": true,
+                "parameters": [
+                    {
+                      "type": "eo:doi",
+                    },
+                    {
+                      "title": "Online Status",
+                      "options": [{
+                            "label": "Online or Staging",
+                            "value": "onlineStatus:(ONLINE OR STAGING)",
+                        }, {
+                            "label": "Online",
+                            "value": "onlineStatus:ONLINE",
+                        }, {
+                            "label": "Staging",
+                            "value": "onlineStatus:STAGING",
+                        }],
+                      "type": "searchTerms"
+                    },
+                    {
+                        "max": 100,
+                        "min": 0,
+                        "range": true,
+                        "type": "eo:cloudCover",
+                        "title": "Cloud Coverage in percent"
+                    },
+                    {
+                      "type": "DIAS:tileIdentifier",
+                      "title": "Tile Identifier"
+
+                    },
+                    {
+                      "type": "eo:orbitNumber",
+                      "title": "Relative Orbit Number"
+                    }
+                ],
+                "extraFields": {
+                    "properties.mundi.date": "dc:date/text()",
+                    "properties.mundi.ingestionDate": "DIAS:ingestionDate/text()",
+                    "properties.mundi.processingDate": "eo:processingDate/text()",
+                    "properties.mundi.published": "atom:published/text()",
+                    "properties.mundi.updated": "atom:updated/text()",
+                    "properties.mundi.productDatapackSize": "DIAS:productDatapackSize/text()",
+                    "properties.mundi.imageFileFormat": "DIAS:imageFileFormat/text()",
+                    "properties.mundi.tileIdentifier": "DIAS:tileIdentifier/text()",
+                    "properties.mundi.cloudCover": "eo:cloudCover/text()",
+                    "properties.mundi.snowCover": "eo:snowCover/text()",
+                    "properties.mundi.radiometricQuality": "DIAS:radiometricQuality/text()",
+                    "properties.mundi.relativeOrbitNumber": "eo:orbitNumber/text()",
+                    "properties.mundi.onlineStatus": "DIAS:onlineStatus/text()",
+                    "properties.mundi.productDeliveryFormat": "DIAS:productDeliveryFormat/text()",
+                    "properties.mundi.datatakeId": "DIAS:datatakeId/text()",
+                    "properties.mundi.quicklookUrl": "media:group/media:content@url"
+                },
+                "extraFieldsNamespaces": {
+                    "DIAS": "http://tas/DIAS",
+                    "eo": "http://a9.com/-/spec/opensearch/extensions/eo/1.0/",
+                    "dc": "http://purl.org/dc/elements/1.1/",
+                    "atom": "http://www.w3.org/2005/Atom",
+                    "media": "http://search.yahoo.com/mrss/"
+                },
+                "descriptionTemplate":
+                    "<table class='table table-condensed'>" +
+                    "<tr>" +
+                      "<td>Sensing Start Date</td>" +
+                      "<td>{{properties.mundi.date}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Processing Date</td>" +
+                      "<td>{{properties.mundi.processingDate}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Publishing Date</td>" +
+                      "<td>{{properties.mundi.published}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Updating Date</td>" +
+                      "<td>{{properties.mundi.updated}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Ingestion Date</td>" +
+                      "<td>{{properties.mundi.ingestionDate}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Cloud Cover</td>" +
+                      "<td>{{properties.mundi.cloudCover}}&#37;</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Snow Cover</td>" +
+                      "<td>{{properties.mundi.snowCover}}&#37;</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Radiometric Quality</td>" +
+                      "<td>{{properties.mundi.radiometricQuality}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Tile Identifer</td>" +
+                      "<td>{{properties.mundi.tileIdentifier}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Relative Orbit Number</td>" +
+                      "<td>{{properties.mundi.relativeOrbitNumber}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Online Status</td>" +
+                      "<td>{{properties.mundi.onlineStatus}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Datatake ID</td>" +
+                      "<td>{{properties.mundi.datatakeId}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Product Delivery Format</td>" +
+                      "<td>{{properties.mundi.productDeliveryFormat}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Image Format</td>" +
+                      "<td>{{properties.mundi.imageFileFormat}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Product Datapack Size</td>" +
+                      "<td>{{formatBytes(properties.mundi.productDatapackSize)}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td colspan=\"2\" style=\"text-align:center\"><img src='{{properties.mundi.quicklookUrl}}' style=\"max-height:200px;\"></td>" +
+                    "</tr>" +
+                  "</table>",
+              "dropEmptyParameters": true,
+            },
+        },
+    ],
+    "overlayLayers": [
+        {
+            "id": "coastline",
+            "displayName": "EOX Coastline",
+            "display": {
+                "id": "coastline",
+                "visible": false,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "style": "default",
+                "format": "image/png",
+                "attribution": "Overlay { Data &copy; <a href=\"//openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"//eox.at\" target=\"_blank\">EOX</a> and <a href=\"//github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
+            }
+        },
+        {
+            "id": "overlay_base",
+            "displayName": "EOX Borders and Labels",
+            "display": {
+                "id": "overlay_base",
+                "visible": false,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "style": "default",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "attribution": "Overlay { Data &copy; <a href=\"//openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"//eox.at\" target=\"_blank\">EOX</a> and <a href=\"//github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
+            }
+        }
+    ]
+};
+    var app = new Application({
+      config: config,
+      container: document.getElementById('app'),
+    });
+    app.start();
+  </script>
+</body>
+</html>
