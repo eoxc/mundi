@@ -208,6 +208,7 @@ window.Application = Marionette.Application.extend({
       selectableInterval: null,
       maxTooltips: null,
       timeSliderControls: false,
+      disableTimeSlider: false,
       maxMapInterval: null,
       constrainOutCoords: false,
       highlightFillColor: 'rgba(255, 255, 255, 0.2)',
@@ -324,30 +325,31 @@ window.Application = Marionette.Application.extend({
         searchModel.stopListening(layerModel, 'change:display.visible');
       });
     }
-
-    layout.showChildView('timeSlider', new TimeSliderView({
-      layersCollection,
-      baseLayersCollection,
-      overlayLayersCollection,
-      mapModel,
-      filtersModel,
-      highlightModel,
-      highlightFillColor: settings.highlightFillColor,
-      highlightStrokeColor: settings.highlightStrokeColor,
-      filterFillColor: settings.filterFillColor,
-      filterStrokeColor: settings.filterStrokeColor,
-      filterOutsideColor: settings.filterOutsideColor,
-      domain,
-      display,
-      constrainTimeDomain: settings.constrainTimeDomain,
-      timeSliderControls: settings.timeSliderControls,
-      timeSliderAlternativeBrush: settings.timeSliderAlternativeBrush,
-      displayInterval: settings.displayInterval,
-      selectableInterval: settings.selectableInterval,
-      maxTooltips: settings.maxTooltips,
-      enableDynamicHistogram: settings.enableDynamicHistogram,
-      singleLayerModeUsed
-    }));
+    if (!settings.disableTimeSlider) {
+      layout.showChildView('timeSlider', new TimeSliderView({
+        layersCollection,
+        baseLayersCollection,
+        overlayLayersCollection,
+        mapModel,
+        filtersModel,
+        highlightModel,
+        highlightFillColor: settings.highlightFillColor,
+        highlightStrokeColor: settings.highlightStrokeColor,
+        filterFillColor: settings.filterFillColor,
+        filterStrokeColor: settings.filterStrokeColor,
+        filterOutsideColor: settings.filterOutsideColor,
+        domain,
+        display,
+        constrainTimeDomain: settings.constrainTimeDomain,
+        timeSliderControls: settings.timeSliderControls,
+        timeSliderAlternativeBrush: settings.timeSliderAlternativeBrush,
+        displayInterval: settings.displayInterval,
+        selectableInterval: settings.selectableInterval,
+        maxTooltips: settings.maxTooltips,
+        enableDynamicHistogram: settings.enableDynamicHistogram,
+        singleLayerModeUsed
+      }));      
+    }
 
     // set up panels
 

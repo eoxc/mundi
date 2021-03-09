@@ -180,6 +180,11 @@
           "type":"boolean",
           "default":false
         },
+        "disableTimeSlider":{ 
+          "description":"Disables TimeSlider completely",
+          "type":"boolean",
+          "default":false
+        },
         "timeSliderAlternativeBrush":{ 
           "description":"If alternative TimeSlider selection brush (Mundi style) should be used.",
           "type":"boolean",
@@ -306,7 +311,7 @@
                   "type":"object",
                   "properties":{ 
                     "label":{ 
-                      "description":"The displayed label of a single option.",
+                      "description":"The displayed label of a single option. If not supplied, 'value' is used as label.",
                       "type":"string"
                     },
                     "value":{ 
@@ -315,7 +320,6 @@
                     }
                   },
                   "required":[ 
-                    "label",
                     "value"
                   ]
                 }
@@ -893,7 +897,7 @@
                       "type":"object",
                       "properties":{ 
                         "label":{ 
-                          "description":"The displayed label of a single option. If not set, 'value' is used.",
+                          "description":"The displayed label of a single option. If not supplied, 'value' is used as label.",
                           "type":"string"
                         },
                         "value":{ 

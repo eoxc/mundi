@@ -49,6 +49,7 @@
         ],
         "selectableInterval": "P365D",
         "timeSliderControls": true,
+        "disableTimeSlider": true,
         "timeSliderAlternativeBrush": true,
         "maxMapInterval": "P7D",
         "enableDynamicHistogram": true,
@@ -159,52 +160,70 @@
             },
             "search": {
                 "protocol": "OpenSearch",
-                "url": "//eusi-api.pvs.mundiwebservices.com/opensearch",
+                "url": "//eusi-api.pvs.mundiwebservices.com/opensearch/",
                 // "id": "DIAS_CWS:S2_MSI_L2A",
                 "histogramBinCount": 28,
                 "format": "application/atom+xml",
                 "method": "GET",
-                "histogramThreshold": 300,
-                "lightweightBuckets": true,
-                "searchLimit": 300,
-                "loadMore": 300,
-                "pageSize": 100,
-                "switchMultiPolygonCoordinates": true,
+                "searchLimit": 10000,
+                "loadMore": 10000,
+                "pageSize": 10000,
                 "searchEnabled": true,
                 "parameters": [
                     {
                       "type": "eo:doi",
+                      "title": "Catalogue ID in inventory format (WV04) or legacy format (all other sensors)",
                     },
                     {
-                      "title": "Online Status",
+                      "title": "Sensor",
                       "options": [{
-                            "label": "Online or Staging",
-                            "value": "onlineStatus:(ONLINE OR STAGING)",
+                          "value": "WV01",
                         }, {
-                            "label": "Online",
-                            "value": "onlineStatus:ONLINE",
+                          "value": "WV02",
                         }, {
-                            "label": "Staging",
-                            "value": "onlineStatus:STAGING",
+                          "value": "WV03",
+                        }, {
+                          "value": "WV04",
+                        }, {
+                          "value": "GE01",
                         }],
-                      "type": "searchTerms"
+                      "type": "eo:instrument",
                     },
                     {
-                        "max": 100,
+                        "max": 90,
                         "min": 0,
                         "range": true,
+                        "type": "eo:illuminationElevationAngle",
+                        "title": "Sun Elevation Angle in degrees",
+                    },
+                    {
+                        "max": 45,
+                        "min": 0,
+                        "range": true,
+                        "type": "eusi:offNadir",
+                        "title": "Off-nadir Angle in degrees",
+                    },
+                    {
+                      "type": "eusi:averagePanResolution",
+                      "title": "Average Pan resolution in m",
+                      "options": [{
+                          "value": "0.3",
+                        }, {
+                          "value": "0.4",
+                        }, {
+                          "value": "0.5",
+                        }, {
+                          "value": "0.6",
+                        }, {
+                          "value": "0.7",
+                        }, {
+                          "value": "0.8",
+                        }],
+                    },
+                    {
                         "type": "eo:cloudCover",
-                        "title": "Cloud Coverage in percent"
+                        "title": "Maximum cloud coverage in percent 0 - 100"
                     },
-                    {
-                      "type": "DIAS:tileIdentifier",
-                      "title": "Tile Identifier"
-
-                    },
-                    {
-                      "type": "eo:orbitNumber",
-                      "title": "Relative Orbit Number"
-                    }
                 ],
                 "extraFields": {
                     "properties.mundi.date": "dc:date/text()",
