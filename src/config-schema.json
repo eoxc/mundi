@@ -304,6 +304,11 @@
                 "description":"Parameter name to be displayed. If not set, 'type' is used.",
                 "type":"string"
                },
+              "privileged":{
+                "description":"Marks the filter as privileged. If the filter is set, other non-privileged filters are not used in the requests. (example usage for UID, where area & time otherwise set will not be part of request).",
+                "type":"boolean",
+                "default":false
+              },
               "options":{ 
                 "description":"Selectable options. Will be rendered as a dropdown.",
                 "type":"array",
@@ -889,6 +894,11 @@
                   "name":{
                     "description":"Parameter name to be displayed. If not set, 'type' is used.",
                     "type":"string"
+                   },
+                   "privileged":{
+                     "description":"Marks the filter as privileged. If the filter is set, other non-privileged filters are not used in the requests. (example usage for UID, where area & time otherwise set will not be part of request).",
+                     "type":"boolean",
+                     "default":false
                    },
                   "options":{ 
                     "description":"Selectable options. Will be rendered as a dropdown.",

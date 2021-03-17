@@ -83,6 +83,7 @@ function combineParameter(setting, param) {
     step: setting.step || 1,
     default: setting.default || setting.fixed,
     fixed: setting.fixed,
+    privileged: setting.privileged,
   };
 }
 
