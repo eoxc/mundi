@@ -237,6 +237,7 @@ window.Application = Marionette.Application.extend({
       selectFilesDownloadEnabled: true,
       filterSettings: null,
       areaFilterLayerExtent: false,
+      maxAreaFilter: 0,
     });
     // determine if singleLayerModeUsed
     const searchEnabledLayers = layersCollection.filter(layerModel => layerModel.get('search.protocol'));
@@ -349,7 +350,9 @@ window.Application = Marionette.Application.extend({
         maxTooltips: settings.maxTooltips,
         enableDynamicHistogram: settings.enableDynamicHistogram,
         singleLayerModeUsed
-      }));      
+      }));
+    } else {
+      layout.$('#timeSlider').hide();
     }
 
     // set up panels
@@ -440,6 +443,7 @@ window.Application = Marionette.Application.extend({
       },
       constrainOutCoords: settings.constrainOutCoords,
       areaFilterLayerExtent: settings.areaFilterLayerExtent,
+      maxAreaFilter: settings.maxAreaFilter,
       singleLayerModeUsed
     });
 

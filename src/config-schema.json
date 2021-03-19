@@ -266,6 +266,11 @@
           "type":"string",
           "default":"#ff0000"
         },
+        "maxAreaFilter":{
+          "description":"Maximum allowed Area Filter or map bbox in km2. Shows a {{max-area-warning}} if exceed. 0 means disabled.",
+          "type":"number",
+          "default":0
+        },
         "leftPanelOpen":{ 
           "description":"Whether or not the left panel shall be open on start.",
           "type":"boolean",

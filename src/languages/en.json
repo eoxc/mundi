@@ -16,6 +16,7 @@
   "max_bbox_warning": "Maximum size of bounding box: {{max_bbox_size}} was exceeded by: {{max_bbox_exceed}} on axis: {{max_bbox_axis}}.",
   "max_resolution_warning": "Maximum resolution: {{max_resolution}} was exceeded. Attempt to download might fail with an error.",
   "download_bands_warning": "The selected format supports at most {{maxBands}} bands, but {{requestedBands}} are requested.",
+  "max_area_filter_exceed": "Catalog search is limited to <b>{{maxArea}}</b> sq. km. Current area <b>{{userArea}}</b> sq. km is <b>{{ratio}}x</b> larger. Please request a smaller area.",
   "timefilter_warning": "Search results may differ from products shown on map because of using a separate time filter",
   "advancedfilter_warning": "Search results may differ from products shown on map because of using additional filters",
   "toomanyresults_warning": "Search results may differ from products shown on map because search results are too big",
