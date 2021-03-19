@@ -57,7 +57,7 @@ export function parseFeaturesFromFiles(fileList) {
   const zipFile = files.find(file => file.type === 'application/zip' || /\.zip$/i.test(file.name));
   const shpFile = files.find(file => /\.shp$/i.test(file.name)); // TODO: no mime?
   const dbfFile = files.find(file => dbfMimes.has(file.type) || /\.dbf$/i.test(file.name));
-  const jsonFile = files.find(file => jsonMimes.has(file.type) || /\.json$/i.test(file.name));
+  const jsonFile = files.find(file => jsonMimes.has(file.type) || /\.*json$/i.test(file.name));
 
   if (zipFile) {
     return readFileAsArraybuffer(zipFile)
