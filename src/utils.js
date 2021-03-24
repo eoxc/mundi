@@ -165,7 +165,7 @@ export function updateConfigBySearchParams(config) {
   }
   // set map zoom
   const zStr = params.get('z');
-  if (typeof xStr === 'string' && typeof yStr === 'string') {
+  if (typeof zStr === 'string') {
     const z = parseInt(zStr.replace(',', '.'), 10);
     if (!isNaN(z)) {
       // not checking maxzoom or minzoom on layers/main config, it is validated by OL anyway
