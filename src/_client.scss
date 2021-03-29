@@ -990,6 +990,10 @@ body {
   height: calc(100% - 120px);
 }
 
+.modal-full-screen-scrolling.quote-modal {
+  height: 60%;
+}
+
 .no-scroll-y {
   overflow-y: hidden!important;
 }

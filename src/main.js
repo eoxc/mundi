@@ -44,6 +44,7 @@ import WarningsView from './views/WarningsView';
 import RecordsDetailsModalView from './views/RecordsDetailsModalView';
 import SelectFilesModalView from './views/SelectFilesModalView';
 import CombinedResultView from './views/combined/CombinedResultView';
+import QuoteModalView from './views/combined/QuoteModalView';
 
 import WarningsCollection from './models/WarningsCollection';
 
@@ -376,6 +377,13 @@ window.Application = Marionette.Application.extend({
       }));
     };
 
+    const getQuote = (records) => {
+      layout.showChildView('modals', new QuoteModalView({
+        records,
+        searchCollection,
+      }));
+    };
+
     const showRecordDetails = (records) => {
       layout.showChildView('modals', new RecordsDetailsModalView({
         baseLayersCollection,
@@ -515,6 +523,7 @@ window.Application = Marionette.Application.extend({
             downloadEnabled: settings.downloadEnabled,
             onStartDownload: startDownload,
             onSelectFiles: selectFiles,
+            onGetQuote: getQuote,
             fallbackThumbnailUrl,
             termsAndConditionsUrl,
           }),

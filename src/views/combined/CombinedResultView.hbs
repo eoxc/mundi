@@ -23,7 +23,12 @@
 </div>
 <span class="btn-group tools search-results-footer">
   {{#if anySelectedToDisplay}}
-      <button class="btn btn-default btn-sm tool start-download" type="button" disabled>{{t 'Download'}}</button>
+      {{#if quoteMode}}
+        <button class="btn btn-default btn-sm tool get-quote" type="button" disabled>{{t 'Get a Quote'}}</button>
+      {{else}}
+        <button class="btn btn-default btn-sm tool start-download" type="button" disabled>{{t 'Download'}}</button>
+      {{/if}}
+    {{#unless quoteMode}}
     <div class="btn-group dropup tool" role="group">
       <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button" disabled>{{t 'Download as'}} <span class="caret"></span></button>
       <ul class="dropdown-menu dropdown-menu-right">
@@ -40,6 +45,7 @@
         {{/if}}
       </ul>
     </div>
+    {{/unless}}
       <button class="btn btn-sm btn-danger tool deselect-all" type="button" disabled>{{t 'Deselect all'}}</button>
   {{/if}}
 </span>

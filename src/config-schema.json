@@ -1018,7 +1018,8 @@
               "enum":[ 
                 "EO-WCS",
                 "URL",
-                "S3"
+                "S3",
+                "QUOTE"
               ],
               "//TODO":"This list will be extended in the future. Currently, this setting is not used with OpenSearch, as the download information is embedded in the search response."
             },
