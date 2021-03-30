@@ -633,6 +633,17 @@ input,
   padding-right: 4px!important;
 }
 
+.record-item-not-downloadable {
+  background-color: $c_gray_hover;
+  cursor: not-allowed;
+}
+
+.record-item-not-downloadable {
+  a {
+    cursor: not-allowed;
+  }
+}
+
 .slider-handle {
   background-color: $c_blue;
   background-image: none;

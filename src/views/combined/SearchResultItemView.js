@@ -20,6 +20,9 @@ const SearchResultItemView = RecordItemView.extend({
     }));
     const downloadSelectionCollection = searchModel.get('downloadSelection');
     this.listenTo(downloadSelectionCollection, 'reset update', this.onSelectedForDownloadChange);
+    if (!isRecordDownloadable(this.layerModel, this.model)) {
+      this.$el.addClass('record-item-not-downloadable');
+    }
   },
 
   onRender() {
@@ -32,6 +35,7 @@ const SearchResultItemView = RecordItemView.extend({
     if (isRecordDownloadable(this.layerModel, this.model)) {
       this.model.selectForDownload(!this.model.isSelectedForDownload());
     }
+    // TODO else: possibly add note about availability as a tooltip?
   },
 
   onSelectedForDownloadChange() {

@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
-import i18next from 'i18next';
+import i18next from '../../i18next';
 
 import template from './AreaFilterView.hbs';
 import './AreaFilterView.css';

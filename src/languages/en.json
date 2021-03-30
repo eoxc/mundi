@@ -6,6 +6,8 @@
   "search_n_layers_selected_plural": "{{count}} layers selected to show",
   "load_more": "Load {{count}} more",
   "download_norecords": "No products selected for download",
+  "no_item_downloadable": "No selected product is available for Download.",
+  "no_item_downloadable_hint": "If product Online Status is 'OFFLINE' or 'empty', you can request it being reloaded from the archive via My Account/My Requested Data",
   "terms_and_conditions": "I have read and agree to the <a class='terms_and_conditions_link' href='{{value}}' target='_blank'>terms &amp; conditions</a>",
   "start_download": "Start download of one product",
   "confirm_download": "'Download' starts the download of one product",

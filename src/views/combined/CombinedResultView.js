@@ -11,6 +11,7 @@ import DownloadListView from './DownloadListView';
 import './CombinedResultView.css';
 import template from './CombinedResultView.hbs';
 import NoProductTemplate from './NoProductSelected.hbs';
+import i18next from '../../i18next';
 
 // eslint-disable-next-line max-len
 const CombinedResultView = Marionette.LayoutView.extend({
@@ -330,14 +331,35 @@ const CombinedResultView = Marionette.LayoutView.extend({
     this.$('.start-download')
       .prop('disabled', !fullDownloadEnabled);
 
+    if (!fullDownloadEnabled) {
+      this.$('.start-download')
+        .prop('title', `${i18next.t('no_item_downloadable')} ${i18next.t('no_item_downloadable_hint')}`);
+    } else {
+      this.$('.start-download').removeProp('title');
+    }
+
     this.$('.get-quote')
       .prop('disabled', !textDownloadEnabled);
 
     this.$('.dropdown-toggle')
       .prop('disabled', !textDownloadEnabled);
 
+    if (!textDownloadEnabled) {
+      this.$('.dropdown-toggle')
+        .prop('title', `${i18next.t('no_item_downloadable')} ${i18next.t('no_item_downloadable_hint')}`);
+    } else {
+      this.$('.dropdown-toggle').removeProp('title');
+    }
+
     this.$('.select-files')
       .prop('disabled', !textDownloadEnabled);
+
+    if (!textDownloadEnabled) {
+      this.$('.select-files')
+        .prop('title', `${i18next.t('no_item_downloadable')} ${i18next.t('no_item_downloadable_hint')}`);
+    } else {
+      this.$('.select-files').removeProp('title');
+    }
 
     this.$('.deselect-all')
       .prop('disabled', totalCount === 0);
