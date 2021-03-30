@@ -34,6 +34,8 @@ const QuoteModalView = ModalView.extend({
     const copied = copyToClipboard(toCopy);
     if (copied) {
       this.$('.copy-successful').show().delay(5000).fadeOut();
+    } else {
+      this.$('.copy-unsuccessful').show().delay(8000).fadeOut();
     }
   }
 });

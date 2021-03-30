@@ -7,7 +7,7 @@
   font-size: 24px;
 }
 
-.copy-successful {
+.copy-successful, .copy-unsuccessful {
   display: none;
 }
 
