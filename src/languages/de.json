@@ -61,7 +61,6 @@
   "Projection": "Projektion",
   "Use bounding box of current spatial filter to crop": "Verwende Begrenzungsrechteck des momentanen räumlichen Filter zum Beschneiden",
   "start_download": "Herunterladen von einem Produkt starten",
-  "start_download_plural": "Herunterladen von {{count}} Produkten starten",
   "confirm_download": "'Herunterladen' startet das Herunterladen von einem Produkt",
   "confirm_download_plural": "'Herunterladen' startet das Herunterladen von {{count}} Produkten",
   "confirm_note": "Achtung, der Browser öffnet möglicherweise mehrere Dialoge zur Bestätigung oder gibt eine Warnung aus. Außerdem haben Browser üblicherweise eine Limitierung auf 6 gleichzeitige offene Verbindungen und das Herunterladen von zu vielen Produkten wird daher den Client blockieren.",

@@ -8,3 +8,8 @@
 .search-result-list .panel-body,.search-result-list .panel {
   margin-bottom: 0px !important;
 }
+
+.panel-body.search-error-message {
+  display: none;
+  color: white;
+}

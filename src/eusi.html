@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta charset="UTF-8">
+  <title>eusi - example</title>
+</head>
+<body>
+  <div id="app" style="width: 100%; top: 0; bottom: 0; position: absolute; margin: 0; padding:0;"></div>
+  <script src="code-de.bundle.js"></script>
+  <script>
+  var today = new Date();
+  today.setUTCHours(24, 0, 0, 0);
+  var displayTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 28));
+  var selectedTimeDomainStart = new Date(new Date(today).setUTCDate(today.getUTCDate() - 8));
+  var selectedTimeDomainEnd = new Date(new Date(today).setUTCDate(today.getUTCDate() - 7));
+
+  function formatBytes(bytes,decimals) {
+  if(bytes == 0) return '0 Bytes';
+  var k = 1024,
+      dm = decimals <= 0 ? 0 : decimals || 2,
+      sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+      i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+
+  var config = {
+    "settings": {
+        "tutorial": "once",
+        "uploadEnabled": false,
+        "downloadEnabled": true,
+        "searchEnabled": true,
+        "searchDebounceTime": 500,
+        "language": "en",
+        "timeDomain": [
+            "2006-01-01T00:00:00Z",
+            today.toISOString()
+        ],
+        "constrainTimeDomain": true,
+        "displayTimeDomain": [
+            displayTimeDomainStart,
+            today.toISOString(),
+        ],
+        "displayInterval": "P365D",
+        "selectedTimeDomain": [
+            selectedTimeDomainStart,
+            selectedTimeDomainEnd,
+        ],
+        "selectableInterval": "P365D",
+        "timeSliderControls": true,
+        // "disableTimeSlider": true,
+        "timeSliderAlternativeBrush": true,
+        "maxMapInterval": "P7D",
+        "enableDynamicHistogram": true,
+        "maxTooltips": 1,
+        "rightPanelOpen": true,
+        "leftPanelOpen": true,
+        "center": [2.3333, 48.8666],
+        "zoom": 5,
+//        "minZoom": 4,
+        "maxZoom": 14,
+        "footprintFillColor": "rgba(0, 0, 0, 0.2)",
+        "footprintStrokeColor": "rgba(0, 0, 0, 1)",
+        "filterFillColor": "rgba(0, 165, 255, 0)",
+        "filterStrokeColor": "rgba(0, 165, 255, 1)",
+        "filterOutsideColor": "rgba(0, 0, 0, 0.5)",
+        "selectedFootprintFillColor": "rgba(255, 0, 0, 0.2)",
+        "selectedFootprintStrokeColor": "rgba(255, 0, 0, 1)",
+        "highlightFillColor": "rgba(246, 182, 0, 0.5)",
+        "highlightStrokeColor": "rgba(246, 182, 0, 1)",
+        "highlightStrokeWidth": 3,
+        "maxAreaFilter": 100000,
+        "translations": {
+            "en": {
+                "Cloud Cover": "Cloud coverage (%)",
+                "Error: NoApplicableCode": "Search timed out. Please refine the filter criteria.",
+            }
+        },
+    },
+    "baseLayers": [
+        {
+            "id": "terrain-light",
+            "displayName": "EOX Terrain-Light",
+            "display": {
+                "id": "terrain-light",
+                "visible": true,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.s2maps-tiles.eu/wmts/",
+                    "//b.s2maps-tiles.eu/wmts/",
+                    "//c.s2maps-tiles.eu/wmts/",
+                    "//d.s2maps-tiles.eu/wmts/",
+                    "//e.s2maps-tiles.eu/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "style": "default",
+                "attribution": "Terrain-Light { Data &copy; <a href=\"//openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"//eox.at\" target=\"_blank\">EOX</a> }"
+            }
+        }, {
+            "id": "terrain",
+            "displayName": "EOX Terrain",
+            "display": {
+                "id": "terrain",
+                "visible": false,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.s2maps-tiles.eu/wmts/",
+                    "//b.s2maps-tiles.eu/wmts/",
+                    "//c.s2maps-tiles.eu/wmts/",
+                    "//d.s2maps-tiles.eu/wmts/",
+                    "//e.s2maps-tiles.eu/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "style": "default",
+                "attribution": "Terrain { Data &copy; <a href=\"//openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors and <a href='javascript:;' onClick='toggle(terrain_attribution)'>others</a>, Rendering &copy; <a href=\"//eox.at\" target=\"_blank\">EOX</a> }"
+            }
+        },  {
+            "id": "s2cloudless",
+            "displayName": "EOX Sentinel-2 cloudless",
+            "display": {
+                "id": "s2cloudless",
+                "visible": false,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.s2maps-tiles.eu/wmts/",
+                    "//b.s2maps-tiles.eu/wmts/",
+                    "//c.s2maps-tiles.eu/wmts/",
+                    "//d.s2maps-tiles.eu/wmts/",
+                    "//e.s2maps-tiles.eu/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "style": "default",
+                "attribution": "<a xmlns:dct=\"//purl.org/dc/terms/\" href=\"//s2maps.eu\" property=\"dct:title\">Sentinel-2 cloudless - //s2maps.eu</a> by <a xmlns:cc=\"//creativecommons.org/ns#\" href=\"//eox.at\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">EOX IT Services GmbH</a> (Contains modified Copernicus Sentinel data 2016 &amp; 2017)"
+            }
+        }
+    ],
+    "layers": [
+        {
+            "id": "EUSI",
+            "displayName": "EUSI",
+            "displayColor": "#56EC00",
+            "display": {
+                "id": "EUSI",
+                "visible": false,
+                "protocol": "WMTS",
+                "matrixSet": "WGS84",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "urls": [
+                  ""
+                ],
+                "useMilliseconds": false,
+            },
+            "search": {
+                "protocol": "OpenSearch",
+                "url": "//eusi-api.pvs.mundiwebservices.com/opensearch/",
+                "id": "EUSI Proxy Search API",
+                "format": "application/atom+xml",
+                "method": "GET",
+                "searchLimit": 10000,
+                "loadMore": 10000,
+                "pageSize": 10000,
+                "searchEnabled": true,
+                "parametersFilterSettings": {
+                    "collapsed": false,
+                },
+                "parameters": [
+                    {
+                      "type": "eo:doi",
+                      "title": "Catalogue ID in inventory format (WV04) or legacy format (all other sensors)",
+                      "privileged": true,
+                    },
+                    {
+                      "title": "Sensor",
+                      "options": [{
+                          "value": "WV01",
+                        }, {
+                          "value": "WV02",
+                        }, {
+                          "value": "WV03",
+                        }, {
+                          "value": "WV04",
+                        }, {
+                          "value": "GE01",
+                        }],
+                      "type": "eo:instrument",
+                    },
+                    {
+                        "max": 90,
+                        "min": 0,
+                        "range": true,
+                        "type": "eo:illuminationElevationAngle",
+                        "title": "Sun Elevation Angle in degrees",
+                    },
+                    {
+                        "max": 45,
+                        "min": 0,
+                        "range": true,
+                        "type": "eo:acrossTrackIncidenceAngle",
+                        "title": "Off-nadir Angle in degrees",
+                    },
+                    {
+                      "type": "eo:resolution",
+                      "title": "Lowest allowable Pan resolution in m",
+                      "options": [{
+                          "value": "0.3",
+                        }, {
+                          "value": "0.4",
+                        }, {
+                          "value": "0.5",
+                        }],
+                    },
+                    {
+                        "type": "eo:cloudCover",
+                        "name": "Max Cloud coverage (%)",
+                        "title": "Maximum cloud coverage in percent 0 - 100"
+                    },
+                ],
+                "extraFields": {
+                    "properties.eusi.date": "dc:date/text()",
+                    "properties.eusi.identifier": "dc:identifier/text()",
+                    "properties.eusi.resolution": "eo:resolution/text()",
+                    "properties.eusi.instrument": "eo:instrument/text()",
+                    "properties.eusi.stripCloudCoverage": "eo:cloudCover/text()",
+                    "properties.eusi.aoiCloudCoverage": "eusi:aoiCloudCoverage/text()",
+                    "properties.eusi.acrossTrackIncidenceAngle": "eo:acrossTrackIncidenceAngle/text()",
+                    "properties.eusi.illuminationElevationAngle": "eo:illuminationElevationAngle/text()",
+                    "properties.eusi.illuminationAzimuthAngle": "eo:illuminationAzimuthAngle/text()",
+                    "properties.eusi.targetAzimuthAngle": "eusi:targetAzimuthAngle/text()",
+                    "properties.eusi.satelliteElevation": "eusi:satelliteElevation/text()",
+                    "properties.eusi.imageBands": "eusi:imageBands/text()",
+                    "properties.eusi.hasStereoPair": "eusi:hasStereoPair/text()",
+                    "properties.eusi.scanDirection": "eusi:scanDirection/text()",
+                    "properties.eusi.quicklookUrl": "eusi:quicklookUrl/text()",
+                    "properties.eusi.thumbnailUrl": "media:group/media:content@url",
+                },
+                "extraFieldsNamespaces": {
+                    "eusi": "https://ordering.euspaceimaging.com/ordering/api/v1/imagery/search",
+                    "eo": "http://a9.com/-/spec/opensearch/extensions/eo/1.0/",
+                    "dc": "http://purl.org/dc/elements/1.1/",
+                    "atom": "http://www.w3.org/2005/Atom",
+                    "media": "http://search.yahoo.com/mrss/",
+                },
+                "descriptionTemplate":
+                    "<table class='table table-condensed'>" +
+                    "<tr>" +
+                      "<td>Sensing Date</td>" +
+                      "<td>{{properties.eusi.date}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Resolution</td>" +
+                      "<td>{{properties.eusi.resolution}} m</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Spacecraft identifier</td>" +
+                      "<td>{{properties.eusi.instrument}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Cloud Coverage</td>" +
+                      "<td>{{properties.eusi.stripCloudCoverage}}&#37</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>AOI Cloud Coverage</td>" +
+                      "<td>{{properties.eusi.aoiCloudCoverage}}&#37;</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Offnadir angle</td>" +
+                      "<td>{{properties.eusi.acrossTrackIncidenceAngle}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Sun Elevation Angle</td>" +
+                      "<td>{{properties.eusi.illuminationElevationAngle}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Sun Azimuth Angle</td>" +
+                      "<td>{{properties.eusi.illuminationAzimuthAngle}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Target Azimuth Angle</td>" +
+                      "<td>{{properties.eusi.targetAzimuthAngle}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Satellite Elevation</td>" +
+                      "<td>{{properties.eusi.satelliteElevation}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Image Bands</td>" +
+                      "<td>{{properties.eusi.imageBands}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Stereo Pair</td>" +
+                      "<td>{{properties.eusi.hasStereoPair}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td>Scan Direction</td>" +
+                      "<td>{{properties.eusi.scanDirection}}</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                      "<td colspan=\"2\" style=\"text-align:center\">" + 
+                      "<div style=\"padding:2px;\">Click the Thumbnail image to download the Quicklook in original resolution</div>" +
+                      "<a href=\"{{properties.eusi.quicklookUrl}}\" alt=\"Quicklook\" target=\"_blank\" style=\"height: 500px; display: block; background-image: url('{{properties.eusi.thumbnailUrl}}'); background-size:auto 100%;background-repeat: no-repeat;background-position: center;\"></a></td>" +
+                    "</tr>" +
+                  "</table>",
+              "dropEmptyParameters": true,
+            },
+            "download": {
+                "protocol": "QUOTE",
+                "url": "https://mundiwebservices.com/helpdesk/servicedesk/customer/portal/3/create/205",
+            },
+        },
+    ],
+    "overlayLayers": [
+        {
+            "id": "coastline",
+            "displayName": "EOX Coastline",
+            "display": {
+                "id": "coastline",
+                "visible": false,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "style": "default",
+                "format": "image/png",
+                "attribution": "Overlay { Data &copy; <a href=\"//openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"//eox.at\" target=\"_blank\">EOX</a> and <a href=\"//github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
+            }
+        },
+        {
+            "id": "overlay_base",
+            "displayName": "EOX Borders and Labels",
+            "display": {
+                "id": "overlay_base",
+                "visible": false,
+                "protocol": "WMTS",
+                "urls": [
+                    "//a.tiles.maps.eox.at/wmts/",
+                    "//b.tiles.maps.eox.at/wmts/",
+                    "//c.tiles.maps.eox.at/wmts/",
+                    "//d.tiles.maps.eox.at/wmts/",
+                    "//e.tiles.maps.eox.at/wmts/"
+                ],
+                "matrixSet": "WGS84",
+                "style": "default",
+                "format": "image/png",
+                "projection": "EPSG:4326",
+                "attribution": "Overlay { Data &copy; <a href=\"//openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors, Rendering &copy; <a href=\"//eox.at\" target=\"_blank\">EOX</a> and <a href=\"//github.com/mapserver/basemaps\" target=\"_blank\">MapServer</a> }"
+            }
+        }
+    ]
+};
+    var app = new Application({
+      config: config,
+      container: document.getElementById('app'),
+    });
+    app.start();
+  </script>
+</body>
+</html>

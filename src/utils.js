@@ -57,7 +57,7 @@ export function parseFeaturesFromFiles(fileList) {
   const zipFile = files.find(file => file.type === 'application/zip' || /\.zip$/i.test(file.name));
   const shpFile = files.find(file => /\.shp$/i.test(file.name)); // TODO: no mime?
   const dbfFile = files.find(file => dbfMimes.has(file.type) || /\.dbf$/i.test(file.name));
-  const jsonFile = files.find(file => jsonMimes.has(file.type) || /\.json$/i.test(file.name));
+  const jsonFile = files.find(file => jsonMimes.has(file.type) || /\.*json$/i.test(file.name));
 
   if (zipFile) {
     return readFileAsArraybuffer(zipFile)
@@ -165,7 +165,7 @@ export function updateConfigBySearchParams(config) {
   }
   // set map zoom
   const zStr = params.get('z');
-  if (typeof xStr === 'string' && typeof yStr === 'string') {
+  if (typeof zStr === 'string') {
     const z = parseInt(zStr.replace(',', '.'), 10);
     if (!isNaN(z)) {
       // not checking maxzoom or minzoom on layers/main config, it is validated by OL anyway
@@ -344,4 +344,25 @@ export function setSearchParamsLayersChange(baseLayersCollection, overlayLayersC
       setSearchParam(`${visibleLayer.get('id')}_visible`, visible);
     });
   });
+}
+
+export function copyToClipboard(text) {
+  if (window.clipboardData && window.clipboardData.setData) {
+    // Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.
+    return window.clipboardData.setData('Text', text);
+  } else if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+    const textarea = document.createElement('textarea');
+    textarea.textContent = text;
+    textarea.style.position = 'fixed';  // Prevent scrolling to bottom of page in Microsoft Edge.
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      return document.execCommand('copy');  // Security exception may be thrown by some browsers.
+    } catch (ex) {
+      console.warn('Copy to clipboard failed.', ex);
+      return false;
+    } finally {
+      document.body.removeChild(textarea);
+    }
+  }
 }

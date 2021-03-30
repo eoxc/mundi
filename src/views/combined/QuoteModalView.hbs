@@ -1,0 +1,32 @@
+<div class="modal-dialog modal-full-screen-scrolling quote-modal modal-lg" style="width: 40%"; role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding: 5px;"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title">{{t 'Getting a quote for'}} {{records.length}} {{t 'product'}}{{#if moreThanOne}}{{t 's'}} {{/if}}
+      </h4>
+    </div>
+    <div class="modal-body download-options">
+      <p class="quote-confirm">{{t 'confirm_quote_1'}}</p>
+      <p class="quote-confirm">{{t 'confirm_quote_2'}}</p>
+      <p>
+        <span class="copy-clipboard"><b>{{t 'Copy Product IDs to clipboard:'}}</b></span>
+        <i class="fa fa-clipboard copy-clipboard"/>
+        <b><span class="copy-successful">{{t 'Copied Products to clipboard!'}}</span></b>
+        <b><span class="copy-unsuccessful">{{t 'Copy to clipboard failed. Please copy the products for the Data Order manually.'}}</span></b>
+      </p>
+      <div class="quote-items">
+        <ul>
+          {{#each productIds}}
+          <li class="quote-item">{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">{{t 'Close' }}</button>
+      <a href="{{url}}" target="_blank">
+        <button type="button" class="btn btn-primary" title="{{t 'Redirect to Mundi helpdesk and finish Order'}}">{{t 'Get a Quote' }}</button>
+      </a>
+    </div>
+  </div>
+</div>

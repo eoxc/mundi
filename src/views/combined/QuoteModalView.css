@@ -1,0 +1,16 @@
+.copy-clipboard {
+  cursor: pointer;
+}
+
+.fa.copy-clipboard {
+  margin: 0 10px;
+  font-size: 24px;
+}
+
+.copy-successful, .copy-unsuccessful {
+  display: none;
+}
+
+.quote-items ul {
+  list-style-type: none;
+}

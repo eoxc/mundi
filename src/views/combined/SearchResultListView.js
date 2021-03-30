@@ -48,10 +48,23 @@ const SearchResultListView = Marionette.CompositeView.extend({
     this.highlightModel = options.highlightModel;
     this.fallbackThumbnailUrl = options.fallbackThumbnailUrl;
     this.referenceCollection = options.referenceCollection;
+    this.listenTo(this.searchModel, 'change', this.onSearchModelChange);
   },
 
   onRender() {
     this.triggerMethod('list:render');
+  },
+
+  onSearchModelChange() {
+    if (this.searchModel.get('hasError')) {
+      this.$('.search-error-message').html(`
+        <p><h4>Search Error:</h2>
+        <p>${this.searchModel.get('errorMessage')}`
+      );
+      this.$('.search-error-message').show();
+    } else {
+      this.$('.search-error-message').hide();
+    }
   },
 
   onItemClicked(childView) {

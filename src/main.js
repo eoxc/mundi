@@ -44,6 +44,7 @@ import WarningsView from './views/WarningsView';
 import RecordsDetailsModalView from './views/RecordsDetailsModalView';
 import SelectFilesModalView from './views/SelectFilesModalView';
 import CombinedResultView from './views/combined/CombinedResultView';
+import QuoteModalView from './views/combined/QuoteModalView';
 
 import WarningsCollection from './models/WarningsCollection';
 
@@ -83,6 +84,7 @@ function combineParameter(setting, param) {
     step: setting.step || 1,
     default: setting.default || setting.fixed,
     fixed: setting.fixed,
+    privileged: setting.privileged,
   };
 }
 
@@ -208,6 +210,7 @@ window.Application = Marionette.Application.extend({
       selectableInterval: null,
       maxTooltips: null,
       timeSliderControls: false,
+      disableTimeSlider: false,
       maxMapInterval: null,
       constrainOutCoords: false,
       highlightFillColor: 'rgba(255, 255, 255, 0.2)',
@@ -235,6 +238,7 @@ window.Application = Marionette.Application.extend({
       selectFilesDownloadEnabled: true,
       filterSettings: null,
       areaFilterLayerExtent: false,
+      maxAreaFilter: 0,
     });
     // determine if singleLayerModeUsed
     const searchEnabledLayers = layersCollection.filter(layerModel => layerModel.get('search.protocol'));
@@ -324,30 +328,33 @@ window.Application = Marionette.Application.extend({
         searchModel.stopListening(layerModel, 'change:display.visible');
       });
     }
-
-    layout.showChildView('timeSlider', new TimeSliderView({
-      layersCollection,
-      baseLayersCollection,
-      overlayLayersCollection,
-      mapModel,
-      filtersModel,
-      highlightModel,
-      highlightFillColor: settings.highlightFillColor,
-      highlightStrokeColor: settings.highlightStrokeColor,
-      filterFillColor: settings.filterFillColor,
-      filterStrokeColor: settings.filterStrokeColor,
-      filterOutsideColor: settings.filterOutsideColor,
-      domain,
-      display,
-      constrainTimeDomain: settings.constrainTimeDomain,
-      timeSliderControls: settings.timeSliderControls,
-      timeSliderAlternativeBrush: settings.timeSliderAlternativeBrush,
-      displayInterval: settings.displayInterval,
-      selectableInterval: settings.selectableInterval,
-      maxTooltips: settings.maxTooltips,
-      enableDynamicHistogram: settings.enableDynamicHistogram,
-      singleLayerModeUsed
-    }));
+    if (!settings.disableTimeSlider) {
+      layout.showChildView('timeSlider', new TimeSliderView({
+        layersCollection,
+        baseLayersCollection,
+        overlayLayersCollection,
+        mapModel,
+        filtersModel,
+        highlightModel,
+        highlightFillColor: settings.highlightFillColor,
+        highlightStrokeColor: settings.highlightStrokeColor,
+        filterFillColor: settings.filterFillColor,
+        filterStrokeColor: settings.filterStrokeColor,
+        filterOutsideColor: settings.filterOutsideColor,
+        domain,
+        display,
+        constrainTimeDomain: settings.constrainTimeDomain,
+        timeSliderControls: settings.timeSliderControls,
+        timeSliderAlternativeBrush: settings.timeSliderAlternativeBrush,
+        displayInterval: settings.displayInterval,
+        selectableInterval: settings.selectableInterval,
+        maxTooltips: settings.maxTooltips,
+        enableDynamicHistogram: settings.enableDynamicHistogram,
+        singleLayerModeUsed
+      }));
+    } else {
+      layout.$('#timeSlider').hide();
+    }
 
     // set up panels
 
@@ -367,6 +374,13 @@ window.Application = Marionette.Application.extend({
           availableInterpolations:
           settings.downloadInterpolations,
         }),
+      }));
+    };
+
+    const getQuote = (records) => {
+      layout.showChildView('modals', new QuoteModalView({
+        records,
+        searchCollection,
       }));
     };
 
@@ -437,6 +451,7 @@ window.Application = Marionette.Application.extend({
       },
       constrainOutCoords: settings.constrainOutCoords,
       areaFilterLayerExtent: settings.areaFilterLayerExtent,
+      maxAreaFilter: settings.maxAreaFilter,
       singleLayerModeUsed
     });
 
@@ -508,6 +523,7 @@ window.Application = Marionette.Application.extend({
             downloadEnabled: settings.downloadEnabled,
             onStartDownload: startDownload,
             onSelectFiles: selectFiles,
+            onGetQuote: getQuote,
             fallbackThumbnailUrl,
             termsAndConditionsUrl,
           }),

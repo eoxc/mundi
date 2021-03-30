@@ -11,6 +11,7 @@ import DownloadListView from './DownloadListView';
 import './CombinedResultView.css';
 import template from './CombinedResultView.hbs';
 import NoProductTemplate from './NoProductSelected.hbs';
+import i18next from '../../i18next';
 
 // eslint-disable-next-line max-len
 const CombinedResultView = Marionette.LayoutView.extend({
@@ -23,6 +24,7 @@ const CombinedResultView = Marionette.LayoutView.extend({
     const selectFilesEnabled = typeof this.onSelectFiles !== 'undefined';
     const automaticSearch = this.singleModel.get('automaticSearch');
     const anySelectedToDisplay = this.singleModel.get('downloadSelection').length > 0 || automaticSearch;
+    const quoteMode = this.layerModel.get('download.protocol') === 'QUOTE';
     const initialDisplay = this.layerModel.get('display').visible;
     return {
       id,
@@ -33,7 +35,8 @@ const CombinedResultView = Marionette.LayoutView.extend({
       isValidDisplay,
       automaticSearch,
       downloadEnabled: this.downloadEnabled,
-      initialDisplay
+      initialDisplay,
+      quoteMode,
     };
   },
 
@@ -58,6 +61,7 @@ const CombinedResultView = Marionette.LayoutView.extend({
     'click .download-as-url-list': 'onDownloadAsUrlListClicked',
     'click .download-full-res': 'onDownloadFullResolutionClick',
     'click .start-processing': 'onProcessingClick',
+    'click .get-quote': 'onGetQuoteClick',
   },
 
   childEvents: {
@@ -77,6 +81,7 @@ const CombinedResultView = Marionette.LayoutView.extend({
     this.downloadEnabled = options.downloadEnabled;
     this.onStartDownload = options.onStartDownload;
     this.onSelectFiles = options.onSelectFiles;
+    this.onGetQuote = options.onGetQuote;
 
     this.hasAcceptedTerms = false;
     this.displaySelected = false;
@@ -249,6 +254,10 @@ const CombinedResultView = Marionette.LayoutView.extend({
     this.onStartDownload();
   },
 
+  onGetQuoteClick() {
+    this.onGetQuote(this.singleModel.get('downloadSelection'));
+  },
+
   onSelectFilesClicked() {
     this.onSelectFiles();
   },
@@ -322,11 +331,35 @@ const CombinedResultView = Marionette.LayoutView.extend({
     this.$('.start-download')
       .prop('disabled', !fullDownloadEnabled);
 
+    if (!fullDownloadEnabled) {
+      this.$('.start-download')
+        .prop('title', `${i18next.t('no_item_downloadable')} ${i18next.t('no_item_downloadable_hint')}`);
+    } else {
+      this.$('.start-download').removeProp('title');
+    }
+
+    this.$('.get-quote')
+      .prop('disabled', !textDownloadEnabled);
+
     this.$('.dropdown-toggle')
       .prop('disabled', !textDownloadEnabled);
 
+    if (!textDownloadEnabled) {
+      this.$('.dropdown-toggle')
+        .prop('title', `${i18next.t('no_item_downloadable')} ${i18next.t('no_item_downloadable_hint')}`);
+    } else {
+      this.$('.dropdown-toggle').removeProp('title');
+    }
+
     this.$('.select-files')
       .prop('disabled', !textDownloadEnabled);
+
+    if (!textDownloadEnabled) {
+      this.$('.select-files')
+        .prop('title', `${i18next.t('no_item_downloadable')} ${i18next.t('no_item_downloadable_hint')}`);
+    } else {
+      this.$('.select-files').removeProp('title');
+    }
 
     this.$('.deselect-all')
       .prop('disabled', totalCount === 0);

@@ -12,6 +12,7 @@ const ExtraParameterSelectView = BaseExtraParameterView.extend({
         options: this.model.get('options').map(
           option => Object.assign({}, option, {
             isSelected: option.value === defaultValue,
+            label: typeof option.label !== 'undefined' ? option.label : option.value,
           })
         ),
       },

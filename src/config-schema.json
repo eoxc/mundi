@@ -180,6 +180,11 @@
           "type":"boolean",
           "default":false
         },
+        "disableTimeSlider":{ 
+          "description":"Disables TimeSlider completely",
+          "type":"boolean",
+          "default":false
+        },
         "timeSliderAlternativeBrush":{ 
           "description":"If alternative TimeSlider selection brush (Mundi style) should be used.",
           "type":"boolean",
@@ -261,6 +266,11 @@
           "type":"string",
           "default":"#ff0000"
         },
+        "maxAreaFilter":{
+          "description":"Maximum allowed Area Filter or map bbox in km2. Shows a {{max-area-warning}} if exceed. 0 means disabled.",
+          "type":"number",
+          "default":0
+        },
         "leftPanelOpen":{ 
           "description":"Whether or not the left panel shall be open on start.",
           "type":"boolean",
@@ -299,6 +309,11 @@
                 "description":"Parameter name to be displayed. If not set, 'type' is used.",
                 "type":"string"
                },
+              "privileged":{
+                "description":"Marks the filter as privileged. If the filter is set, other non-privileged filters are not used in the requests. (example usage for UID, where area & time otherwise set will not be part of request).",
+                "type":"boolean",
+                "default":false
+              },
               "options":{ 
                 "description":"Selectable options. Will be rendered as a dropdown.",
                 "type":"array",
@@ -306,7 +321,7 @@
                   "type":"object",
                   "properties":{ 
                     "label":{ 
-                      "description":"The displayed label of a single option.",
+                      "description":"The displayed label of a single option. If not supplied, 'value' is used as label.",
                       "type":"string"
                     },
                     "value":{ 
@@ -315,7 +330,6 @@
                     }
                   },
                   "required":[ 
-                    "label",
                     "value"
                   ]
                 }
@@ -886,6 +900,11 @@
                     "description":"Parameter name to be displayed. If not set, 'type' is used.",
                     "type":"string"
                    },
+                   "privileged":{
+                     "description":"Marks the filter as privileged. If the filter is set, other non-privileged filters are not used in the requests. (example usage for UID, where area & time otherwise set will not be part of request).",
+                     "type":"boolean",
+                     "default":false
+                   },
                   "options":{ 
                     "description":"Selectable options. Will be rendered as a dropdown.",
                     "type":"array",
@@ -893,7 +912,7 @@
                       "type":"object",
                       "properties":{ 
                         "label":{ 
-                          "description":"The displayed label of a single option. If not set, 'value' is used.",
+                          "description":"The displayed label of a single option. If not supplied, 'value' is used as label.",
                           "type":"string"
                         },
                         "value":{ 
@@ -999,7 +1018,8 @@
               "enum":[ 
                 "EO-WCS",
                 "URL",
-                "S3"
+                "S3",
+                "QUOTE"
               ],
               "//TODO":"This list will be extended in the future. Currently, this setting is not used with OpenSearch, as the download information is embedded in the search response."
             },
