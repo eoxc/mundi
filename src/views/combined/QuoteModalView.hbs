@@ -12,12 +12,22 @@
         <p class="quote-confirm">{{t 'confirm_quote_1'}}</p>
         <p class="quote-confirm">{{t 'confirm_quote_2'}}</p>
       {{/if}}
+      {{#unless records.[0]}}
+      <p>
+        <span class="copy-clipboard-area"><b>{{t 'If no Products were selected, please Copy current Area to clipboard:'}}</b></span>
+        <i class="fa fa-clipboard copy-clipboard-area"/>
+        <p class="copy-successful"><b>{{t 'Copied current Area to clipboard!'}}</b></p>
+        <p class="copy-unsuccessful"><b>{{t 'Copy to clipboard failed. Please copy the Area for the Data Order manually.'}}</b></p>
+        <p>{{t 'Current Area:'}}</p>
+        <p><b>{{area}}</b></p>
+      </p>
+      {{/unless}}
       {{#if records.[0]}}
         <p>
           <span class="copy-clipboard"><b>{{t 'Copy Product IDs to clipboard:'}}</b></span>
           <i class="fa fa-clipboard copy-clipboard"/>
-          <b><span class="copy-successful">{{t 'Copied Products to clipboard!'}}</span></b>
-          <b><span class="copy-unsuccessful">{{t 'Copy to clipboard failed. Please copy the products for the Data Order manually.'}}</span></b>
+          <p class="copy-successful"><b>{{t 'Copied Products to clipboard!'}}</b></p>
+          <p class="copy-unsuccessful"><b>{{t 'Copy to clipboard failed. Please copy the products for the Data Order manually.'}}</b></p>
         </p>
         <div class="quote-items">
           <ul>

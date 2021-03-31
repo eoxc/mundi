@@ -1,8 +1,8 @@
-.copy-clipboard {
+.copy-clipboard, .copy-clipboard-area {
   cursor: pointer;
 }
 
-.fa.copy-clipboard {
+.fa.copy-clipboard, .fa.copy-clipboard-area {
   margin: 0 10px;
   font-size: 24px;
 }
