@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import ModalView from 'eoxc/src/core/views/ModalView';
 
 import { copyToClipboard } from '../../utils';
@@ -9,10 +8,10 @@ const QuoteModalView = ModalView.extend({
   template,
   templateHelpers() {
     return {
-      records: this.records,
-      moreThanOne: this.records.length > 1,
+      records: this.records.models,
       productIds: this.productIds,
-      url: this.searchCollection.models[0].get('layerModel').get('download.url'),
+      url: this.layerModel.get('download.url'),
+      quoteModalIntro: this.layerModel.get('download.quoteModalIntro'),
     };
   },
 
@@ -26,7 +25,7 @@ const QuoteModalView = ModalView.extend({
   initialize(options) {
     this.records = options.records;
     this.productIds = this.records.models.map(item => item.get('id'));
-    this.searchCollection = options.searchCollection;
+    this.layerModel = this.records.searchModel.get('layerModel');
   },
 
   onCopyClipboardClicked() {

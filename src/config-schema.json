@@ -1067,6 +1067,10 @@
             "pathPrefix":{ 
               "description":"Part of the download path to be considered not part of the bucket and download prefix. Necessary for S3 URLs",
               "type":"string"
+            },
+            "quoteModalIntro":{
+              "description":"HTML content of Get a Quote Modal description in case it needs to be customized in configuration.",
+              "type":"string"
             }
           },
           "required":[ 

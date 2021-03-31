@@ -380,7 +380,6 @@ window.Application = Marionette.Application.extend({
     const getQuote = (records) => {
       layout.showChildView('modals', new QuoteModalView({
         records,
-        searchCollection,
       }));
     };
 
