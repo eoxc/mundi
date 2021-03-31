@@ -2,7 +2,11 @@
   {{#if title}}
     data-toggle="tooltip" data-placement="top" title="{{t title}}"
   {{/if}}
->{{t displayName}}</label>
+>{{t displayName}}
+  {{#if title}}
+    <i class="fa fa-info-circle" aria-hidden="true"></i>
+  {{/if}}
+</label>
 <div class="col-sm-6">
   <input value=""
     data-type="{{ type }}"
