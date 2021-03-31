@@ -104,13 +104,14 @@ const SearchResultHeaderView = Marionette.ItemView.extend({
   refreshSelectedButton() {
     const selectedProducts = this.singleModel.get('downloadSelection');
     const selectedCount = typeof selectedProducts !== 'undefined' ? selectedProducts.length : 0;
+    const selectedWord = this.singleModel.get('layerModel').get('download.protocol') === 'QUOTE' ? 'Basket' : 'Selected';
     this.$('.btn-selected-count').prop('disabled',
     selectedCount === 0 || this.singleModel.get('automaticSearch') === false);
     if (this.displaySelected && this.singleModel.get('automaticSearch') === true) {
       this.$('.btn-selected-count').html(`<span class="caret selected-count-caret"></span>
  Show all products`);
     } else {
-      this.$('.btn-selected-count').html(`Selected (${selectedCount})`);
+      this.$('.btn-selected-count').html(`${selectedWord} (${selectedCount})`);
     }
   },
 });

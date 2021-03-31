@@ -338,9 +338,6 @@ const CombinedResultView = Marionette.LayoutView.extend({
       this.$('.start-download').removeProp('title');
     }
 
-    this.$('.get-quote')
-      .prop('disabled', !textDownloadEnabled);
-
     this.$('.dropdown-toggle')
       .prop('disabled', !textDownloadEnabled);
 
