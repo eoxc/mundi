@@ -17,6 +17,7 @@ module.exports = {
       backbone: path.join(__dirname, 'node_modules', 'backbone', 'backbone'),
       handlebars: 'handlebars/dist/handlebars.min.js',
       'opensearch-browser': 'opensearch-browser/dist',
+      jquery: path.join(__dirname, 'node_modules/jquery/src/jquery'),
 
       // Bind version of jquery
       //jquery: path.join(__dirname, 'node_modules', 'jquery'),
