@@ -2,7 +2,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding: 5px;"><span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title">{{t 'Getting a quote for'}} {{records.length}} {{t 'product'}}{{#if records.[1]}}{{t 's'}} {{/if}}
+      <h4 class="modal-title">{{t 'Getting a quote for'}} {{productIds.length}} {{t 'product'}}{{#if productIds.[1]}}{{t 's'}} {{/if}}
       </h4>
     </div>
     <div class="modal-body download-options">
@@ -12,36 +12,40 @@
         <p class="quote-confirm">{{t 'confirm_quote_1'}}</p>
         <p class="quote-confirm">{{t 'confirm_quote_2'}}</p>
       {{/if}}
-      {{#unless records.[0]}}
-      <p>
-        <span class="copy-clipboard-area"><b>{{t 'If no Products were selected, please Copy current Area to clipboard:'}}</b></span>
-        <i class="fa fa-clipboard copy-clipboard-area"/>
-        <p class="copy-successful"><b>{{t 'Copied current Area to clipboard!'}}</b></p>
-        <p class="copy-unsuccessful"><b>{{t 'Copy to clipboard failed. Please copy the Area for the Data Order manually.'}}</b></p>
-        <p>{{t 'Current Area:'}}</p>
-        <p><b>{{area}}</b></p>
-      </p>
-      {{/unless}}
-      {{#if records.[0]}}
-        <p>
-          <span class="copy-clipboard"><b>{{t 'Copy Product IDs to clipboard:'}}</b></span>
-          <i class="fa fa-clipboard copy-clipboard"/>
-          <p class="copy-successful"><b>{{t 'Copied Products to clipboard!'}}</b></p>
-          <p class="copy-unsuccessful"><b>{{t 'Copy to clipboard failed. Please copy the products for the Data Order manually.'}}</b></p>
-        </p>
+      <div>
+        <span class="copy-clipboard"><b>{{t 'Copy quote Information to clipboard:'}}</b></span>
+        <i class="fa fa-clipboard copy-clipboard"/>
+        <span class="copy-successful"><b>{{t 'Copied to clipboard!'}}</b></span>
+        <span class="copy-unsuccessful"><b>{{t 'Copy to clipboard failed for unknown reason. Please copy the quote info for the Data Order manually.'}}</b></span>
+        <p><h4>{{t 'Quote information:'}}</h4></p>
+        <div class="quote-information">
+          <p><b>Area of Interest:</b></p>
+          <p>{{area}}</p>
+          <p><b>Time constraint:</b></p>
+          <p>{{time}}</p>
+          {{#if otherFilters.[0]}}
+            <p><b>Additional filters:</b></p>
+            <ul>
+              {{#each otherFilters}}
+              <li class="quote-item">{{this.name}}: {{this.value}}</li>
+              {{/each}}
+            </ul>
+          {{/if}}
+        </div>
         <div class="quote-items">
+          <b>{{t 'Product IDs:'}}</b>
           <ul>
             {{#each productIds}}
             <li class="quote-item">{{this}}</li>
             {{/each}}
           </ul>
         </div>
-      {{/if}}
+      </div>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">{{t 'Close' }}</button>
       <a href="{{url}}" target="_blank">
-        <button type="button" class="btn btn-primary" title="{{t 'Redirect to Mundi helpdesk and finish Order'}}">{{t 'Get a Quote' }}</button>
+        <button type="button" class="btn btn-primary" title="{{t 'Redirect to Mundi helpdesk and finish the Order'}}">{{t 'Get a Quote' }}</button>
       </a>
     </div>
   </div>

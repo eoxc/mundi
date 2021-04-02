@@ -13,7 +13,7 @@
   "confirm_download": "'Download' starts the download of one product",
   "confirm_download_plural": "'Download' starts the download of {{count}} products",
   "confirm_quote_1": "To get a quote, you will be forwarded to Mundi helpdesk to give additional information.",
-  "confirm_quote_2": "But first please copy the product identifiers to your clipboard using the 'clipboard' Icon and then click 'Get a Quote'.",
+  "confirm_quote_2": "But first please copy the Quote information to your clipboard using the 'clipboard' Icon and then click 'Get a Quote'.",
   "confirm_note": "Note, the browser might open multiple confirmation dialogs or issue a warning. Besides, typically browsers have a limit of 6 concurrent connections. If popups are blocked by your browser, please enable them for this site.",
   "download_size_warning": "The estimated size of the download without compression is {{estimated_size}}MB. This might exceed the capabilities of the service.",
   "max_bbox_warning": "Maximum size of bounding box: {{max_bbox_size}} was exceeded by: {{max_bbox_exceed}} on axis: {{max_bbox_axis}}.",
