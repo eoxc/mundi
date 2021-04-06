@@ -43,6 +43,7 @@ const QuoteModalView = ModalView.extend({
     }
     // extracts search area and time from url
     const params = new URLSearchParams(actualWindowObject.location.search);
+    this.currentUrl = decodeURIComponent(actualWindowObject.location.href);
     this.area = params.get('area') || JSON.stringify(featureFromExtent(this.mapModel.get('bbox')).geometry);
     this.time = `${params.get('start')}/${params.get('end')}`;
 
@@ -59,9 +60,7 @@ const QuoteModalView = ModalView.extend({
   onCopyClipboardClicked() {
     const toCopy = JSON.stringify({
       products: this.productIds.join(', '),
-      area: this.area,
-      time: this.time,
-      otherFilters: this.otherFilters,
+      contextInformation: this.currentUrl,
     });
     const copied = copyToClipboard(toCopy);
     if (copied) {
