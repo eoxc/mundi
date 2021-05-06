@@ -624,6 +624,9 @@ input,
   color: black;
   background-color: white;
   img {
+    height: 100px;
+    max-height: 100px;
+    object-fit: contain;
     width: 94px;
   }
   img.error {
