@@ -22,12 +22,6 @@ jobs:
     - name: Build the library
       run: npm run build
 
-    - name: Publish release to npm
-      uses: JS-DevTools/npm-publish@v1
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        token: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
     - name: Create Release draft
       if: startsWith(github.ref, 'refs/tags/')
       id: create_release
