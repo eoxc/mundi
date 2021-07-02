@@ -667,7 +667,8 @@ input,
   color: white;
 }
 
-.ol-control, #infoPanel, #infoPanel div {
+.ol-control, #infoPanel,  #infoPanel div, 
+.toggleTimeSliderButton {
   border: none !important;
   box-shadow: none !important;
   background-color: $c_trans;
@@ -703,6 +704,10 @@ input,
   button {
     border-radius: 4px;
   }
+}
+
+.toggleTimeSliderButton {
+  color: $c_gray;
 }
 
 #infoPanel .btn:hover .icon-eox-eye-white {

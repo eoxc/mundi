@@ -16,15 +16,16 @@ export default Marionette.LayoutView.extend({
     timeSlider: '#timeSlider',
     modals: '#modals',
     topModals: '#top-modals',
+    timeSliderToggle: '#timeslider-toggle',
   },
 
   initialize(options) {
     this.listenTo(options.mapModel, 'change:tool', (model, tool) => {
       if (tool) {
-        this.$('#timeSlider,#leftPanel,#rightPanel,#infoPanel,#topPanel').fadeOut('fast');
+        this.$('#timeSlider,#leftPanel,#rightPanel,#infoPanel,#topPanel,#timeslider-toggle').fadeOut('fast');
         this.$('#bottomPanel').fadeIn('fast').css('display', 'flex');
       } else {
-        this.$('#timeSlider,#leftPanel,#rightPanel,#infoPanel,#topPanel').fadeIn('fast');
+        this.$('#timeSlider,#leftPanel,#rightPanel,#infoPanel,#topPanel,#timeslider-toggle').fadeIn('fast');
         this.$('#bottomPanel').fadeOut('fast');
       }
     });

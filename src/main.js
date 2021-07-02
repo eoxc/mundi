@@ -44,6 +44,7 @@ import WarningsView from './views/WarningsView';
 import RecordsDetailsModalView from './views/RecordsDetailsModalView';
 import SelectFilesModalView from './views/SelectFilesModalView';
 import CombinedResultView from './views/combined/CombinedResultView';
+import ToggleTimeSliderView from './views/ToggleTimeSliderView';
 import QuoteModalView from './views/combined/QuoteModalView';
 
 import WarningsCollection from './models/WarningsCollection';
@@ -266,6 +267,7 @@ window.Application = Marionette.Application.extend({
         new Date(settings.selectedTimeDomain[0]),
         new Date(settings.selectedTimeDomain[1]),
       ],
+      disableTimeSlider: settings.disableTimeSlider,
     });
     const filtersModel = new FiltersModel({ });
     const highlightModel = new HighlightModel();
@@ -328,33 +330,38 @@ window.Application = Marionette.Application.extend({
         searchModel.stopListening(layerModel, 'change:display.visible');
       });
     }
-    if (!settings.disableTimeSlider) {
-      layout.showChildView('timeSlider', new TimeSliderView({
-        layersCollection,
-        baseLayersCollection,
-        overlayLayersCollection,
-        mapModel,
-        filtersModel,
-        highlightModel,
-        highlightFillColor: settings.highlightFillColor,
-        highlightStrokeColor: settings.highlightStrokeColor,
-        filterFillColor: settings.filterFillColor,
-        filterStrokeColor: settings.filterStrokeColor,
-        filterOutsideColor: settings.filterOutsideColor,
-        domain,
-        display,
-        constrainTimeDomain: settings.constrainTimeDomain,
-        timeSliderControls: settings.timeSliderControls,
-        timeSliderAlternativeBrush: settings.timeSliderAlternativeBrush,
-        displayInterval: settings.displayInterval,
-        selectableInterval: settings.selectableInterval,
-        maxTooltips: settings.maxTooltips,
-        enableDynamicHistogram: settings.enableDynamicHistogram,
-        singleLayerModeUsed
-      }));
-    } else {
-      layout.$('#timeSlider').hide();
+
+    function setupTimeSlider(disable) {
+      if (!disable) {
+        layout.$('#timeSlider').show();
+        layout.showChildView('timeSlider', new TimeSliderView({
+          layersCollection,
+          baseLayersCollection,
+          overlayLayersCollection,
+          mapModel,
+          filtersModel,
+          highlightModel,
+          highlightFillColor: settings.highlightFillColor,
+          highlightStrokeColor: settings.highlightStrokeColor,
+          filterFillColor: settings.filterFillColor,
+          filterStrokeColor: settings.filterStrokeColor,
+          filterOutsideColor: settings.filterOutsideColor,
+          domain,
+          display,
+          constrainTimeDomain: settings.constrainTimeDomain,
+          timeSliderControls: settings.timeSliderControls,
+          timeSliderAlternativeBrush: settings.timeSliderAlternativeBrush,
+          displayInterval: settings.displayInterval,
+          selectableInterval: settings.selectableInterval,
+          maxTooltips: settings.maxTooltips,
+          enableDynamicHistogram: settings.enableDynamicHistogram,
+          singleLayerModeUsed
+        }));
+      } else {
+        layout.$('#timeSlider').hide();
+      }
     }
+    setupTimeSlider(settings.disableTimeSlider);
 
     // set up panels
 
@@ -464,6 +471,15 @@ window.Application = Marionette.Application.extend({
       }
       // zoom is not explicitely set, as some other event already triggers it
     }
+
+    layout.showChildView('timeSliderToggle', new ToggleTimeSliderView({
+      mapModel,
+      initialDisableTimeSlider: configSettings.disableTimeSlider,
+    }));
+    // pass event through mapModel out of convenience
+    mapModel.on('change:disableTimeSlider', (mapModel_) => {
+      setupTimeSlider(mapModel_.get('disableTimeSlider'));
+    });
 
     layout.showChildView('leftPanel', new SidePanelView({
       position: 'left',

@@ -196,6 +196,12 @@ export function updateConfigBySearchParams(config) {
     const rpi = parseInt(rptab, 10);
     configUpdate.rightPanelTabIndex = rpi;
   }
+  const disableTimeSlider = params.get('disabletimeslider');
+  if (disableTimeSlider === 'true') {
+    configUpdate.disableTimeSlider = true;
+  } else if (disableTimeSlider === 'false') {
+    configUpdate.disableTimeSlider = false;
+  }
   return configUpdate;
 }
 
