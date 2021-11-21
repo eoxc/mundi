@@ -245,7 +245,7 @@ window.Application = Marionette.Application.extend({
     const singleLayerModeUsed = searchEnabledLayers.length === 1 && configSettings.enableSingleLayerMode;
 
     // intercept searchParams to see if config change from user (url)
-    const settings = updateConfigBySearchParams(configSettings);
+    const settings = updateConfigBySearchParams(configSettings, singleLayerModeUsed);
     if (singleLayerModeUsed && !settings.disableSearchParams) {
       // intercept searchParams to see if custom filters set from user (url)
       updateFiltersBySearchParams(searchEnabledLayers);

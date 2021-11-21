@@ -109,25 +109,20 @@ export function sizeChangedEvent(handleFunction) {
   return element;
 }
 
-export function updateConfigBySearchParams(config) {
-  if (config.disableSearchParams) {
-    return config;
-  }
-  let actualWindowObject = window;
-  if (window.self !== window.top) { // checking if it is an iframe
-    actualWindowObject = window.top;
-  }
-  // extracts search parameters in url and update settings replacing keys with user supported ones
-  const configUpdate = Object.assign({}, config);
-  const params = new URLSearchParams(actualWindowObject.location.search);
+function updateTimeBySearchParams(config, configUpdate, params) {
   // validate and set time filter
   const timeStartStr = params.get('start');
   const timeEndStr = params.get('end');
   if (typeof timeStartStr === 'string' && typeof timeEndStr === 'string') {
-    const timestart = moment.utc(timeStartStr).toDate();
-    let timeend = moment.utc(timeEndStr).toDate();
+    let timestart = moment.utc(timeStartStr);
+    let timeend = moment.utc(timeEndStr);
+    // validate if parsed correctly
+    if (!timestart.isValid() || !timeend.isValid()) return;
+    timestart = timestart.toDate();
+    timeend = timeend.toDate();
     // validate start with timeDomain
-    if (timestart >= moment.utc(config.timeDomain[0]).toDate() && timestart <= moment.utc(config.timeDomain[1]).toDate()) {
+    if (timestart >= moment.utc(config.timeDomain[0]).toDate()
+      && timestart <= moment.utc(config.timeDomain[1]).toDate()) {
       configUpdate.selectedTimeDomain[0] = timestart;
       // validate timeend vs timestart
       if ((timeend - timestart) === 0 || timeend < timestart) {
@@ -152,6 +147,20 @@ export function updateConfigBySearchParams(config) {
       configUpdate.displayTimeDomain = [displayTimeStart, displayTimeEnd];
     }
   }
+}
+
+export function updateConfigBySearchParams(config, singleLayerModeUsed) {
+  if (config.disableSearchParams) {
+    return config;
+  }
+  let actualWindowObject = window;
+  if (window.self !== window.top) { // checking if it is an iframe
+    actualWindowObject = window.top;
+  }
+  // extracts search parameters in url and update settings replacing keys with user supported ones
+  const configUpdate = Object.assign({}, config);
+  const params = new URLSearchParams(actualWindowObject.location.search);
+  updateTimeBySearchParams(config, configUpdate, params);
   // set map position
   const xStr = params.get('x');
   const yStr = params.get('y');
@@ -189,12 +198,17 @@ export function updateConfigBySearchParams(config) {
   const lptab = params.get('leftpaneltab');
   if (typeof lptab === 'string') {
     const lpi = parseInt(lptab, 10);
-    configUpdate.leftPanelTabIndex = lpi;
+    if (!isNaN(lpi) && lpi < 2) {
+      // two tabs only in left panel
+      configUpdate.leftPanelTabIndex = lpi;
+    }
   }
   const rptab = params.get('rightpaneltab');
   if (typeof rptab === 'string') {
     const rpi = parseInt(rptab, 10);
-    configUpdate.rightPanelTabIndex = rpi;
+    if (!singleLayerModeUsed && !isNaN(rpi) && rpi < 2) {
+      configUpdate.rightPanelTabIndex = rpi;
+    }
   }
   return configUpdate;
 }
